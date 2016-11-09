@@ -30,6 +30,7 @@ CREATE TABLE ESTUDIANTE (
     FechaInscripcion DATE  NOT NULL ,
     RepositorioCodigo CHAR(100),
     RepositorioArchivos CHAR(100),
+	LinkHojaDeVida CHAR(100),
     Idioma CHAR(50),
     
     CONSTRAINT PK_ESTUDIANTE
