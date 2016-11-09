@@ -29,7 +29,7 @@ CREATE TABLE ESTUDIANTE (
     Region CHAR(30),
     FechaInscripcion DATE  NOT NULL ,
     RepositorioCodigo CHAR(100),
-    HojaDeVida CHAR(100),
+    RepositorioArchivos CHAR(100),
     Idioma CHAR(50),
     
     CONSTRAINT PK_ESTUDIANTE
@@ -49,6 +49,7 @@ CREATE TABLE PROFESOR (
     HorarioAtencion CHAR(15),
     Pais CHAR(30) NOT NULL ,
     Region CHAR(30),
+	RepositorioArchivos CHAR(100),
     CONSTRAINT PK_PROFESOR
 		PRIMARY KEY (Id),
     CONSTRAINT FK_PROFESOR_ID
@@ -65,6 +66,7 @@ CREATE TABLE EMPRESA (
     PaginaWebEmpresa CHAR(30),
     Pais CHAR(30) NOT NULL ,
     Region CHAR(30),
+	RepositorioArchivos CHAR(100),
     CONSTRAINT PK_EMPRESA
 		PRIMARY KEY (Id),
     CONSTRAINT FK_EMPRESA_ID
@@ -79,14 +81,6 @@ CREATE TABLE TECNOLOGIA (
     Nombre CHAR(30) NOT NULL ,
     
     CONSTRAINT PK_TECNOLOGIA
-		PRIMARY KEY (Id)
-);
-
-CREATE TABLE REPOSITORIO (
-    Id INT IDENTITY(1,1),
-    Nombre CHAR(30) NOT NULL ,
-    
-    CONSTRAINT PK_REPOSITORIO_REPOSITORIO
 		PRIMARY KEY (Id)
 );
 

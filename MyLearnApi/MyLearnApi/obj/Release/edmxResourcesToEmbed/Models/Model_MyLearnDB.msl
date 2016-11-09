@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyLearnDBModelStoreContainer" CdmEntityContainer="MyLearnDBEntities">
+    <EntitySetMapping Name="CURSO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.CURSO">
+        <MappingFragment StoreEntitySet="CURSO">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTUDIANTE">
+      <EntityTypeMapping TypeName="MyLearnDBModel.ESTUDIANTE">
+        <MappingFragment StoreEntitySet="ESTUDIANTE">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="ApellidoContacto" ColumnName="ApellidoContacto" />
+          <ScalarProperty Name="Carne" ColumnName="Carne" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="FechaInscripcion" ColumnName="FechaInscripcion" />
+          <ScalarProperty Name="RepositorioCodigo" ColumnName="RepositorioCodigo" />
+          <ScalarProperty Name="RepositorioArchivos" ColumnName="RepositorioArchivos" />
+          <ScalarProperty Name="Idioma" ColumnName="Idioma" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

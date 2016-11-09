@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyLearnDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CURSO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" />
+    <Property Name="Codigo" Type="char" MaxLength="10" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="ApellidoContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Carne" Type="char" MaxLength="15" />
+    <Property Name="Email" Type="char" MaxLength="50" Nullable="false" />
+    <Property Name="Telefono" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Foto" Type="char" MaxLength="30" />
+    <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Region" Type="char" MaxLength="30" />
+    <Property Name="FechaInscripcion" Type="date" Nullable="false" />
+    <Property Name="RepositorioCodigo" Type="char" MaxLength="100" />
+    <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
+    <Property Name="Idioma" Type="char" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="MyLearnDBModelStoreContainer">
+    <EntitySet Name="CURSO" EntityType="Self.CURSO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
