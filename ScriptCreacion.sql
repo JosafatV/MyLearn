@@ -1,200 +1,3 @@
-USE master
-IF EXISTS(SELECT * FROM sys.databases WHERE name='MyLearnDB')
-DROP DATABASE MyLearnDB
-GO
-
-CREATE DATABASE MyLearnDB;
-GO
-
-
-USE MyLearnDB;
-
-CREATE TABLE USUARIO (
-    Id INT IDENTITY(1,1),
-    Contrasena CHAR(8),
-    CONSTRAINT PK_USUARIO
-		PRIMARY KEY (Id),
-);
-
-CREATE TABLE ESTUDIANTE (
-    Id INT,
-    NombreContacto CHAR(30) NOT NULL,
-    ApellidoContacto CHAR(30) NOT NULL ,
-    Carne CHAR(15),
-    Email CHAR(50)  NOT NULL,
-    Telefono CHAR(15) NOT NULL,
-    Foto CHAR(30),
-    FechaInscripcion DATE  NOT NULL ,
-    RepositorioCodigo CHAR(100),
-    HojaDeVida CHAR(100),
-    Idioma CHAR(50),
-    
-    CONSTRAINT PK_ESTUDIANTE
-		PRIMARY KEY (Id),
-    CONSTRAINT FK_ESTUDIANTE_ID
-		FOREIGN KEY (Id) REFERENCES USUARIO(Id)
-);
-
-CREATE TABLE PROFESOR (
-    Id INT,
-    NombreContacto CHAR(30) NOT NULL ,
-    ApellidoContacto CHAR(30) NOT NULL ,
-    Email CHAR(50),
-    Telefono CHAR(15) NOT NULL ,
-    Foto CHAR(30),
-    FechaInscripcion  DATE NOT NULL ,
-    HorarioAtencion CHAR(15),
-    
-    CONSTRAINT PK_PROFESOR
-		PRIMARY KEY (Id),
-    CONSTRAINT FK_PROFESOR_ID
-		FOREIGN KEY (Id) REFERENCES USUARIO(Id)
-);
-    
-CREATE TABLE EMPRESA (
-    Id INT,
-    NombreEmpresarial CHAR(30), /** If NULL => NombreEmpresarial=NombreContacto+NombreEmpresarial**/
-    Email CHAR(50) NOT NULL ,
-    Telefono CHAR(15) NOT NULL ,
-    Foto CHAR(100),
-    FechaInscripcion DATE NOT NULL ,
-    PaginaWebEmpresa CHAR(30),
-    
-    CONSTRAINT PK_EMPRESA
-		PRIMARY KEY (Id),
-    CONSTRAINT FK_EMPRESA_ID
-		FOREIGN KEY (Id) REFERENCES USUARIO(Id)
-);
-
-/**/
-
-CREATE TABLE UBICACION (
-    Id INT IDENTITY(1,1),
-    Pais CHAR(30) NOT NULL ,
-    Region CHAR(30),
-    
-    CONSTRAINT PK_UBICACION
-		PRIMARY KEY (Id)
-);
-
-CREATE TABLE TECNOLOGIA (
-    Id INT IDENTITY(1,1),
-    Nombre CHAR(30) NOT NULL ,
-    
-    CONSTRAINT PK_TECNOLOGIA
-		PRIMARY KEY (Id)
-);
-
-CREATE TABLE REPOSITORIO (
-    Id INT IDENTITY(1,1),
-    Nombre CHAR(30) NOT NULL ,
-    
-    CONSTRAINT PK_REPOSITORIO_REPOSITORIO
-		PRIMARY KEY (Id)
-);
-
-CREATE TABLE IDIOMA (
-    Id INT IDENTITY(1,1),
-    Nombre CHAR(30) NOT NULL ,
-    
-    CONSTRAINT PK_REPOSITORIO
-		PRIMARY KEY (Id)
-);
-
-/**/
-
-CREATE TABLE UNIVERSIDAD (
-    Id INT IDENTITY(1,1),
-    Nombre CHAR(30) NOT NULL ,
-    
-    CONSTRAINT PK_UNIVERSIDAD
-		PRIMARY KEY (Id)
-);
-
-CREATE TABLE CURSO (
-    Id INT IDENTITY(1,1),
-    Nombre CHAR(30),
-    Codigo CHAR(10),
-    Estado CHAR(1),
-
-	CONSTRAINT PK_CURSO
-		PRIMARY KEY (Id)
-);
-
-CREATE TABLE BADGE (
-	Id INT IDENTITY(1,1),
-    Nombre CHAR (30),
-    Puntaje TINYINT,
-    Curso_Id INT,
-	CONSTRAINT PK_BADGE
-		PRIMARY KEY (Id),
-    CONSTRAINT FK_CURSO_ID_BADGE
-		FOREIGN KEY (Curso_Id) REFERENCES CURSO(Id)
-
-);
-
-/**/
-
-CREATE TABLE PROYECTO (
-    Id INT IDENTITY(1,1),
-    Nombre CHAR(30) NOT NULL ,
-    Problematica CHAR(100) NOT NULL ,
-    Descripcion CHAR(500) NOT NULL ,
-    Id_Curso INT,
-    FechaInicio DATE NOT NULL ,
-    FechaFinal DATE,
-    DocumentoAdicional CHAR(100),
-    NotaMinima INT NOT NULL ,
-    Estado CHAR(1),
-
-	CONSTRAINT PK_PROYECTO
-		PRIMARY KEY (Id),
-	FOREIGN KEY (Id_Curso) REFERENCES CURSO(Id)
-);
-
-CREATE TABLE TRABAJO (
-    Id INT IDENTITY(1,1),
-    Nombre CHAR(30) NOT NULL,
-    Descripcion CHAR(500) NOT NULL,
-    Empresa INT NOT NULL,
-    FechaInicio  DATE,
-    FechaCierre DATE NOT NULL,
-    FechaFinal DATE,
-    DocumentoAdicional CHAR(100),
-    Estado CHAR(1),
-
-	CONSTRAINT PK_TRABAJO
-		PRIMARY KEY (Id),
-	FOREIGN KEY (Empresa) REFERENCES EMPRESA(Id)
-	
-);
-
-/**/
-
-CREATE TABLE MENSAJE
-(
-    Id BIGINT IDENTITY(1,1),
-    Contenido CHAR(500),
-    Adjunto CHAR(500),
-    Fecha DATETIME,
-    
-    CONSTRAINT PK_MENSAJE
-		PRIMARY KEY (Id)
-);
-
-CREATE TABLE RESPUESTA
-(
-    Id BIGINT IDENTITY(1,1),
-    MensajeRaiz BIGINT NOT NULL,
-    Contenido CHAR(500),
-    Adjunto CHAR(500),
-    Fecha DATETIME,
-    
-    CONSTRAINT PK_RESPUESTA
-		PRIMARY KEY (Id),
-    CONSTRAINT FK_RESPUESTA_RAIZ
-		FOREIGN KEY (MensajeRaiz) REFERENCES MENSAJE(Id)
-);
 
 USE master
 IF EXISTS(SELECT * FROM sys.databases WHERE name='MyLearnDB')
@@ -222,6 +25,8 @@ CREATE TABLE ESTUDIANTE (
     Email CHAR(50)  NOT NULL,
     Telefono CHAR(15) NOT NULL,
     Foto CHAR(30),
+	Pais CHAR(30) NOT NULL ,
+    Region CHAR(30),
     FechaInscripcion DATE  NOT NULL ,
     RepositorioCodigo CHAR(100),
     HojaDeVida CHAR(100),
@@ -242,7 +47,8 @@ CREATE TABLE PROFESOR (
     Foto CHAR(30),
     FechaInscripcion  DATE NOT NULL ,
     HorarioAtencion CHAR(15),
-    
+    Pais CHAR(30) NOT NULL ,
+    Region CHAR(30),
     CONSTRAINT PK_PROFESOR
 		PRIMARY KEY (Id),
     CONSTRAINT FK_PROFESOR_ID
@@ -257,7 +63,8 @@ CREATE TABLE EMPRESA (
     Foto CHAR(100),
     FechaInscripcion DATE NOT NULL ,
     PaginaWebEmpresa CHAR(30),
-    
+    Pais CHAR(30) NOT NULL ,
+    Region CHAR(30),
     CONSTRAINT PK_EMPRESA
 		PRIMARY KEY (Id),
     CONSTRAINT FK_EMPRESA_ID
@@ -266,14 +73,6 @@ CREATE TABLE EMPRESA (
 
 /**/
 
-CREATE TABLE UBICACION (
-    Id INT IDENTITY(1,1),
-    Pais CHAR(30) NOT NULL ,
-    Region CHAR(30),
-    
-    CONSTRAINT PK_UBICACION
-		PRIMARY KEY (Id)
-);
 
 CREATE TABLE TECNOLOGIA (
     Id INT IDENTITY(1,1),
