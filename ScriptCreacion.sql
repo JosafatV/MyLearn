@@ -209,6 +209,7 @@ CREATE TABLE CURSO_POR_UNIVERSIDAD
 (
     Curso_Id INT,
     Universidad_Id INT,
+	Estado CHAR(1),
 
     CONSTRAINT PK_CURSO_POR_UNIVERSIDAD
 		PRIMARY KEY (Curso_Id,Universidad_Id),
@@ -222,6 +223,7 @@ CREATE TABLE CURSO_POR_PROFESOR
 (
     Curso_Id INT,
     Profesor_Id INT,
+	Estado CHAR(1),
 
     CONSTRAINT PK_CURSO_POR_PROFESOR
 		PRIMARY KEY (Curso_Id,Profesor_Id),
@@ -235,6 +237,7 @@ CREATE TABLE PROFESOR_POR_UNIVERSIDAD
 (
     Profesor_Id INT,
     Universidad_Id INT,
+	Estado CHAR(1),
 
     CONSTRAINT PK_PROFESOR_POR_UNIVERSIDAD
 		PRIMARY KEY (Profesor_Id,Universidad_Id),
@@ -264,6 +267,7 @@ CREATE TABLE BADGE_POR_PROYECTO
 (
     Id_Badge INT,
     Id_Proyecto INT,
+	Estado CHAR(1),
 
     PRIMARY KEY (Id_Badge,Id_Proyecto),
     FOREIGN KEY (Id_Badge) REFERENCES BADGE (Id),
@@ -274,6 +278,7 @@ CREATE TABLE PROYECTO_POR_PROFESOR
 (
      IdProyecto INT,
      IdProfesor INT,
+	 Estado CHAR(1),
 
     PRIMARY KEY (IdProyecto, IdProfesor),
     FOREIGN KEY (IdProyecto) REFERENCES PROYECTO (Id),
@@ -284,6 +289,7 @@ CREATE TABLE PROYECTO_POR_ESTUDIANTE
 (
      IdProyecto INT,
      IdEstudiante INT,
+	 Estado CHAR(1),
 
     PRIMARY KEY (IdProyecto,IdEstudiante),
     FOREIGN KEY (IdProyecto) REFERENCES PROYECTO (Id),
@@ -293,6 +299,7 @@ CREATE TABLE PROYECTO_POR_ESTUDIANTE
 CREATE TABLE IDIOMA_POR_ESTUDIANTE(
 	IdEstudiante INT,
 	IdIdioma INT,
+	Estado CHAR(1),
 
 	/*CONSTRAINT PK_IDIOMA_POR_ESTUDIANTE*/
 	PRIMARY KEY (IdEstudiante, IdIdioma),
@@ -304,6 +311,7 @@ CREATE TABLE MENSAJE_POR_PROYECTO
 (
     IdMensaje BIGINT,
     IdProyecto INT,
+	Estado CHAR(1),
 
     PRIMARY KEY (IdMensaje, IdProyecto),
     FOREIGN KEY (IdMensaje) REFERENCES MENSAJE(Id),
@@ -314,6 +322,7 @@ CREATE TABLE TECNOLOGIA_POR_PROYECTO
 (
     IdTecnologia INT,
     IdProyecto INT,
+	Estado CHAR(1),
 
     PRIMARY KEY (Id_Tecnologia, Id_Proyecto),
     FOREIGN KEY (Id_Tecnologia) REFERENCES TECNOLOGIA(Id),
@@ -340,6 +349,7 @@ CREATE TABLE TECNOLOGIA_POR_TRABAJO
     Id_Tecnologia INT,
     Id_Trabajo INT,
 	Fecha DATE,
+	Estado CHAR(1),
 
     PRIMARY KEY (Id_Tecnologia,Id_Trabajo),
     FOREIGN KEY (Id_Tecnologia) REFERENCES TECNOLOGIA(Id),
@@ -350,6 +360,7 @@ CREATE TABLE MENSAJE_POR_TRABAJO
 (
     Id_Mensaje BIGINT,
     Id_Trabajo INT,
+	Estado CHAR(1),
 
     PRIMARY KEY (Id_Mensaje,Id_Trabajo),
     FOREIGN KEY (Id_Mensaje) REFERENCES MENSAJE(Id),
