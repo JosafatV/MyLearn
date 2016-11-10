@@ -8,6 +8,7 @@ CREATE DATABASE MyLearnDB;
 GO
 
 
+
 USE MyLearnDB;
 
 CREATE TABLE USUARIO (
@@ -107,7 +108,7 @@ CREATE TABLE CURSO (
     Id INT IDENTITY(1,1),
     Nombre CHAR(30),
     Codigo CHAR(10),
-    Estado CHAR(1),
+    Estado CHAR(1), /*Activo, Pasado*/
 
 	CONSTRAINT PK_CURSO
 		PRIMARY KEY (Id)
@@ -137,7 +138,7 @@ CREATE TABLE PROYECTO (
     FechaFinal DATE,
     DocumentoAdicional CHAR(100),
     NotaMinima INT NOT NULL ,
-    Estado CHAR(1),
+    Estado CHAR(1) /*Propuesta, Lectura, Activo*/,
 
 	CONSTRAINT PK_PROYECTO
 		PRIMARY KEY (Id),
@@ -151,9 +152,8 @@ CREATE TABLE TRABAJO (
     Empresa INT NOT NULL,
     FechaInicio  DATE,
     FechaCierre DATE NOT NULL,
-    FechaFinal DATE,
     DocumentoAdicional CHAR(100),
-    Estado CHAR(1),
+    Estado CHAR(1), /*Propuesta, Terminado, Activo*/
 
 	CONSTRAINT PK_TRABAJO
 		PRIMARY KEY (Id),
@@ -187,6 +187,20 @@ CREATE TABLE RESPUESTA
     CONSTRAINT FK_RESPUESTA_RAIZ
 		FOREIGN KEY (MensajeRaiz) REFERENCES MENSAJE(Id)
 );
+
+CREATE TABLE NOTIFICACION
+(
+	Id BIGINT IDENTITY(1,1),
+    Contenido CHAR(500),
+    Fecha DATETIME,
+	UserId INT,
+	Estado CHAR(1), /*Leida, Nueva*/
+
+	CONSTRAINT PK_NOTIFICACION
+		PRIMARY KEY (Id),
+	CONSTRAINT FK_USER_ID
+		FOREIGN KEY UserId REFERENCES USUARIO(Id)
+);
 /*------------------------------------------Relaciones entre tablas--------------------------------------*/
 /*Manejo de cuentas*/
 
@@ -195,49 +209,54 @@ CREATE TABLE CURSO_POR_UNIVERSIDAD
 (
     Curso_Id INT,
     Universidad_Id INT,
+
     CONSTRAINT PK_CURSO_POR_UNIVERSIDAD
 		PRIMARY KEY (Curso_Id,Universidad_Id),
     CONSTRAINT FK_CURSO_ID_CURSO_POR_UNIVERSIDAD
 		FOREIGN KEY (Curso_Id) REFERENCES BADGE(Id),
     CONSTRAINT FK_UNIVERSIDAD_ID_CURSO_POR_UNIVERSIDAD
 		FOREIGN KEY (Universidad_Id) REFERENCES UNIVERSIDAD(Id)
-)
+);
 
 CREATE TABLE CURSO_POR_PROFESOR
 (
     Curso_Id INT,
     Profesor_Id INT,
+
     CONSTRAINT PK_CURSO_POR_PROFESOR
 		PRIMARY KEY (Curso_Id,Profesor_Id),
     CONSTRAINT FK_CURSO_ID_CURSO_POR_PROFESOR
 		FOREIGN KEY (Curso_Id) REFERENCES BADGE(Id),
     CONSTRAINT FK_UNIVERSIDA_ID_CURSO_POR_PROFESOR
 		FOREIGN KEY (Profesor_Id) REFERENCES UNIVERSIDAD(Id)
-)
+);
 
 CREATE TABLE PROFESOR_POR_UNIVERSIDAD
 (
     Profesor_Id INT,
     Universidad_Id INT,
+
     CONSTRAINT PK_PROFESOR_POR_UNIVERSIDAD
 		PRIMARY KEY (Profesor_Id,Universidad_Id),
     CONSTRAINT FK_CURSO_ID_PROFESOR_POR_UNIVERSIDAD
 		FOREIGN KEY (Profesor_Id) REFERENCES PROFESOR(Id),
     CONSTRAINT FK_UNIVERSIDAD_ID_PROFESOR_POR_UNIVERSIDAD
 		FOREIGN KEY (Universidad_Id) REFERENCES UNIVERSIDAD(Id)
-)
+);
 
 CREATE TABLE ESTUDIANTE_POR_CURSO
 (
     Estudiante_Id INT,
     Curso_Id INT,
+	Estado CHAR(1), /*Disponible, Inscrito*/
+
     CONSTRAINT PK_ESTUDIANTE_POR_CURSO
 		PRIMARY KEY ( Estudiante_Id,Curso_Id),
     CONSTRAINT FK_ESTUDIANTE_ID_ESTUDIANTE_POR_CURSO
 		FOREIGN KEY (Estudiante_Id) REFERENCES ESTUDIANTE(Id),
     CONSTRAINT FK_CURSO_ID_ESTUDIANTE_POR_CURSO
 		FOREIGN KEY ( Curso_Id) REFERENCES CURSO(Id)
-)
+);
 
 
 /*Area de trabajo- curso*/
@@ -245,82 +264,94 @@ CREATE TABLE BADGE_POR_PROYECTO
 (
     Id_Badge INT,
     Id_Proyecto INT,
+
     PRIMARY KEY (Id_Badge,Id_Proyecto),
     FOREIGN KEY (Id_Badge) REFERENCES BADGE (Id),
     FOREIGN KEY (Id_Proyecto) REFERENCES PROYECTO (Id)
-)
+);
 
 CREATE TABLE PROYECTO_POR_PROFESOR
 (
-     Id_Proyecto INT,
-     Id_Profesor INT,
-    PRIMARY KEY (Id_Proyecto,Id_Profesor),
-    FOREIGN KEY (Id_Proyecto) REFERENCES PROYECTO (Id),
-    FOREIGN KEY (Id_Profesor) REFERENCES PROFESOR(Id)
-)
+     IdProyecto INT,
+     IdProfesor INT,
+
+    PRIMARY KEY (IdProyecto, IdProfesor),
+    FOREIGN KEY (IdProyecto) REFERENCES PROYECTO (Id),
+    FOREIGN KEY (IdProfesor) REFERENCES PROFESOR(Id)
+);
 
 CREATE TABLE PROYECTO_POR_ESTUDIANTE
 (
-     Id_Proyecto INT,
-     Id_Estudiante INT,
-    PRIMARY KEY (Id_Proyecto,Id_Estudiante),
-    FOREIGN KEY (Id_Proyecto) REFERENCES PROYECTO (Id),
-    FOREIGN KEY (Id_Estudiante) REFERENCES ESTUDIANTE(Id)
-)
+     IdProyecto INT,
+     IdEstudiante INT,
+
+    PRIMARY KEY (IdProyecto,IdEstudiante),
+    FOREIGN KEY (IdProyecto) REFERENCES PROYECTO (Id),
+    FOREIGN KEY (IdEstudiante) REFERENCES ESTUDIANTE(Id)
+);
+
+CREATE TABLE IDIOMA_POR_ESTUDIANTE(
+	IdEstudiante INT,
+	IdIdioma INT,
+
+	/*CONSTRAINT PK_IDIOMA_POR_ESTUDIANTE*/
+	PRIMARY KEY (IdEstudiante, IdIdioma),
+    FOREIGN KEY (IdIdioma) REFERENCES PROYECTO (Id),
+    FOREIGN KEY (IdEstudiante) REFERENCES ESTUDIANTE(Id)
+);
+
 CREATE TABLE MENSAJE_POR_PROYECTO
 (
-    Id_Mensaje BIGINT,
-    Id_Proyecto INT,
-    PRIMARY KEY (Id_Mensaje,Id_Proyecto),
-    FOREIGN KEY (Id_Mensaje) REFERENCES MENSAJE(Id),
-    FOREIGN KEY (Id_Proyecto) REFERENCES PROYECTO(Id)
-)
+    IdMensaje BIGINT,
+    IdProyecto INT,
+
+    PRIMARY KEY (IdMensaje, IdProyecto),
+    FOREIGN KEY (IdMensaje) REFERENCES MENSAJE(Id),
+    FOREIGN KEY (IdProyecto) REFERENCES PROYECTO(Id)
+);
 
 CREATE TABLE TECNOLOGIA_POR_PROYECTO
 (
-    Id_Tecnologia INT,
-    Id_Proyecto INT,
-    PRIMARY KEY (Id_Tecnologia,Id_Proyecto),
+    IdTecnologia INT,
+    IdProyecto INT,
+
+    PRIMARY KEY (Id_Tecnologia, Id_Proyecto),
     FOREIGN KEY (Id_Tecnologia) REFERENCES TECNOLOGIA(Id),
     FOREIGN KEY (Id_Proyecto) REFERENCES PROYECTO(Id)
-)
+);
 
-
-/*Mensajeria*/
-
-CREATE TABLE RESPUESTA_POR_MENSAJE
-(
-    Id_Respuesta BIGINT,
-    Id_Mensaje BIGINT,
-    PRIMARY KEY (Id_Respuesta,Id_Mensaje),
-    FOREIGN KEY (Id_Respuesta) REFERENCES RESPUESTA(Id),
-    FOREIGN KEY (Id_Mensaje) REFERENCES MENSAJE(Id)
-)
 /*Area de trabajo- empresa*/
 
 CREATE TABLE TRABAJO_POR_ESTUDIANTE
 (
-    Id_Trabajo INT,
-    Id_Estudiante INT,
-    PRIMARY KEY (Id_Trabajo,Id_Estudiante),
-    FOREIGN KEY (Id_Trabajo) REFERENCES TRABAJO(Id),
-    FOREIGN KEY (Id_Estudiante) REFERENCES ESTUDIANTE(Id)
-)
+    IdTrabajo INT,
+    IdEstudiante INT,
+	Monto INT,
+	Comentario CHAR(300),
+	Estado CHAR(1), /*Aceptada, Negada, Enviada*/
+
+    PRIMARY KEY (IdTrabajo, IdEstudiante),
+    FOREIGN KEY (IdTrabajo) REFERENCES TRABAJO(Id),
+    FOREIGN KEY (IdEstudiante) REFERENCES ESTUDIANTE(Id)
+);
 
 CREATE TABLE TECNOLOGIA_POR_TRABAJO
 (
     Id_Tecnologia INT,
     Id_Trabajo INT,
+	Fecha DATE,
+
     PRIMARY KEY (Id_Tecnologia,Id_Trabajo),
     FOREIGN KEY (Id_Tecnologia) REFERENCES TECNOLOGIA(Id),
     FOREIGN KEY (Id_Trabajo) REFERENCES TRABAJO(Id)
-)
+);
 
 CREATE TABLE MENSAJE_POR_TRABAJO
 (
     Id_Mensaje BIGINT,
     Id_Trabajo INT,
+
     PRIMARY KEY (Id_Mensaje,Id_Trabajo),
     FOREIGN KEY (Id_Mensaje) REFERENCES MENSAJE(Id),
     FOREIGN KEY (Id_Trabajo) REFERENCES TRABAJO(Id)
-)
+);
