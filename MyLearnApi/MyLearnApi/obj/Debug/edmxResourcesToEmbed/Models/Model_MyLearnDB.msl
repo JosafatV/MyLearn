@@ -14,6 +14,7 @@
     <EntitySetMapping Name="ESTUDIANTE">
       <EntityTypeMapping TypeName="MyLearnDBModel.ESTUDIANTE">
         <MappingFragment StoreEntitySet="ESTUDIANTE">
+          <ScalarProperty Name="LinkHojaDeVida" ColumnName="LinkHojaDeVida" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
           <ScalarProperty Name="ApellidoContacto" ColumnName="ApellidoContacto" />
@@ -27,6 +28,14 @@
           <ScalarProperty Name="RepositorioCodigo" ColumnName="RepositorioCodigo" />
           <ScalarProperty Name="RepositorioArchivos" ColumnName="RepositorioArchivos" />
           <ScalarProperty Name="Idioma" ColumnName="Idioma" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.USUARIO">
+        <MappingFragment StoreEntitySet="USUARIO">
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

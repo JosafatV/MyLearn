@@ -203,7 +203,7 @@ CREATE TABLE NOTIFICACION
 	CONSTRAINT PK_NOTIFICACION
 		PRIMARY KEY (Id),
 	CONSTRAINT FK_USER_ID
-		FOREIGN KEY UserId REFERENCES USUARIO(Id)
+		FOREIGN KEY (UserId) REFERENCES USUARIO(Id)
 );
 
 /*------------------------------------------Relaciones entre tablas--------------------------------------*/

@@ -27,5 +27,8 @@ namespace MyLearnApi.Models
         public string RepositorioCodigo { get; set; }
         public string RepositorioArchivos { get; set; }
         public string Idioma { get; set; }
+        public string LinkHojaDeVida { get; set; }
+    
+        public virtual USUARIO USUARIO { get; set; }
     }
 }

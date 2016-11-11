@@ -27,5 +27,6 @@ namespace MyLearnApi.Models
     
         public virtual DbSet<CURSO> CURSO { get; set; }
         public virtual DbSet<ESTUDIANTE> ESTUDIANTE { get; set; }
+        public virtual DbSet<USUARIO> USUARIO { get; set; }
     }
 }

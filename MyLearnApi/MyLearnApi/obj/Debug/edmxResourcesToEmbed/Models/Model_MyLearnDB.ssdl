@@ -25,10 +25,35 @@
     <Property Name="FechaInscripcion" Type="date" Nullable="false" />
     <Property Name="RepositorioCodigo" Type="char" MaxLength="100" />
     <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
+    <Property Name="LinkHojaDeVida" Type="char" MaxLength="100" />
     <Property Name="Idioma" Type="char" MaxLength="50" />
   </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Contrasena" Type="char" MaxLength="8" />
+  </EntityType>
+  <Association Name="FK_ESTUDIANTE_ID">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="MyLearnDBModelStoreContainer">
     <EntitySet Name="CURSO" EntityType="Self.CURSO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ESTUDIANTE_ID" Association="Self.FK_ESTUDIANTE_ID">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>
