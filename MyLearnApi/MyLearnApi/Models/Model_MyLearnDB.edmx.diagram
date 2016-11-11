@@ -5,10 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e89c74aac38c472f9e27064a310e3ebf" Name="Diagram1">
-        <EntityTypeShape EntityType="MyLearnDBModel.CURSO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyLearnDBModel.ESTUDIANTE" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyLearnDBModel.USUARIO" Width="1.5" PointX="0.75" PointY="3.875" />
-        <AssociationConnector Association="MyLearnDBModel.FK_ESTUDIANTE_ID" />
+        <EntityTypeShape EntityType="MyLearnDBModel.USUARIO" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

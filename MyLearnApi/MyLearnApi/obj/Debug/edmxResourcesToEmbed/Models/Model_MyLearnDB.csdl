@@ -1,61 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MyLearnDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="CURSO">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
-    <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-  </EntityType>
-  <EntityType Name="ESTUDIANTE">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="NombreContacto" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="ApellidoContacto" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="Carne" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="Foto" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
-    <Property Name="Pais" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="Region" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
-    <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="RepositorioCodigo" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="RepositorioArchivos" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="Idioma" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
-    <Property Name="LinkHojaDeVida" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="USUARIO" Relationship="MyLearnDBModel.FK_ESTUDIANTE_ID" FromRole="ESTUDIANTE" ToRole="USUARIO" />
-  </EntityType>
   <EntityContainer Name="MyLearnDBEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="CURSO" EntityType="Self.CURSO" />
-    <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" />
     <EntitySet Name="USUARIO" EntityType="MyLearnDBModel.USUARIO" />
-    <AssociationSet Name="FK_ESTUDIANTE_ID" Association="MyLearnDBModel.FK_ESTUDIANTE_ID">
-      <End Role="USUARIO" EntitySet="USUARIO" />
-      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="USUARIO">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="Contrasena" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="ESTUDIANTE" Relationship="MyLearnDBModel.FK_ESTUDIANTE_ID" FromRole="USUARIO" ToRole="ESTUDIANTE" />
   </EntityType>
-  <Association Name="FK_ESTUDIANTE_ID">
-    <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
-    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="USUARIO">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ESTUDIANTE">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

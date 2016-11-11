@@ -14,9 +14,7 @@ namespace MyLearnApi.Models
     
     public partial class USUARIO
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Contrasena { get; set; }
-    
-        public virtual ESTUDIANTE ESTUDIANTE { get; set; }
     }
 }

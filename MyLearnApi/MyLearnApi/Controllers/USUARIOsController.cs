@@ -24,7 +24,7 @@ namespace MyLearnApi.Controllers
 
         // GET: api/USUARIOs/5
         [ResponseType(typeof(USUARIO))]
-        public IHttpActionResult GetUSUARIO(int id)
+        public IHttpActionResult GetUSUARIO(string id)
         {
             USUARIO uSUARIO = db.USUARIO.Find(id);
             if (uSUARIO == null)
@@ -37,7 +37,7 @@ namespace MyLearnApi.Controllers
 
         // PUT: api/USUARIOs/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUSUARIO(int id, USUARIO uSUARIO)
+        public IHttpActionResult PutUSUARIO(string id, USUARIO uSUARIO)
         {
             if (!ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace MyLearnApi.Controllers
 
         // DELETE: api/USUARIOs/5
         [ResponseType(typeof(USUARIO))]
-        public IHttpActionResult DeleteUSUARIO(int id)
+        public IHttpActionResult DeleteUSUARIO(string id)
         {
             USUARIO uSUARIO = db.USUARIO.Find(id);
             if (uSUARIO == null)
@@ -110,7 +110,7 @@ namespace MyLearnApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool USUARIOExists(int id)
+        private bool USUARIOExists(string id)
         {
             return db.USUARIO.Count(e => e.Id == id) > 0;
         }

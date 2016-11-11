@@ -12,14 +12,14 @@ GO
 USE MyLearnDB;
 
 CREATE TABLE USUARIO (
-    Id INT IDENTITY(1,1),
+    Id CHAR(100),
     Contrasena CHAR(8),
     CONSTRAINT PK_USUARIO
 		PRIMARY KEY (Id),
 );
 
 CREATE TABLE ESTUDIANTE (
-    Id INT,
+    Id CHAR(100),
     NombreContacto CHAR(30) NOT NULL,
     ApellidoContacto CHAR(30) NOT NULL ,
     Carne CHAR(15),
@@ -41,7 +41,7 @@ CREATE TABLE ESTUDIANTE (
 );
 
 CREATE TABLE PROFESOR (
-    Id INT,
+    Id CHAR(100),
     NombreContacto CHAR(30) NOT NULL ,
     ApellidoContacto CHAR(30) NOT NULL ,
     Email CHAR(50),
@@ -60,7 +60,7 @@ CREATE TABLE PROFESOR (
 );
     
 CREATE TABLE EMPRESA (
-    Id INT,
+    Id CHAR(100),
     NombreEmpresarial CHAR(30), /** If NULL => NombreEmpresarial=NombreContacto+NombreEmpresarial**/
     Email CHAR(50) NOT NULL ,
     Telefono CHAR(15) NOT NULL ,
@@ -152,7 +152,7 @@ CREATE TABLE TRABAJO (
     Id INT IDENTITY(1,1),
     Nombre CHAR(30) NOT NULL,
     Descripcion CHAR(500) NOT NULL,
-    IdEmpresa INT NOT NULL,
+    IdEmpresa CHAR(100) NOT NULL,
     FechaInicio  DATE,
     FechaCierre DATE NOT NULL,
     DocumentoAdicional CHAR(100),
@@ -197,7 +197,7 @@ CREATE TABLE NOTIFICACION
 	Id BIGINT IDENTITY(1,1),
     Contenido CHAR(500),
     Fecha DATETIME,
-	UserId INT,
+	UserId CHAR(100),
 	Estado CHAR(1), /*Leida, Nueva*/
 
 	CONSTRAINT PK_NOTIFICACION
@@ -227,7 +227,7 @@ CREATE TABLE CURSO_POR_UNIVERSIDAD
 CREATE TABLE CURSO_POR_PROFESOR
 (
 	IdCurso INT,
-    IdProfesor INT,
+    IdProfesor CHAR(100),
 	Estado CHAR(1), /*Activo, Inactivo*/
 
     CONSTRAINT PK_CURSO_POR_PROFESOR
@@ -240,7 +240,7 @@ CREATE TABLE CURSO_POR_PROFESOR
 
 CREATE TABLE PROFESOR_POR_UNIVERSIDAD
 (
-    IdProfesor INT,
+    IdProfesor CHAR(100),
     IdUniversidad INT,
 	Estado CHAR(1), /*Activo, Inactivo*/
 
@@ -254,7 +254,7 @@ CREATE TABLE PROFESOR_POR_UNIVERSIDAD
 
 CREATE TABLE ESTUDIANTE_POR_CURSO
 (
-    IdEstudiante INT,
+    IdEstudiante CHAR(100),
     IdCurso INT,
 	Estado CHAR(1), /*Disponible, Inscrito*/
 
@@ -285,7 +285,7 @@ CREATE TABLE BADGE_POR_PROYECTO
 CREATE TABLE PROYECTO_POR_PROFESOR
 (
      IdProyecto INT,
-     IdProfesor INT,
+     IdProfesor CHAR(100),
 	 Estado CHAR(1),
 
 	CONSTRAINT PK_PROYECTO_POR_PROFESOR
@@ -299,7 +299,7 @@ CREATE TABLE PROYECTO_POR_PROFESOR
 CREATE TABLE PROYECTO_POR_ESTUDIANTE
 (
     IdProyecto INT,
-    IdEstudiante INT,
+    IdEstudiante CHAR(100),
 	Estado CHAR(1),
 
 	CONSTRAINT PK_PROYECTO_POR_ESTUDIANTE
@@ -311,7 +311,7 @@ CREATE TABLE PROYECTO_POR_ESTUDIANTE
 );
 
 CREATE TABLE IDIOMA_POR_ESTUDIANTE(
-	IdEstudiante INT,
+	IdEstudiante CHAR(100),
 	IdIdioma INT,
 	Estado CHAR(1),
 
@@ -356,7 +356,7 @@ CREATE TABLE TECNOLOGIA_POR_PROYECTO
 CREATE TABLE TRABAJO_POR_ESTUDIANTE
 (
     IdTrabajo INT,
-    IdEstudiante INT,
+    IdEstudiante CHAR(100),
 	Monto INT,
 	Comentario CHAR(300),
 	Estado CHAR(1), /*Aceptada, Negada, Enviada*/

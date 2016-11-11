@@ -19,7 +19,7 @@ namespace MyLearnApi.BusinessLogic
 {
     public class clsCuentaDeUsuario
     {
-        public static bool login(int username, string password)
+        public static bool login(string username, string password)
         {
             using (MyLearnDBEntities entities = new MyLearnDBEntities())
             {

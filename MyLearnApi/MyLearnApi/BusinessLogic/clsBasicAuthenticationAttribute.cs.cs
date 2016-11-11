@@ -32,7 +32,7 @@ namespace MyLearnApi.BusinessLogic
                 string username = usernamePasswordArray[0];
                 string password = usernamePasswordArray[1];
 
-                if (clsCuentaDeUsuario.login(Int32.Parse(username), password))
+                if (clsCuentaDeUsuario.login(username, password))
                 {
                     Thread.CurrentPrincipal = new GenericPrincipal(
                         new GenericIdentity(username), null);
