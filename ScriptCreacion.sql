@@ -14,11 +14,24 @@ USE MyLearnDB;
 CREATE TABLE USUARIO (
     Id CHAR(100),
     Contrasena CHAR(8),
+	Sal CHAR(20),
+	RepositorioArchivos CHAR(100),
+	CredencialDrive CHAR(100),
 	Estado CHAR(1),
     CONSTRAINT PK_USUARIO
 		PRIMARY KEY (Id),
 );
 
+CREATE TABLE USUARIO_XMP (
+    Id CHAR(100),
+    Nombre CHAR(30) NOT NULL,
+    ApellidoContacto CHAR(30) NOT NULL ,
+   
+    CONSTRAINT PK_USUARIO_XMP
+		PRIMARY KEY (Id),
+    CONSTRAINT FK_USUARIO_XMP
+		FOREIGN KEY (Id) REFERENCES USUARIO(Id)
+);
 CREATE TABLE ESTUDIANTE (
     Id CHAR(100),
     NombreContacto CHAR(30) NOT NULL,
@@ -31,9 +44,7 @@ CREATE TABLE ESTUDIANTE (
     Region CHAR(30),
     FechaInscripcion DATE  NOT NULL ,
     RepositorioCodigo CHAR(100),
-    RepositorioArchivos CHAR(100),
 	LinkHojaDeVida CHAR(100),
-    Idioma CHAR(50),
     
     CONSTRAINT PK_ESTUDIANTE
 		PRIMARY KEY (Id),
@@ -52,8 +63,7 @@ CREATE TABLE PROFESOR (
     HorarioAtencion CHAR(15),
     Pais CHAR(30) NOT NULL ,
     Region CHAR(30),
-	RepositorioArchivos CHAR(100),
-
+	
     CONSTRAINT PK_PROFESOR
 		PRIMARY KEY (Id),
     CONSTRAINT FK_PROFESOR_ID
@@ -70,7 +80,7 @@ CREATE TABLE EMPRESA (
     PaginaWebEmpresa CHAR(30),
     Pais CHAR(30) NOT NULL ,
     Region CHAR(30),
-	RepositorioArchivos CHAR(100),
+	
 
     CONSTRAINT PK_EMPRESA
 		PRIMARY KEY (Id),
