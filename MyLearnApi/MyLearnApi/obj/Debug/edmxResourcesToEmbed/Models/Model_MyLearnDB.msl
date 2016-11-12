@@ -1,11 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="MyLearnDBModelStoreContainer" CdmEntityContainer="MyLearnDBEntities">
+    <EntitySetMapping Name="ESTUDIANTE">
+      <EntityTypeMapping TypeName="MyLearnDBModel.ESTUDIANTE">
+        <MappingFragment StoreEntitySet="ESTUDIANTE">
+          <ScalarProperty Name="LinkHojaDeVida" ColumnName="LinkHojaDeVida" />
+          <ScalarProperty Name="RepositorioCodigo" ColumnName="RepositorioCodigo" />
+          <ScalarProperty Name="FechaInscripcion" ColumnName="FechaInscripcion" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Carne" ColumnName="Carne" />
+          <ScalarProperty Name="ApellidoContacto" ColumnName="ApellidoContacto" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_insert_estudiante" FunctionName="MyLearnDBModel.Store.sp_insert_estudiante" />
     <EntitySetMapping Name="USUARIO">
       <EntityTypeMapping TypeName="MyLearnDBModel.USUARIO">
         <MappingFragment StoreEntitySet="USUARIO">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="CredencialDrive" ColumnName="CredencialDrive" />
+          <ScalarProperty Name="RepositorioArchivos" ColumnName="RepositorioArchivos" />
+          <ScalarProperty Name="Sal" ColumnName="Sal" />
           <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IDIOMA">
+      <EntityTypeMapping TypeName="MyLearnDBModel.IDIOMA">
+        <MappingFragment StoreEntitySet="IDIOMA">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IDIOMA_POR_ESTUDIANTE">
+      <EntityTypeMapping TypeName="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE">
+        <MappingFragment StoreEntitySet="IDIOMA_POR_ESTUDIANTE">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="IdIdioma" ColumnName="IdIdioma" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VIEW_ESTUDIANTE">
+      <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_ESTUDIANTE">
+        <MappingFragment StoreEntitySet="VIEW_ESTUDIANTE">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="CredencialDrive" ColumnName="CredencialDrive" />
+          <ScalarProperty Name="RepositorioArchivos" ColumnName="RepositorioArchivos" />
+          <ScalarProperty Name="Sal" ColumnName="Sal" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LinkHojaDeVida" ColumnName="LinkHojaDeVida" />
+          <ScalarProperty Name="RepositorioCodigo" ColumnName="RepositorioCodigo" />
+          <ScalarProperty Name="FechaInscripcion" ColumnName="FechaInscripcion" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Carne" ColumnName="Carne" />
+          <ScalarProperty Name="ApellidoContacto" ColumnName="ApellidoContacto" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

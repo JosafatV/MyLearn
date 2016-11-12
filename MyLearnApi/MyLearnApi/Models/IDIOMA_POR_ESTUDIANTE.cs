@@ -12,13 +12,12 @@ namespace MyLearnApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class USUARIO
+    public partial class IDIOMA_POR_ESTUDIANTE
     {
-        public string Id { get; set; }
-        public string Contrasena { get; set; }
-        public string Sal { get; set; }
-        public string RepositorioArchivos { get; set; }
-        public string CredencialDrive { get; set; }
+        public string IdEstudiante { get; set; }
+        public int IdIdioma { get; set; }
         public string Estado { get; set; }
+    
+        public virtual ESTUDIANTE ESTUDIANTE { get; set; }
     }
 }
