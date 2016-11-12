@@ -14,6 +14,7 @@ USE MyLearnDB;
 CREATE TABLE USUARIO (
     Id CHAR(100),
     Contrasena CHAR(8),
+	Estado CHAR(1),
     CONSTRAINT PK_USUARIO
 		PRIMARY KEY (Id),
 );
