@@ -1,0 +1,65 @@
+header {
+	width:100%; /* Establecemos que el header abarque el 100% del documento */
+	overflow:hidden; /* Eliminamos errores de float */
+	background:#252932;
+	margin-bottom:20px;
+}
+
+.wrapper {
+	width:90%; /* Establecemos que el ancho sera del 90% */
+	max-width:875px; /* Aqui le decimos que el ancho máximo sera de 1000px */
+	margin:auto; /* Centramos los elementos */
+	overflow:hidden; /* Eliminamos errores de float */
+}
+
+header .logo {
+	color:#f56f3a;
+	font-size:75px;
+	line-height:200px;
+	float:left;
+	font-family:Broadway;
+}
+
+header nav {
+	float:right;
+	line-height:200px;
+}
+
+header nav a {
+	display:inline-block;
+	color:#fff;
+	text-decoration:none;
+	padding:10px 20px;
+	line-height:normal;
+	font-size:20px;
+	font-weight:bold;
+	-webkit-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+	transition:all 500ms ease;
+}
+
+header nav a:hover {
+	background:#f56f3a;
+	border-radius:50px;
+	color:#fff;
+	cursor:pointer;
+}
+
+.img{
+	position: absolute;
+ top:  50px;
+ left: 50px;
+}
+/*Finaiza parte CSS cabecera*/
+
+.btn-tcc{
+	background:#252932;
+	color:#f56f3a;
+}
+.btn-ttc:hover {
+	color:#f56f3a;
+}
+body{
+	background: #D8D8D8;
+	color:#252932
+}
