@@ -19,5 +19,6 @@ namespace MyLearnApi.Models
         public string Estado { get; set; }
     
         public virtual ESTUDIANTE ESTUDIANTE { get; set; }
+        public virtual IDIOMA IDIOMA { get; set; }
     }
 }

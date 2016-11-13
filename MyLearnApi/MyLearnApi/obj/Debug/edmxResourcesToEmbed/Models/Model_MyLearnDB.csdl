@@ -25,12 +25,16 @@
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
     <EntitySet Name="IDIOMA" EntityType="MyLearnDBModel.IDIOMA" />
+    <EntitySet Name="VIEW_ESTUDIANTE" EntityType="MyLearnDBModel.VIEW_ESTUDIANTE" />
     <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" />
     <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
       <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
     </AssociationSet>
-    <EntitySet Name="VIEW_ESTUDIANTE" EntityType="MyLearnDBModel.VIEW_ESTUDIANTE" />
+    <AssociationSet Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
+      <End Role="IDIOMA" EntitySet="IDIOMA" />
+      <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -48,7 +52,6 @@
     <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="RepositorioCodigo" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="LinkHojaDeVida" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="IDIOMA_POR_ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" FromRole="ESTUDIANTE" ToRole="IDIOMA_POR_ESTUDIANTE" />
   </EntityType>
   <EntityType Name="USUARIO">
     <Key>
@@ -80,28 +83,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
   </EntityType>
-  <EntityType Name="IDIOMA_POR_ESTUDIANTE">
-    <Key>
-      <PropertyRef Name="IdEstudiante" />
-      <PropertyRef Name="IdIdioma" />
-    </Key>
-    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="IdIdioma" Type="Int32" Nullable="false" />
-    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" FromRole="IDIOMA_POR_ESTUDIANTE" ToRole="ESTUDIANTE" />
-  </EntityType>
-  <Association Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
-    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
-    <End Type="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" Role="IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ESTUDIANTE">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="IDIOMA_POR_ESTUDIANTE">
-        <PropertyRef Name="IdEstudiante" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="VIEW_ESTUDIANTE">
     <Key>
       <PropertyRef Name="Id" />
@@ -123,4 +104,39 @@
     <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
   </EntityType>
+  <EntityType Name="IDIOMA_POR_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdEstudiante" />
+      <PropertyRef Name="IdIdioma" />
+    </Key>
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="IdIdioma" Type="Int32" Nullable="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" FromRole="IDIOMA_POR_ESTUDIANTE" ToRole="ESTUDIANTE" />
+    <NavigationProperty Name="IDIOMA" Relationship="MyLearnDBModel.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" FromRole="IDIOMA_POR_ESTUDIANTE" ToRole="IDIOMA" />
+  </EntityType>
+  <Association Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
+    <End Type="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" Role="IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IDIOMA_POR_ESTUDIANTE">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.IDIOMA" Role="IDIOMA" Multiplicity="1" />
+    <End Type="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" Role="IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IDIOMA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IDIOMA_POR_ESTUDIANTE">
+        <PropertyRef Name="IdIdioma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

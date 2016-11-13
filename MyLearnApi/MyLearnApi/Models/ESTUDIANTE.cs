@@ -14,12 +14,6 @@ namespace MyLearnApi.Models
     
     public partial class ESTUDIANTE
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ESTUDIANTE()
-        {
-            this.IDIOMA_POR_ESTUDIANTE = new HashSet<IDIOMA_POR_ESTUDIANTE>();
-        }
-    
         public string Id { get; set; }
         public string NombreContacto { get; set; }
         public string ApellidoContacto { get; set; }
@@ -32,8 +26,5 @@ namespace MyLearnApi.Models
         public System.DateTime FechaInscripcion { get; set; }
         public string RepositorioCodigo { get; set; }
         public string LinkHojaDeVida { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IDIOMA_POR_ESTUDIANTE> IDIOMA_POR_ESTUDIANTE { get; set; }
     }
 }

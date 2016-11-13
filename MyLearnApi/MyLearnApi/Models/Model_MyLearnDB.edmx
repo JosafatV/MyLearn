@@ -49,29 +49,6 @@
           <Property Name="CredencialDrive" Type="char" MaxLength="100" />
           <Property Name="Estado" Type="char" MaxLength="1" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="VIEW_ESTUDIANTE">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
-          <Property Name="ApellidoContacto" Type="char" MaxLength="30" Nullable="false" />
-          <Property Name="Carne" Type="char" MaxLength="15" />
-          <Property Name="Email" Type="char" MaxLength="50" Nullable="false" />
-          <Property Name="Telefono" Type="char" MaxLength="15" Nullable="false" />
-          <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
-          <Property Name="Region" Type="char" MaxLength="30" />
-          <Property Name="FechaInscripcion" Type="date" Nullable="false" />
-          <Property Name="RepositorioCodigo" Type="char" MaxLength="100" />
-          <Property Name="LinkHojaDeVida" Type="char" MaxLength="100" />
-          <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
-          <Property Name="Contrasena" Type="char" MaxLength="8" />
-          <Property Name="Sal" Type="char" MaxLength="20" />
-          <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
-          <Property Name="CredencialDrive" Type="char" MaxLength="100" />
-          <Property Name="Estado" Type="char" MaxLength="1" />
-        </EntityType>
         <Association Name="FK_ESTUDIANTE_ID">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
           <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="0..1" />
@@ -96,54 +73,33 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="sp_insert_estudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="char" Mode="In" />
-          <Parameter Name="Contrasena" Type="char" Mode="In" />
-          <Parameter Name="Sal" Type="char" Mode="In" />
-          <Parameter Name="RepositorioArchivos" Type="char" Mode="In" />
-          <Parameter Name="CredencialDrive" Type="char" Mode="In" />
-          <Parameter Name="Nombre" Type="char" Mode="In" />
-          <Parameter Name="Apellido" Type="char" Mode="In" />
-          <Parameter Name="Carne" Type="char" Mode="In" />
-          <Parameter Name="Email" Type="char" Mode="In" />
-          <Parameter Name="Telefono" Type="char" Mode="In" />
-          <Parameter Name="Pais" Type="char" Mode="In" />
-          <Parameter Name="Region" Type="char" Mode="In" />
-          <Parameter Name="FechaInscripcion" Type="date" Mode="In" />
-          <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
-          <Parameter Name="LinkHojaDeVida" Type="char" Mode="In" />
-        </Function>
+        <Association Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
+          <End Role="IDIOMA" Type="Self.IDIOMA" Multiplicity="1" />
+          <End Role="IDIOMA_POR_ESTUDIANTE" Type="Self.IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IDIOMA">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IDIOMA_POR_ESTUDIANTE">
+              <PropertyRef Name="IdIdioma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MyLearnDBModelStoreContainer">
           <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IDIOMA" EntityType="Self.IDIOMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="Self.IDIOMA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="VIEW_ESTUDIANTE" EntityType="Self.VIEW_ESTUDIANTE" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [VIEW_ESTUDIANTE].[NombreContacto] AS [NombreContacto], 
-    [VIEW_ESTUDIANTE].[ApellidoContacto] AS [ApellidoContacto], 
-    [VIEW_ESTUDIANTE].[Carne] AS [Carne], 
-    [VIEW_ESTUDIANTE].[Email] AS [Email], 
-    [VIEW_ESTUDIANTE].[Telefono] AS [Telefono], 
-    [VIEW_ESTUDIANTE].[Pais] AS [Pais], 
-    [VIEW_ESTUDIANTE].[Region] AS [Region], 
-    [VIEW_ESTUDIANTE].[FechaInscripcion] AS [FechaInscripcion], 
-    [VIEW_ESTUDIANTE].[RepositorioCodigo] AS [RepositorioCodigo], 
-    [VIEW_ESTUDIANTE].[LinkHojaDeVida] AS [LinkHojaDeVida], 
-    [VIEW_ESTUDIANTE].[Id] AS [Id], 
-    [VIEW_ESTUDIANTE].[Contrasena] AS [Contrasena], 
-    [VIEW_ESTUDIANTE].[Sal] AS [Sal], 
-    [VIEW_ESTUDIANTE].[RepositorioArchivos] AS [RepositorioArchivos], 
-    [VIEW_ESTUDIANTE].[CredencialDrive] AS [CredencialDrive], 
-    [VIEW_ESTUDIANTE].[Estado] AS [Estado]
-    FROM [dbo].[VIEW_ESTUDIANTE] AS [VIEW_ESTUDIANTE]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_ESTUDIANTE_ID" Association="Self.FK_ESTUDIANTE_ID">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
           </AssociationSet>
           <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
             <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+            <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
+            <End Role="IDIOMA" EntitySet="IDIOMA" />
             <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
           </AssociationSet>
         </EntityContainer>
@@ -176,12 +132,16 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
             <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
           </AssociationSet>
           <EntitySet Name="IDIOMA" EntityType="MyLearnDBModel.IDIOMA" />
+          <EntitySet Name="VIEW_ESTUDIANTE" EntityType="MyLearnDBModel.VIEW_ESTUDIANTE" />
           <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" />
           <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
             <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
             <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
           </AssociationSet>
-          <EntitySet Name="VIEW_ESTUDIANTE" EntityType="MyLearnDBModel.VIEW_ESTUDIANTE" />
+          <AssociationSet Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
+            <End Role="IDIOMA" EntitySet="IDIOMA" />
+            <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
           <Key>
@@ -199,7 +159,6 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
           <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="RepositorioCodigo" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <Property Name="LinkHojaDeVida" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="IDIOMA_POR_ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" FromRole="ESTUDIANTE" ToRole="IDIOMA_POR_ESTUDIANTE" />
         </EntityType>
         <EntityType Name="USUARIO">
           <Key>
@@ -231,28 +190,6 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
         </EntityType>
-        <EntityType Name="IDIOMA_POR_ESTUDIANTE">
-          <Key>
-            <PropertyRef Name="IdEstudiante" />
-            <PropertyRef Name="IdIdioma" />
-          </Key>
-          <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
-          <Property Name="IdIdioma" Type="Int32" Nullable="false" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" FromRole="IDIOMA_POR_ESTUDIANTE" ToRole="ESTUDIANTE" />
-        </EntityType>
-        <Association Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
-          <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
-          <End Type="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" Role="IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ESTUDIANTE">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="IDIOMA_POR_ESTUDIANTE">
-              <PropertyRef Name="IdEstudiante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="VIEW_ESTUDIANTE">
           <Key>
             <PropertyRef Name="Id" />
@@ -274,6 +211,41 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
           <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
+        <EntityType Name="IDIOMA_POR_ESTUDIANTE">
+          <Key>
+            <PropertyRef Name="IdEstudiante" />
+            <PropertyRef Name="IdIdioma" />
+          </Key>
+          <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="IdIdioma" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" FromRole="IDIOMA_POR_ESTUDIANTE" ToRole="ESTUDIANTE" />
+          <NavigationProperty Name="IDIOMA" Relationship="MyLearnDBModel.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" FromRole="IDIOMA_POR_ESTUDIANTE" ToRole="IDIOMA" />
+        </EntityType>
+        <Association Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
+          <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
+          <End Type="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" Role="IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTUDIANTE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IDIOMA_POR_ESTUDIANTE">
+              <PropertyRef Name="IdEstudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
+          <End Type="MyLearnDBModel.IDIOMA" Role="IDIOMA" Multiplicity="1" />
+          <End Type="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" Role="IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IDIOMA">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IDIOMA_POR_ESTUDIANTE">
+              <PropertyRef Name="IdIdioma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -298,7 +270,6 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_insert_estudiante" FunctionName="MyLearnDBModel.Store.sp_insert_estudiante" />
           <EntitySetMapping Name="USUARIO">
             <EntityTypeMapping TypeName="MyLearnDBModel.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
@@ -325,28 +296,6 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="IdIdioma" ColumnName="IdIdioma" />
                 <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VIEW_ESTUDIANTE">
-            <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_ESTUDIANTE">
-              <MappingFragment StoreEntitySet="VIEW_ESTUDIANTE">
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="CredencialDrive" ColumnName="CredencialDrive" />
-                <ScalarProperty Name="RepositorioArchivos" ColumnName="RepositorioArchivos" />
-                <ScalarProperty Name="Sal" ColumnName="Sal" />
-                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="LinkHojaDeVida" ColumnName="LinkHojaDeVida" />
-                <ScalarProperty Name="RepositorioCodigo" ColumnName="RepositorioCodigo" />
-                <ScalarProperty Name="FechaInscripcion" ColumnName="FechaInscripcion" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="Pais" ColumnName="Pais" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Carne" ColumnName="Carne" />
-                <ScalarProperty Name="ApellidoContacto" ColumnName="ApellidoContacto" />
-                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

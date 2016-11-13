@@ -6,12 +6,13 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e89c74aac38c472f9e27064a310e3ebf" Name="Diagram1">
         <EntityTypeShape EntityType="MyLearnDBModel.ESTUDIANTE" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="MyLearnDBModel.USUARIO" Width="1.5" PointX="3.125" PointY="0.5" />
+        <EntityTypeShape EntityType="MyLearnDBModel.USUARIO" Width="1.5" PointX="7.125" PointY="0.5" />
         <AssociationConnector Association="MyLearnDBModel.FK_ESTUDIANTE_ID" />
-        <EntityTypeShape EntityType="MyLearnDBModel.IDIOMA" Width="2.5" PointX="6.75" PointY="3.25" />
-        <EntityTypeShape EntityType="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" Width="2.5" PointX="3.75" PointY="4.375" />
+        <EntityTypeShape EntityType="MyLearnDBModel.IDIOMA" Width="2.5" PointX="7" PointY="3.25" />
+        <EntityTypeShape EntityType="MyLearnDBModel.VIEW_ESTUDIANTE" Width="2.875" PointX="0.5" PointY="4.625" />
+        <EntityTypeShape EntityType="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" Width="1.5" PointX="4.25" PointY="3" />
         <AssociationConnector Association="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" />
-        <EntityTypeShape EntityType="MyLearnDBModel.VIEW_ESTUDIANTE" Width="2.875" PointX="0.75" PointY="5.75" />
+        <AssociationConnector Association="MyLearnDBModel.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
