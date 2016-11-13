@@ -53,12 +53,6 @@
 warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VIEW_ESTUDIANTE">
           <Key>
-            <PropertyRef Name="NombreContacto" />
-            <PropertyRef Name="ApellidoContacto" />
-            <PropertyRef Name="Email" />
-            <PropertyRef Name="Telefono" />
-            <PropertyRef Name="Pais" />
-            <PropertyRef Name="FechaInscripcion" />
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
@@ -261,12 +255,6 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
         </Association>
         <EntityType Name="VIEW_ESTUDIANTE">
           <Key>
-            <PropertyRef Name="NombreContacto" />
-            <PropertyRef Name="ApellidoContacto" />
-            <PropertyRef Name="Email" />
-            <PropertyRef Name="Telefono" />
-            <PropertyRef Name="Pais" />
-            <PropertyRef Name="FechaInscripcion" />
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="NombreContacto" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />

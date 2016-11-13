@@ -74,3 +74,4 @@ C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\Microsoft.
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\System.Web.Http.Owin.xml
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Release\MyLearnApi.dll
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Release\MyLearnApi.pdb
+C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Release\MyLearnApi.csprojResolveAssemblyReference.cache

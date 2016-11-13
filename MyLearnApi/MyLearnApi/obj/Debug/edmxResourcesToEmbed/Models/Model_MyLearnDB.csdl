@@ -104,12 +104,6 @@
   </Association>
   <EntityType Name="VIEW_ESTUDIANTE">
     <Key>
-      <PropertyRef Name="NombreContacto" />
-      <PropertyRef Name="ApellidoContacto" />
-      <PropertyRef Name="Email" />
-      <PropertyRef Name="Telefono" />
-      <PropertyRef Name="Pais" />
-      <PropertyRef Name="FechaInscripcion" />
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="NombreContacto" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />

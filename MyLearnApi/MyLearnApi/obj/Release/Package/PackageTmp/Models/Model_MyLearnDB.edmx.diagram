@@ -5,8 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e89c74aac38c472f9e27064a310e3ebf" Name="Diagram1">
-        <EntityTypeShape EntityType="MyLearnDBModel.CURSO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyLearnDBModel.ESTUDIANTE" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyLearnDBModel.ESTUDIANTE" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MyLearnDBModel.USUARIO" Width="1.5" PointX="3.125" PointY="0.5" />
+        <AssociationConnector Association="MyLearnDBModel.FK_ESTUDIANTE_ID" />
+        <EntityTypeShape EntityType="MyLearnDBModel.IDIOMA" Width="2.5" PointX="6.75" PointY="3.25" />
+        <EntityTypeShape EntityType="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" Width="2.5" PointX="3.75" PointY="4.375" />
+        <AssociationConnector Association="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" />
+        <EntityTypeShape EntityType="MyLearnDBModel.VIEW_ESTUDIANTE" Width="2.875" PointX="0.75" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
