@@ -266,7 +266,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="HTML\login.html" />
+    <Content Include="HTML\Estudiante\Perfil_Estudiante.html" />
+    <Content Include="HTML\Login\Crear_CuentaEstudiante.html" />
+    <Content Include="HTML\Login\Login.html" />
     <Content Include="index.html" />
     <Content Include="Scripts\Angular and Bootstrap\AngularJS\angular-modal-service.js" />
     <Content Include="Scripts\Angular and Bootstrap\AngularJS\angular-resource.js" />
@@ -282,6 +284,7 @@
     <Content Include="Scripts\Angular and Bootstrap\Bootstrap\js\bootstrap.min.js" />
     <Content Include="Scripts\Angular and Bootstrap\Bootstrap\js\npm.js" />
     <Content Include="Scripts\app\configScript.js" />
+    <Content Include="Scripts\app\Estudiante\ctrl_crearCuentaEstudiante.js" />
     <Content Include="Scripts\app\Twitter\fct_twitterService.js" />
     <Content Include="Scripts\app\Login\ctrl_login.js" />
     <Content Include="Scripts\app\mod_MyLearn.js" />
@@ -361,6 +364,18 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Vistas\Configuracion\css\Estilos_CrearCE.css" />
+    <Content Include="Vistas\Configuracion\css\Estilos_login.css" />
+    <Content Include="Vistas\Configuracion\css\Estilos_PerfilE.css" />
+    <Content Include="Vistas\Configuracion\img\ball.jpg" />
+    <Content Include="Vistas\Configuracion\js\bootstrap.js" />
+    <Content Include="Vistas\Configuracion\js\bootstrap.min.js" />
+    <Content Include="Vistas\Configuracion\js\jquery.js" />
+    <Content Include="Vistas\Configuracion\js\npm.js" />
+    <Content Include="Vistas\Estudiante\Perfil_Estudiante.html" />
+    <Content Include="Vistas\Login.html" />
+    <Content Include="Vistas\Login\Crear_CuentaEstudiante.html" />
+    <Content Include="Vistas\Login\Login.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -373,9 +388,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="HTML\Empresa\" />
+    <Folder Include="HTML\Profesor\" />
     <Folder Include="Scripts\app\Configuration\" />
     <Folder Include="Scripts\app\Drive\" />
     <Folder Include="Scripts\app\Dropbox\" />
+    <Folder Include="Scripts\app\Empresa\" />
+    <Folder Include="Scripts\app\Profesor\" />
+    <Folder Include="Vistas\Empresa\" />
+    <Folder Include="Vistas\Profesor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

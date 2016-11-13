@@ -1,4 +1,4 @@
-﻿angular.module('mod_MyLearn').controller('loginController', ['$q','$scope', '$routeParams', '$location', 'ModalService', 'waveWebApiResource', 'twitterService',
+angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','$scope', '$routeParams', '$location', 'ModalService', 'waveWebApiResource', 'twitterService',
     function ($q, $scope, $routeParams, $location, ModalService, waveWebApiResource, twitterService) {
 
         $scope.goCrearCuenta = function () {

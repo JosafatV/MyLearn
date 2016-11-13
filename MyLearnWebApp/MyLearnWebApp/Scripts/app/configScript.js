@@ -2,13 +2,13 @@
     $routeProvider
 /*-------------------------------------Cashier-------------------------------------------*/
 
-    .when('/NigmaFacturation/LoginView/signIn', {
-        templateUrl: 'HtmlPages/LoginView/signIn.html',
-        controller: 'signInLoginController'
-    })
+    .when('/MyLearn/Estudiante/CrearCuenta', {
+        templateUrl: 'Vistas/Estudiante/Crear_CuentaEstudiante.html',
+        controller: 'ctrl_crearCuentaEstudiantes'
+    })  
 /*-------------------------------------Default--------------------------------------------*/
     .otherwise({
-        templateUrl: 'HTML/login.html',
+        templateUrl: 'Vistas/Login/Login.html',
         controller: 'loginController'
     })
 }]);
