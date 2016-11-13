@@ -7,7 +7,7 @@ GO
 
 
 
-CREATE PROCEDURE SP_Insert_Estudiante   
+CREATE PROCEDURE SP_Insertar_Estudiante   
 	@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 	@Nombre CHAR(30), @Apellido CHAR(30), @Carne CHAR(15), @Email CHAR(50), @Telefono CHAR(15), @Pais CHAR(30),
@@ -66,4 +66,21 @@ CREATE PROCEDURE SP_Insertar_Universidad
 	AS
 		INSERT INTO UNIVERSIDAD (Id, Nombre)
 		VALUES (@Id, @Nombre)
+	GO
+
+CREATE PROCEDURE SP_Select_Cursos
+@UserId INT
+	AS
+		SELECT Curso, SUM(PuntajeBadge) AS Nota, EstadoCurso
+		FROM VIEW_CALIFICACIONES
+		WHERE IdEstudiante=@UserId AND EstadoBadge='O'
+		GROUP BY Curso, EstadoCurso
+	GO
+
+CREATE PROCEDURE SP_Nota_Poyecto
+@UserID INT, @ProjectId INT
+	AS
+		SELECT SUM(PuntajeBadge) AS Nota
+		FROM VIEW_CALIFICACIONES
+		WHERE IdEstudiante=@UserID AND EstadoBadge='O' AND IdProyecto=@ProjectId
 	GO
