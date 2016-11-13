@@ -12,22 +12,25 @@ using MyLearnApi.Models;
 
 namespace MyLearnApi.Controllers
 {
+    [AllowAnonymous]
     public class EstudiantesController : ApiController
     {
         private MyLearnDBEntities db = new MyLearnDBEntities();
 
-        // GET: api/Estudiantes
-        public IQueryable<ESTUDIANTE> GetESTUDIANTE()
+        [HttpGet]
+        [Route("MyLearnApi/Estudiantes")]
+        public IQueryable<VIEW_ESTUDIANTE> GetESTUDIANTE()
         {
-            return db.ESTUDIANTE;
+            return db.VIEW_ESTUDIANTE.Where(est => est.Estado != "E"); ;
         }
 
-        // GET: api/Estudiantes/5
-        [ResponseType(typeof(ESTUDIANTE))]
+        [HttpGet]
+        [Route("MyLearnApi/Estudiantes/{id}")]
+        [ResponseType(typeof(VIEW_ESTUDIANTE))]
         public IHttpActionResult GetESTUDIANTE(string id)
         {
-            ESTUDIANTE eSTUDIANTE = db.ESTUDIANTE.Find(id);
-            if (eSTUDIANTE == null)
+            VIEW_ESTUDIANTE eSTUDIANTE = db.VIEW_ESTUDIANTE.Find(id);
+            if (eSTUDIANTE == null || eSTUDIANTE.Estado == "E") //si está eliminado
             {
                 return NotFound();
             }
@@ -35,9 +38,9 @@ namespace MyLearnApi.Controllers
             return Ok(eSTUDIANTE);
         }
 
-     
 
-        // POST: api/Estudiantes
+        [HttpPost]
+        [Route("MyLearnApi/Estudiantes")]
         [ResponseType(typeof(VIEW_ESTUDIANTE))]
         public IHttpActionResult PostESTUDIANTE(VIEW_ESTUDIANTE estudiante)
         {
@@ -47,7 +50,8 @@ namespace MyLearnApi.Controllers
             }
 
             db.sp_insert_estudiante(estudiante.Id,estudiante.Contrasena,estudiante.Sal,estudiante.RepositorioArchivos,estudiante.CredencialDrive,
-                estudiante.NombreContacto,estudiante.ApellidoContacto,);
+                estudiante.NombreContacto,estudiante.ApellidoContacto,estudiante.Carne,estudiante.Email,estudiante.Telefono,estudiante.Pais,estudiante.Region,
+                estudiante.FechaInscripcion, estudiante.RepositorioCodigo,estudiante.LinkHojaDeVida);
            // db.sp_insert_estudiante(eSTUDIANTE.Id, eSTUDIANTE.);
             try
             {
@@ -68,20 +72,43 @@ namespace MyLearnApi.Controllers
             return Ok(estudiante);
         }
 
-        // DELETE: api/Estudiantes/5
-        [ResponseType(typeof(ESTUDIANTE))]
-        public IHttpActionResult DeleteESTUDIANTE(string id)
+        [HttpDelete]
+        [Route("MyLearnApi/Estudiantes/{id}")]
+        [ResponseType(typeof(USUARIO))]
+        public IHttpActionResult DeleteEstudiante(int id)
         {
-            ESTUDIANTE eSTUDIANTE = db.ESTUDIANTE.Find(id);
-            if (eSTUDIANTE == null)
+            USUARIO estudiante = db.USUARIO.Find(id);
+
+            if (estudiante == null)
             {
                 return NotFound();
             }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            db.ESTUDIANTE.Remove(eSTUDIANTE);
-            db.SaveChanges();
+            estudiante.Estado = "E" ; //se pone E de eliminado
+            db.Entry(estudiante).State = EntityState.Modified;
 
-            return Ok(eSTUDIANTE);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                 throw;        
+            }
+
+            return Ok(estudiante);
+        }
+
+        [HttpOptions]
+        [Route("MyLearnApi/Estudiantes")]
+        [Route("MyLearnApi/Estudiantes/{id}")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
 
         protected override void Dispose(bool disposing)
@@ -95,7 +122,7 @@ namespace MyLearnApi.Controllers
 
         private bool ESTUDIANTEExists(string id)
         {
-            return db.ESTUDIANTE.Count(e => e.Id == id) > 0;
+            return db.VIEW_ESTUDIANTE.Count(e => e.Id == id) > 0;
         }
     }
 }
