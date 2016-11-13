@@ -7,8 +7,6 @@ GO
 CREATE DATABASE MyLearnDB;
 GO
 
-
-
 USE MyLearnDB;
 
 CREATE TABLE USUARIO (
@@ -18,6 +16,7 @@ CREATE TABLE USUARIO (
 	RepositorioArchivos CHAR(100),
 	CredencialDrive CHAR(100),
 	Estado CHAR(1),
+
     CONSTRAINT PK_USUARIO
 		PRIMARY KEY (Id),
 );
@@ -72,7 +71,9 @@ CREATE TABLE PROFESOR (
     
 CREATE TABLE EMPRESA (
     Id CHAR(100),
-    NombreEmpresarial CHAR(30), /** If NULL => NombreEmpresarial=NombreContacto+NombreEmpresarial**/
+	NombreContacto CHAR(30),
+	ApellidoContacto CHAR(30),
+    NombreEmpresarial CHAR(30), /** If NULL => NombreEmpresarial=NombreContacto+ApellidoContacto**/
     Email CHAR(50) NOT NULL ,
     Telefono CHAR(15) NOT NULL ,
     Foto CHAR(100),
@@ -173,7 +174,6 @@ CREATE TABLE TRABAJO (
 		PRIMARY KEY (Id),
 	CONSTRAINT FK_TRABAJO_POR_EMPRESA
 		FOREIGN KEY (IdEmpresa) REFERENCES EMPRESA(Id)
-	
 );
 
 /**/
