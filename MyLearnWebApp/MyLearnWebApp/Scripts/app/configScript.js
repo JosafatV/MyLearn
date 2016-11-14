@@ -1,6 +1,6 @@
 ﻿angular.module('mod_MyLearn').config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-/*-------------------------------------Cashier-------------------------------------------*/
+/*-------------------------------------Estudiante-------------------------------------------*/
 
     .when('/MyLearn/Estudiante/CrearCuenta', {
         templateUrl: 'Vistas/Estudiante/Crear_CuentaEstudiante.html',
@@ -9,7 +9,7 @@
 /*-------------------------------------Default--------------------------------------------*/
     .otherwise({
         templateUrl: 'Vistas/Login/Login.html',
-        controller: 'loginController'
+        controller: 'ctrl_login'
     })
 }]);
 

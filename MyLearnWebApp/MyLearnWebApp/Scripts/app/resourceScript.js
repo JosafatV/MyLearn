@@ -2,7 +2,7 @@
 var urlGeneric = 'http://192.168.2.13';
 
 //This script is the resource that is used to connect to the web Api od DrPhischel
-angular.module('mod_MyLearn').factory('waveWebApiResource', function ($resource) {
+angular.module('mod_MyLearn').factory('fct_MyLearn_API_Client', function ($resource) {
     return $resource(urlGeneric + ':8093/api/:type/:extension1/:extension2/:extension3/:extension4/:extension5/:extension6', {}, {
         query: {
             method: 'GET',

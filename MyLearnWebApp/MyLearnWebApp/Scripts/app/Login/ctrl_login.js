@@ -1,8 +1,17 @@
-﻿angular.module('mod_MyLearn').controller('loginController', ['$q','$scope', '$routeParams', '$location', 'ModalService', 'waveWebApiResource', 'twitterService',
-    function ($q, $scope, $routeParams, $location, ModalService, waveWebApiResource, twitterService) {
+﻿angular.module('mod_MyLearn').controller('ctrl_login', ['$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function ($q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.goCrearCuenta = function () {
             $location.path("/MyLearn/Estudiante/CrearCuenta");
+        };
+
+        $scope.testModal = function () {
+            uibModal.open({
+                animation: true,
+                templateUrl: 'Vistas/Estudiante/Perfil_Estudiante.html',
+                controller: 'ctrl_login',
+                size: 'lg'
+            })
         };
 
     }]);

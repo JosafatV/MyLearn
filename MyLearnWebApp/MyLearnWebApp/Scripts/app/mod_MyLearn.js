@@ -1,1 +1,1 @@
-angular.module('mod_MyLearn', ['ngRoute', 'ngResource', 'angularModalService']);
+angular.module('mod_MyLearn', ['ngRoute', 'ngResource', 'angularModalService', 'ui.bootstrap']);
