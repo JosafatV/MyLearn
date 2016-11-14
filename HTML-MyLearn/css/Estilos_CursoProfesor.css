@@ -7,7 +7,7 @@ header {
 
 .wrapper {
 	width:90%; /* Establecemos que el ancho sera del 90% */
-	max-width:850px; /* Aqui le decimos que el ancho máximo sera de 1000px */
+	max-width:725px; /* Aqui le decimos que el ancho máximo sera de 1000px */
 	margin:auto; /* Centramos los elementos */
 	overflow:hidden; /* Eliminamos errores de float */
 }
@@ -52,16 +52,9 @@ header nav a:hover {
  left: 50px;
 }
 /*Finaiza parte CSS cabecera*/
-body h1:hover{
-	background:#f56f3a;
-	border-radius:10px;
-	color:#252932;
-	cursor:pointer;
-
-}
 
 .btn-tcc{
-	background:#252932;
+	background:#f56f3a;
 	color:#fff;
 }
 .btn-ttc:hover {
@@ -76,6 +69,10 @@ body{
 	color:#252932
 }
 .prom1{
+	background:#252932;
+	color: #D8D8D8;
+}
+.prom2{
 	background:#252932;
 	color: #D8D8D8;
 }
