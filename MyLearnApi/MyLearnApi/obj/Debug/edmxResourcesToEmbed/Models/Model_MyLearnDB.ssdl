@@ -44,6 +44,47 @@
     <Property Name="CredencialDrive" Type="char" MaxLength="100" />
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VIEW_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="NombreContacto" />
+      <PropertyRef Name="ApellidoContacto" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Telefono" />
+      <PropertyRef Name="Pais" />
+      <PropertyRef Name="FechaInscripcion" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="ApellidoContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Carne" Type="char" MaxLength="15" />
+    <Property Name="Email" Type="char" MaxLength="50" Nullable="false" />
+    <Property Name="Telefono" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Region" Type="char" MaxLength="30" />
+    <Property Name="FechaInscripcion" Type="date" Nullable="false" />
+    <Property Name="RepositorioCodigo" Type="char" MaxLength="100" />
+    <Property Name="LinkHojaDeVida" Type="char" MaxLength="100" />
+    <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Contrasena" Type="char" MaxLength="8" />
+    <Property Name="Sal" Type="char" MaxLength="20" />
+    <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
+    <Property Name="CredencialDrive" Type="char" MaxLength="100" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'MyLearnDB.dbo.VIEW_IDIOMA_POR_ESTUDIANTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VIEW_IDIOMA_POR_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdEstudiante" />
+      <PropertyRef Name="IdIdioma" />
+    </Key>
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="IdIdioma" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+    <Property Name="Idioma" Type="char" MaxLength="30" Nullable="false" />
+  </EntityType>
   <Association Name="FK_ESTUDIANTE_ID">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
     <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="0..1" />
@@ -80,11 +121,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_Select_Cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="MyLearnDBModelStoreContainer">
     <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDIOMA" EntityType="Self.IDIOMA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="Self.IDIOMA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VIEW_ESTUDIANTE" EntityType="Self.VIEW_ESTUDIANTE" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VIEW_ESTUDIANTE].[NombreContacto] AS [NombreContacto], 
+    [VIEW_ESTUDIANTE].[ApellidoContacto] AS [ApellidoContacto], 
+    [VIEW_ESTUDIANTE].[Carne] AS [Carne], 
+    [VIEW_ESTUDIANTE].[Email] AS [Email], 
+    [VIEW_ESTUDIANTE].[Telefono] AS [Telefono], 
+    [VIEW_ESTUDIANTE].[Pais] AS [Pais], 
+    [VIEW_ESTUDIANTE].[Region] AS [Region], 
+    [VIEW_ESTUDIANTE].[FechaInscripcion] AS [FechaInscripcion], 
+    [VIEW_ESTUDIANTE].[RepositorioCodigo] AS [RepositorioCodigo], 
+    [VIEW_ESTUDIANTE].[LinkHojaDeVida] AS [LinkHojaDeVida], 
+    [VIEW_ESTUDIANTE].[Id] AS [Id], 
+    [VIEW_ESTUDIANTE].[Contrasena] AS [Contrasena], 
+    [VIEW_ESTUDIANTE].[Sal] AS [Sal], 
+    [VIEW_ESTUDIANTE].[RepositorioArchivos] AS [RepositorioArchivos], 
+    [VIEW_ESTUDIANTE].[CredencialDrive] AS [CredencialDrive], 
+    [VIEW_ESTUDIANTE].[Estado] AS [Estado]
+    FROM [dbo].[VIEW_ESTUDIANTE] AS [VIEW_ESTUDIANTE]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VIEW_IDIOMA_POR_ESTUDIANTE" EntityType="Self.VIEW_IDIOMA_POR_ESTUDIANTE" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VIEW_IDIOMA_POR_ESTUDIANTE].[IdEstudiante] AS [IdEstudiante], 
+    [VIEW_IDIOMA_POR_ESTUDIANTE].[IdIdioma] AS [IdIdioma], 
+    [VIEW_IDIOMA_POR_ESTUDIANTE].[Estado] AS [Estado], 
+    [VIEW_IDIOMA_POR_ESTUDIANTE].[Idioma] AS [Idioma]
+    FROM [dbo].[VIEW_IDIOMA_POR_ESTUDIANTE] AS [VIEW_IDIOMA_POR_ESTUDIANTE]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_ESTUDIANTE_ID" Association="Self.FK_ESTUDIANTE_ID">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />

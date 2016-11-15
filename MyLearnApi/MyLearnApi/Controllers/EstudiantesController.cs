@@ -21,7 +21,7 @@ namespace MyLearnApi.Controllers
         [Route("MyLearnApi/Estudiantes")]
         public IQueryable<VIEW_ESTUDIANTE> GetESTUDIANTE()
         {
-            return db.VIEW_ESTUDIANTE.Where(est => est.Estado != "E"); ;
+            return db.VIEW_ESTUDIANTE.Where(est => est.Estado != "E"); 
         }
 
         [HttpGet]
@@ -36,6 +36,15 @@ namespace MyLearnApi.Controllers
             }
 
             return Ok(eSTUDIANTE);
+        }
+
+
+        [HttpGet]
+        [Route("MyLearnApi/Estudiantes/Idiomas/{idEstudiante}")]
+        [ResponseType(typeof(VIEW_IDIOMA_POR_ESTUDIANTE))]
+        public IQueryable<VIEW_IDIOMA_POR_ESTUDIANTE> GetIdiomasPorEstudiante(string idEstudiante)
+        {
+            return db.VIEW_IDIOMA_POR_ESTUDIANTE.Where(idiom => idiom.IdEstudiante != idEstudiante);
         }
 
 

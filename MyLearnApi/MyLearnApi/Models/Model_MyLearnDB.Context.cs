@@ -30,8 +30,9 @@ namespace MyLearnApi.Models
         public virtual DbSet<ESTUDIANTE> ESTUDIANTE { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
         public virtual DbSet<IDIOMA> IDIOMA { get; set; }
-        public virtual DbSet<VIEW_ESTUDIANTE> VIEW_ESTUDIANTE { get; set; }
         public virtual DbSet<IDIOMA_POR_ESTUDIANTE> IDIOMA_POR_ESTUDIANTE { get; set; }
+        public virtual DbSet<VIEW_IDIOMA_POR_ESTUDIANTE> VIEW_IDIOMA_POR_ESTUDIANTE { get; set; }
+        public virtual DbSet<VIEW_ESTUDIANTE> VIEW_ESTUDIANTE { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {
@@ -96,6 +97,15 @@ namespace MyLearnApi.Models
                 new ObjectParameter("LinkHojaDeVida", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_estudiante", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreParameter, apellidoParameter, carneParameter, emailParameter, telefonoParameter, paisParameter, regionParameter, fechaInscripcionParameter, repositorioCodigoParameter, linkHojaDeVidaParameter);
+        }
+    
+        public virtual int SP_Select_Cursos(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Select_Cursos", userIdParameter);
         }
     }
 }

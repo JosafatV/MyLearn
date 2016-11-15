@@ -12,10 +12,11 @@ namespace MyLearnApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class IDIOMA_POR_ESTUDIANTE
+    public partial class VIEW_IDIOMA_POR_ESTUDIANTE
     {
         public string IdEstudiante { get; set; }
         public int IdIdioma { get; set; }
         public string Estado { get; set; }
+        public string Idioma { get; set; }
     }
 }

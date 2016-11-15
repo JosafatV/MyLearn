@@ -25,7 +25,6 @@
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
     <EntitySet Name="IDIOMA" EntityType="MyLearnDBModel.IDIOMA" />
-    <EntitySet Name="VIEW_ESTUDIANTE" EntityType="MyLearnDBModel.VIEW_ESTUDIANTE" />
     <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" />
     <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
@@ -35,6 +34,11 @@
       <End Role="IDIOMA" EntitySet="IDIOMA" />
       <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
     </AssociationSet>
+    <EntitySet Name="VIEW_IDIOMA_POR_ESTUDIANTE" EntityType="MyLearnDBModel.VIEW_IDIOMA_POR_ESTUDIANTE" />
+    <FunctionImport Name="SP_Select_Cursos">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="VIEW_ESTUDIANTE" EntityType="MyLearnDBModel.VIEW_ESTUDIANTE" />
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -83,27 +87,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
   </EntityType>
-  <EntityType Name="VIEW_ESTUDIANTE">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="NombreContacto" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
-    <Property Name="ApellidoContacto" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
-    <Property Name="Carne" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
-    <Property Name="Telefono" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
-    <Property Name="Pais" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
-    <Property Name="Region" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
-    <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="RepositorioCodigo" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="LinkHojaDeVida" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="Contrasena" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
-    <Property Name="Sal" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-    <Property Name="RepositorioArchivos" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-  </EntityType>
   <EntityType Name="IDIOMA_POR_ESTUDIANTE">
     <Key>
       <PropertyRef Name="IdEstudiante" />
@@ -112,8 +95,6 @@
     <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="IdIdioma" Type="Int32" Nullable="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" FromRole="IDIOMA_POR_ESTUDIANTE" ToRole="ESTUDIANTE" />
-    <NavigationProperty Name="IDIOMA" Relationship="MyLearnDBModel.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" FromRole="IDIOMA_POR_ESTUDIANTE" ToRole="IDIOMA" />
   </EntityType>
   <Association Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
     <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
@@ -139,4 +120,41 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="VIEW_IDIOMA_POR_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdEstudiante" />
+      <PropertyRef Name="IdIdioma" />
+    </Key>
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="IdIdioma" Type="Int32" Nullable="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Idioma" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="VIEW_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="NombreContacto" />
+      <PropertyRef Name="ApellidoContacto" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Telefono" />
+      <PropertyRef Name="Pais" />
+      <PropertyRef Name="FechaInscripcion" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="NombreContacto" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="ApellidoContacto" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Carne" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="Telefono" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="Pais" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Region" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="RepositorioCodigo" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="LinkHojaDeVida" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Contrasena" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Name="Sal" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="RepositorioArchivos" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
 </Schema>

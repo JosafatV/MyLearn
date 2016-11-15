@@ -55,5 +55,14 @@ FROM            dbo.BADGE INNER JOIN
                          dbo.CURSO ON dbo.BADGE.IdCurso = dbo.CURSO.Id INNER JOIN
                          dbo.ESTUDIANTE_POR_CURSO ON dbo.CURSO.Id = dbo.ESTUDIANTE_POR_CURSO.IdCurso INNER JOIN
                          dbo.PROYECTO ON dbo.BADGE_POR_PROYECTO.IdProyecto = dbo.PROYECTO.Id AND dbo.CURSO.Id = dbo.PROYECTO.IdCurso
-	GO
+GO
 
+
+CREATE VIEW [dbo].[VIEW_IDIOMA_POR_ESTUDIANTE]
+AS
+SELECT        dbo.ESTUDIANTE.Id AS IdEstudiante,dbo.IDIOMA_POR_ESTUDIANTE.IdIdioma, dbo.IDIOMA_POR_ESTUDIANTE.Estado, dbo.IDIOMA.Nombre AS Idioma
+FROM            dbo.ESTUDIANTE INNER JOIN
+                         dbo.IDIOMA_POR_ESTUDIANTE ON dbo.ESTUDIANTE.Id = dbo.IDIOMA_POR_ESTUDIANTE.IdEstudiante INNER JOIN
+                         dbo.IDIOMA ON dbo.IDIOMA_POR_ESTUDIANTE.IdIdioma = dbo.IDIOMA.Id
+			 
+GO
