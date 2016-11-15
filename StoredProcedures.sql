@@ -54,6 +54,17 @@ CREATE PROCEDURE SP_Insertar_Empresa
 		@PaginaWebEmpresa, @Pais, @Region) 
 	GO
 
+CREATE PROCEDURE SP_Insertar_Admin
+@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
+@Nombre CHAR(30), @ApellidoContacto CHAR(30)
+	AS
+		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado) 
+		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A')
+
+		INSERT INTO USUARIO_XMP (NombreContacto, ApellidoContacto)
+		VALUES (@Nombre, @ApellidoContacto) 
+	GO
+
 CREATE PROCEDURE SP_Insertar_Tecnologia
 @Id INT, @Nombre CHAR(30)
 	AS

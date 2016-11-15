@@ -23,8 +23,8 @@ CREATE TABLE USUARIO (
 
 CREATE TABLE USUARIO_XMP (
     Id CHAR(100),
-    Nombre CHAR(30) NOT NULL,
-    ApellidoContacto CHAR(30) NOT NULL ,
+    NombreContacto CHAR(30) NOT NULL,
+    ApellidoContacto CHAR(30) NOT NULL,
    
     CONSTRAINT PK_USUARIO_XMP
 		PRIMARY KEY (Id),
