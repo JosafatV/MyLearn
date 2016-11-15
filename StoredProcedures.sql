@@ -32,9 +32,9 @@ CREATE PROCEDURE SP_Insertar_Profesor
 		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado) 
 		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A')
 
-		INSERT INTO PROFESOR (NombreContacto, ApellidoContacto, Email, Telefono, FechaInscripcion, HorarioAtencion, Pais,
+		INSERT INTO PROFESOR (Id, NombreContacto, ApellidoContacto, Email, Telefono, FechaInscripcion, HorarioAtencion, Pais,
 		Region)
-		VALUES (@NombreContacto, @ApellidoContacto, @Email, @Telefono, @FechaInscripcion, @HorarioAtencion, @Pais,
+		VALUES (@Id, @NombreContacto, @ApellidoContacto, @Email, @Telefono, @FechaInscripcion, @HorarioAtencion, @Pais,
 		@Region)
 
 		GO
@@ -48,9 +48,9 @@ CREATE PROCEDURE SP_Insertar_Empresa
 		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado) 
 		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A')
 
-		INSERT INTO EMPRESA (NombreContacto, ApellidoContacto, NombreEmpresarial, Email, Telefono, FechaInscripcion, 
+		INSERT INTO EMPRESA (Id, NombreContacto, ApellidoContacto, NombreEmpresarial, Email, Telefono, FechaInscripcion, 
 		PaginaWebEmpresa, Pais, Region)
-		VALUES (@NombreContacto, @ApellidoContacto, @NombreEmpresarial, @Email, @Telefono, @FechaInscripcion, 
+		VALUES (@Id, @NombreContacto, @ApellidoContacto, @NombreEmpresarial, @Email, @Telefono, @FechaInscripcion, 
 		@PaginaWebEmpresa, @Pais, @Region) 
 	GO
 
@@ -61,8 +61,8 @@ CREATE PROCEDURE SP_Insertar_Admin
 		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado) 
 		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A')
 
-		INSERT INTO USUARIO_XMP (NombreContacto, ApellidoContacto)
-		VALUES (@Nombre, @ApellidoContacto) 
+		INSERT INTO USUARIO_XMP (Id, NombreContacto, ApellidoContacto)
+		VALUES (@Id, @Nombre, @ApellidoContacto) 
 	GO
 
 CREATE PROCEDURE SP_Insertar_Tecnologia
