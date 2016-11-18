@@ -216,7 +216,11 @@ CREATE PROCEDURE SP_Asignar_Tecnologia @IdProyecto INT, @IdTecnologia INT
 	GO
 
 
-
+CREATE PROCEDURE SP_Agregar_Al_Curso @IdEstudiante CHAR(100), @IdCurso INT
+	AS
+		INSERT INTO ESTUDIANTE_POR_CURSO (IdEstudiante, IdCurso, Estado)
+		VALUES (@IdEstudiante, @IdCurso, 'A')
+	GO
 
 
 

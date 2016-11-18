@@ -69,11 +69,11 @@ EXEC SP_Aceptar_Subasta '2'
 
 EXEC SP_Insertar_Mensaje_Trabajo 'Por favor enviarme una propuesta inicial del proyecto', '', '10/17/2016', '2'
 EXEC SP_Insertar_Respuesta '1', 'Aquí adjunto la propuesta', '', '10/18/2016'
+EXEC SP_Insertar_Mensaje_Trabajo 'Necesito que me envie el perfil de la empresa', '', '10/18/2016', '2'
 
 EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto Drpischel', '10/17/2016', '1'
 
-EXEC SP_Agregar_Al_Curso @IdEstudiante CHAR(100), @IdCurso INT, @Estado CHAR(1)
-	AS
-		INSERT INTO ESTUDIANTE_POR_CURSO (IdEstudiante, IdCurso, Estado)
-		VALUES (@IdEstudiante, @IdCurso, 'A')
-	GO
+EXEC SP_Agregar_Al_Curso '1', '1'
+EXEC SP_Agregar_Al_Curso '2', '1'
+
+
