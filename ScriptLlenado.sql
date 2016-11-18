@@ -46,8 +46,6 @@ EXEC SP_Insertar_Admin '29','1234','3re6d3k45gf3l4h53jk4', '', '','Josafat','Var
 EXEC SP_Insertar_Admin '30','1234','563kp4j3uiopbgny878c', '', '', 'Giovanni','Villalobos'
 
 
-INSERT INTO *****************************************************************************
-
 EXEC SP_Insertar_Curso '13', 'Especificacion y Diseño de Software', 'CE-4101', '1'
 
 /*CE-4101*/
@@ -56,16 +54,31 @@ EXEC SP_Insertar_Badge 'Diagramas de Diseño', '25', '1'
 EXEC SP_Insertar_Badge 'Especificación de Proyectos', '25', '1'
 EXEC SP_Insertar_Badge 'Patrones de Diseño', '25', '1'
 
+EXEC SP_Agregar_Al_Curso '1', '1'
+EXEC SP_Agregar_Al_Curso '2', '1'
 
-EXEC SP_Insertar_Proyecto '1', 'DigiLearn', 'La ausencia de una plataforma para trabajar en línea y obtener experiencia laboral','ofrecer un sericio a estudiantes para que puedan trabajar en cursos de su universidad y en ofertas de trabajo', '1', '10/17/2016', '11/26/2016', '', 70
+EXEC SP_Insertar_Propuesta_Proyecto '1', 'DigiLearn', 'La ausencia de una plataforma para trabajar en línea y obtener experiencia laboral','ofrecer un sericio a estudiantes para que puedan trabajar en cursos de su universidad y en ofertas de trabajo', '1', '10/17/2016', '11/26/2016', '', 70
+EXEC SP_Asignar_Tecnologia_Proyecto '1', '1'
+EXEC SP_Asignar_Tecnologia_Proyecto '1', '2'
+EXEC SP_Insertar_Propuesta_Proyecto '2', 'PlanetToaster', 'La necesidad de tostar pan','ofrecer un sericio de tostadora a domicilio a los afiliados', '1', '10/19/2016', '11/26/2016', '', 70
+EXEC SP_Asignar_Tecnologia_Proyecto '2', '1'
+EXEC SP_Asignar_Tecnologia_Proyecto '2', '3'
+
+EXEC SP_Aceptar_Proyecto '1', '1', '1'
 
 EXEC SP_Insertar_Trabajo 'Decripción de STCs', 'Gran cantidad de informacion se encuentra en este STC, es necesario decriptarlo', '20', '11/10/2016', '12/01/2016', ''
+EXEC SP_Asignar_Tecnologia_Trabajo '1', '1'
+EXEC SP_Asignar_Tecnologia_Trabajo '1', '2'
 EXEC SP_Insertar_Trabajo 'DrPischel', 'Para ser más competitivo la farmacia DrPischel desea crear un sistema de atención en línea, donde los usuarios puedan pre-ordenar medicamentos para facilitar su recolección', '20', '10/17/2016', '11/26/2016', ''
+EXEC SP_Asignar_Tecnologia_Trabajo '2', '1'
+EXEC SP_Asignar_Tecnologia_Trabajo '2', '3'
 						
-EXEC SP_Crear_Propuesta_Subasta 2, '1', 35000, 'Knowledge is power, Guard it well!'
-EXEC SP_Crear_Propuesta_Subasta 2, '2', 55000, 'Sisters, we must go as Martyrs! We must go up in flames!'
+EXEC SP_Insertar_Propuesta_Subasta 2, '1', 35000, 'Knowledge is power, Guard it well!'
+EXEC SP_Insertar_Propuesta_Subasta 2, '2', 55000, 'Sisters, we must go as Martyrs! We must go up in flames!'
 								
-EXEC SP_Aceptar_Subasta '2'
+EXEC SP_Aceptar_Subasta '2', '1'
+
+EXEC SP_Otorgar_Badge '1', '1'
 
 EXEC SP_Insertar_Mensaje_Trabajo 'Por favor enviarme una propuesta inicial del proyecto', '', '10/17/2016', '2'
 EXEC SP_Insertar_Respuesta '1', 'Aquí adjunto la propuesta', '', '10/18/2016'
@@ -73,7 +86,5 @@ EXEC SP_Insertar_Mensaje_Trabajo 'Necesito que me envie el perfil de la empresa'
 
 EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto Drpischel', '10/17/2016', '1'
 
-EXEC SP_Agregar_Al_Curso '1', '1'
-EXEC SP_Agregar_Al_Curso '2', '1'
 
 

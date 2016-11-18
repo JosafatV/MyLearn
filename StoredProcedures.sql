@@ -4,6 +4,8 @@ IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'sp_insert_estu
 DROP PROCEDURE sp_insert_estudiante   
 GO
 
+/*****************SELECTS*****************/
+
 CREATE PROCEDURE SP_Select_Cursos @UserId INT
 	AS
 		SELECT Curso, SUM(PuntajeBadge) AS Nota, EstadoCurso
@@ -19,6 +21,8 @@ CREATE PROCEDURE SP_Nota_Poyecto @UserID INT, @ProjectId INT
 		WHERE IdEstudiante=@UserID AND EstadoBadge='O' AND IdProyecto=@ProjectId
 	GO
 
+
+/*****************SIMPLE INSERTS*****************/
 
 CREATE PROCEDURE SP_Insertar_Estudiante   
 	@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
@@ -80,8 +84,6 @@ CREATE PROCEDURE SP_Insertar_Admin
 		VALUES (@Id, @Nombre, @ApellidoContacto) 
 	GO
 
-
-
 CREATE PROCEDURE SP_Insertar_Tecnologia @Nombre CHAR(30)
 	AS
 		INSERT INTO TECNOLOGIA (Nombre, Estado)
@@ -94,7 +96,10 @@ CREATE PROCEDURE SP_Insertar_Universidad @Nombre CHAR(30)
 		VALUES (@Nombre, 'A')
 	GO
 
+/*****************MULTI-PARTED INSERTS*****************/
 
+
+/********** UNIVERSIDAD **********/
 CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30), @Codigo CHAR(10), @IdUniversidad INT
 	AS
 		DECLARE @IdCurso INT
@@ -109,20 +114,29 @@ CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30), @Cod
 		VALUES (@IdCurso, @IdUniversidad, 'A')
 	GO
 
+	/*SP_Terminar_Curso*/
+
 CREATE PROCEDURE SP_Insertar_Badge (@Nombre CHAR (30), @Puntaje TINYINT, @IdCurso INT) 
 	AS
 		INSERT INTO BADGE (Nombre, Puntaje, IdCurso)
 		VALUES (@Nombre, @Puntaje, @IdCurso)
-
 	GO
 
 CREATE PROCEDURE SP_Otorgar_Badge (@IdBadge INT, @IdProyecto INT)
 	AS
-		INSERT INTO BADGE_POR_PROYECTO (IdBadge, IdProyecto, Estado)
-		VALUES (@IdBadge, @IdProyecto, 'A')
+		UPDATE BADGE_POR_PROYECTO 
+		SET Estado='A'
+		WHERE IdProyecto=@IdProyecto AND IdBadge=@IdBadge
 	GO
 
-CREATE PROCEDURE SP_Insertar_Proyecto @IdEstudiante CHAR(100), @Nombre CHAR(30), @Problematica CHAR(100), @Descripcion CHAR(500), @IdCurso INT, @FechaInicio DATE, @FechaFinal DATE, @DocumentoAdicional CHAR(100), @NotaMinima INT 
+CREATE PROCEDURE SP_Agregar_Al_Curso @IdEstudiante CHAR(100), @IdCurso INT
+	AS
+		INSERT INTO ESTUDIANTE_POR_CURSO (IdEstudiante, IdCurso, Estado)
+		VALUES (@IdEstudiante, @IdCurso, 'A')
+	GO
+
+	/*Creates a proyect in the proposition stage*/
+CREATE PROCEDURE SP_Insertar_Propuesta_Proyecto @IdEstudiante CHAR(100), @Nombre CHAR(30), @Problematica CHAR(100), @Descripcion CHAR(500), @IdCurso INT, @FechaInicio DATE, @FechaFinal DATE, @DocumentoAdicional CHAR(100), @NotaMinima INT 
 	AS
 		DECLARE @IdProyecto INT
 		INSERT INTO PROYECTO (Nombre, Problematica, Descripcion, IdCurso, FechaInicio, FechaFinal, DocumentoAdicional, NotaMinima, Estado)
@@ -131,9 +145,15 @@ CREATE PROCEDURE SP_Insertar_Proyecto @IdEstudiante CHAR(100), @Nombre CHAR(30),
 		SELECT @IdProyecto = @@IDENTITY
 		INSERT INTO PROYECTO_POR_ESTUDIANTE (IdProyecto, IdEstudiante, Estado)
 		VALUES (@IdProyecto, @IdEstudiante, 'P')
+
+		INSERT INTO PROYECTO_POR_PROFESOR (IdProyecto, IdProfesor, Estado)
+			SELECT @IdProyecto, Cpp.IdProfesor, 'P' 
+			FROM CURSO_POR_PROFESOR AS Cpp 
+			WHERE Cpp.IdCurso=@IdCurso
 	GO
 
-CREATE PROCEDURE SP_Aceptar_Propuesta @IdProfesor CHAR(100), @IdPropuesta CHAR(1)
+	/*Marks a proyect proposition as an active project and asigns it badges*/
+CREATE PROCEDURE SP_Aceptar_Proyecto @IdProfesor CHAR(100), @IdPropuesta INT, @IdCurso INT 
 	AS
 		UPDATE PROYECTO
 		SET Estado='A'
@@ -141,24 +161,35 @@ CREATE PROCEDURE SP_Aceptar_Propuesta @IdProfesor CHAR(100), @IdPropuesta CHAR(1
 
 		UPDATE PROYECTO_POR_ESTUDIANTE
 		SET Estado='A'
-		WHERE IdEstudiante=@IdPropuesta
+		WHERE IdProyecto=@IdPropuesta
 
-		INSERT INTO PROYECTO_POR_PROFESOR (IdProyecto, IdProfesor, Estado)
-		VALUES (@IdPropuesta, @IdProfesor, 'A')
+		UPDATE PROYECTO_POR_PROFESOR
+		SET Estado='A'
+		WHERE IdProyecto=@IdPropuesta
+
+		INSERT INTO BADGE_POR_PROYECTO (IdBadge, IdProyecto, Estado)
+			SELECT BADGE.Id, @IdPropuesta, 'P' 
+			FROM BADGE 
+			WHERE BADGE.IdCurso=@IdCurso
 	GO
 
+/********** COMPAÑIAS **********/
+
+	/*Creates a new job in the action state*/
 CREATE PROCEDURE SP_Insertar_Trabajo @Nombre CHAR(30), @Descripcion CHAR(500), @IdEmpresa CHAR(100), @FechaInicio DATE, @FechaCierre DATE, @DocumentoAdicional CHAR(100)
 	AS
 		INSERT INTO TRABAJO (Nombre, Descripcion, IdEmpresa, FechaInicio, FechaCierre, DocumentoAdicional, Estado)
 		VALUES (@Nombre, @Descripcion, @IdEmpresa, @FechaInicio, @FechaCierre, @DocumentoAdicional, 'P')
 	GO
 
-CREATE PROCEDURE SP_Crear_Propuesta_Subasta @IdTrabajo INT, @IdEstudiante CHAR(100), @Monto INT, @Comentario CHAR(300)
+	/*Creates a new offer for the auctions*/
+CREATE PROCEDURE SP_Insertar_Propuesta_Subasta @IdTrabajo INT, @IdEstudiante CHAR(100), @Monto INT, @Comentario CHAR(300)
 	AS
 		INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, Comentario, Estado)
 		VALUES (@IdTrabajo, @IdEstudiante, @Monto, @Comentario, 'P')
 	GO
 
+	/*accepts an offer to an auction, canceling all others*/
 CREATE PROCEDURE SP_Aceptar_Subasta @IdSubasta CHAR(1), @IdEstudiante CHAR(100)
 	AS
 		UPDATE TRABAJO_POR_ESTUDIANTE
@@ -173,6 +204,9 @@ CREATE PROCEDURE SP_Aceptar_Subasta @IdSubasta CHAR(1), @IdEstudiante CHAR(100)
 		SET Estado='A'
 		WHERE Id=@IdSubasta
 	GO
+
+
+/********** MENSAJERIA **********/
 
 CREATE PROCEDURE SP_Insertar_Mensaje_Proyecto @Contenido CHAR(500), @Adjunto CHAR(500), @Fecha DATETIME, @IdProyecto INT
 	AS
@@ -209,18 +243,18 @@ CREATE PROCEDURE SP_Insertar_Notificacion @Contenido CHAR(500), @Fecha DATETIME,
 		VALUES (@Contenido, @Fecha, @UserId, 'A')
 	GO
 
-CREATE PROCEDURE SP_Asignar_Tecnologia @IdProyecto INT, @IdTecnologia INT
+CREATE PROCEDURE SP_Asignar_Tecnologia_Proyecto @IdProyecto INT, @IdTecnologia INT
 	AS
 		INSERT INTO TECNOLOGIA_POR_PROYECTO (IdProyecto, IdTecnologia, Estado)
 		VALUES (@IdProyecto, @IdTecnologia, 'A')
 	GO
 
-
-CREATE PROCEDURE SP_Agregar_Al_Curso @IdEstudiante CHAR(100), @IdCurso INT
+CREATE PROCEDURE SP_Asignar_Tecnologia_Trabajo @IdTrabajo INT, @IdTecnologia INT
 	AS
-		INSERT INTO ESTUDIANTE_POR_CURSO (IdEstudiante, IdCurso, Estado)
-		VALUES (@IdEstudiante, @IdCurso, 'A')
+		INSERT INTO TECNOLOGIA_POR_TRABAJO(IdTrabajo, IdTecnologia, Estado)
+		VALUES (@IdTrabajo, @IdTecnologia, 'A')
 	GO
+
 
 
 
