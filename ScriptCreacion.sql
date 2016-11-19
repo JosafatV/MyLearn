@@ -123,7 +123,7 @@ CREATE TABLE CURSO (
     Id INT IDENTITY(1,1),
     Nombre CHAR(30),
     Codigo CHAR(10),
-    Estado CHAR(1), /*Activo, Pasado*/
+    Estado CHAR(1), /*Activo, Cerrado*/
 
 	CONSTRAINT PK_CURSO
 		PRIMARY KEY (Id)
@@ -151,8 +151,9 @@ CREATE TABLE PROYECTO (
     FechaInicio DATE NOT NULL ,
     FechaFinal DATE,
     DocumentoAdicional CHAR(100),
-    NotaMinima INT NOT NULL ,
-    Estado CHAR(1) /*Propuesta, Lectura, Activo*/,
+    NotaMinima tinyINT NOT NULL ,
+    NotaObtenida tinyINT,
+    Estado CHAR(1) /*Propuesta, Lectura, Activo,*/,
 
 	CONSTRAINT PK_PROYECTO
 		PRIMARY KEY (Id),
@@ -168,7 +169,8 @@ CREATE TABLE TRABAJO (
     FechaInicio  DATE,
     FechaCierre DATE NOT NULL,
     DocumentoAdicional CHAR(100),
-    Estado CHAR(1), /*Propuesta, Terminado, Activo*/
+    EstrellasObtenidas tinyINT,
+    Estado CHAR(1), /*Propuesta, Exito(Terminado), Fallo(Terminado), Activo*/
 
 	CONSTRAINT PK_TRABAJO
 		PRIMARY KEY (Id),
@@ -209,7 +211,7 @@ CREATE TABLE NOTIFICACION
     Contenido CHAR(500),
     Fecha DATETIME,
 	UserId CHAR(100),
-	Estado CHAR(1), /*Leida, Nueva*/
+	Estado CHAR(1), /*Leida, Nueva, Borrada*/
 
 	CONSTRAINT PK_NOTIFICACION
 		PRIMARY KEY (Id),
@@ -253,7 +255,7 @@ CREATE TABLE PROFESOR_POR_UNIVERSIDAD
 (
     IdProfesor CHAR(100),
     IdUniversidad INT,
-	Estado CHAR(1), /*Activo, Inactivo*/
+    Estado CHAR(1), /*Activo, Inactivo*/
 
     CONSTRAINT PK_PROFESOR_POR_UNIVERSIDAD
 		PRIMARY KEY (IdProfesor, IdUniversidad),
@@ -267,7 +269,8 @@ CREATE TABLE ESTUDIANTE_POR_CURSO
 (
     IdEstudiante CHAR(100),
     IdCurso INT,
-	Estado CHAR(1), /*Disponible, Inscrito*/
+    Nota INT,
+    Estado CHAR(1), /*Disponible, Inscrito, Aprobado(Inactivo), Reprobado(Inactivo)*/
 
     CONSTRAINT PK_ESTUDIANTE_POR_CURSO
 		PRIMARY KEY (IdEstudiante, IdCurso),
