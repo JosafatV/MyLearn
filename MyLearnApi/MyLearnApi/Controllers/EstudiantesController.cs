@@ -35,7 +35,9 @@ namespace MyLearnApi.Controllers
                 return NotFound();
             }
 
-            return Ok(eSTUDIANTE);
+            IHttpActionResult result = Ok(eSTUDIANTE);
+            
+            return result;
         }
 
 

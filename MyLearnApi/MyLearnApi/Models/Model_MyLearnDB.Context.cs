@@ -33,6 +33,8 @@ namespace MyLearnApi.Models
         public virtual DbSet<IDIOMA_POR_ESTUDIANTE> IDIOMA_POR_ESTUDIANTE { get; set; }
         public virtual DbSet<VIEW_IDIOMA_POR_ESTUDIANTE> VIEW_IDIOMA_POR_ESTUDIANTE { get; set; }
         public virtual DbSet<VIEW_ESTUDIANTE> VIEW_ESTUDIANTE { get; set; }
+        public virtual DbSet<EMPRESA> EMPRESA { get; set; }
+        public virtual DbSet<VIEW_EMPRESA> VIEW_EMPRESA { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {
@@ -106,6 +108,71 @@ namespace MyLearnApi.Models
                 new ObjectParameter("UserId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Select_Cursos", userIdParameter);
+        }
+    
+        public virtual int SP_Insertar_Empresa(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombreContacto, string apellidoContacto, string nombreEmpresarial, string email, string telefono, Nullable<System.DateTime> fechaInscripcion, string paginaWebEmpresa, string pais, string region, string repositorioCodigo)
+        {
+            var idParameter = id != null ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(string));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("Contrasena", contrasena) :
+                new ObjectParameter("Contrasena", typeof(string));
+    
+            var salParameter = sal != null ?
+                new ObjectParameter("Sal", sal) :
+                new ObjectParameter("Sal", typeof(string));
+    
+            var repositorioArchivosParameter = repositorioArchivos != null ?
+                new ObjectParameter("RepositorioArchivos", repositorioArchivos) :
+                new ObjectParameter("RepositorioArchivos", typeof(string));
+    
+            var credencialDriveParameter = credencialDrive != null ?
+                new ObjectParameter("CredencialDrive", credencialDrive) :
+                new ObjectParameter("CredencialDrive", typeof(string));
+    
+            var nombreContactoParameter = nombreContacto != null ?
+                new ObjectParameter("NombreContacto", nombreContacto) :
+                new ObjectParameter("NombreContacto", typeof(string));
+    
+            var apellidoContactoParameter = apellidoContacto != null ?
+                new ObjectParameter("ApellidoContacto", apellidoContacto) :
+                new ObjectParameter("ApellidoContacto", typeof(string));
+    
+            var nombreEmpresarialParameter = nombreEmpresarial != null ?
+                new ObjectParameter("NombreEmpresarial", nombreEmpresarial) :
+                new ObjectParameter("NombreEmpresarial", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var fechaInscripcionParameter = fechaInscripcion.HasValue ?
+                new ObjectParameter("FechaInscripcion", fechaInscripcion) :
+                new ObjectParameter("FechaInscripcion", typeof(System.DateTime));
+    
+            var paginaWebEmpresaParameter = paginaWebEmpresa != null ?
+                new ObjectParameter("PaginaWebEmpresa", paginaWebEmpresa) :
+                new ObjectParameter("PaginaWebEmpresa", typeof(string));
+    
+            var paisParameter = pais != null ?
+                new ObjectParameter("Pais", pais) :
+                new ObjectParameter("Pais", typeof(string));
+    
+            var regionParameter = region != null ?
+                new ObjectParameter("Region", region) :
+                new ObjectParameter("Region", typeof(string));
+    
+            var repositorioCodigoParameter = repositorioCodigo != null ?
+                new ObjectParameter("RepositorioCodigo", repositorioCodigo) :
+                new ObjectParameter("RepositorioCodigo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Empresa", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreContactoParameter, apellidoContactoParameter, nombreEmpresarialParameter, emailParameter, telefonoParameter, fechaInscripcionParameter, paginaWebEmpresaParameter, paisParameter, regionParameter, repositorioCodigoParameter);
         }
     }
 }
