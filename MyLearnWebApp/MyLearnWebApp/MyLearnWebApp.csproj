@@ -285,6 +285,15 @@
     <Content Include="Scripts\Angular and Bootstrap\Bootstrap\js\npm.js" />
     <Content Include="Scripts\app\configScript.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_crearCuentaEstudiante.js" />
+    <Content Include="Scripts\app\Estudiante\ctrl_cursosDisponibles.js" />
+    <Content Include="Scripts\app\Estudiante\ctrl_ofertarSubasta.js" />
+    <Content Include="Scripts\app\Estudiante\ctrl_perfilEstudiante.js" />
+    <Content Include="Scripts\app\Estudiante\ctrl_proponerProyecto.js" />
+    <Content Include="Scripts\app\Estudiante\ctrl_subastaEstudiante.js" />
+    <Content Include="Scripts\app\Profesor\ctrl_crearCurso.js" />
+    <Content Include="Scripts\app\Profesor\ctrl_cursoProfesor.js" />
+    <Content Include="Scripts\app\Profesor\ctrl_perfilProfesor.js" />
+    <Content Include="Scripts\app\Profesor\ctrl_propuestaProyecto.js" />
     <Content Include="Scripts\app\Twitter\fct_twitterService.js" />
     <Content Include="Scripts\app\Login\ctrl_login.js" />
     <Content Include="Scripts\app\mod_MyLearn.js" />
@@ -365,6 +374,9 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Vistas\Areas de trabajo\AreaTrabajoEst_ProyCurso.html" />
+    <Content Include="Vistas\Areas de trabajo\AreaTrabajoEst_ProyEmpresa.html" />
+    <Content Include="Vistas\Areas de trabajo\AreaTrabajoProf_ProyCurso.html" />
     <Content Include="Vistas\Configuracion\css\Estilos_CrearCE.css" />
     <Content Include="Vistas\Configuracion\css\Estilos_login.css" />
     <Content Include="Vistas\Configuracion\css\Estilos_PerfilE.css" />
@@ -373,10 +385,40 @@
     <Content Include="Vistas\Configuracion\js\bootstrap.min.js" />
     <Content Include="Vistas\Configuracion\js\jquery.js" />
     <Content Include="Vistas\Configuracion\js\npm.js" />
+    <Content Include="Vistas\Estilo\css\Estilos_AreaTEC.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_AreaTEE.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_AreaTPC.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_CrearCE.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_CrearCP.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_CrearCurso.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_CursoProfesor.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_CursosD.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_login.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_OfertarSub.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_PerfilE.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_PerfilP.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_ProponerProyecto.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_PropuestaProyectoProf.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_SubastaE.css" />
+    <Content Include="Vistas\Estilo\img\badgepeq.png" />
+    <Content Include="Vistas\Estilo\img\ball.jpg" />
+    <Content Include="Vistas\Estilo\img\ball.png" />
+    <Content Include="Vistas\Estilo\js\bootstrap.js" />
+    <Content Include="Vistas\Estilo\js\bootstrap.min.js" />
+    <Content Include="Vistas\Estilo\js\jquery.js" />
+    <Content Include="Vistas\Estilo\js\npm.js" />
+    <Content Include="Vistas\Estudiante\Crear_CuentaEstudiante.html" />
+    <Content Include="Vistas\Estudiante\Cursos_Disponibles.html" />
+    <Content Include="Vistas\Estudiante\Ofertar_Subasta.html" />
     <Content Include="Vistas\Estudiante\Perfil_Estudiante.html" />
-    <Content Include="Vistas\Login.html" />
-    <Content Include="Vistas\Login\Crear_CuentaEstudiante.html" />
+    <Content Include="Vistas\Estudiante\Proponer_Proyecto.html" />
+    <Content Include="Vistas\Estudiante\Subasta_Estudiante.html" />
     <Content Include="Vistas\Login\Login.html" />
+    <Content Include="Vistas\Profesor\Crear_CuentaProfesor.html" />
+    <Content Include="Vistas\Profesor\Crear_Curso.html" />
+    <Content Include="Vistas\Profesor\Curso_Profesor.html" />
+    <Content Include="Vistas\Profesor\Perfil_Profesor.html" />
+    <Content Include="Vistas\Profesor\PropuestaProyecto_Profesor.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -395,9 +437,7 @@
     <Folder Include="Scripts\app\Drive\" />
     <Folder Include="Scripts\app\Dropbox\" />
     <Folder Include="Scripts\app\Empresa\" />
-    <Folder Include="Scripts\app\Profesor\" />
     <Folder Include="Vistas\Empresa\" />
-    <Folder Include="Vistas\Profesor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

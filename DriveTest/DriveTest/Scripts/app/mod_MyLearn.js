@@ -1,0 +1,1 @@
+angular.module('mod_MyLearn', ['ngRoute', 'ngResource', 'angularModalService']);

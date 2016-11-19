@@ -5,6 +5,10 @@
             $location.path("/MyLearn/Estudiante/CrearCuenta");
         };
 
+        $scope.goPerfil = function () {
+            $location.path('/MyLearn/Estudiante/Perfil');
+        };
+
         $scope.testModal = function () {
             uibModal.open({
                 animation: true,

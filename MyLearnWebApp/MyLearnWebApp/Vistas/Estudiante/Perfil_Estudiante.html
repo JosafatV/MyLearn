@@ -2,49 +2,157 @@
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/Estilos_login.css">
+    <link rel="stylesheet" href="../../Scripts/Angular and Bootstrap/Bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_login.css">
 </head>
 <header>
 		<div class="wrapper">
 			<div class="logo">Mi Perfil
 				<div class="img">
-					<a href="#"><img src="img/ball.jpg" class="img-responsive img-rounded"alt=""></a>
+                    <a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
 				</div>
 			</div>
-
-
+			<nav>
+				<a data-ng-click="goCursosDisponibles()">Cursos Disponibles</a>
+				<a data-ng-click="goSubastas()">Subastas</a>
+				<a href="#ventana1"data-toggle="modal">Notificaciones</a>
+				<a>Ayuda en Linea</a>
+				<a data-ng-click="goLogin()">Cerrar Sesión</a>
+			</nav>
+		</div>
+		<div class="modal fade" id="ventana1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!--Header Ventana-->
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="false">&times;</button>
+						<h2 class="modal-tittle">Mis Notificaciones:</h2>
+					</div>
+					<!--Contenido-->
+					<div class="modal-body">
+						<label for="">Chancher es playo</label> <br>
+							<label for="">Alto,macho y guapo...mmmm</label>
+					</div>
+					<!--Footer-->
+					<div class="modal-footer">
+						<button type="button"class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 </header>
+<br><br><br>
 <body>
-	<div class="container">
-		<br/><br/><br/><br/>
-    <form action=""class="">
-      <div class="form-group">
-				<div class="col-md-8">
-					<div class="col-md-offset-6">
-						<input  class="form-control" id="Usuario"type="text" placeholder="Usuario:">
-					</div>
-				</div>
-      </div>
-		<br/><br/><br/><br/>
+	<div class="container-fluid">
+		<section class="main row">
+			<article class="col-md-8">
+				<br>
+			<h2>Mi Infomación:</h2><br>
+				<label for="Nombre">Nombre de usuario:</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+				<label for="Link a Hoja de vida">Link de Hoja de vida:</label><br>
+				<label for="Carné Estudiantil">Carné Estudiantil:</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+				<label for="País">País:</label>&nbsp; &nbsp; &nbsp;<br>
+				<label for="Universidad">Universidad:</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label for="Repositorio de código">Repositorio de Código:</label>
+		</article>
+		<aside class="col-md-1">
+			<h3>Foto:</h3>
 			<div class="form-group">
-				<div class="col-md-8">
-					<div class="col-md-offset-6">
-						<input  class="form-control" id="Contraseña"type="text" placeholder="Contraseña:">
-					</div>
-				</div>
+				<input type="file" id="foto">
+				<p class="help-block">Máximo 50mb</p>
+				<a class="btn btn-tcc btn-default btn-md">Añadir</a>
 			</div>
-		</form>
-	</div>
-		<br/><br/>
-	<div class="container">
-		<div class="col-md-10">
-			<div class="col-md-offset-5">
-				<a class="btn btn-success btn-lg">Iniciar sesión</a>
-				<a class="btn btn-tcc btn-default btn-lg">Crear una cuenta</a>
+
+		</aside>
+		</section>
+		<br><br><br>
+		<div class="row">
+			<div class="col-md-6 color1">
+				<h3>Proyectos de Cursos:</h3>
+				<table class="table table-bordered table-hover table-condensed prom1">
+						<tr>
+								<th>Nombre del Proyecto</th>
+								<th>Estado</th>
+						</tr>
+						<tr>
+								<td>1</td>
+								<td>Nombre 1</td>
+						</tr>
+						<tr>
+								<td>2</td>
+								<td>Nombre 2</td>
+						</tr>
+						<tr>
+								<td>3</td>
+								<td>Nombre 3</td>
+						</tr>
+			</table> <br><br>
+			<h3>Mis Cursos:</h3>
+			<table class="table table-bordered table-hover table-condensed prom1">
+					<tr>
+							<th>Nombre del Proyecto</th>
+							<th>Nota Obtenida</th>
+							<th>Estado</th>
+					</tr>
+					<tr>
+							<td>1</td>
+							<td></td>
+							<td>Estado 1</td>
+					</tr>
+					<tr>
+							<td>2</td>
+							<td>Nota 1</td>
+							<td>Estado 2</td>
+					</tr>
+					<tr>
+							<td>3</td>
+							<td>Nota 3</td>
+							<td>Estado 3</td>
+					</tr>
+		</table>
+
 			</div>
-		</div>
+			<div class="col-md-6">
+				<h3>Trabajos para Empresa:</h3>
+				<table class="table table-bordered table-hover table-condensed prom1">
+						<tr>
+								<th>Nombre del Proyecto</th>
+								<th>Nota Obtenida</th>
+								<th>Estado</th>
+						</tr>
+						<tr>
+								<td>1</td>
+								<td></td>
+								<td>Estado 1</td>
+						</tr>
+						<tr>
+								<td>2</td>
+								<td>Nota 1</td>
+								<td>Estado 2</td>
+						</tr>
+						<tr>
+								<td>3</td>
+								<td>Nota 3</td>
+								<td>Estado 3</td>
+						</tr>
+			</table> <br><br>
+			<div class="container-fluid">
+				<section class="main row">
+					<article class="col-md-6">
+						<h3>Mi Historial académico:</h3><br>
+						<label for="Promedio Ponderado">Promedio Ponderado Mis Cursos:</label><br><br>
+						<label for="Cursos aprobados">Cursos Aprobados:</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+						<label for="VS">VS</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+						<label for="Cursos Reprobados">Cursos Reprobados:</label><br><br><br>
+						<label for="Proyectos Exitosos">Proyectos Exitosos:</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+						<label for="VS">VS</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+						<label for="Proyectos Fallidos">Proyectos Fallidos:</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+				</article>
+
+				</section>
+
+			</div><br><br>
+
 
 	</div>
 

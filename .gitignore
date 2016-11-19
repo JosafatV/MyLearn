@@ -56,3 +56,5 @@ MyLearnWebApp/.vs/MyLearnWebApp/v14/.suo
 *.config
 *.csproj
 *.cache
+*.suo
+MyLearnWebApp/.vs/MyLearnWebApp/v14/.suo

@@ -5,7 +5,27 @@
     .when('/MyLearn/Estudiante/CrearCuenta', {
         templateUrl: 'Vistas/Estudiante/Crear_CuentaEstudiante.html',
         controller: 'ctrl_crearCuentaEstudiantes'
-    })  
+    })
+    .when('/MyLearn/Estudiante/Perfil', {
+        templateUrl: 'Vistas/Estudiante/Perfil_Estudiante.html',
+        controller: 'ctrl_perfilEstudiante'
+    })
+    .when('/MyLearn/Estudiante/Perfil/CursosDisponibles', {
+        templateUrl: 'Vistas/Estudiante/Cursos_Disponibles.html',
+        controller: 'ctrl_cursosDisponibles'
+    })
+    .when('/MyLearn/Estudiante/Perfil/OfertarSubasta', {
+        templateUrl: 'Vistas/Estudiante/Ofertar_Subasta.html',
+        controller: 'ctrl_ofertarSubasta'
+    })
+    .when('/MyLearn/Estudiante/Perfil/ProponerProyecto', {
+        templateUrl: 'Vistas/Estudiante/Proponer_Proyecto.html',
+        controller: 'ctrl_proponerProyecto'
+    })
+    .when('/MyLearn/Estudiante/Perfil/SubastaEstudiante', {
+        templateUrl: 'Vistas/Estudiante/Subasta_Estudiante.html',
+        controller: 'ctrl_subastaEstudiante'
+    })
 /*-------------------------------------Default--------------------------------------------*/
     .otherwise({
         templateUrl: 'Vistas/Login/Login.html',
