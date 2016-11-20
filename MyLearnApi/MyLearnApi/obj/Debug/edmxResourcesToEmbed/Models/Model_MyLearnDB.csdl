@@ -56,7 +56,6 @@
       <Parameter Name="NombreEmpresarial" Mode="In" Type="String" />
       <Parameter Name="Email" Mode="In" Type="String" />
       <Parameter Name="Telefono" Mode="In" Type="String" />
-      <Parameter Name="FechaInscripcion" Mode="In" Type="DateTime" />
       <Parameter Name="PaginaWebEmpresa" Mode="In" Type="String" />
       <Parameter Name="Pais" Mode="In" Type="String" />
       <Parameter Name="Region" Mode="In" Type="String" />
@@ -73,7 +72,6 @@
       <Parameter Name="ApellidoContacto" Mode="In" Type="String" />
       <Parameter Name="Email" Mode="In" Type="String" />
       <Parameter Name="Telefono" Mode="In" Type="String" />
-      <Parameter Name="FechaInscripcion" Mode="In" Type="DateTime" />
       <Parameter Name="HorarioAtencion" Mode="In" Type="String" />
       <Parameter Name="Pais" Mode="In" Type="String" />
       <Parameter Name="Region" Mode="In" Type="String" />
@@ -104,6 +102,8 @@
       <End Role="PAIS" EntitySet="PAIS" />
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
+    <EntitySet Name="TECNOLOGIA" EntityType="MyLearnDBModel.TECNOLOGIA" />
+    <EntitySet Name="UNIVERSIDAD" EntityType="MyLearnDBModel.UNIVERSIDAD" />
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -121,7 +121,6 @@
     <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="RepositorioCodigo" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="LinkHojaDeVida" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="PAIS1" Relationship="MyLearnDBModel.FK_ESTUDIANTE_PAIS" FromRole="ESTUDIANTE" ToRole="PAIS" />
   </EntityType>
   <EntityType Name="USUARIO">
     <Key>
@@ -319,4 +318,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="TECNOLOGIA">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UNIVERSIDAD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
 </Schema>

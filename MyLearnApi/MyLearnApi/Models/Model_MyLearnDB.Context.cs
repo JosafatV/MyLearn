@@ -37,6 +37,8 @@ namespace MyLearnApi.Models
         public virtual DbSet<VIEW_EMPRESA> VIEW_EMPRESA { get; set; }
         public virtual DbSet<VIEW_PROFESOR> VIEW_PROFESOR { get; set; }
         public virtual DbSet<PAIS> PAIS { get; set; }
+        public virtual DbSet<TECNOLOGIA> TECNOLOGIA { get; set; }
+        public virtual DbSet<UNIVERSIDAD> UNIVERSIDAD { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {

@@ -1,34 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MyLearnApi.Models;
+using MyLearnApi.BusinessLogic;
 
 namespace MyLearnApi.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ProfesoresController : ApiController
     {
-        private MyLearnDBEntities db = new MyLearnDBEntities();
+        //
+        private clsProfesoresLogic pobj_ProfesoresLogic = new clsProfesoresLogic();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("MyLearnApi/Profesores")]
-        public IQueryable<VIEW_PROFESOR> GetVIEW_PROFESOR()
+        [ResponseType(typeof(List<VIEW_PROFESOR>))]
+        public List<VIEW_PROFESOR> GetVIEW_PROFESOR()
         {
-            return db.VIEW_PROFESOR;
+            return pobj_ProfesoresLogic.getAllProfesores();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("MyLearnApi/Profesores/{id}")]
         [ResponseType(typeof(VIEW_PROFESOR))]
         public IHttpActionResult GetVIEW_PROFESOR(string id)
         {
-            VIEW_PROFESOR vIEW_PROFESOR = db.VIEW_PROFESOR.Find(id);
+            VIEW_PROFESOR vIEW_PROFESOR = pobj_ProfesoresLogic.getSpecificProfesor(id);
             if (vIEW_PROFESOR == null)
             {
                 return NotFound();
@@ -38,7 +49,11 @@ namespace MyLearnApi.Controllers
         }
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vIEW_PROFESOR"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("MyLearnApi/Profesores")]
         [ResponseType(typeof(VIEW_PROFESOR))]
@@ -49,47 +64,37 @@ namespace MyLearnApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.SP_Insertar_Profesor(vIEW_PROFESOR.Id, vIEW_PROFESOR.Contrasena, vIEW_PROFESOR.Sal, vIEW_PROFESOR.RepositorioArchivos, vIEW_PROFESOR.CredencialDrive,
-                vIEW_PROFESOR.NombreContacto, vIEW_PROFESOR.ApellidoContacto, vIEW_PROFESOR.Email, vIEW_PROFESOR.Telefono, 
-                vIEW_PROFESOR.HorarioAtencion, vIEW_PROFESOR.Pais, vIEW_PROFESOR.Region, vIEW_PROFESOR.IdUniversidad);
+            bool lbo_isValid = pobj_ProfesoresLogic.insertProfesor(vIEW_PROFESOR); 
 
-            try
+           
+            if (!lbo_isValid)
             {
-                db.SaveChanges();
+                return Conflict();
             }
-            catch (DbUpdateException)
-            {
-                if (VIEW_PROFESORExists(vIEW_PROFESOR.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+               
             return   Ok(vIEW_PROFESOR);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [Route("MyLearnApi/Profesores")]
         [Route("MyLearnApi/Profesores/{id}")]
         public HttpResponseMessage Options()
         {
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            pobj_ProfesoresLogic.Dispose(disposing);
             base.Dispose(disposing);
         }
 
-        private bool VIEW_PROFESORExists(string id)
-        {
-            return db.VIEW_PROFESOR.Count(e => e.Id == id) > 0;
-        }
+        
     }
 }

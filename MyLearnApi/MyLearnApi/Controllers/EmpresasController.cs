@@ -66,7 +66,7 @@ namespace MyLearnApi.Controllers
 
             bool lbo_conflict = pobj_EmpresasLogic.postEmpresa(vIEW_EMPRESA);
 
-            if (lbo_conflict)
+            if (!lbo_conflict)
             {
                 return Conflict();
             }
