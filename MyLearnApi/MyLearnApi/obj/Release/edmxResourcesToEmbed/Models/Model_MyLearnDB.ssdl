@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MyLearnDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EMPRESA">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="NombreContacto" Type="char" MaxLength="30" />
+    <Property Name="ApellidoContacto" Type="char" MaxLength="30" />
+    <Property Name="NombreEmpresarial" Type="char" MaxLength="30" />
+    <Property Name="Email" Type="char" MaxLength="50" Nullable="false" />
+    <Property Name="Telefono" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Foto" Type="char" MaxLength="100" />
+    <Property Name="FechaInscripcion" Type="date" Nullable="false" />
+    <Property Name="PaginaWebEmpresa" Type="char" MaxLength="30" />
+    <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Region" Type="char" MaxLength="30" />
+  </EntityType>
   <EntityType Name="ESTUDIANTE">
     <Key>
       <PropertyRef Name="Id" />
@@ -45,9 +61,42 @@
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'MyLearnDB.dbo.VIEW_EMPRESA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VIEW_EMPRESA">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Telefono" />
+      <PropertyRef Name="FechaInscripcion" />
+      <PropertyRef Name="Pais" />
+    </Key>
+    <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="NombreContacto" Type="char" MaxLength="30" />
+    <Property Name="ApellidoContacto" Type="char" MaxLength="30" />
+    <Property Name="NombreEmpresarial" Type="char" MaxLength="30" />
+    <Property Name="Email" Type="char" MaxLength="50" Nullable="false" />
+    <Property Name="Telefono" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Foto" Type="char" MaxLength="100" />
+    <Property Name="FechaInscripcion" Type="date" Nullable="false" />
+    <Property Name="PaginaWebEmpresa" Type="char" MaxLength="30" />
+    <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Region" Type="char" MaxLength="30" />
+    <Property Name="Contrasena" Type="char" MaxLength="8" />
+    <Property Name="Sal" Type="char" MaxLength="20" />
+    <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
+    <Property Name="CredencialDrive" Type="char" MaxLength="100" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VIEW_ESTUDIANTE">
     <Key>
+      <PropertyRef Name="NombreContacto" />
+      <PropertyRef Name="ApellidoContacto" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Telefono" />
+      <PropertyRef Name="Pais" />
+      <PropertyRef Name="FechaInscripcion" />
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
@@ -67,6 +116,30 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
     <Property Name="CredencialDrive" Type="char" MaxLength="100" />
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'MyLearnDB.dbo.VIEW_IDIOMA_POR_ESTUDIANTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VIEW_IDIOMA_POR_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdEstudiante" />
+      <PropertyRef Name="IdIdioma" />
+    </Key>
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="IdIdioma" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+    <Property Name="Idioma" Type="char" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_EMPRESA_ID">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EMPRESA">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ESTUDIANTE_ID">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
     <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="0..1" />
@@ -91,28 +164,64 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="sp_insert_estudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Association Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
+    <End Role="IDIOMA" Type="Self.IDIOMA" Multiplicity="1" />
+    <End Role="IDIOMA_POR_ESTUDIANTE" Type="Self.IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IDIOMA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IDIOMA_POR_ESTUDIANTE">
+        <PropertyRef Name="IdIdioma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="SP_Insertar_Empresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="char" Mode="In" />
     <Parameter Name="Contrasena" Type="char" Mode="In" />
     <Parameter Name="Sal" Type="char" Mode="In" />
     <Parameter Name="RepositorioArchivos" Type="char" Mode="In" />
     <Parameter Name="CredencialDrive" Type="char" Mode="In" />
-    <Parameter Name="Nombre" Type="char" Mode="In" />
-    <Parameter Name="Apellido" Type="char" Mode="In" />
-    <Parameter Name="Carne" Type="char" Mode="In" />
+    <Parameter Name="NombreContacto" Type="char" Mode="In" />
+    <Parameter Name="ApellidoContacto" Type="char" Mode="In" />
+    <Parameter Name="NombreEmpresarial" Type="char" Mode="In" />
     <Parameter Name="Email" Type="char" Mode="In" />
     <Parameter Name="Telefono" Type="char" Mode="In" />
+    <Parameter Name="FechaInscripcion" Type="date" Mode="In" />
+    <Parameter Name="PaginaWebEmpresa" Type="char" Mode="In" />
     <Parameter Name="Pais" Type="char" Mode="In" />
     <Parameter Name="Region" Type="char" Mode="In" />
-    <Parameter Name="FechaInscripcion" Type="date" Mode="In" />
     <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
-    <Parameter Name="LinkHojaDeVida" Type="char" Mode="In" />
+  </Function>
+  <Function Name="SP_Select_Cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="MyLearnDBModelStoreContainer">
+    <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDIOMA" EntityType="Self.IDIOMA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="Self.IDIOMA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VIEW_EMPRESA" EntityType="Self.VIEW_EMPRESA" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VIEW_EMPRESA].[Id] AS [Id], 
+    [VIEW_EMPRESA].[NombreContacto] AS [NombreContacto], 
+    [VIEW_EMPRESA].[ApellidoContacto] AS [ApellidoContacto], 
+    [VIEW_EMPRESA].[NombreEmpresarial] AS [NombreEmpresarial], 
+    [VIEW_EMPRESA].[Email] AS [Email], 
+    [VIEW_EMPRESA].[Telefono] AS [Telefono], 
+    [VIEW_EMPRESA].[Foto] AS [Foto], 
+    [VIEW_EMPRESA].[FechaInscripcion] AS [FechaInscripcion], 
+    [VIEW_EMPRESA].[PaginaWebEmpresa] AS [PaginaWebEmpresa], 
+    [VIEW_EMPRESA].[Pais] AS [Pais], 
+    [VIEW_EMPRESA].[Region] AS [Region], 
+    [VIEW_EMPRESA].[Contrasena] AS [Contrasena], 
+    [VIEW_EMPRESA].[Sal] AS [Sal], 
+    [VIEW_EMPRESA].[RepositorioArchivos] AS [RepositorioArchivos], 
+    [VIEW_EMPRESA].[CredencialDrive] AS [CredencialDrive], 
+    [VIEW_EMPRESA].[Estado] AS [Estado]
+    FROM [dbo].[VIEW_EMPRESA] AS [VIEW_EMPRESA]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="VIEW_ESTUDIANTE" EntityType="Self.VIEW_ESTUDIANTE" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [VIEW_ESTUDIANTE].[NombreContacto] AS [NombreContacto], 
@@ -133,12 +242,28 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
     [VIEW_ESTUDIANTE].[Estado] AS [Estado]
     FROM [dbo].[VIEW_ESTUDIANTE] AS [VIEW_ESTUDIANTE]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="VIEW_IDIOMA_POR_ESTUDIANTE" EntityType="Self.VIEW_IDIOMA_POR_ESTUDIANTE" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VIEW_IDIOMA_POR_ESTUDIANTE].[IdEstudiante] AS [IdEstudiante], 
+    [VIEW_IDIOMA_POR_ESTUDIANTE].[IdIdioma] AS [IdIdioma], 
+    [VIEW_IDIOMA_POR_ESTUDIANTE].[Estado] AS [Estado], 
+    [VIEW_IDIOMA_POR_ESTUDIANTE].[Idioma] AS [Idioma]
+    FROM [dbo].[VIEW_IDIOMA_POR_ESTUDIANTE] AS [VIEW_IDIOMA_POR_ESTUDIANTE]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_EMPRESA_ID" Association="Self.FK_EMPRESA_ID">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+    </AssociationSet>
     <AssociationSet Name="FK_ESTUDIANTE_ID" Association="Self.FK_ESTUDIANTE_ID">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
+      <End Role="IDIOMA" EntitySet="IDIOMA" />
       <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
     </AssociationSet>
   </EntityContainer>

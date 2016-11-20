@@ -71,9 +71,17 @@ namespace MyLearnApi.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = vIEW_EMPRESA.Id }, vIEW_EMPRESA);
+            return Ok(vIEW_EMPRESA);
         }
 
+
+        [HttpOptions]
+        [Route("MyLearnApi/Empresas/{id}")]
+        [Route("MyLearnApi/Empresas")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

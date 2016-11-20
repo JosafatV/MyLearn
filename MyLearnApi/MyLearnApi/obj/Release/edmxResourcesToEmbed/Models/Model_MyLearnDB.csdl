@@ -30,7 +30,38 @@
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
       <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
     </AssociationSet>
+    <AssociationSet Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
+      <End Role="IDIOMA" EntitySet="IDIOMA" />
+      <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <EntitySet Name="VIEW_IDIOMA_POR_ESTUDIANTE" EntityType="MyLearnDBModel.VIEW_IDIOMA_POR_ESTUDIANTE" />
+    <FunctionImport Name="SP_Select_Cursos">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
     <EntitySet Name="VIEW_ESTUDIANTE" EntityType="MyLearnDBModel.VIEW_ESTUDIANTE" />
+    <EntitySet Name="EMPRESA" EntityType="MyLearnDBModel.EMPRESA" />
+    <EntitySet Name="VIEW_EMPRESA" EntityType="MyLearnDBModel.VIEW_EMPRESA" />
+    <AssociationSet Name="FK_EMPRESA_ID" Association="MyLearnDBModel.FK_EMPRESA_ID">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+    </AssociationSet>
+    <FunctionImport Name="SP_Insertar_Empresa">
+      <Parameter Name="Id" Mode="In" Type="String" />
+      <Parameter Name="Contrasena" Mode="In" Type="String" />
+      <Parameter Name="Sal" Mode="In" Type="String" />
+      <Parameter Name="RepositorioArchivos" Mode="In" Type="String" />
+      <Parameter Name="CredencialDrive" Mode="In" Type="String" />
+      <Parameter Name="NombreContacto" Mode="In" Type="String" />
+      <Parameter Name="ApellidoContacto" Mode="In" Type="String" />
+      <Parameter Name="NombreEmpresarial" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+      <Parameter Name="FechaInscripcion" Mode="In" Type="DateTime" />
+      <Parameter Name="PaginaWebEmpresa" Mode="In" Type="String" />
+      <Parameter Name="Pais" Mode="In" Type="String" />
+      <Parameter Name="Region" Mode="In" Type="String" />
+      <Parameter Name="RepositorioCodigo" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -48,7 +79,6 @@
     <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="RepositorioCodigo" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="LinkHojaDeVida" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="IDIOMA_POR_ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" FromRole="ESTUDIANTE" ToRole="IDIOMA_POR_ESTUDIANTE" />
   </EntityType>
   <EntityType Name="USUARIO">
     <Key>
@@ -60,6 +90,7 @@
     <Property Name="RepositorioArchivos" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="EMPRESA" Relationship="MyLearnDBModel.FK_EMPRESA_ID" FromRole="USUARIO" ToRole="EMPRESA" />
   </EntityType>
   <Association Name="FK_ESTUDIANTE_ID">
     <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
@@ -88,7 +119,6 @@
     <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="IdIdioma" Type="Int32" Nullable="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" FromRole="IDIOMA_POR_ESTUDIANTE" ToRole="ESTUDIANTE" />
   </EntityType>
   <Association Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
     <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
@@ -102,8 +132,36 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.IDIOMA" Role="IDIOMA" Multiplicity="1" />
+    <End Type="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" Role="IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IDIOMA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IDIOMA_POR_ESTUDIANTE">
+        <PropertyRef Name="IdIdioma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="VIEW_IDIOMA_POR_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdEstudiante" />
+      <PropertyRef Name="IdIdioma" />
+    </Key>
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="IdIdioma" Type="Int32" Nullable="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Idioma" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+  </EntityType>
   <EntityType Name="VIEW_ESTUDIANTE">
     <Key>
+      <PropertyRef Name="NombreContacto" />
+      <PropertyRef Name="ApellidoContacto" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Telefono" />
+      <PropertyRef Name="Pais" />
+      <PropertyRef Name="FechaInscripcion" />
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="NombreContacto" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
@@ -123,4 +181,58 @@
     <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
   </EntityType>
+  <EntityType Name="EMPRESA">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="NombreContacto" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="ApellidoContacto" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="NombreEmpresarial" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="Telefono" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="Foto" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PaginaWebEmpresa" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Pais" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Region" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="USUARIO" Relationship="MyLearnDBModel.FK_EMPRESA_ID" FromRole="EMPRESA" ToRole="USUARIO" />
+  </EntityType>
+  <EntityType Name="VIEW_EMPRESA">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Telefono" />
+      <PropertyRef Name="FechaInscripcion" />
+      <PropertyRef Name="Pais" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="NombreContacto" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="ApellidoContacto" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="NombreEmpresarial" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="Telefono" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="Foto" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PaginaWebEmpresa" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Pais" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Region" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Contrasena" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Name="Sal" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="RepositorioArchivos" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_EMPRESA_ID">
+    <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.EMPRESA" Role="EMPRESA" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EMPRESA">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

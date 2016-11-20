@@ -121,5 +121,27 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_Insertar_Empresa" FunctionName="MyLearnDBModel.Store.SP_Insertar_Empresa" />
+    <EntitySetMapping Name="VIEW_PROFESOR">
+      <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_PROFESOR">
+        <MappingFragment StoreEntitySet="VIEW_PROFESOR">
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="HorarioAtencion" ColumnName="HorarioAtencion" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="FechaInscripcion" ColumnName="FechaInscripcion" />
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ApellidoContacto" ColumnName="ApellidoContacto" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="CredencialDrive" ColumnName="CredencialDrive" />
+          <ScalarProperty Name="RepositorioArchivos" ColumnName="RepositorioArchivos" />
+          <ScalarProperty Name="Sal" ColumnName="Sal" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Insertar_Profesor" FunctionName="MyLearnDBModel.Store.SP_Insertar_Profesor" />
   </EntityContainerMapping>
 </Mapping>
