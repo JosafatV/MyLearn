@@ -52,7 +52,7 @@ CREATE VIEW [dbo].[VIEW_ESTUDIANTE]
 			CREATE VIEW [dbo].[VIEW_CALIFICACIONES]
 	AS
 SELECT        dbo.ESTUDIANTE_POR_CURSO.IdEstudiante, dbo.CURSO.Nombre AS Curso, dbo.CURSO.Estado AS EstadoCurso, dbo.BADGE.Puntaje AS PuntajeBadge, dbo.BADGE_POR_PROYECTO.Estado AS EstadoBadge, 
-                         dbo.PROYECTO.Nombre AS Proyecto, dbo.PROYECTO.Id AS IdProyecto, dbo.PROYECTO.FechaInicio AS InicioProyecto, dbo.PROYECTO.NotaMinima, dbo.PROYECTO.Estado AS EstadoProyecto, dbo.BADGE.Nombre AS Badge
+                         dbo.PROYECTO.Nombre AS Proyecto, dbo.PROYECTO.Id AS IdProyecto, dbo.PROYECTO.FechaInicio AS InicioProyecto, dbo.CURSO.NotaMinima, dbo.PROYECTO.Estado AS EstadoProyecto, dbo.BADGE.Nombre AS Badge
 FROM            dbo.BADGE INNER JOIN
                          dbo.BADGE_POR_PROYECTO ON dbo.BADGE.Id = dbo.BADGE_POR_PROYECTO.IdBadge INNER JOIN
                          dbo.CURSO ON dbo.BADGE.IdCurso = dbo.CURSO.Id INNER JOIN

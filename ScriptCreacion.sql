@@ -123,7 +123,7 @@ CREATE TABLE CURSO (
     Id INT IDENTITY(1,1),
     Nombre CHAR(30),
     Codigo CHAR(10),
-    NotaMinima tiny INT NOT NULL ,
+    NotaMinima tinyINT NOT NULL ,
     Estado CHAR(1), /*Activo, Cerrado*/
 
 	CONSTRAINT PK_CURSO

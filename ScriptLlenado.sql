@@ -46,7 +46,7 @@ EXEC SP_Insertar_Admin '29','1234','3re6d3k45gf3l4h53jk4', '', '','Josafat','Var
 EXEC SP_Insertar_Admin '30','1234','563kp4j3uiopbgny878c', '', '', 'Giovanni','Villalobos'
 
 
-EXEC SP_Insertar_Curso '13', 'Especificacion y Diseño de Software', 'CE-4101', '1'
+EXEC SP_Insertar_Curso '13', 'Especificacion y Diseño de Software', 'CE-4101', '1', 68
 
 /*CE-4101*/
 EXEC SP_Insertar_Badge 'Usabilidad', '25', '1'
@@ -57,10 +57,10 @@ EXEC SP_Insertar_Badge 'Patrones de Diseño', '25', '1'
 EXEC SP_Agregar_Al_Curso '1', '1'
 EXEC SP_Agregar_Al_Curso '2', '1'
 
-EXEC SP_Insertar_Propuesta_Proyecto '1', 'DigiLearn', 'La ausencia de una plataforma para trabajar en línea y obtener experiencia laboral','ofrecer un sericio a estudiantes para que puedan trabajar en cursos de su universidad y en ofertas de trabajo', '1', '10/17/2016', '11/26/2016', '', 70
+EXEC SP_Insertar_Propuesta_Proyecto '1', 'DigiLearn', 'La ausencia de una plataforma para trabajar en línea y obtener experiencia laboral','ofrecer un sericio a estudiantes para que puedan trabajar en cursos de su universidad y en ofertas de trabajo', '1', '10/17/2016', '11/26/2016', ''
 EXEC SP_Asignar_Tecnologia_Proyecto '1', '1'
 EXEC SP_Asignar_Tecnologia_Proyecto '1', '2'
-EXEC SP_Insertar_Propuesta_Proyecto '2', 'PlanetToaster', 'La necesidad de tostar pan','ofrecer un sericio de tostadora a domicilio a los afiliados', '1', '10/19/2016', '11/26/2016', '', 70
+EXEC SP_Insertar_Propuesta_Proyecto '2', 'PlanetToaster', 'La necesidad de tostar pan','ofrecer un sericio de tostadora a domicilio a los afiliados', '1', '10/19/2016', '11/26/2016', ''
 EXEC SP_Asignar_Tecnologia_Proyecto '2', '1'
 EXEC SP_Asignar_Tecnologia_Proyecto '2', '3'
 

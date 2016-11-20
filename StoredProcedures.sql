@@ -136,11 +136,11 @@ CREATE PROCEDURE SP_Agregar_Al_Curso @IdEstudiante CHAR(100), @IdCurso INT
 	GO
 
 	/*Creates a proyect in the proposition stage*/
-CREATE PROCEDURE SP_Insertar_Propuesta_Proyecto @IdEstudiante CHAR(100), @Nombre CHAR(30), @Problematica CHAR(100), @Descripcion CHAR(500), @IdCurso INT, @FechaInicio DATE, @FechaFinal DATE, @DocumentoAdicional CHAR(100), @NotaMinima INT 
+CREATE PROCEDURE SP_Insertar_Propuesta_Proyecto @IdEstudiante CHAR(100), @Nombre CHAR(30), @Problematica CHAR(100), @Descripcion CHAR(500), @IdCurso INT, @FechaInicio DATE, @FechaFinal DATE, @DocumentoAdicional CHAR(100)
 	AS
 		DECLARE @IdProyecto INT
-		INSERT INTO PROYECTO (Nombre, Problematica, Descripcion, IdCurso, FechaInicio, FechaFinal, DocumentoAdicional, NotaMinima, Estado)
-		VALUES (@Nombre,@Problematica, @Descripcion, @IdCurso, @FechaInicio, @FechaFinal, @DocumentoAdicional, @NotaMinima, 'P')
+		INSERT INTO PROYECTO (Nombre, Problematica, Descripcion, IdCurso, FechaInicio, FechaFinal, DocumentoAdicional, Estado)
+		VALUES (@Nombre,@Problematica, @Descripcion, @IdCurso, @FechaInicio, @FechaFinal, @DocumentoAdicional, 'P')
 
 		SELECT @IdProyecto = @@IDENTITY
 		INSERT INTO PROYECTO_POR_ESTUDIANTE (IdProyecto, IdEstudiante, Estado)
