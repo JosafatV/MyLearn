@@ -44,14 +44,14 @@ CREATE PROCEDURE SP_Insertar_Profesor
 	@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 	@NombreContacto CHAR(30), @ApellidoContacto CHAR(30), @Email CHAR(50), @Telefono CHAR(15), 
-	@FechaInscripcion DATE, @HorarioAtencion CHAR(15), @Pais CHAR(30), @Region CHAR(30), @IdUniversidad INT
+	 @HorarioAtencion CHAR(15), @Pais CHAR(30), @Region CHAR(30), @IdUniversidad INT
 		AS
 			INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado) 
 			VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A')
 
 			INSERT INTO PROFESOR (Id, NombreContacto, ApellidoContacto, Email, Telefono, FechaInscripcion, HorarioAtencion, Pais,
 			Region)
-			VALUES (@Id, @NombreContacto, @ApellidoContacto, @Email, @Telefono, @FechaInscripcion, @HorarioAtencion, @Pais,
+			VALUES (@Id, @NombreContacto, @ApellidoContacto, @Email, @Telefono, getDate(), @HorarioAtencion, @Pais,
 			@Region)
 
 			INSERT INTO PROFESOR_POR_UNIVERSIDAD (IdProfesor, IdUniversidad, Estado)
@@ -62,14 +62,14 @@ CREATE PROCEDURE SP_Insertar_Empresa
 @Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 @NombreContacto CHAR(30), @ApellidoContacto CHAR(30), @NombreEmpresarial CHAR(30), @Email CHAR(50), @Telefono CHAR(15),
-@FechaInscripcion DATE, @PaginaWebEmpresa CHAR(30), @Pais CHAR(30), @Region CHAR(30), @RepositorioCodigo CHAR(100)
+ @PaginaWebEmpresa CHAR(30), @Pais CHAR(30), @Region CHAR(30), @RepositorioCodigo CHAR(100)
 	AS
 		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado) 
 		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A')
 
-		INSERT INTO EMPRESA (Id, NombreContacto, ApellidoContacto, NombreEmpresarial, Email, Telefono, FechaInscripcion, 
+		INSERT INTO EMPRESA (Id, NombreContacto, ApellidoContacto, NombreEmpresarial, Email, Telefono, FechaInscripcion , 
 		PaginaWebEmpresa, Pais, Region)
-		VALUES (@Id, @NombreContacto, @ApellidoContacto, @NombreEmpresarial, @Email, @Telefono, @FechaInscripcion, 
+		VALUES (@Id, @NombreContacto, @ApellidoContacto, @NombreEmpresarial, @Email, @Telefono, getDate(),
 		@PaginaWebEmpresa, @Pais, @Region) 
 	GO
 

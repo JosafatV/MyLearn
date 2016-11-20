@@ -36,6 +36,7 @@ namespace MyLearnApi.Models
         public virtual DbSet<EMPRESA> EMPRESA { get; set; }
         public virtual DbSet<VIEW_EMPRESA> VIEW_EMPRESA { get; set; }
         public virtual DbSet<VIEW_PROFESOR> VIEW_PROFESOR { get; set; }
+        public virtual DbSet<PAIS> PAIS { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {
@@ -111,7 +112,7 @@ namespace MyLearnApi.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Select_Cursos", userIdParameter);
         }
     
-        public virtual int SP_Insertar_Empresa(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombreContacto, string apellidoContacto, string nombreEmpresarial, string email, string telefono, Nullable<System.DateTime> fechaInscripcion, string paginaWebEmpresa, string pais, string region, string repositorioCodigo)
+        public virtual int SP_Insertar_Empresa(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombreContacto, string apellidoContacto, string nombreEmpresarial, string email, string telefono, string paginaWebEmpresa, string pais, string region, string repositorioCodigo)
         {
             var idParameter = id != null ?
                 new ObjectParameter("Id", id) :
@@ -153,10 +154,6 @@ namespace MyLearnApi.Models
                 new ObjectParameter("Telefono", telefono) :
                 new ObjectParameter("Telefono", typeof(string));
     
-            var fechaInscripcionParameter = fechaInscripcion.HasValue ?
-                new ObjectParameter("FechaInscripcion", fechaInscripcion) :
-                new ObjectParameter("FechaInscripcion", typeof(System.DateTime));
-    
             var paginaWebEmpresaParameter = paginaWebEmpresa != null ?
                 new ObjectParameter("PaginaWebEmpresa", paginaWebEmpresa) :
                 new ObjectParameter("PaginaWebEmpresa", typeof(string));
@@ -173,10 +170,10 @@ namespace MyLearnApi.Models
                 new ObjectParameter("RepositorioCodigo", repositorioCodigo) :
                 new ObjectParameter("RepositorioCodigo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Empresa", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreContactoParameter, apellidoContactoParameter, nombreEmpresarialParameter, emailParameter, telefonoParameter, fechaInscripcionParameter, paginaWebEmpresaParameter, paisParameter, regionParameter, repositorioCodigoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Empresa", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreContactoParameter, apellidoContactoParameter, nombreEmpresarialParameter, emailParameter, telefonoParameter, paginaWebEmpresaParameter, paisParameter, regionParameter, repositorioCodigoParameter);
         }
     
-        public virtual int SP_Insertar_Profesor(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombreContacto, string apellidoContacto, string email, string telefono, Nullable<System.DateTime> fechaInscripcion, string horarioAtencion, string pais, string region, Nullable<int> idUniversidad)
+        public virtual int SP_Insertar_Profesor(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombreContacto, string apellidoContacto, string email, string telefono, string horarioAtencion, string pais, string region, Nullable<int> idUniversidad)
         {
             var idParameter = id != null ?
                 new ObjectParameter("Id", id) :
@@ -214,10 +211,6 @@ namespace MyLearnApi.Models
                 new ObjectParameter("Telefono", telefono) :
                 new ObjectParameter("Telefono", typeof(string));
     
-            var fechaInscripcionParameter = fechaInscripcion.HasValue ?
-                new ObjectParameter("FechaInscripcion", fechaInscripcion) :
-                new ObjectParameter("FechaInscripcion", typeof(System.DateTime));
-    
             var horarioAtencionParameter = horarioAtencion != null ?
                 new ObjectParameter("HorarioAtencion", horarioAtencion) :
                 new ObjectParameter("HorarioAtencion", typeof(string));
@@ -234,7 +227,7 @@ namespace MyLearnApi.Models
                 new ObjectParameter("IdUniversidad", idUniversidad) :
                 new ObjectParameter("IdUniversidad", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Profesor", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreContactoParameter, apellidoContactoParameter, emailParameter, telefonoParameter, fechaInscripcionParameter, horarioAtencionParameter, paisParameter, regionParameter, idUniversidadParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Profesor", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreContactoParameter, apellidoContactoParameter, emailParameter, telefonoParameter, horarioAtencionParameter, paisParameter, regionParameter, idUniversidadParameter);
         }
     
         public virtual int SP_Insertar_Estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, string repositorioCodigo, string linkHojaDeVida)

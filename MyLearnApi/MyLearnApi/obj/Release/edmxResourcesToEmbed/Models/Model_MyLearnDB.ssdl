@@ -49,6 +49,13 @@
     <Property Name="IdIdioma" Type="int" Nullable="false" />
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
+  <EntityType Name="PAIS">
+    <Key>
+      <PropertyRef Name="Pais" />
+    </Key>
+    <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+  </EntityType>
   <EntityType Name="USUARIO">
     <Key>
       <PropertyRef Name="Id" />
@@ -154,6 +161,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_EMPRESA_PAIS">
+    <End Role="PAIS" Type="Self.PAIS" Multiplicity="1" />
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAIS">
+        <PropertyRef Name="Pais" />
+      </Principal>
+      <Dependent Role="EMPRESA">
+        <PropertyRef Name="Pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ESTUDIANTE_ID">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
     <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="0..1" />
@@ -163,6 +182,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
       </Principal>
       <Dependent Role="ESTUDIANTE">
         <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ESTUDIANTE_PAIS">
+    <End Role="PAIS" Type="Self.PAIS" Multiplicity="1" />
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAIS">
+        <PropertyRef Name="Pais" />
+      </Principal>
+      <Dependent Role="ESTUDIANTE">
+        <PropertyRef Name="Pais" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -201,7 +232,6 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     <Parameter Name="NombreEmpresarial" Type="char" Mode="In" />
     <Parameter Name="Email" Type="char" Mode="In" />
     <Parameter Name="Telefono" Type="char" Mode="In" />
-    <Parameter Name="FechaInscripcion" Type="date" Mode="In" />
     <Parameter Name="PaginaWebEmpresa" Type="char" Mode="In" />
     <Parameter Name="Pais" Type="char" Mode="In" />
     <Parameter Name="Region" Type="char" Mode="In" />
@@ -233,7 +263,6 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     <Parameter Name="ApellidoContacto" Type="char" Mode="In" />
     <Parameter Name="Email" Type="char" Mode="In" />
     <Parameter Name="Telefono" Type="char" Mode="In" />
-    <Parameter Name="FechaInscripcion" Type="date" Mode="In" />
     <Parameter Name="HorarioAtencion" Type="char" Mode="In" />
     <Parameter Name="Pais" Type="char" Mode="In" />
     <Parameter Name="Region" Type="char" Mode="In" />
@@ -247,6 +276,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDIOMA" EntityType="Self.IDIOMA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="Self.IDIOMA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VIEW_EMPRESA" EntityType="Self.VIEW_EMPRESA" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -321,8 +351,16 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="EMPRESA" EntitySet="EMPRESA" />
     </AssociationSet>
+    <AssociationSet Name="FK_EMPRESA_PAIS" Association="Self.FK_EMPRESA_PAIS">
+      <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+    </AssociationSet>
     <AssociationSet Name="FK_ESTUDIANTE_ID" Association="Self.FK_ESTUDIANTE_ID">
       <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ESTUDIANTE_PAIS" Association="Self.FK_ESTUDIANTE_PAIS">
+      <End Role="PAIS" EntitySet="PAIS" />
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">

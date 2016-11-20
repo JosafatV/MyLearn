@@ -214,6 +214,7 @@
     <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdiomasController.cs" />
+    <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\ProfesoresController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -250,6 +251,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_MyLearnDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PAIS.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USUARIO.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>

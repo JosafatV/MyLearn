@@ -50,7 +50,7 @@ namespace MyLearnApi.Controllers
             }
 
             db.SP_Insertar_Profesor(vIEW_PROFESOR.Id, vIEW_PROFESOR.Contrasena, vIEW_PROFESOR.Sal, vIEW_PROFESOR.RepositorioArchivos, vIEW_PROFESOR.CredencialDrive,
-                vIEW_PROFESOR.NombreContacto, vIEW_PROFESOR.ApellidoContacto, vIEW_PROFESOR.Email, vIEW_PROFESOR.Telefono, vIEW_PROFESOR.FechaInscripcion,
+                vIEW_PROFESOR.NombreContacto, vIEW_PROFESOR.ApellidoContacto, vIEW_PROFESOR.Email, vIEW_PROFESOR.Telefono, 
                 vIEW_PROFESOR.HorarioAtencion, vIEW_PROFESOR.Pais, vIEW_PROFESOR.Region, vIEW_PROFESOR.IdUniversidad);
 
             try

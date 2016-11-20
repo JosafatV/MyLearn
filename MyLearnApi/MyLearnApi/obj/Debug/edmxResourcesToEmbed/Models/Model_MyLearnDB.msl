@@ -145,5 +145,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_Insertar_Profesor" FunctionName="MyLearnDBModel.Store.SP_Insertar_Profesor" />
+    <FunctionImportMapping FunctionImportName="SP_Insertar_Estudiante" FunctionName="MyLearnDBModel.Store.SP_Insertar_Estudiante" />
+    <EntitySetMapping Name="PAIS">
+      <EntityTypeMapping TypeName="MyLearnDBModel.PAIS">
+        <MappingFragment StoreEntitySet="PAIS">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Pais1" ColumnName="Pais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

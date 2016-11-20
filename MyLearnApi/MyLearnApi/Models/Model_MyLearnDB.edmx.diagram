@@ -18,6 +18,9 @@
         <EntityTypeShape EntityType="MyLearnDBModel.VIEW_EMPRESA" Width="2" PointX="6.75" PointY="0.5" />
         <AssociationConnector Association="MyLearnDBModel.FK_EMPRESA_ID" />
         <EntityTypeShape EntityType="MyLearnDBModel.VIEW_PROFESOR" Width="2.375" PointX="7.375" PointY="5.75" />
+        <EntityTypeShape EntityType="MyLearnDBModel.PAIS" Width="1.5" PointX="11" PointY="1.125" />
+        <AssociationConnector Association="MyLearnDBModel.FK_EMPRESA_PAIS" />
+        <AssociationConnector Association="MyLearnDBModel.FK_ESTUDIANTE_PAIS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
