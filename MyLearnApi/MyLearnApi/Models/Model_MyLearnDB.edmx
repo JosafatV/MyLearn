@@ -139,6 +139,13 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
         <EntityType Name="VIEW_PROFESOR">
           <Key>
             <PropertyRef Name="Id" />
+            
+            
+            
+            
+            
+            
+            
           </Key>
           <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
           <Property Name="Contrasena" Type="char" MaxLength="8" />
@@ -222,6 +229,22 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
           <Parameter Name="Pais" Type="char" Mode="In" />
           <Parameter Name="Region" Type="char" Mode="In" />
           <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
+        </Function>
+        <Function Name="SP_Insertar_Estudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="char" Mode="In" />
+          <Parameter Name="Contrasena" Type="char" Mode="In" />
+          <Parameter Name="Sal" Type="char" Mode="In" />
+          <Parameter Name="RepositorioArchivos" Type="char" Mode="In" />
+          <Parameter Name="CredencialDrive" Type="char" Mode="In" />
+          <Parameter Name="Nombre" Type="char" Mode="In" />
+          <Parameter Name="Apellido" Type="char" Mode="In" />
+          <Parameter Name="Carne" Type="char" Mode="In" />
+          <Parameter Name="Email" Type="char" Mode="In" />
+          <Parameter Name="Telefono" Type="char" Mode="In" />
+          <Parameter Name="Pais" Type="char" Mode="In" />
+          <Parameter Name="Region" Type="char" Mode="In" />
+          <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
+          <Parameter Name="LinkHojaDeVida" Type="char" Mode="In" />
         </Function>
         <Function Name="SP_Insertar_Profesor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="char" Mode="In" />
@@ -416,6 +439,22 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
             <Parameter Name="Pais" Mode="In" Type="String" />
             <Parameter Name="Region" Mode="In" Type="String" />
             <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Insertar_Estudiante">
+            <Parameter Name="Id" Mode="In" Type="String" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
+            <Parameter Name="Sal" Mode="In" Type="String" />
+            <Parameter Name="RepositorioArchivos" Mode="In" Type="String" />
+            <Parameter Name="CredencialDrive" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellido" Mode="In" Type="String" />
+            <Parameter Name="Carne" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="Pais" Mode="In" Type="String" />
+            <Parameter Name="Region" Mode="In" Type="String" />
+            <Parameter Name="RepositorioCodigo" Mode="In" Type="String" />
+            <Parameter Name="LinkHojaDeVida" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
@@ -750,6 +789,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_Insertar_Profesor" FunctionName="MyLearnDBModel.Store.SP_Insertar_Profesor" />
+          <FunctionImportMapping FunctionImportName="SP_Insertar_Estudiante" FunctionName="MyLearnDBModel.Store.SP_Insertar_Estudiante" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

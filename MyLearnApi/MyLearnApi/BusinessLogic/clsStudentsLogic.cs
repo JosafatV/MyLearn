@@ -50,9 +50,9 @@ namespace MyLearnApi.BusinessLogic
         /// <returns></returns>
         public bool doStudentInsertion(VIEW_ESTUDIANTE estudiante)
         {
-            db.sp_insert_estudiante(estudiante.Id, estudiante.Contrasena, estudiante.Sal, estudiante.RepositorioArchivos, estudiante.CredencialDrive,
+            db.SP_Insertar_Estudiante(estudiante.Id, estudiante.Contrasena, estudiante.Sal, estudiante.RepositorioArchivos, estudiante.CredencialDrive,
                 estudiante.NombreContacto, estudiante.ApellidoContacto, estudiante.Carne, estudiante.Email, estudiante.Telefono, estudiante.Pais, estudiante.Region,
-                estudiante.FechaInscripcion, estudiante.RepositorioCodigo, estudiante.LinkHojaDeVida);
+                 estudiante.RepositorioCodigo, estudiante.LinkHojaDeVida);
             try
             {
                 db.SaveChanges();

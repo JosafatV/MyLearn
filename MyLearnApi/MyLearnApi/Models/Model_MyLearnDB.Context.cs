@@ -236,5 +236,66 @@ namespace MyLearnApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Profesor", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreContactoParameter, apellidoContactoParameter, emailParameter, telefonoParameter, fechaInscripcionParameter, horarioAtencionParameter, paisParameter, regionParameter, idUniversidadParameter);
         }
+    
+        public virtual int SP_Insertar_Estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, string repositorioCodigo, string linkHojaDeVida)
+        {
+            var idParameter = id != null ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(string));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("Contrasena", contrasena) :
+                new ObjectParameter("Contrasena", typeof(string));
+    
+            var salParameter = sal != null ?
+                new ObjectParameter("Sal", sal) :
+                new ObjectParameter("Sal", typeof(string));
+    
+            var repositorioArchivosParameter = repositorioArchivos != null ?
+                new ObjectParameter("RepositorioArchivos", repositorioArchivos) :
+                new ObjectParameter("RepositorioArchivos", typeof(string));
+    
+            var credencialDriveParameter = credencialDrive != null ?
+                new ObjectParameter("CredencialDrive", credencialDrive) :
+                new ObjectParameter("CredencialDrive", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoParameter = apellido != null ?
+                new ObjectParameter("Apellido", apellido) :
+                new ObjectParameter("Apellido", typeof(string));
+    
+            var carneParameter = carne != null ?
+                new ObjectParameter("Carne", carne) :
+                new ObjectParameter("Carne", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var paisParameter = pais != null ?
+                new ObjectParameter("Pais", pais) :
+                new ObjectParameter("Pais", typeof(string));
+    
+            var regionParameter = region != null ?
+                new ObjectParameter("Region", region) :
+                new ObjectParameter("Region", typeof(string));
+    
+            var repositorioCodigoParameter = repositorioCodigo != null ?
+                new ObjectParameter("RepositorioCodigo", repositorioCodigo) :
+                new ObjectParameter("RepositorioCodigo", typeof(string));
+    
+            var linkHojaDeVidaParameter = linkHojaDeVida != null ?
+                new ObjectParameter("LinkHojaDeVida", linkHojaDeVida) :
+                new ObjectParameter("LinkHojaDeVida", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Estudiante", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreParameter, apellidoParameter, carneParameter, emailParameter, telefonoParameter, paisParameter, regionParameter, repositorioCodigoParameter, linkHojaDeVidaParameter);
+        }
     }
 }
