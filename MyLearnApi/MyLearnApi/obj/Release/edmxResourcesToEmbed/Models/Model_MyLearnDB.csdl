@@ -102,6 +102,8 @@
       <End Role="PAIS" EntitySet="PAIS" />
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
+    <EntitySet Name="TECNOLOGIA" EntityType="MyLearnDBModel.TECNOLOGIA" />
+    <EntitySet Name="UNIVERSIDAD" EntityType="MyLearnDBModel.UNIVERSIDAD" />
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -316,4 +318,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="TECNOLOGIA">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UNIVERSIDAD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
 </Schema>

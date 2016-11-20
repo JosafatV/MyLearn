@@ -24,6 +24,7 @@ CREATE PROCEDURE SP_Nota_Poyecto @UserID INT, @ProjectId INT
 
 /*****************SIMPLE INSERTS*****************/
 
+//ya
 CREATE PROCEDURE SP_Insertar_Estudiante   
 	@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
@@ -39,7 +40,7 @@ CREATE PROCEDURE SP_Insertar_Estudiante
 		 @LinkHojaDeVida)
 	GO
 
-
+//ya
 CREATE PROCEDURE SP_Insertar_Profesor
 	@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
@@ -57,7 +58,7 @@ CREATE PROCEDURE SP_Insertar_Profesor
 			INSERT INTO PROFESOR_POR_UNIVERSIDAD (IdProfesor, IdUniversidad, Estado)
 			VALUES (@Id, @IdUniversidad, 'A')
 		GO
-
+//ya
 CREATE PROCEDURE SP_Insertar_Empresa
 @Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
@@ -72,7 +73,7 @@ CREATE PROCEDURE SP_Insertar_Empresa
 		VALUES (@Id, @NombreContacto, @ApellidoContacto, @NombreEmpresarial, @Email, @Telefono, getDate(),
 		@PaginaWebEmpresa, @Pais, @Region) 
 	GO
-
+//no se usa
 CREATE PROCEDURE SP_Insertar_Admin
 @Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 @Nombre CHAR(30), @ApellidoContacto CHAR(30)
@@ -83,7 +84,7 @@ CREATE PROCEDURE SP_Insertar_Admin
 		INSERT INTO USUARIO_XMP (Id, NombreContacto, ApellidoContacto)
 		VALUES (@Id, @Nombre, @ApellidoContacto) 
 	GO
-
+/*  NO SE USAN PORQUE MADRIZ LAS QUITO DE LAS FUNCIONALIDADES
 CREATE PROCEDURE SP_Insertar_Tecnologia @Nombre CHAR(30)
 	AS
 		INSERT INTO TECNOLOGIA (Nombre, Estado)
@@ -95,7 +96,7 @@ CREATE PROCEDURE SP_Insertar_Universidad @Nombre CHAR(30)
 		INSERT INTO UNIVERSIDAD (Nombre, Estado)
 		VALUES (@Nombre, 'A')
 	GO
-
+*/
 /*****************MULTI-PARTED INSERTS*****************/
 
 
@@ -152,6 +153,10 @@ CREATE PROCEDURE SP_Insertar_Propuesta_Proyecto @IdEstudiante CHAR(100), @Nombre
 			WHERE Cpp.IdCurso=@IdCurso
 	GO
 
+
+/*	YA NO SE USA
+
+
 	/*Marks a proyect proposition as an active project and asigns it badges*/
 CREATE PROCEDURE SP_Aceptar_Proyecto @IdProfesor CHAR(100), @IdPropuesta INT, @IdCurso INT 
 	AS
@@ -173,7 +178,7 @@ CREATE PROCEDURE SP_Aceptar_Proyecto @IdProfesor CHAR(100), @IdPropuesta INT, @I
 			WHERE BADGE.IdCurso=@IdCurso
 	GO
 
-
+*/
 
 /********** COMPAÑIAS **********/
 

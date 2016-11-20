@@ -64,6 +64,15 @@
     <Property Name="Nombre" Type="char" MaxLength="30" Nullable="false" />
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
+  <EntityType Name="TECNOLOGIA_POR_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdTecnologia" />
+      <PropertyRef Name="IdEstudiante" />
+    </Key>
+    <Property Name="IdTecnologia" Type="int" Nullable="false" />
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
   <EntityType Name="UNIVERSIDAD">
     <Key>
       <PropertyRef Name="Id" />
@@ -225,6 +234,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE">
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+    <End Role="TECNOLOGIA_POR_ESTUDIANTE" Type="Self.TECNOLOGIA_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TECNOLOGIA_POR_ESTUDIANTE">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
     <End Role="IDIOMA" Type="Self.IDIOMA" Multiplicity="1" />
     <End Role="IDIOMA_POR_ESTUDIANTE" Type="Self.IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
@@ -234,6 +255,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
       </Principal>
       <Dependent Role="IDIOMA_POR_ESTUDIANTE">
         <PropertyRef Name="IdIdioma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE">
+    <End Role="TECNOLOGIA" Type="Self.TECNOLOGIA" Multiplicity="1" />
+    <End Role="TECNOLOGIA_POR_ESTUDIANTE" Type="Self.TECNOLOGIA_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TECNOLOGIA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TECNOLOGIA_POR_ESTUDIANTE">
+        <PropertyRef Name="IdTecnologia" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -294,6 +327,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="Self.IDIOMA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TECNOLOGIA" EntityType="Self.TECNOLOGIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TECNOLOGIA_POR_ESTUDIANTE" EntityType="Self.TECNOLOGIA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UNIVERSIDAD" EntityType="Self.UNIVERSIDAD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VIEW_EMPRESA" EntityType="Self.VIEW_EMPRESA" store:Type="Views" store:Schema="dbo">
@@ -385,9 +419,17 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
       <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
     </AssociationSet>
+    <AssociationSet Name="FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE">
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
+    </AssociationSet>
     <AssociationSet Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
       <End Role="IDIOMA" EntitySet="IDIOMA" />
       <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE" Association="Self.FK_IDTECNOLOGIA_POR_ESTUDIANTE">
+      <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
+      <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

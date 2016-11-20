@@ -172,5 +172,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TECNOLOGIA_POR_ESTUDIANTE">
+      <EntityTypeMapping TypeName="MyLearnDBModel.TECNOLOGIA_POR_ESTUDIANTE">
+        <MappingFragment StoreEntitySet="TECNOLOGIA_POR_ESTUDIANTE">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="IdTecnologia" ColumnName="IdTecnologia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

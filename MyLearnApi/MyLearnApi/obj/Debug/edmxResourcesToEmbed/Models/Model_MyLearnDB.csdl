@@ -104,6 +104,15 @@
     </AssociationSet>
     <EntitySet Name="TECNOLOGIA" EntityType="MyLearnDBModel.TECNOLOGIA" />
     <EntitySet Name="UNIVERSIDAD" EntityType="MyLearnDBModel.UNIVERSIDAD" />
+    <EntitySet Name="TECNOLOGIA_POR_ESTUDIANTE" EntityType="MyLearnDBModel.TECNOLOGIA_POR_ESTUDIANTE" />
+    <AssociationSet Name="FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE">
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDTECNOLOGIA_POR_ESTUDIANTE">
+      <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
+      <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -334,4 +343,37 @@
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
   </EntityType>
+  <EntityType Name="TECNOLOGIA_POR_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdTecnologia" />
+      <PropertyRef Name="IdEstudiante" />
+    </Key>
+    <Property Name="IdTecnologia" Type="Int32" Nullable="false" />
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TECNOLOGIA_POR_ESTUDIANTE" Role="TECNOLOGIA_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TECNOLOGIA_POR_ESTUDIANTE">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.TECNOLOGIA" Role="TECNOLOGIA" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TECNOLOGIA_POR_ESTUDIANTE" Role="TECNOLOGIA_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TECNOLOGIA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TECNOLOGIA_POR_ESTUDIANTE">
+        <PropertyRef Name="IdTecnologia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

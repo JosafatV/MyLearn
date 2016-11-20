@@ -79,6 +79,51 @@ namespace MyLearnApi.Controllers
             }
             return Ok(estudiante);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idioma"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("MyLearnApi/Estudiantes/Idioma")]
+        [ResponseType(typeof(IDIOMA_POR_ESTUDIANTE))]
+        public IHttpActionResult PostIdiomaToEstudiante(IDIOMA_POR_ESTUDIANTE idioma)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            bool lbo_isValid = pobj_studentsLogic.addIdiomaToEstudiante(idioma);
+
+            if (!lbo_isValid)
+            {
+                return Conflict();
+            }
+            return Ok(idioma);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tecnologia"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("MyLearnApi/Estudiantes/Tecnologia")]
+        [ResponseType(typeof(TECNOLOGIA_POR_ESTUDIANTE))]
+        public IHttpActionResult PostTecnologiaToEstudiante(TECNOLOGIA_POR_ESTUDIANTE tecnologia)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            bool lbo_isValid = pobj_studentsLogic.addTecnologiaToEstudiante(tecnologia);
+
+            if (!lbo_isValid)
+            {
+                return Conflict();
+            }
+            return Ok(tecnologia);
+        }
 
         /// <summary>
         /// 
@@ -112,6 +157,8 @@ namespace MyLearnApi.Controllers
         [HttpOptions]
         [Route("MyLearnApi/Estudiantes")]
         [Route("MyLearnApi/Estudiantes/{id}")]
+        [Route("MyLearnApi/Estudiantes/Idioma")]
+        [Route("MyLearnApi/Estudiantes/Tecnologia")]
         public HttpResponseMessage Options()
         {
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };

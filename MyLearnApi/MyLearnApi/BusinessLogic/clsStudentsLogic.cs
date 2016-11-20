@@ -43,6 +43,10 @@ namespace MyLearnApi.BusinessLogic
             return db.VIEW_IDIOMA_POR_ESTUDIANTE.Where(idiom => idiom.IdEstudiante != idEstudiante).ToList<VIEW_IDIOMA_POR_ESTUDIANTE>();
         }
 
+       /* public List<TECNOLOGIA> GetTecnologiasPorEstudiante(string idEstudiante)
+        {
+            return db.TECNOLOGIA.Where(tecno => idiom.IdEstudiante != idEstudiante).ToList<VIEW_IDIOMA_POR_ESTUDIANTE>();
+        }*/
         /// <summary>
         /// 
         /// </summary>
@@ -112,6 +116,64 @@ namespace MyLearnApi.BusinessLogic
             }
           
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tecnologia"></param>
+        /// <returns></returns>
+        public bool addTecnologiaToEstudiante(TECNOLOGIA_POR_ESTUDIANTE tecnologia)
+        {
+
+            db.TECNOLOGIA_POR_ESTUDIANTE.Add(tecnologia);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (TecnologiaporEstudianteExists(tecnologia.IdTecnologia, tecnologia.IdEstudiante))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idioma"></param>
+        /// <returns></returns>
+        public bool addIdiomaToEstudiante(IDIOMA_POR_ESTUDIANTE idioma)
+        {
+
+            db.IDIOMA_POR_ESTUDIANTE.Add(idioma);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (IdiomaPorEstudianteExists(idioma.IdIdioma, idioma.IdEstudiante))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return true;
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -120,6 +182,16 @@ namespace MyLearnApi.BusinessLogic
         private bool ESTUDIANTEExists(string id)
         {
             return db.VIEW_ESTUDIANTE.Count(e => e.Id == id) > 0;
+        }
+
+        private bool TecnologiaporEstudianteExists(int idtecnologia, string idestudiante)
+        {
+            return db.TECNOLOGIA_POR_ESTUDIANTE.Find(idtecnologia,idestudiante) != null;
+        }
+
+        private bool IdiomaPorEstudianteExists(int idIdioma, string idestudiante)
+        {
+            return db.IDIOMA_POR_ESTUDIANTE.Find(idIdioma, idestudiante) != null;
         }
     }
 }
