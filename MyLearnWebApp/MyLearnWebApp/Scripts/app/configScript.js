@@ -1,10 +1,17 @@
 ﻿angular.module('mod_MyLearn').config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-/*-------------------------------------Estudiante-------------------------------------------*/
+/*-------------------------------------Profesor-------------------------------------------*/
+    .when('/MyLearn/Profesor/CrearCuenta', {
+        templateUrl: 'Vistas/Profesor/Crear_CuentaProfesor.html',
+        controller: 'ctrl_crearCuentaProfesor'
+    })
+
+/*-------------------------------------Empresa-------------------------------------------*/
+/*-------------------------------------Estudiante----------------------------------------*/
 
     .when('/MyLearn/Estudiante/CrearCuenta', {
         templateUrl: 'Vistas/Estudiante/Crear_CuentaEstudiante.html',
-        controller: 'ctrl_crearCuentaEstudiantes'
+        controller: 'ctrl_crearCuentaEstudiante'
     })
     .when('/MyLearn/Estudiante/Perfil', {
         templateUrl: 'Vistas/Estudiante/Perfil_Estudiante.html',

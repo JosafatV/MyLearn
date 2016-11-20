@@ -284,12 +284,14 @@
     <Content Include="Scripts\Angular and Bootstrap\Bootstrap\js\bootstrap.min.js" />
     <Content Include="Scripts\Angular and Bootstrap\Bootstrap\js\npm.js" />
     <Content Include="Scripts\app\configScript.js" />
+    <Content Include="Scripts\app\Empresa\ctrl_crearCuentaEmpresa.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_crearCuentaEstudiante.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_cursosDisponibles.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_ofertarSubasta.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_perfilEstudiante.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_proponerProyecto.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_subastaEstudiante.js" />
+    <Content Include="Scripts\app\Profesor\ctrl_crearCuentaProfesor.js" />
     <Content Include="Scripts\app\Profesor\ctrl_crearCurso.js" />
     <Content Include="Scripts\app\Profesor\ctrl_cursoProfesor.js" />
     <Content Include="Scripts\app\Profesor\ctrl_perfilProfesor.js" />
@@ -436,7 +438,6 @@
     <Folder Include="Scripts\app\Configuration\" />
     <Folder Include="Scripts\app\Drive\" />
     <Folder Include="Scripts\app\Dropbox\" />
-    <Folder Include="Scripts\app\Empresa\" />
     <Folder Include="Vistas\Empresa\" />
   </ItemGroup>
   <ItemGroup>

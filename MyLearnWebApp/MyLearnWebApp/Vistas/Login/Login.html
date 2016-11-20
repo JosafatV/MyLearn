@@ -27,7 +27,7 @@
 				<div class="col-md-8">
 					<div class="col-md-offset-6">
 					<label for="Nombre">Nombre de usuario:</label>
-						<input  class="form-control" id="Usuario"type="text"	>
+						<input  class="form-control" id="Usuario"type="text" data-ng-model="usuario">
 					</div>
 				</div>
       </div>
@@ -36,7 +36,7 @@
 				<div class="col-md-8">
 					<div class="col-md-offset-6">
 						<label for="Contraseña">Contraseña:</label>
-						<input  class="form-control" id="Contraseña"type="password">
+						<input  class="form-control" id="Contraseña"type="password" data-ng-model="contrasenia">
 					</div>
 				</div>
 			</div>
@@ -46,7 +46,7 @@
 	<div class="container">
 		<div class="col-md-10">
 			<div class="col-md-offset-5">
-				<a class="btn btn-success btn-lg" data-ng-click="goPerfil()">Iniciar sesión</a>&nbsp; &nbsp;&nbsp; &nbsp;
+				<a class="btn btn-success btn-lg" data-ng-click="goCrearCuentaEstudiante()">Iniciar sesión</a>&nbsp; &nbsp;&nbsp; &nbsp;
 				<a class="btn btn-tcc btn-default btn-lg">Crear una cuenta</a>
 			</div>
 		</div>

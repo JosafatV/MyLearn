@@ -22,27 +22,27 @@
 	    <form action=""class="">
 				<div class="form-group">
 	        <label for="Nombre">Nombre:</label>
-	        <input  class="form-control" id="nombre_deUsuario"type="text">
+	        <input  class="form-control" id="nombre_deUsuario"type="text"data-ng-model="js_crearCuentaJson.NombreContacto">
 	      </div>
 				<div class="form-group">
 	        <label for="Apellido">Primer Apellido:</label>
-	        <input  class="form-control" id="nombre_deUsuario"type="text">
+	        <input  class="form-control" id="nombre_deUsuario"type="text" data-ng-model="js_crearCuentaJson.ApellidoContacto">
 	      </div>
 				<div class="form-group">
 					<label for="Email">Correo Electrónico:</label>
-					<input  class="form-control" id="nombre_deUsuario"type="text">
+					<input  class="form-control" id="nombre_deUsuario"type="text" data-ng-model="js_crearCuentaJson.Email">
 				</div>
 				<div class="form-group">
 					<label for="telefono">Teléfono:</label>
-					<input  class="form-control" id="nombre_deUsuario"type="text">
+					<input  class="form-control" id="nombre_deUsuario"type="text" data-ng-model="js_crearCuentaJson.Telefono">
 				</div>
 	      <div class="form-group">
 	        <label for="NombreU">Nombre de usuario:</label>
-	        <input  class="form-control" id="nombre_deUsuario"type="text">
+	        <input  class="form-control" id="nombre_deUsuario"type="text" data-ng-model="js_crearCuentaJson.Id">
 	      </div>
 				<div class="form-group">
 	        <label for="Contraseña">Contraseña:</label>
-	        <input  class="form-control" id="contraseña"type="password">
+	        <input  class="form-control" id="contraseña"type="password" data-ng-model="js_crearCuentaJson.Contrasena">
 	      </div>
 				<div class="form-group">
 	        <label for="Confirmación">Confirmación de contraseña:</label>
@@ -50,11 +50,11 @@
 	      </div>
 				<div class="form-group">
 	        <label for="País">País:</label>
-	        <input  class="form-control" id="país"type="text" >
+                    <select ng-options="pais.Pais1 for pais in lst_listaPaises" class="form-control" data-ng-model="paisSelected" data-ng-change="changePais()"></select>
 	      </div>
 				<div class="form-group">
 	        <label for="Dirección">Dirección:</label>
-	        <input  class="form-control" id="ubicación"type="text">
+	        <input  class="form-control" id="ubicación"type="text" data-ng-model="js_crearCuentaJson.Region">
 	      </div>
 				<div class="form-group">
 					<label for="option">Universidad a la que pertenece:</label>
@@ -67,7 +67,7 @@
 				</div>
 				<div class="form-group">
 	        <label for="carné">Carné Estudiantil:</label>
-	        <input  class="form-control" id="ID"type="text">
+	        <input  class="form-control" id="ID"type="text" data-ng-model="js_crearCuentaJson.Carne">
 	      </div>
 				<div class="form-group">
 	        <label for="option">Repositorios de documentos disponibles:</label>
@@ -78,11 +78,11 @@
 	      </div>
 				<div class="form-group">
 					<label for="Hoja de vida">Link a Hoja de Vida:</label>
-					<input  class="form-control" id="Hoja de vida"type="text">
+					<input  class="form-control" id="Hoja de vida"type="text" data-ng-model="js_crearCuentaJson.LinkHojaDeVida">
 				</div>
 				<div class="form-group">
 					<label for="Repositorio">Link de repositorios de código disponibles:</label>
-					<input  class="form-control" id="Repositorios"type="text">
+					<input  class="form-control" id="Repositorios"type="text" data-ng-model="js_crearCuentaJson.RepositorioCodigo">
 				</div>
 				<div class="form-group">
 					<label for="option">Seleccione las tecnologías que domina:</label>
@@ -93,7 +93,7 @@
 				<div class="container">
 					<div class="col-md-10">
 						<div class="col-md-offset-1">
-							<a class="btn btn-tcc btn-default btn-lg">Crear una cuenta</a>
+							<a class="btn btn-tcc btn-default btn-lg" data-ng-click="sendCuenta()">Crear una cuenta</a>
 							<a class="btn btn-danger btn-lg">Cancelar</a>
 						</div>
 					</div>
