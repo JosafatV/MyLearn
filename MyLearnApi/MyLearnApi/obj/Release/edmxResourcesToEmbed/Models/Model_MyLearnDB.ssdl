@@ -207,6 +207,22 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     <Parameter Name="Region" Type="char" Mode="In" />
     <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
   </Function>
+  <Function Name="SP_Insertar_Estudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="char" Mode="In" />
+    <Parameter Name="Contrasena" Type="char" Mode="In" />
+    <Parameter Name="Sal" Type="char" Mode="In" />
+    <Parameter Name="RepositorioArchivos" Type="char" Mode="In" />
+    <Parameter Name="CredencialDrive" Type="char" Mode="In" />
+    <Parameter Name="Nombre" Type="char" Mode="In" />
+    <Parameter Name="Apellido" Type="char" Mode="In" />
+    <Parameter Name="Carne" Type="char" Mode="In" />
+    <Parameter Name="Email" Type="char" Mode="In" />
+    <Parameter Name="Telefono" Type="char" Mode="In" />
+    <Parameter Name="Pais" Type="char" Mode="In" />
+    <Parameter Name="Region" Type="char" Mode="In" />
+    <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
+    <Parameter Name="LinkHojaDeVida" Type="char" Mode="In" />
+  </Function>
   <Function Name="SP_Insertar_Profesor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="char" Mode="In" />
     <Parameter Name="Contrasena" Type="char" Mode="In" />

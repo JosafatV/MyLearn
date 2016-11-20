@@ -1,6 +1,24 @@
 Use MyLearnDB;
 GO
 
+INSERT INTO PAIS (Pais) VALUES('Argentina')
+
+INSERT INTO PAIS (Pais) VALUES('Bélgica')
+INSERT INTO PAIS (Pais) VALUES('Brasil')
+INSERT INTO PAIS (Pais) VALUES('Canadá')
+INSERT INTO PAIS (Pais) VALUES('Chile')
+INSERT INTO PAIS (Pais) VALUES('Colombia')
+INSERT INTO PAIS (Pais) VALUES('Costa Rica')
+INSERT INTO PAIS (Pais) VALUES('España')
+INSERT INTO PAIS (Pais) VALUES('Estados Unidos')
+INSERT INTO PAIS (Pais) VALUES('Francia')
+INSERT INTO PAIS (Pais) VALUES('Guatemala')
+INSERT INTO PAIS (Pais) VALUES('México')
+INSERT INTO PAIS (Pais) VALUES('Panamá')
+INSERT INTO PAIS (Pais) VALUES('Portugal')
+INSERT INTO PAIS (Pais) VALUES('Suiza')
+
+
 EXEC SP_Insertar_Universidad 'Instituto Tecnologico de Costa Rica'
 EXEC SP_Insertar_Universidad 'Universidad Nacional'
 EXEC SP_Insertar_Universidad 'Universidad de Costa Rica'

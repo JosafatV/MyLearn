@@ -79,6 +79,22 @@
       <Parameter Name="Region" Mode="In" Type="String" />
       <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SP_Insertar_Estudiante">
+      <Parameter Name="Id" Mode="In" Type="String" />
+      <Parameter Name="Contrasena" Mode="In" Type="String" />
+      <Parameter Name="Sal" Mode="In" Type="String" />
+      <Parameter Name="RepositorioArchivos" Mode="In" Type="String" />
+      <Parameter Name="CredencialDrive" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Apellido" Mode="In" Type="String" />
+      <Parameter Name="Carne" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+      <Parameter Name="Pais" Mode="In" Type="String" />
+      <Parameter Name="Region" Mode="In" Type="String" />
+      <Parameter Name="RepositorioCodigo" Mode="In" Type="String" />
+      <Parameter Name="LinkHojaDeVida" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>

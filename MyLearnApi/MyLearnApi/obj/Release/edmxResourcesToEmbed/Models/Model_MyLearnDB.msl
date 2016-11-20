@@ -145,5 +145,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_Insertar_Profesor" FunctionName="MyLearnDBModel.Store.SP_Insertar_Profesor" />
+    <FunctionImportMapping FunctionImportName="SP_Insertar_Estudiante" FunctionName="MyLearnDBModel.Store.SP_Insertar_Estudiante" />
   </EntityContainerMapping>
 </Mapping>
