@@ -10,7 +10,7 @@ CREATE PROCEDURE SP_Select_Cursos @UserId INT
 	AS
 		SELECT Curso, SUM(PuntajeBadge) AS Nota, EstadoCurso
 		FROM VIEW_CALIFICACIONES
-		WHERE IdEstudiante=@UserId AND EstadoBadge='O'
+		WHERE IdEstudiante=@UserId AND EstadoBadge='A' OR EstadoBadge='B' 
 		GROUP BY Curso, EstadoCurso
 	GO
 
@@ -18,7 +18,7 @@ CREATE PROCEDURE SP_Nota_Poyecto @UserID INT, @ProjectId INT
 	AS
 		SELECT SUM(PuntajeBadge) AS Nota
 		FROM VIEW_CALIFICACIONES
-		WHERE IdEstudiante=@UserID AND EstadoBadge='O' AND IdProyecto=@ProjectId
+		WHERE IdEstudiante=@UserID AND IdProyecto=@ProjectId AND (EstadoBadge='A' OR EstadoBadge='B')
 	GO
 
 
@@ -100,11 +100,11 @@ CREATE PROCEDURE SP_Insertar_Universidad @Nombre CHAR(30)
 
 
 /********** UNIVERSIDAD **********/
-CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30), @Codigo CHAR(10), @IdUniversidad INT
+CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30), @Codigo CHAR(10), @IdUniversidad INT, @NotaMinima tinyINT
 	AS
 		DECLARE @IdCurso INT
-		INSERT INTO CURSO (Nombre, Codigo, Estado)
-		VALUES (@Nombre, @Codigo, 'A')
+		INSERT INTO CURSO (Nombre, Codigo, NotaMinima, Estado)
+		VALUES (@Nombre, @Codigo, @NotaMinima, 'A')
 
 		SELECT @IdCurso = @@IDENTITY
 		INSERT INTO CURSO_POR_PROFESOR (IdCurso, IdProfesor, Estado)
@@ -125,7 +125,7 @@ CREATE PROCEDURE SP_Insertar_Badge (@Nombre CHAR (30), @Puntaje TINYINT, @IdCurs
 CREATE PROCEDURE SP_Otorgar_Badge (@IdBadge INT, @IdProyecto INT)
 	AS
 		UPDATE BADGE_POR_PROYECTO 
-		SET Estado='A'
+		SET Estado='O'
 		WHERE IdProyecto=@IdProyecto AND IdBadge=@IdBadge
 	GO
 
@@ -156,7 +156,7 @@ CREATE PROCEDURE SP_Insertar_Propuesta_Proyecto @IdEstudiante CHAR(100), @Nombre
 CREATE PROCEDURE SP_Aceptar_Proyecto @IdProfesor CHAR(100), @IdPropuesta INT, @IdCurso INT 
 	AS
 		UPDATE PROYECTO
-		SET Estado='A'
+		SET Estado='A', NotaObtenida=0
 		WHERE Id=@IdPropuesta
 
 		UPDATE PROYECTO_POR_ESTUDIANTE
@@ -172,6 +172,8 @@ CREATE PROCEDURE SP_Aceptar_Proyecto @IdProfesor CHAR(100), @IdPropuesta INT, @I
 			FROM BADGE 
 			WHERE BADGE.IdCurso=@IdCurso
 	GO
+
+
 
 /********** COMPAÑIAS **********/
 

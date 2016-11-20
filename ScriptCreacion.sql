@@ -123,6 +123,7 @@ CREATE TABLE CURSO (
     Id INT IDENTITY(1,1),
     Nombre CHAR(30),
     Codigo CHAR(10),
+    NotaMinima tiny INT NOT NULL ,
     Estado CHAR(1), /*Activo, Cerrado*/
 
 	CONSTRAINT PK_CURSO
@@ -151,7 +152,6 @@ CREATE TABLE PROYECTO (
     FechaInicio DATE NOT NULL ,
     FechaFinal DATE,
     DocumentoAdicional CHAR(100),
-    NotaMinima tinyINT NOT NULL ,
     NotaObtenida tinyINT,
     Estado CHAR(1) /*Propuesta, Lectura, Activo,*/,
 
@@ -170,7 +170,7 @@ CREATE TABLE TRABAJO (
     FechaCierre DATE NOT NULL,
     DocumentoAdicional CHAR(100),
     EstrellasObtenidas tinyINT,
-    Estado CHAR(1), /*Propuesta, Exito(Terminado), Fallo(Terminado), Activo*/
+    Estado CHAR(1), /*Propuesta, Exito(Terminado), Fracaso(Terminado), Activo*/
 
 	CONSTRAINT PK_TRABAJO
 		PRIMARY KEY (Id),
@@ -286,7 +286,7 @@ CREATE TABLE BADGE_POR_PROYECTO
 (
     IdBadge INT,
     IdProyecto INT,
-	Estado CHAR(1),
+	Estado CHAR(1), /*Alardeado (Obtenido), Por Alardear (Obtenido), Pendiente*/
 
 	CONSTRAINT PK_BADGE_POR_PROYECTO
 		PRIMARY KEY (IdBadge, IdProyecto),
