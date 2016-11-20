@@ -65,10 +65,6 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_EMPRESA' does not have a primar
   <EntityType Name="VIEW_EMPRESA">
     <Key>
       <PropertyRef Name="Id" />
-      <PropertyRef Name="Email" />
-      <PropertyRef Name="Telefono" />
-      <PropertyRef Name="FechaInscripcion" />
-      <PropertyRef Name="Pais" />
     </Key>
     <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
     <Property Name="NombreContacto" Type="char" MaxLength="30" />
@@ -91,12 +87,6 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_EMPRESA' does not have a primar
 warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VIEW_ESTUDIANTE">
     <Key>
-      <PropertyRef Name="NombreContacto" />
-      <PropertyRef Name="ApellidoContacto" />
-      <PropertyRef Name="Email" />
-      <PropertyRef Name="Telefono" />
-      <PropertyRef Name="Pais" />
-      <PropertyRef Name="FechaInscripcion" />
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
@@ -127,6 +117,30 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_IDIOMA_POR_ESTUDIANTE' does not
     <Property Name="IdIdioma" Type="int" Nullable="false" />
     <Property Name="Estado" Type="char" MaxLength="1" />
     <Property Name="Idioma" Type="char" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VIEW_PROFESOR">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Contrasena" Type="char" MaxLength="8" />
+    <Property Name="Sal" Type="char" MaxLength="20" />
+    <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
+    <Property Name="CredencialDrive" Type="char" MaxLength="100" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+    <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="ApellidoContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Email" Type="char" MaxLength="50" />
+    <Property Name="Telefono" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Foto" Type="char" MaxLength="30" />
+    <Property Name="FechaInscripcion" Type="date" Nullable="false" />
+    <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="HorarioAtencion" Type="char" MaxLength="15" />
+    <Property Name="Region" Type="char" MaxLength="30" />
+    <Property Name="IdUniversidad" Type="int" Nullable="false" />
+    <Property Name="Universidad" Type="char" MaxLength="30" Nullable="false" />
   </EntityType>
   <Association Name="FK_EMPRESA_ID">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
@@ -193,6 +207,22 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_IDIOMA_POR_ESTUDIANTE' does not
     <Parameter Name="Region" Type="char" Mode="In" />
     <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
   </Function>
+  <Function Name="SP_Insertar_Profesor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="char" Mode="In" />
+    <Parameter Name="Contrasena" Type="char" Mode="In" />
+    <Parameter Name="Sal" Type="char" Mode="In" />
+    <Parameter Name="RepositorioArchivos" Type="char" Mode="In" />
+    <Parameter Name="CredencialDrive" Type="char" Mode="In" />
+    <Parameter Name="NombreContacto" Type="char" Mode="In" />
+    <Parameter Name="ApellidoContacto" Type="char" Mode="In" />
+    <Parameter Name="Email" Type="char" Mode="In" />
+    <Parameter Name="Telefono" Type="char" Mode="In" />
+    <Parameter Name="FechaInscripcion" Type="date" Mode="In" />
+    <Parameter Name="HorarioAtencion" Type="char" Mode="In" />
+    <Parameter Name="Pais" Type="char" Mode="In" />
+    <Parameter Name="Region" Type="char" Mode="In" />
+    <Parameter Name="IdUniversidad" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_Select_Cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="int" Mode="In" />
   </Function>
@@ -249,6 +279,27 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_IDIOMA_POR_ESTUDIANTE' does not
     [VIEW_IDIOMA_POR_ESTUDIANTE].[Estado] AS [Estado], 
     [VIEW_IDIOMA_POR_ESTUDIANTE].[Idioma] AS [Idioma]
     FROM [dbo].[VIEW_IDIOMA_POR_ESTUDIANTE] AS [VIEW_IDIOMA_POR_ESTUDIANTE]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VIEW_PROFESOR" EntityType="Self.VIEW_PROFESOR" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VIEW_PROFESOR].[Id] AS [Id], 
+    [VIEW_PROFESOR].[Contrasena] AS [Contrasena], 
+    [VIEW_PROFESOR].[Sal] AS [Sal], 
+    [VIEW_PROFESOR].[RepositorioArchivos] AS [RepositorioArchivos], 
+    [VIEW_PROFESOR].[CredencialDrive] AS [CredencialDrive], 
+    [VIEW_PROFESOR].[Estado] AS [Estado], 
+    [VIEW_PROFESOR].[NombreContacto] AS [NombreContacto], 
+    [VIEW_PROFESOR].[ApellidoContacto] AS [ApellidoContacto], 
+    [VIEW_PROFESOR].[Email] AS [Email], 
+    [VIEW_PROFESOR].[Telefono] AS [Telefono], 
+    [VIEW_PROFESOR].[Foto] AS [Foto], 
+    [VIEW_PROFESOR].[FechaInscripcion] AS [FechaInscripcion], 
+    [VIEW_PROFESOR].[Pais] AS [Pais], 
+    [VIEW_PROFESOR].[HorarioAtencion] AS [HorarioAtencion], 
+    [VIEW_PROFESOR].[Region] AS [Region], 
+    [VIEW_PROFESOR].[IdUniversidad] AS [IdUniversidad], 
+    [VIEW_PROFESOR].[Universidad] AS [Universidad]
+    FROM [dbo].[VIEW_PROFESOR] AS [VIEW_PROFESOR]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_EMPRESA_ID" Association="Self.FK_EMPRESA_ID">
       <End Role="USUARIO" EntitySet="USUARIO" />

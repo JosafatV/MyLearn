@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e89c74aac38c472f9e27064a310e3ebf" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="MyLearnDBModel.ESTUDIANTE" Width="1.5" PointX="0.5" PointY="0.5" />
-        <EntityTypeShape EntityType="MyLearnDBModel.USUARIO" Width="1.5" PointX="3" PointY="0.5" />
+        <EntityTypeShape EntityType="MyLearnDBModel.USUARIO" Width="1.5" PointX="3.25" PointY="0.5" />
         <AssociationConnector Association="MyLearnDBModel.FK_ESTUDIANTE_ID" />
         <EntityTypeShape EntityType="MyLearnDBModel.IDIOMA" Width="2.5" PointX="2.75" PointY="4.875" />
         <EntityTypeShape EntityType="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" Width="1.5" PointX="0.5" PointY="4.25" />
@@ -14,9 +14,10 @@
         <AssociationConnector Association="MyLearnDBModel.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" />
         <EntityTypeShape EntityType="MyLearnDBModel.VIEW_IDIOMA_POR_ESTUDIANTE" Width="2.625" PointX="3.125" PointY="2.875" />
         <EntityTypeShape EntityType="MyLearnDBModel.VIEW_ESTUDIANTE" Width="2.75" PointX="0.5" PointY="6.5" />
-        <EntityTypeShape EntityType="MyLearnDBModel.EMPRESA" Width="2" PointX="5.625" PointY="7.5" />
+        <EntityTypeShape EntityType="MyLearnDBModel.EMPRESA" Width="2" PointX="4.5" PointY="7.125" />
         <EntityTypeShape EntityType="MyLearnDBModel.VIEW_EMPRESA" Width="2" PointX="6.75" PointY="0.5" />
         <AssociationConnector Association="MyLearnDBModel.FK_EMPRESA_ID" />
+        <EntityTypeShape EntityType="MyLearnDBModel.VIEW_PROFESOR" Width="2.375" PointX="7.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

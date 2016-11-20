@@ -25,7 +25,5 @@ namespace MyLearnApi.Models
         public string PaginaWebEmpresa { get; set; }
         public string Pais { get; set; }
         public string Region { get; set; }
-    
-        public virtual USUARIO USUARIO { get; set; }
     }
 }
