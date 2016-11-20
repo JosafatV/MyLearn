@@ -1,55 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MyLearnApi.Models;
+using MyLearnApi.BusinessLogic;
 
 namespace MyLearnApi.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [AllowAnonymous]
     public class EstudiantesController : ApiController
-    {
-        private MyLearnDBEntities db = new MyLearnDBEntities();
-
+    {   //
+        private clsStudentsLogic pobj_studentsLogic = new clsStudentsLogic();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("MyLearnApi/Estudiantes")]
-        public IQueryable<VIEW_ESTUDIANTE> GetESTUDIANTE()
+        [ResponseType(typeof(List<VIEW_ESTUDIANTE>))]
+        public IHttpActionResult GetESTUDIANTE()
         {
-            return db.VIEW_ESTUDIANTE.Where(est => est.Estado != "E"); 
+            return Ok(pobj_studentsLogic.GetAllEstudiantes());
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("MyLearnApi/Estudiantes/{id}")]
         [ResponseType(typeof(VIEW_ESTUDIANTE))]
         public IHttpActionResult GetESTUDIANTE(string id)
         {
-            VIEW_ESTUDIANTE eSTUDIANTE = db.VIEW_ESTUDIANTE.Find(id);
+            VIEW_ESTUDIANTE eSTUDIANTE = pobj_studentsLogic.getSpecificStudent(id);
+
             if (eSTUDIANTE == null || eSTUDIANTE.Estado == "E") //si está eliminado
             {
                 return NotFound();
-            }
-
-            IHttpActionResult result = Ok(eSTUDIANTE);
-            
-            return result;
+            }        
+            return Ok(eSTUDIANTE);
         }
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idEstudiante"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("MyLearnApi/Estudiantes/Idiomas/{idEstudiante}")]
-        [ResponseType(typeof(VIEW_IDIOMA_POR_ESTUDIANTE))]
-        public IQueryable<VIEW_IDIOMA_POR_ESTUDIANTE> GetIdiomasPorEstudiante(string idEstudiante)
+        [ResponseType(typeof(List<VIEW_IDIOMA_POR_ESTUDIANTE>))]
+        public IHttpActionResult GetIdiomasPorEstudiante(string idEstudiante)
         {
-            return db.VIEW_IDIOMA_POR_ESTUDIANTE.Where(idiom => idiom.IdEstudiante != idEstudiante);
+            return Ok(pobj_studentsLogic.GetIdiomasPorEstudiante(idEstudiante));
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="estudiante"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("MyLearnApi/Estudiantes")]
         [ResponseType(typeof(VIEW_ESTUDIANTE))]
@@ -59,36 +71,26 @@ namespace MyLearnApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            db.sp_insert_estudiante(estudiante.Id,estudiante.Contrasena,estudiante.Sal,estudiante.RepositorioArchivos,estudiante.CredencialDrive,
-                estudiante.NombreContacto,estudiante.ApellidoContacto,estudiante.Carne,estudiante.Email,estudiante.Telefono,estudiante.Pais,estudiante.Region,
-                estudiante.FechaInscripcion, estudiante.RepositorioCodigo,estudiante.LinkHojaDeVida);
-           // db.sp_insert_estudiante(eSTUDIANTE.Id, eSTUDIANTE.);
-            try
+            bool lbo_isValid = pobj_studentsLogic.doStudentInsertion(estudiante);
+           
+            if (!lbo_isValid)
             {
-                db.SaveChanges();
+                return Conflict();
             }
-            catch (DbUpdateException)
-            {
-                if (ESTUDIANTEExists(estudiante.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
             return Ok(estudiante);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("MyLearnApi/Estudiantes/{id}")]
         [ResponseType(typeof(USUARIO))]
         public IHttpActionResult DeleteEstudiante(int id)
         {
-            USUARIO estudiante = db.USUARIO.Find(id);
+            USUARIO estudiante = pobj_studentsLogic.DeleteEstudiante(id);
 
             if (estudiante == null)
             {
@@ -99,21 +101,14 @@ namespace MyLearnApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            estudiante.Estado = "E" ; //se pone E de eliminado
-            db.Entry(estudiante).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                 throw;        
-            }
 
             return Ok(estudiante);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         [Route("MyLearnApi/Estudiantes")]
         [Route("MyLearnApi/Estudiantes/{id}")]
@@ -122,18 +117,15 @@ namespace MyLearnApi.Controllers
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            pobj_studentsLogic.dispose(disposing);
             base.Dispose(disposing);
         }
 
-        private bool ESTUDIANTEExists(string id)
-        {
-            return db.VIEW_ESTUDIANTE.Count(e => e.Id == id) > 0;
-        }
     }
 }
