@@ -124,6 +124,8 @@
     <EntitySetMapping Name="VIEW_PROFESOR">
       <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_PROFESOR">
         <MappingFragment StoreEntitySet="VIEW_PROFESOR">
+          <ScalarProperty Name="Universidad" ColumnName="Universidad" />
+          <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
           <ScalarProperty Name="Region" ColumnName="Region" />
           <ScalarProperty Name="HorarioAtencion" ColumnName="HorarioAtencion" />
           <ScalarProperty Name="Pais" ColumnName="Pais" />

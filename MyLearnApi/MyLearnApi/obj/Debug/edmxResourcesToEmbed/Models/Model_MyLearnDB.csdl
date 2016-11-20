@@ -259,5 +259,7 @@
     <Property Name="Pais" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
     <Property Name="HorarioAtencion" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
     <Property Name="Region" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="IdUniversidad" Type="Int32" Nullable="false" />
+    <Property Name="Universidad" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
   </EntityType>
 </Schema>

@@ -16,7 +16,7 @@ CREATE VIEW [dbo].[VIEW_ESTUDIANTE]
 	CREATE VIEW [dbo].[VIEW_PROFESOR]
 	AS
 		SELECT        dbo.USUARIO.*, dbo.PROFESOR.NombreContacto, dbo.PROFESOR.ApellidoContacto, dbo.PROFESOR.Email, dbo.PROFESOR.Telefono, dbo.PROFESOR.Foto, dbo.PROFESOR.FechaInscripcion, 
-					      dbo.PROFESOR.Pais, dbo.PROFESOR.HorarioAtencion, dbo.PROFESOR.Region, dbo.UNIVERSIDAD.Id AS IdUniversidad, dbo.UNIVERSIDAD.Nombre as UNIVERSIDAD 
+					      dbo.PROFESOR.Pais, dbo.PROFESOR.HorarioAtencion, dbo.PROFESOR.Region, dbo.UNIVERSIDAD.Id AS IdUniversidad, dbo.UNIVERSIDAD.Nombre as Universidad 
 		FROM          dbo.PROFESOR INNER JOIN
 						  dbo.USUARIO ON dbo.PROFESOR.Id = dbo.USUARIO.Id
 							INNER JOIN 

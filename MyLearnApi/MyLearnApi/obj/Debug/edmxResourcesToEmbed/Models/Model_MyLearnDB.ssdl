@@ -139,6 +139,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
     <Property Name="HorarioAtencion" Type="char" MaxLength="15" />
     <Property Name="Region" Type="char" MaxLength="30" />
+    <Property Name="IdUniversidad" Type="int" Nullable="false" />
+    <Property Name="Universidad" Type="char" MaxLength="30" Nullable="false" />
   </EntityType>
   <Association Name="FK_EMPRESA_ID">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
@@ -294,7 +296,9 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     [VIEW_PROFESOR].[FechaInscripcion] AS [FechaInscripcion], 
     [VIEW_PROFESOR].[Pais] AS [Pais], 
     [VIEW_PROFESOR].[HorarioAtencion] AS [HorarioAtencion], 
-    [VIEW_PROFESOR].[Region] AS [Region]
+    [VIEW_PROFESOR].[Region] AS [Region], 
+    [VIEW_PROFESOR].[IdUniversidad] AS [IdUniversidad], 
+    [VIEW_PROFESOR].[Universidad] AS [Universidad]
     FROM [dbo].[VIEW_PROFESOR] AS [VIEW_PROFESOR]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_EMPRESA_ID" Association="Self.FK_EMPRESA_ID">

@@ -70,6 +70,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_EMPRESA' does not have a primar
         <EntityType Name="VIEW_EMPRESA">
           <Key>
             <PropertyRef Name="Id" />
+            
+            
+            
+            
           </Key>
           <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
           <Property Name="NombreContacto" Type="char" MaxLength="30" />
@@ -92,6 +96,12 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_EMPRESA' does not have a primar
 warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VIEW_ESTUDIANTE">
           <Key>
+            
+            
+            
+            
+            
+            
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
@@ -145,6 +155,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
           <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
           <Property Name="HorarioAtencion" Type="char" MaxLength="15" />
           <Property Name="Region" Type="char" MaxLength="30" />
+          <Property Name="IdUniversidad" Type="int" Nullable="false" />
+          <Property Name="Universidad" Type="char" MaxLength="30" Nullable="false" />
         </EntityType>
         <Association Name="FK_EMPRESA_ID">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
@@ -300,7 +312,9 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     [VIEW_PROFESOR].[FechaInscripcion] AS [FechaInscripcion], 
     [VIEW_PROFESOR].[Pais] AS [Pais], 
     [VIEW_PROFESOR].[HorarioAtencion] AS [HorarioAtencion], 
-    [VIEW_PROFESOR].[Region] AS [Region]
+    [VIEW_PROFESOR].[Region] AS [Region], 
+    [VIEW_PROFESOR].[IdUniversidad] AS [IdUniversidad], 
+    [VIEW_PROFESOR].[Universidad] AS [Universidad]
     FROM [dbo].[VIEW_PROFESOR] AS [VIEW_PROFESOR]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_EMPRESA_ID" Association="Self.FK_EMPRESA_ID">
@@ -583,6 +597,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
           <Property Name="Pais" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
           <Property Name="HorarioAtencion" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
           <Property Name="Region" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="IdUniversidad" Type="Int32" Nullable="false" />
+          <Property Name="Universidad" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -713,6 +729,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
           <EntitySetMapping Name="VIEW_PROFESOR">
             <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_PROFESOR">
               <MappingFragment StoreEntitySet="VIEW_PROFESOR">
+                <ScalarProperty Name="Universidad" ColumnName="Universidad" />
+                <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
                 <ScalarProperty Name="Region" ColumnName="Region" />
                 <ScalarProperty Name="HorarioAtencion" ColumnName="HorarioAtencion" />
                 <ScalarProperty Name="Pais" ColumnName="Pais" />
