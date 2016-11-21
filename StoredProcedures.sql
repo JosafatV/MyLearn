@@ -73,7 +73,6 @@ CREATE PROCEDURE SP_Insertar_Empresa
 		VALUES (@Id, @NombreContacto, @ApellidoContacto, @NombreEmpresarial, @Email, @Telefono, getDate(),
 		@PaginaWebEmpresa, @Pais, @Region) 
 	GO
-
 //no se usa
 CREATE PROCEDURE SP_Insertar_Admin
 @Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
@@ -85,8 +84,7 @@ CREATE PROCEDURE SP_Insertar_Admin
 		INSERT INTO USUARIO_XMP (Id, NombreContacto, ApellidoContacto)
 		VALUES (@Id, @Nombre, @ApellidoContacto) 
 	GO
-
-/* 	PUNTOS EXTRA
+/*  NO SE USAN PORQUE MADRIZ LAS QUITO DE LAS FUNCIONALIDADES
 CREATE PROCEDURE SP_Insertar_Tecnologia @Nombre CHAR(30)
 	AS
 		INSERT INTO TECNOLOGIA (Nombre, Estado)
@@ -99,10 +97,8 @@ CREATE PROCEDURE SP_Insertar_Universidad @Nombre CHAR(30)
 		VALUES (@Nombre, 'A')
 	GO
 */
-
-
-
 /*****************MULTI-PARTED INSERTS*****************/
+
 
 /********** UNIVERSIDAD **********/
 CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30), @Codigo CHAR(10), @IdUniversidad INT, @NotaMinima tinyINT
@@ -158,7 +154,9 @@ CREATE PROCEDURE SP_Insertar_Propuesta_Proyecto @IdEstudiante CHAR(100), @Nombre
 	GO
 
 
-/*	PUNTOS EXTRA
+/*	YA NO SE USA
+
+
 	/*Marks a proyect proposition as an active project and asigns it badges*/
 CREATE PROCEDURE SP_Aceptar_Proyecto @IdProfesor CHAR(100), @IdPropuesta INT, @IdCurso INT 
 	AS
@@ -179,6 +177,7 @@ CREATE PROCEDURE SP_Aceptar_Proyecto @IdProfesor CHAR(100), @IdPropuesta INT, @I
 			FROM BADGE 
 			WHERE BADGE.IdCurso=@IdCurso
 	GO
+
 */
 
 /********** COMPAÑIAS **********/
@@ -244,6 +243,13 @@ CREATE PROCEDURE SP_Insertar_Respuesta @MensajeRaiz BIGINT, @Contenido CHAR(500)
 		VALUES (@MensajeRaiz, @Contenido, @Adjunto, @Fecha)
 	GO
 
+/*Automatizar?*/
+CREATE PROCEDURE SP_Insertar_Notificacion @Contenido CHAR(500), @Fecha DATETIME, @UserId CHAR(100)
+	AS
+		INSERT INTO NOTIFICACION (Contenido, Fecha, UserId, Estado)
+		VALUES (@Contenido, @Fecha, @UserId, 'A')
+	GO
+
 CREATE PROCEDURE SP_Asignar_Tecnologia_Proyecto @IdProyecto INT, @IdTecnologia INT
 	AS
 		INSERT INTO TECNOLOGIA_POR_PROYECTO (IdProyecto, IdTecnologia, Estado)
@@ -256,37 +262,9 @@ CREATE PROCEDURE SP_Asignar_Tecnologia_Trabajo @IdTrabajo INT, @IdTecnologia INT
 		VALUES (@IdTrabajo, @IdTecnologia, 'A')
 	GO
 
-/*Automatizar?*/
-CREATE PROCEDURE SP_Insertar_Notificacion @Contenido CHAR(500), @Fecha DATETIME, @UserId CHAR(100)
-	AS
-		INSERT INTO NOTIFICACION (Contenido, Fecha, UserId, Estado)
-		VALUES (@Contenido, @Fecha, @UserId, 'A')
-	GO
-
-
-/*My Employee*/
 
 
 
-SUM(ESTUDIANTE_POR_CURSO.Nota) / COUNT(ESTUDIANTE_POR_CURSO.IdCurso) * 0.3
-WHERE PROYECTO_POR_ESTUDIANTE.IdEstudiante = @IdEstudiante AND PROYECTO.Estado = 'E'
-
-
-SUM(TRABAJO.EstrellasObtenidas) / COUNT(TRABAJO.Id) * 5 * 0.3
-WHERE IdEstudiante = @IdEstudiante AND (Estado = 'E' OR Estado = 'F')
-
-
-COUNT(PROYECT.Id)
-WHERE PROYETO_POR_ESTUDIANTE.IdEstudiante=@IdEstudiante AND PROYECTO.Estado = E
- / COUNT(PROYECT.Id)
-WHERE IdEstudiante=@IdEstudiante AND (Estado = 'E' OR Estado = 'F') 
-* 0.3
-
-COUNT(ESTUDIANTE_POR_CURSO.IdCurso)
-WHERE IdEstudiante=@IdEstudiante AND ESTUDIANTE_POR_CURSO.Estado=E
-/ COUNT(ESTUDIANTE_POR_CURSO.IdCurso)
-WHERE IdEstudiante=@IdEstudiante AND (ESTUDIANTE_POR_CURSO.Estado='E' OR ESTUDIANTE_POR_CURSO.Estado='F') 
-* 0.1
 
 
 
