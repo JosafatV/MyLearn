@@ -7,6 +7,23 @@
     })
 
 /*-------------------------------------Empresa-------------------------------------------*/
+
+
+    .when('/MyLearn/Empresa/CrearCuenta', {
+        templateUrl: 'Vistas/Empresa/Crear_CuentaEmpresa.html',
+        controller: 'ctrl_crearCuentaEmpresa'
+    })
+
+    .when('/MyLearn/Empresa/Perfil', {
+        templateUrl: 'Vistas/Empresa/Perfil_Empresa.html',
+        controller: 'ctrl_perfilEmpresa'
+    })
+
+    .when('/MyLearn/Empresa/CrearSubasta', {
+        templateUrl: 'Vistas/Empresa/CrearSubasta.html',
+        controller: 'ctrl_crearSubasta'
+    })
+
 /*-------------------------------------Estudiante----------------------------------------*/
 
     .when('/MyLearn/Estudiante/CrearCuenta', {

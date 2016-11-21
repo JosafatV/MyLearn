@@ -285,6 +285,7 @@
     <Content Include="Scripts\Angular and Bootstrap\Bootstrap\js\npm.js" />
     <Content Include="Scripts\app\configScript.js" />
     <Content Include="Scripts\app\Empresa\ctrl_crearCuentaEmpresa.js" />
+    <Content Include="Scripts\app\Empresa\ctrl_perfilEmpresa.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_crearCuentaEstudiante.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_cursosDisponibles.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_ofertarSubasta.js" />
@@ -301,6 +302,7 @@
     <Content Include="Scripts\app\mod_MyLearn.js" />
     <Content Include="Scripts\app\OAuth.js" />
     <Content Include="Scripts\app\resourceScript.js" />
+    <Content Include="Scripts\app\values.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -387,6 +389,8 @@
     <Content Include="Vistas\Configuracion\js\bootstrap.min.js" />
     <Content Include="Vistas\Configuracion\js\jquery.js" />
     <Content Include="Vistas\Configuracion\js\npm.js" />
+    <Content Include="Vistas\Empresa\Crear_CuentaEmpresa.html" />
+    <Content Include="Vistas\Empresa\Perfil_Empresa.html" />
     <Content Include="Vistas\Estilo\css\Estilos_AreaTEC.css" />
     <Content Include="Vistas\Estilo\css\Estilos_AreaTEE.css" />
     <Content Include="Vistas\Estilo\css\Estilos_AreaTPC.css" />
@@ -438,7 +442,6 @@
     <Folder Include="Scripts\app\Configuration\" />
     <Folder Include="Scripts\app\Drive\" />
     <Folder Include="Scripts\app\Dropbox\" />
-    <Folder Include="Vistas\Empresa\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

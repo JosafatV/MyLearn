@@ -1,5 +1,5 @@
 ﻿//Var used to save the URL 
-var urlGeneric = 'http://192.168.0.108';
+var urlGeneric = 'http://sebastian95';
 
 //This script is the resource that is used to connect to the web Api od DrPhischel
 angular.module('mod_MyLearn').factory('fct_MyLearn_API_Client', function ($resource) {
@@ -41,3 +41,29 @@ angular.module('mod_MyLearn').factory('fct_MyLearn_API_Client', function ($resou
         delete: { method: 'DELETE' }
     });
 });
+
+angular.module('mod_MyLearn').factory('fct_User', function ($resource) {
+
+    var id = '20';
+    var contrasena = '';
+
+    this.setId = function (str_newId) {
+        id = str_newId;
+    };
+
+    this.setContra = function (str_newContra) {
+        contrasena = str_newContra;
+    };
+
+    this.getContra = function () {
+        return str_newContra;
+    };
+
+    this.getId = function () {
+        return id;
+    };
+
+    return this
+
+});
+
