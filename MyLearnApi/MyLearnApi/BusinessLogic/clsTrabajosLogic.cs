@@ -30,6 +30,18 @@ namespace MyLearnApi.BusinessLogic
             return algoritmoPaginacion(listaTrabajos, index, 20);
         }
 
+
+        public List<VIEW_TRABAJO> getTrabajoDeEstudiante(string idEstudiante)
+        {
+            //retorna los proyectos activos
+            List<VIEW_TRABAJO> listaTrabajos = db.VIEW_TRABAJO
+                .Where(trab => trab.EstadoTrabajo == "A" && trab.IdEstudiante == idEstudiante && trab.EstadoTrabajoPorEstudiante == "A")
+                .OrderBy(trab => trab.Nombre)
+                .ToList<VIEW_TRABAJO>();
+            //pagina el resultado de 20 en 20
+            return listaTrabajos;
+        }
+
         /// <summary>
         /// obtiene las ofertas no aceptadas de un trabajo especifico de una empresa especifica
         /// </summary>
@@ -40,7 +52,8 @@ namespace MyLearnApi.BusinessLogic
         {
             //lista las orfetas de una subasta especifica de una empresa especifica
             List<VIEW_TRABAJO> listaTrabajos = db.VIEW_TRABAJO
-                .Where(trab => trab.EstadoTrabajo == "P" && trab.IdEmpresa == idEmpresa && trab.EstadoTrabajoPorEstudiante == "P")
+                .Where(trab => trab.EstadoTrabajo == "P" && trab.IdEmpresa == idEmpresa &&
+                trab.EstadoTrabajoPorEstudiante == "P" && trab.IdTrabajo == idTrabajo)
                 .OrderBy(trab => trab.FechaFinalizacion)
                 .ToList<VIEW_TRABAJO>();
             //pagina el resultado de 20 en 20
@@ -159,6 +172,29 @@ namespace MyLearnApi.BusinessLogic
             return true;
         }
 
+        public bool addTecnologiaToTrabajo(TECNOLOGIA_POR_TRABAJO tecnologia)
+        {
+            tecnologia.Estado = "A";
+            db.TECNOLOGIA_POR_TRABAJO.Add(tecnologia);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (trabajoTecnologiaPorTrabajoExists(tecnologia.IdTecnologia,tecnologia.IdTrabajo))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return true;
+        }
+
 
         /// <summary>
         /// pregunta si el trabajo existe
@@ -169,7 +205,6 @@ namespace MyLearnApi.BusinessLogic
         {
             return db.TRABAJO.Count(e => e.Id == id) > 0;
         }
-
         private bool View_TRABAJOExists(int id)
         {
             return db.VIEW_TRABAJO.Count(e => e.IdTrabajo == id) > 0;
@@ -178,7 +213,10 @@ namespace MyLearnApi.BusinessLogic
         {
             return db.TRABAJO_POR_ESTUDIANTE.Find(idTrabajo,idEstudiante) != null ;
         }
-
+        private bool trabajoTecnologiaPorTrabajoExists(int idTecnologia, int idTrabajo)
+        {
+            return db.TECNOLOGIA_POR_TRABAJO.Find(idTecnologia,idTrabajo) != null;
+        }
         public void Dispose(bool disposing)
         {
             if (disposing)

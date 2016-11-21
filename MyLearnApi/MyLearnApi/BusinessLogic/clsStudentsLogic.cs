@@ -125,6 +125,7 @@ namespace MyLearnApi.BusinessLogic
         public bool addTecnologiaToEstudiante(TECNOLOGIA_POR_ESTUDIANTE tecnologia)
         {
 
+            tecnologia.Estado = "A";
             db.TECNOLOGIA_POR_ESTUDIANTE.Add(tecnologia);
             try
             {

@@ -78,6 +78,24 @@
           <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" />
         </EntityType>
+        <EntityType Name="TECNOLOGIA_POR_PROYECTO">
+          <Key>
+            <PropertyRef Name="IdTecnologia" />
+            <PropertyRef Name="IdProyecto" />
+          </Key>
+          <Property Name="IdTecnologia" Type="int" Nullable="false" />
+          <Property Name="IdProyecto" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="TECNOLOGIA_POR_TRABAJO">
+          <Key>
+            <PropertyRef Name="IdTecnologia" />
+            <PropertyRef Name="IdTrabajo" />
+          </Key>
+          <Property Name="IdTecnologia" Type="int" Nullable="false" />
+          <Property Name="IdTrabajo" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
         <EntityType Name="TRABAJO">
           <Key>
             <PropertyRef Name="Id" />
@@ -361,6 +379,42 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO">
+          <End Role="TECNOLOGIA" Type="Self.TECNOLOGIA" Multiplicity="1" />
+          <End Role="TECNOLOGIA_POR_PROYECTO" Type="Self.TECNOLOGIA_POR_PROYECTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TECNOLOGIA">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TECNOLOGIA_POR_PROYECTO">
+              <PropertyRef Name="IdTecnologia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO">
+          <End Role="TECNOLOGIA" Type="Self.TECNOLOGIA" Multiplicity="1" />
+          <End Role="TECNOLOGIA_POR_TRABAJO" Type="Self.TECNOLOGIA_POR_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TECNOLOGIA">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TECNOLOGIA_POR_TRABAJO">
+              <PropertyRef Name="IdTecnologia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO">
+          <End Role="TRABAJO" Type="Self.TRABAJO" Multiplicity="1" />
+          <End Role="TECNOLOGIA_POR_TRABAJO" Type="Self.TECNOLOGIA_POR_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRABAJO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TECNOLOGIA_POR_TRABAJO">
+              <PropertyRef Name="IdTrabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE">
           <End Role="TRABAJO" Type="Self.TRABAJO" Multiplicity="1" />
           <End Role="TRABAJO_POR_ESTUDIANTE" Type="Self.TRABAJO_POR_ESTUDIANTE" Multiplicity="*" />
@@ -456,6 +510,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TECNOLOGIA" EntityType="Self.TECNOLOGIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TECNOLOGIA_POR_ESTUDIANTE" EntityType="Self.TECNOLOGIA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TECNOLOGIA_POR_PROYECTO" EntityType="Self.TECNOLOGIA_POR_PROYECTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TECNOLOGIA_POR_TRABAJO" EntityType="Self.TECNOLOGIA_POR_TRABAJO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRABAJO" EntityType="Self.TRABAJO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRABAJO_POR_ESTUDIANTE" EntityType="Self.TRABAJO_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UNIVERSIDAD" EntityType="Self.UNIVERSIDAD" Schema="dbo" store:Type="Tables" />
@@ -584,6 +640,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <AssociationSet Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE" Association="Self.FK_IDTECNOLOGIA_POR_ESTUDIANTE">
             <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
             <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO" Association="Self.FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO">
+            <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
+            <End Role="TECNOLOGIA_POR_PROYECTO" EntitySet="TECNOLOGIA_POR_PROYECTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO" Association="Self.FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO">
+            <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
+            <End Role="TECNOLOGIA_POR_TRABAJO" EntitySet="TECNOLOGIA_POR_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO" Association="Self.FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO">
+            <End Role="TRABAJO" EntitySet="TRABAJO" />
+            <End Role="TECNOLOGIA_POR_TRABAJO" EntitySet="TECNOLOGIA_POR_TRABAJO" />
           </AssociationSet>
           <AssociationSet Name="FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE" Association="Self.FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE">
             <End Role="TRABAJO" EntitySet="TRABAJO" />
@@ -743,6 +811,20 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <Parameter Name="IdSubasta" Mode="In" Type="Int32" />
             <Parameter Name="IdEstudiante" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="TECNOLOGIA_POR_PROYECTO" EntityType="MyLearnDBModel.TECNOLOGIA_POR_PROYECTO" />
+          <AssociationSet Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO" Association="MyLearnDBModel.FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO">
+            <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
+            <End Role="TECNOLOGIA_POR_PROYECTO" EntitySet="TECNOLOGIA_POR_PROYECTO" />
+          </AssociationSet>
+          <EntitySet Name="TECNOLOGIA_POR_TRABAJO" EntityType="MyLearnDBModel.TECNOLOGIA_POR_TRABAJO" />
+          <AssociationSet Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO" Association="MyLearnDBModel.FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO">
+            <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
+            <End Role="TECNOLOGIA_POR_TRABAJO" EntitySet="TECNOLOGIA_POR_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO" Association="MyLearnDBModel.FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO">
+            <End Role="TRABAJO" EntitySet="TRABAJO" />
+            <End Role="TECNOLOGIA_POR_TRABAJO" EntitySet="TECNOLOGIA_POR_TRABAJO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
           <Key>
@@ -1021,7 +1103,6 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Name="EstrellasObtenidas" Type="Byte" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="PresupuestoBase" Type="Double" />
-          <NavigationProperty Name="TRABAJO_POR_ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE" FromRole="TRABAJO" ToRole="TRABAJO_POR_ESTUDIANTE" />
         </EntityType>
         <Association Name="FK_TRABAJO_POR_EMPRESA">
           <End Type="MyLearnDBModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
@@ -1088,6 +1169,60 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="TRABAJO_POR_ESTUDIANTE">
+              <PropertyRef Name="IdTrabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TECNOLOGIA_POR_PROYECTO">
+          <Key>
+            <PropertyRef Name="IdTecnologia" />
+            <PropertyRef Name="IdProyecto" />
+          </Key>
+          <Property Name="IdTecnologia" Type="Int32" Nullable="false" />
+          <Property Name="IdProyecto" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO">
+          <End Type="MyLearnDBModel.TECNOLOGIA" Role="TECNOLOGIA" Multiplicity="1" />
+          <End Type="MyLearnDBModel.TECNOLOGIA_POR_PROYECTO" Role="TECNOLOGIA_POR_PROYECTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TECNOLOGIA">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TECNOLOGIA_POR_PROYECTO">
+              <PropertyRef Name="IdTecnologia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TECNOLOGIA_POR_TRABAJO">
+          <Key>
+            <PropertyRef Name="IdTecnologia" />
+            <PropertyRef Name="IdTrabajo" />
+          </Key>
+          <Property Name="IdTecnologia" Type="Int32" Nullable="false" />
+          <Property Name="IdTrabajo" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO">
+          <End Type="MyLearnDBModel.TECNOLOGIA" Role="TECNOLOGIA" Multiplicity="1" />
+          <End Type="MyLearnDBModel.TECNOLOGIA_POR_TRABAJO" Role="TECNOLOGIA_POR_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TECNOLOGIA">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TECNOLOGIA_POR_TRABAJO">
+              <PropertyRef Name="IdTecnologia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO">
+          <End Type="MyLearnDBModel.TRABAJO" Role="TRABAJO" Multiplicity="1" />
+          <End Type="MyLearnDBModel.TECNOLOGIA_POR_TRABAJO" Role="TECNOLOGIA_POR_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRABAJO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TECNOLOGIA_POR_TRABAJO">
               <PropertyRef Name="IdTrabajo" />
             </Dependent>
           </ReferentialConstraint>
@@ -1330,6 +1465,24 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_Rechazar_Demas_Subastas" FunctionName="MyLearnDBModel.Store.SP_Rechazar_Demas_Subastas" />
+          <EntitySetMapping Name="TECNOLOGIA_POR_PROYECTO">
+            <EntityTypeMapping TypeName="MyLearnDBModel.TECNOLOGIA_POR_PROYECTO">
+              <MappingFragment StoreEntitySet="TECNOLOGIA_POR_PROYECTO">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+                <ScalarProperty Name="IdTecnologia" ColumnName="IdTecnologia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TECNOLOGIA_POR_TRABAJO">
+            <EntityTypeMapping TypeName="MyLearnDBModel.TECNOLOGIA_POR_TRABAJO">
+              <MappingFragment StoreEntitySet="TECNOLOGIA_POR_TRABAJO">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdTrabajo" ColumnName="IdTrabajo" />
+                <ScalarProperty Name="IdTecnologia" ColumnName="IdTecnologia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

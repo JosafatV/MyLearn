@@ -145,6 +145,20 @@
       <Parameter Name="IdSubasta" Mode="In" Type="Int32" />
       <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="TECNOLOGIA_POR_PROYECTO" EntityType="MyLearnDBModel.TECNOLOGIA_POR_PROYECTO" />
+    <AssociationSet Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO" Association="MyLearnDBModel.FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO">
+      <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
+      <End Role="TECNOLOGIA_POR_PROYECTO" EntitySet="TECNOLOGIA_POR_PROYECTO" />
+    </AssociationSet>
+    <EntitySet Name="TECNOLOGIA_POR_TRABAJO" EntityType="MyLearnDBModel.TECNOLOGIA_POR_TRABAJO" />
+    <AssociationSet Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO" Association="MyLearnDBModel.FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO">
+      <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
+      <End Role="TECNOLOGIA_POR_TRABAJO" EntitySet="TECNOLOGIA_POR_TRABAJO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO" Association="MyLearnDBModel.FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO">
+      <End Role="TRABAJO" EntitySet="TRABAJO" />
+      <End Role="TECNOLOGIA_POR_TRABAJO" EntitySet="TECNOLOGIA_POR_TRABAJO" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -423,7 +437,6 @@
     <Property Name="EstrellasObtenidas" Type="Byte" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="PresupuestoBase" Type="Double" />
-    <NavigationProperty Name="TRABAJO_POR_ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE" FromRole="TRABAJO" ToRole="TRABAJO_POR_ESTUDIANTE" />
   </EntityType>
   <Association Name="FK_TRABAJO_POR_EMPRESA">
     <End Type="MyLearnDBModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
@@ -490,6 +503,60 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="TRABAJO_POR_ESTUDIANTE">
+        <PropertyRef Name="IdTrabajo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TECNOLOGIA_POR_PROYECTO">
+    <Key>
+      <PropertyRef Name="IdTecnologia" />
+      <PropertyRef Name="IdProyecto" />
+    </Key>
+    <Property Name="IdTecnologia" Type="Int32" Nullable="false" />
+    <Property Name="IdProyecto" Type="Int32" Nullable="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO">
+    <End Type="MyLearnDBModel.TECNOLOGIA" Role="TECNOLOGIA" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TECNOLOGIA_POR_PROYECTO" Role="TECNOLOGIA_POR_PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TECNOLOGIA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TECNOLOGIA_POR_PROYECTO">
+        <PropertyRef Name="IdTecnologia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TECNOLOGIA_POR_TRABAJO">
+    <Key>
+      <PropertyRef Name="IdTecnologia" />
+      <PropertyRef Name="IdTrabajo" />
+    </Key>
+    <Property Name="IdTecnologia" Type="Int32" Nullable="false" />
+    <Property Name="IdTrabajo" Type="Int32" Nullable="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO">
+    <End Type="MyLearnDBModel.TECNOLOGIA" Role="TECNOLOGIA" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TECNOLOGIA_POR_TRABAJO" Role="TECNOLOGIA_POR_TRABAJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TECNOLOGIA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TECNOLOGIA_POR_TRABAJO">
+        <PropertyRef Name="IdTecnologia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO">
+    <End Type="MyLearnDBModel.TRABAJO" Role="TRABAJO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TECNOLOGIA_POR_TRABAJO" Role="TECNOLOGIA_POR_TRABAJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TECNOLOGIA_POR_TRABAJO">
         <PropertyRef Name="IdTrabajo" />
       </Dependent>
     </ReferentialConstraint>
