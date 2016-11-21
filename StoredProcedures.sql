@@ -153,7 +153,6 @@ CREATE PROCEDURE SP_Insertar_Propuesta_Proyecto @IdEstudiante CHAR(100), @Nombre
 			WHERE Cpp.IdCurso=@IdCurso
 	GO
 
-
 /*	YA NO SE USA
 
 

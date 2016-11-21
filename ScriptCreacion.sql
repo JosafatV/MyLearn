@@ -399,6 +399,7 @@ CREATE TABLE TRABAJO_POR_ESTUDIANTE
     IdTrabajo INT,
     IdEstudiante CHAR(100),
 	Monto INT,
+	FechaFinalizacion Date,
 	Comentario CHAR(300),
 	Estado CHAR(1), /*Aceptada, Negada, Enviada*/
 
