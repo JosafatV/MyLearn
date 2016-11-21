@@ -25,7 +25,7 @@
             $location.path('/MyLearn/Estudiante/Perfil');
         };
 
-        $scope.do_goPerfilEmpresa = function () {
+        $scope.do_goPerfil = function () {
             $location.path('/MyLearn/Empresa/Perfil');
         };
 

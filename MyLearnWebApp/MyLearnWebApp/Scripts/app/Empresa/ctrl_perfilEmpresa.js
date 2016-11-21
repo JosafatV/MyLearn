@@ -1,8 +1,8 @@
 ﻿angular.module('mod_MyLearn').controller('ctrl_perfilEmpresa', ['fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService',
     function (fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService) {
 
-        var num_indexTrabajos = 0;
-        var num_indexSubastas = 0;
+        $scope.num_indexTrabajos = 0;
+        $scope.num_indexSubastas = 0;
 
         var vm = this;
 
@@ -10,12 +10,11 @@
             $scope.js_datosEmpresa = data;
         });
 
-        fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: fct_User.getId(), extension3: num_indexTrabajos }).$promise.then(function (data) {
+        fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexTrabajos }).$promise.then(function (data) {
             $scope.ls_trabajos = data;
         });
 
-        fct_MyLearn_API_Client.query({ type: 'Subastas', extension1: 'Empresa', extension2: fct_User.getId(), extension3: num_indexSubastas }).$promise.then(function (data) {
-            alert(angular.toJson(data, true));
+        fct_MyLearn_API_Client.query({ type: 'Subastas', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexSubastas }).$promise.then(function (data) {
             $scope.ls_subastas = data;
         });
 
@@ -45,13 +44,41 @@
 
         }
 
-        vm.do_goCrearSubasta = function () {
-            $location.path('/MyLearn/Empresa/Perfil/');
+        $scope.do_goCrearSubasta = function () {
+            $location.path('/MyLearn/Empresa/CrearSubasta');
 
         };
 
-        vm.do_goLogin = function () {
+        $scope.get_20MoreWork = function () {
+            $scope.num_indexTrabajos = $scope.num_indexTrabajos + 1;
+            fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexTrabajos }).$promise.then(function (data) {
+                $scope.ls_trabajos = data;
 
+            });
+        };
+
+        $scope.get_20MoreSubastas = function () {
+            $scope.num_indexSubastas = $scope.num_indexSubastas + 1;
+            fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexTrabajos }).$promise.then(function (data) {
+                $scope.ls_trabajos = data;
+            });
+        };
+
+        $scope.get_20LessSubastas = function () {
+            $scope.num_indexSubastas = $scope.num_indexSubastas - 1;
+            fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexSubastas }).$promise.then(function (data) {
+                $scope.ls_trabajos = data;
+            });
+        };
+
+        $scope.get_20LessWork = function () {
+            $scope.num_indexTrabajos = $scope.num_indexTrabajos - 1;
+            fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexTrabajos }).$promise.then(function (data) {
+                $scope.ls_trabajos = data;
+            });
+        };
+
+        vm.do_goLogin = function () {
 
         };
 

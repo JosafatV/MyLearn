@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<nav>
-				<a>Crear Subasta</a>
+				<a data-ng-click="do_goCrearSubasta()">Crear Subasta</a>
 				<a>Ayuda en Linea</a>
 				<a>Cerrar Sesión</a>
 			</nav>
@@ -44,7 +44,7 @@
 					</tr>
                 <tr data-ng-repeat="subasta in ls_subastas  | filter: search">
                     <td>{{subasta.Nombre}}</td>
-                    <td>{{subasta}}</td>
+                    <td>{{subasta.PresupuestoBase}}</td>
                     <td>{{subasta.FechaCierre}}</td>
                 </tr>
 
@@ -62,8 +62,8 @@
 						</tr>
                     <tr data-ng-repeat="trabajos in ls_trabajos  | filter: search">
                         <td>{{trabajos.Nombre}}</td>
-                        <td></td>
-                        <td>{{trabajos.Estado}}</td>
+                        <td>{{trabajos.FechaFinalizacion}}</td>
+                        <td>{{trabajos.EstadoTrabajo}}</td>
 
                     </tr>
 
@@ -71,7 +71,10 @@
 
 
 	</div>
-
+        <button data-ng-click="get_20MoreWork()">Mas 20 trabajos</button>
+        <button data-ng-disabled="num_indexTrabajos < 1" data-ng-click="get_20LessWork()">Menos 20 trabajos</button>
+        <button data-ng-click="get_20MoreSubasta()">Mas 20 subastas</button>
+        <button data-ng-disabled="num_indexSubastas < 1" data-ng-click="get_20LessSubasta()">Menos 20 subastas</button>
 
 
 	</body>
