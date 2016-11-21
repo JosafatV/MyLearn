@@ -137,6 +137,14 @@
       <End Role="TRABAJO" EntitySet="TRABAJO" />
       <End Role="TRABAJO_POR_ESTUDIANTE" EntitySet="TRABAJO_POR_ESTUDIANTE" />
     </AssociationSet>
+    <FunctionImport Name="SP_Aceptar_Subasta">
+      <Parameter Name="IdSubasta" Mode="In" Type="Int32" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Rechazar_Demas_Subastas">
+      <Parameter Name="IdSubasta" Mode="In" Type="Int32" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>

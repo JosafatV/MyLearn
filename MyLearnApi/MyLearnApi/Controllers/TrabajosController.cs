@@ -134,6 +134,7 @@ namespace MyLearnApi.Controllers
         }
         
         [HttpOptions]
+        [Route("MyLearnApi/Trabajos/{idTrabajo}/{idEstudiante}")]
         [Route("MyLearnApi/Subastas")]
         [Route("MyLearnApi/Trabajos")]
         public HttpResponseMessage Options()

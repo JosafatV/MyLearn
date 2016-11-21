@@ -232,5 +232,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Rechazar_Demas_Subastas" FunctionName="MyLearnDBModel.Store.SP_Rechazar_Demas_Subastas" />
   </EntityContainerMapping>
 </Mapping>

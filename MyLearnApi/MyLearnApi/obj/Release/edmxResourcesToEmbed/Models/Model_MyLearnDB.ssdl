@@ -356,10 +356,6 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="SP_Aceptar_Subasta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IdSubasta" Type="int" Mode="In" />
-    <Parameter Name="IdEstudiante" Type="char" Mode="In" />
-  </Function>
   <Function Name="SP_Insertar_Empresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="char" Mode="In" />
     <Parameter Name="Contrasena" Type="char" Mode="In" />
@@ -415,6 +411,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Parameter Name="FechaCierre" Type="date" Mode="In" />
     <Parameter Name="DocumentoAdicional" Type="char" Mode="In" />
     <Parameter Name="presupuesto" Type="float" Mode="In" />
+  </Function>
+  <Function Name="SP_Rechazar_Demas_Subastas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdSubasta" Type="int" Mode="In" />
+    <Parameter Name="IdEstudiante" Type="char" Mode="In" />
   </Function>
   <Function Name="SP_Select_Cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="int" Mode="In" />

@@ -208,16 +208,21 @@ CREATE PROCEDURE SP_Rechazar_Demas_Subastas @IdSubasta INT, @IdEstudiante CHAR(1
 		UPDATE TRABAJO_POR_ESTUDIANTE
 		SET Estado='X'
 		WHERE IdTrabajo = @IdSubasta AND IdEstudiante != @IdEstudiante
-
-		/*UPDATE TRABAJO_POR_ESTUDIANTE
-		SET Estado='A'
-		WHERE IdEstudiante=@IdEstudiante AND IdTrabajo=@IdSubasta*/
-		
-	/*	UPDATE TRABAJO
-		SET Estado='A'
-		WHERE Id=@IdSubasta*/
 	GO
+CREATE PROCEDURE SP_Aceptar_Subasta @IdSubasta INT, @IdEstudiante CHAR(100)
+	AS
+		UPDATE TRABAJO_POR_ESTUDIANTE
+		SET Estado='X'
+		WHERE IdTrabajo = @IdSubasta AND IdEstudiante != @IdEstudiante
 
+		UPDATE TRABAJO_POR_ESTUDIANTE
+		SET Estado='A'
+		WHERE IdEstudiante=@IdEstudiante AND IdTrabajo=@IdSubasta
+		
+		UPDATE TRABAJO
+		SET Estado='A'
+		WHERE Id=@IdSubasta
+	GO
 
 /********** MENSAJERIA **********/
 

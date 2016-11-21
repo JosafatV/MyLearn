@@ -141,6 +141,10 @@
       <Parameter Name="IdSubasta" Mode="In" Type="Int32" />
       <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="SP_Rechazar_Demas_Subastas">
+      <Parameter Name="IdSubasta" Mode="In" Type="Int32" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
