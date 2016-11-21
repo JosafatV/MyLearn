@@ -125,7 +125,9 @@
       <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
       <Parameter Name="DocumentoAdicional" Mode="In" Type="String" />
+      <Parameter Name="presupuesto" Mode="In" Type="Double" />
     </FunctionImport>
+    <EntitySet Name="VIEW_TRABAJO" EntityType="MyLearnDBModel.VIEW_TRABAJO" />
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -402,6 +404,7 @@
     <Property Name="DocumentoAdicional" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="EstrellasObtenidas" Type="Byte" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="PresupuestoBase" Type="Double" />
   </EntityType>
   <Association Name="FK_TRABAJO_POR_EMPRESA">
     <End Type="MyLearnDBModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
@@ -415,4 +418,25 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="VIEW_TRABAJO">
+    <Key>
+      <PropertyRef Name="IdTrabajo" />
+    </Key>
+    <Property Name="FechaFinalizacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Monto" Type="Int32" />
+    <Property Name="Comentario" Type="String" MaxLength="300" FixedLength="true" Unicode="false" />
+    <Property Name="IdTrabajo" Type="Int32" Nullable="false" />
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="NombreContacto" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="ApellidoContacto" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="false" />
+    <Property Name="IdEmpresa" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="FechaInicioSubasta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCierreSubasta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DocumentoAdicional" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="EstrellasObtenidas" Type="Byte" />
+    <Property Name="EstadoTrabajo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="EstadoTrabajoPorEstudiante" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
 </Schema>
