@@ -69,3 +69,28 @@ FROM            dbo.ESTUDIANTE INNER JOIN
                          dbo.IDIOMA ON dbo.IDIOMA_POR_ESTUDIANTE.IdIdioma = dbo.IDIOMA.Id
 			 
 GO
+
+
+
+USE [MyLearnDB]
+GO
+
+/****** Object:  View [dbo].[VIEW_TRABAJO]    Script Date: 21/11/2016 12:36:13 a.m. ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[VIEW_TRABAJO]
+AS
+SELECT        dbo.TRABAJO_POR_ESTUDIANTE.FechaFinalizacion, dbo.TRABAJO_POR_ESTUDIANTE.Monto, dbo.TRABAJO_POR_ESTUDIANTE.Comentario, dbo.TRABAJO_POR_ESTUDIANTE.IdTrabajo, 
+                         dbo.TRABAJO_POR_ESTUDIANTE.IdEstudiante, dbo.ESTUDIANTE.NombreContacto, dbo.ESTUDIANTE.ApellidoContacto, dbo.TRABAJO.Nombre, dbo.TRABAJO.Descripcion, dbo.TRABAJO.IdEmpresa, 
+                         dbo.TRABAJO.FechaInicio, dbo.TRABAJO.FechaCierre, dbo.TRABAJO.DocumentoAdicional, dbo.TRABAJO.EstrellasObtenidas, dbo.TRABAJO.Estado as EstadoTrabajo, dbo.TRABAJO_POR_ESTUDIANTE.Estado AS EstadoTrabajoPorEstudiante
+FROM            dbo.ESTUDIANTE INNER JOIN
+                         dbo.TRABAJO_POR_ESTUDIANTE ON dbo.ESTUDIANTE.Id = dbo.TRABAJO_POR_ESTUDIANTE.IdEstudiante INNER JOIN
+                         dbo.TRABAJO ON dbo.TRABAJO_POR_ESTUDIANTE.IdTrabajo = dbo.TRABAJO.Id
+
+GO
+
+
