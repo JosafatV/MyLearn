@@ -183,6 +183,7 @@ CREATE TABLE TRABAJO (
     FechaCierre DATE NOT NULL,
     DocumentoAdicional CHAR(100),
     EstrellasObtenidas tinyINT,
+	PresupuestoBase Float,
     Estado CHAR(1), /*Propuesta, Exito(Terminado), Fracaso(Terminado), Activo*/
 
 	CONSTRAINT PK_TRABAJO

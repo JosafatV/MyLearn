@@ -103,15 +103,15 @@ EXEC SP_Asignar_Tecnologia_Proyecto '2', '3'
 
 EXEC SP_Aceptar_Proyecto '1', '1', '1'
 
-EXEC SP_Insertar_Trabajo 'Decripción de STCs', 'Gran cantidad de informacion se encuentra en este STC, es necesario decriptarlo', '20', '11/10/2016', '12/01/2016', ''
+EXEC SP_Insertar_Trabajo 'Decripción de STCs', 'Gran cantidad de informacion se encuentra en este STC, es necesario decriptarlo', '20', '11/10/2016', '12/01/2016', '','3000'
 EXEC SP_Asignar_Tecnologia_Trabajo '1', '1'
 EXEC SP_Asignar_Tecnologia_Trabajo '1', '2'
-EXEC SP_Insertar_Trabajo 'DrPischel', 'Para ser más competitivo la farmacia DrPischel desea crear un sistema de atención en línea, donde los usuarios puedan pre-ordenar medicamentos para facilitar su recolección', '20', '10/17/2016', '11/26/2016', ''
+EXEC SP_Insertar_Trabajo 'DrPischel', 'Para ser más competitivo la farmacia DrPischel desea crear un sistema de atención en línea, donde los usuarios puedan pre-ordenar medicamentos para facilitar su recolección', '20', '10/17/2016', '11/26/2016', '', '5000'
 EXEC SP_Asignar_Tecnologia_Trabajo '2', '1'
 EXEC SP_Asignar_Tecnologia_Trabajo '2', '3'
 						
-EXEC SP_Insertar_Propuesta_Subasta 2, '1', 35000, 'Knowledge is power, Guard it well!'
-EXEC SP_Insertar_Propuesta_Subasta 2, '2', 55000, 'Sisters, we must go as Martyrs! We must go up in flames!'
+EXEC SP_Insertar_Propuesta_Subasta 2, '1', 35000, 'Knowledge is power, Guard it well!' , '02/20/2018'
+EXEC SP_Insertar_Propuesta_Subasta 2, '2', 55000, 'Sisters, we must go as Martyrs! We must go up in flames!' , '09/18/2019'
 								
 EXEC SP_Aceptar_Subasta '2', '1'
 

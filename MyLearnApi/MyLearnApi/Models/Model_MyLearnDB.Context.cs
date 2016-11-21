@@ -41,6 +41,7 @@ namespace MyLearnApi.Models
         public virtual DbSet<UNIVERSIDAD> UNIVERSIDAD { get; set; }
         public virtual DbSet<TECNOLOGIA_POR_ESTUDIANTE> TECNOLOGIA_POR_ESTUDIANTE { get; set; }
         public virtual DbSet<TRABAJO> TRABAJO { get; set; }
+        public virtual DbSet<VIEW_TRABAJO> VIEW_TRABAJO { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {
@@ -295,7 +296,7 @@ namespace MyLearnApi.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Estudiante", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreParameter, apellidoParameter, carneParameter, emailParameter, telefonoParameter, paisParameter, regionParameter, repositorioCodigoParameter, linkHojaDeVidaParameter);
         }
     
-        public virtual int SP_Insertar_Trabajo(string nombre, string descripcion, string idEmpresa, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaCierre, string documentoAdicional)
+        public virtual int SP_Insertar_Trabajo(string nombre, string descripcion, string idEmpresa, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaCierre, string documentoAdicional, Nullable<double> presupuesto)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
@@ -321,7 +322,11 @@ namespace MyLearnApi.Models
                 new ObjectParameter("DocumentoAdicional", documentoAdicional) :
                 new ObjectParameter("DocumentoAdicional", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Trabajo", nombreParameter, descripcionParameter, idEmpresaParameter, fechaInicioParameter, fechaCierreParameter, documentoAdicionalParameter);
+            var presupuestoParameter = presupuesto.HasValue ?
+                new ObjectParameter("presupuesto", presupuesto) :
+                new ObjectParameter("presupuesto", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Trabajo", nombreParameter, descripcionParameter, idEmpresaParameter, fechaInicioParameter, fechaCierreParameter, documentoAdicionalParameter, presupuestoParameter);
         }
     }
 }

@@ -36,14 +36,14 @@ namespace MyLearnApi.BusinessLogic
         /// </summary>
         /// <param name="idEmpresa"></param>
         /// <returns></returns>
-        public List<TRABAJO> getSubastasdeTrabajosActivas(string idEmpresa, int index)
+        public List<VIEW_TRABAJO> getSubastasdeTrabajosActivas(string idEmpresa, int index)
         {
             //estado "P" de trabajo pendiente, o sea es una subasta
 
-            List<TRABAJO> listaTrabajos = db.TRABAJO
-                .Where(trab => trab.Estado == "P" && trab.IdEmpresa == idEmpresa)
-                .OrderBy(trab => trab.FechaCierre)
-                .ToList<TRABAJO>();
+            List<VIEW_TRABAJO> listaTrabajos = db.VIEW_TRABAJO
+                .Where(trab => trab.EstadoTrabajo == "P" && trab.IdEmpresa == idEmpresa)
+                .OrderBy(trab => trab.FechaFinalizacion)
+                .ToList<VIEW_TRABAJO>();
             //pagina el resultado de 20 en 20
             return algoritmoPaginacion(listaTrabajos, index, 20);
         }
@@ -53,10 +53,10 @@ namespace MyLearnApi.BusinessLogic
         /// </summary>
         /// <param name="idTrabajo"></param>
         /// <returns></returns>
-        public TRABAJO getSpecificTrabajo(int idTrabajo)
+        public VIEW_TRABAJO getSpecificTrabajo(int idTrabajo)
         {
-            if (TRABAJOExists(idTrabajo))
-                return db.TRABAJO.Find(idTrabajo);
+            if (View_TRABAJOExists(idTrabajo))
+                return db.VIEW_TRABAJO.Find(idTrabajo);
             else
                 return null;       
         }
@@ -126,6 +126,11 @@ namespace MyLearnApi.BusinessLogic
             return db.TRABAJO.Count(e => e.Id == id) > 0;
         }
 
+        private bool View_TRABAJOExists(int id)
+        {
+            return db.VIEW_TRABAJO.Count(e => e.IdTrabajo == id) > 0;
+        }
+
 
         public void Dispose(bool disposing)
         {
@@ -159,6 +164,31 @@ namespace MyLearnApi.BusinessLogic
 
         }
 
+
+        /// <summary>
+        /// obtiene un rango de la lista
+        /// </summary>
+        /// <param name="lista"> lista que se quiere paginar </param>
+        /// <param name="index"> indice desde donde se quiere comenzar </param>
+        /// <returns></returns>
+        private List<VIEW_TRABAJO> algoritmoPaginacion(List<VIEW_TRABAJO> lista, int index, byte lby_offset)
+        {
+            List<VIEW_TRABAJO> lobj_resultado = new List<VIEW_TRABAJO>();
+            //obtengo el rango que se necesita
+            int li_largoLista = lista.Count;
+            //si el indice esta fuera del rango de la lista
+            if (index > li_largoLista)
+                return lobj_resultado;
+            //si index y el offset estan dentro del rango
+            else if ((li_largoLista >= (index + lby_offset)))
+                lobj_resultado = lista.GetRange(index, index + lby_offset - 1);
+            //si hay un overflow en el rango devuelve del indice hasta el fin de la lista
+            else
+                lobj_resultado = lista.GetRange(index, li_largoLista);
+
+            return lobj_resultado;
+
+        }
 
 
     }

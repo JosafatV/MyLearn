@@ -12,17 +12,23 @@ namespace MyLearnApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TRABAJO
+    public partial class VIEW_TRABAJO
     {
-        public int Id { get; set; }
+        public string FechaFinalizacion { get; set; }
+        public Nullable<int> Monto { get; set; }
+        public string Comentario { get; set; }
+        public int IdTrabajo { get; set; }
+        public string IdEstudiante { get; set; }
+        public string NombreContacto { get; set; }
+        public string ApellidoContacto { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string IdEmpresa { get; set; }
-        public Nullable<System.DateTime> FechaInicio { get; set; }
-        public System.DateTime FechaCierre { get; set; }
+        public string FechaInicioSubasta { get; set; }
+        public string FechaCierreSubasta { get; set; }
         public string DocumentoAdicional { get; set; }
         public Nullable<byte> EstrellasObtenidas { get; set; }
-        public string Estado { get; set; }
-        public Nullable<double> PresupuestoBase { get; set; }
+        public string EstadoTrabajo { get; set; }
+        public string EstadoTrabajoPorEstudiante { get; set; }
     }
 }

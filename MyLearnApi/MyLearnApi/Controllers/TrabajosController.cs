@@ -43,8 +43,8 @@ namespace MyLearnApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("MyLearnApi/Subastas/Empresa/{idEmpresa}/{index}")]
-        [ResponseType(typeof(List<TRABAJO>))]
-        public List<TRABAJO> getSubastasActivas(string idEmpresa, int index)
+        [ResponseType(typeof(List<VIEW_TRABAJO>))]
+        public List<VIEW_TRABAJO> getSubastasActivas(string idEmpresa, int index)
         {
             return pobj_TrabajosLogic.getSubastasdeTrabajosActivas(idEmpresa,index);
         }
@@ -52,10 +52,10 @@ namespace MyLearnApi.Controllers
 
         [HttpGet]
         [Route("MyLearnApi/Trabajos/{idTrabajo}")]
-        [ResponseType(typeof(TRABAJO))]
+        [ResponseType(typeof(VIEW_TRABAJO))]
         public IHttpActionResult GetTRABAJO(int idTrabajo)
         {
-            TRABAJO tRABAJO = pobj_TrabajosLogic.getSpecificTrabajo(idTrabajo);
+            VIEW_TRABAJO tRABAJO = pobj_TrabajosLogic.getSpecificTrabajo(idTrabajo);
             if (tRABAJO == null)
             {
                 return NotFound();
