@@ -22,10 +22,29 @@ INSERT INTO PAIS (Pais) VALUES('Suiza')
 EXEC SP_Insertar_Universidad 'Instituto Tecnologico de Costa Rica'
 EXEC SP_Insertar_Universidad 'Universidad Nacional'
 EXEC SP_Insertar_Universidad 'Universidad de Costa Rica'
+EXEC SP_Insertar_Universidad 'Universidad Autónoma de Centro América'
+EXEC SP_Insertar_Universidad 'Universidad Fidélitas'
 
-EXEC SP_Insertar_Tecnologia 'SQL'
+EXEC SP_Insertar_Tecnologia 'SQL Server'
 EXEC SP_Insertar_Tecnologia 'HTML'
 EXEC SP_Insertar_Tecnologia 'C#'
+EXEC SP_Insertar_Tecnologia 'Bootstrap'
+EXEC SP_Insertar_Tecnologia 'AngularJs'
+EXEC SP_Insertar_Tecnologia 'Python'
+EXEC SP_Insertar_Tecnologia 'C'
+EXEC SP_Insertar_Tecnologia 'C++'
+EXEC SP_Insertar_Tecnologia 'Java'
+EXEC SP_Insertar_Tecnologia 'Scheme'
+EXEC SP_Insertar_Tecnologia 'Prolog'
+EXEC SP_Insertar_Tecnologia 'Github'
+EXEC SP_Insertar_Tecnologia 'Rust'
+EXEC SP_Insertar_Tecnologia 'Visual Studio'
+EXEC SP_Insertar_Tecnologia 'Auspex'
+EXEC SP_Insertar_Tecnologia 'Transonic'
+EXEC SP_Insertar_Tecnologia 'Omnispex'
+EXEC SP_Insertar_Tecnologia 'Vox-caster'
+EXEC SP_Insertar_Tecnologia 'Melta'
+EXEC SP_Insertar_Tecnologia 'Skyfire'
 
 EXEC SP_Insertar_Estudiante '1', '1234', 'gsg4aer6g4ar68g46r5g', 'Drive', 'thrj4=56d3k', 'Gabriel', 'Angelos', '09-0873-0544', 'Gabriel@gmail.com', 85748231, 'Costa Rica', 'San Jose','GabrielA', 'rg38a4gr8a4r3g8a7r4g'
 EXEC SP_Insertar_Estudiante '2', '1234', '4adfn98g4ar65g4ar98n', 'Drive', '45gf3=l4h53', 'Nathaniel','Garro', '02-0623-0463', 'Nathaniel@gmail.com', 89843549, 'Costa Rica', 'San Jose','NathanielG', '8g34arg863a74rgarg38' 
@@ -102,7 +121,6 @@ EXEC SP_Insertar_Mensaje_Trabajo 'Por favor enviarme una propuesta inicial del p
 EXEC SP_Insertar_Respuesta '1', 'Aquí adjunto la propuesta', '', '10/18/2016'
 EXEC SP_Insertar_Mensaje_Trabajo 'Necesito que me envie el perfil de la empresa', '', '10/18/2016', '2'
 
-EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto Drpischel', '10/17/2016', '1'
-
-
+EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto DrPischel', '10/17/2016', '1'
+EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto Barbarras', '10/17/2016', '1'
 
