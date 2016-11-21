@@ -78,6 +78,20 @@
           <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" />
         </EntityType>
+        <EntityType Name="TRABAJO">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="Descripcion" Type="char" MaxLength="500" Nullable="false" />
+          <Property Name="IdEmpresa" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="FechaCierre" Type="date" Nullable="false" />
+          <Property Name="DocumentoAdicional" Type="char" MaxLength="100" />
+          <Property Name="EstrellasObtenidas" Type="tinyint" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
         <EntityType Name="UNIVERSIDAD">
           <Key>
             <PropertyRef Name="Id" />
@@ -293,6 +307,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TRABAJO_POR_EMPRESA">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="TRABAJO" Type="Self.TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TRABAJO">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="SP_Insertar_Empresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="char" Mode="In" />
           <Parameter Name="Contrasena" Type="char" Mode="In" />
@@ -340,6 +366,14 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
           <Parameter Name="Region" Type="char" Mode="In" />
           <Parameter Name="IdUniversidad" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_Insertar_Trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="char" Mode="In" />
+          <Parameter Name="Descripcion" Type="char" Mode="In" />
+          <Parameter Name="IdEmpresa" Type="char" Mode="In" />
+          <Parameter Name="FechaInicio" Type="date" Mode="In" />
+          <Parameter Name="FechaCierre" Type="date" Mode="In" />
+          <Parameter Name="DocumentoAdicional" Type="char" Mode="In" />
+        </Function>
         <Function Name="SP_Select_Cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
@@ -351,6 +385,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
           <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TECNOLOGIA" EntityType="Self.TECNOLOGIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TECNOLOGIA_POR_ESTUDIANTE" EntityType="Self.TECNOLOGIA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRABAJO" EntityType="Self.TRABAJO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UNIVERSIDAD" EntityType="Self.UNIVERSIDAD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VIEW_EMPRESA" EntityType="Self.VIEW_EMPRESA" store:Type="Views" store:Schema="dbo">
@@ -453,6 +488,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
           <AssociationSet Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE" Association="Self.FK_IDTECNOLOGIA_POR_ESTUDIANTE">
             <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
             <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRABAJO_POR_EMPRESA" Association="Self.FK_TRABAJO_POR_EMPRESA">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="TRABAJO" EntitySet="TRABAJO" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -572,6 +611,19 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
             <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
             <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
           </AssociationSet>
+          <EntitySet Name="TRABAJO" EntityType="MyLearnDBModel.TRABAJO" />
+          <AssociationSet Name="FK_TRABAJO_POR_EMPRESA" Association="MyLearnDBModel.FK_TRABAJO_POR_EMPRESA">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="TRABAJO" EntitySet="TRABAJO" />
+          </AssociationSet>
+          <FunctionImport Name="SP_Insertar_Trabajo">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="IdEmpresa" Mode="In" Type="String" />
+            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
+            <Parameter Name="DocumentoAdicional" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
           <Key>
@@ -835,6 +887,32 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TRABAJO">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="false" />
+          <Property Name="IdEmpresa" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DocumentoAdicional" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="EstrellasObtenidas" Type="Byte" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_TRABAJO_POR_EMPRESA">
+          <End Type="MyLearnDBModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
+          <End Type="MyLearnDBModel.TRABAJO" Role="TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TRABAJO">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1021,6 +1099,22 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TRABAJO">
+            <EntityTypeMapping TypeName="MyLearnDBModel.TRABAJO">
+              <MappingFragment StoreEntitySet="TRABAJO">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="EstrellasObtenidas" ColumnName="EstrellasObtenidas" />
+                <ScalarProperty Name="DocumentoAdicional" ColumnName="DocumentoAdicional" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Insertar_Trabajo" FunctionName="MyLearnDBModel.Store.SP_Insertar_Trabajo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

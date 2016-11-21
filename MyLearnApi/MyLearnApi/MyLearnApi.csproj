@@ -211,6 +211,7 @@
     <Compile Include="BusinessLogic\clsEmpresasLogic.cs" />
     <Compile Include="BusinessLogic\clsProfesoresLogic.cs" />
     <Compile Include="BusinessLogic\clsStudentsLogic.cs" />
+    <Compile Include="BusinessLogic\clsTrabajosLogic.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\ProfesoresController.cs" />
     <Compile Include="Controllers\TecnologiasController.cs" />
+    <Compile Include="Controllers\TrabajosController.cs" />
     <Compile Include="Controllers\UniversidadesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -262,6 +264,9 @@
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TECNOLOGIA_POR_ESTUDIANTE.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRABAJO.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UNIVERSIDAD.cs">

@@ -40,6 +40,7 @@ namespace MyLearnApi.Models
         public virtual DbSet<TECNOLOGIA> TECNOLOGIA { get; set; }
         public virtual DbSet<UNIVERSIDAD> UNIVERSIDAD { get; set; }
         public virtual DbSet<TECNOLOGIA_POR_ESTUDIANTE> TECNOLOGIA_POR_ESTUDIANTE { get; set; }
+        public virtual DbSet<TRABAJO> TRABAJO { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {
@@ -292,6 +293,35 @@ namespace MyLearnApi.Models
                 new ObjectParameter("LinkHojaDeVida", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Estudiante", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreParameter, apellidoParameter, carneParameter, emailParameter, telefonoParameter, paisParameter, regionParameter, repositorioCodigoParameter, linkHojaDeVidaParameter);
+        }
+    
+        public virtual int SP_Insertar_Trabajo(string nombre, string descripcion, string idEmpresa, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaCierre, string documentoAdicional)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var idEmpresaParameter = idEmpresa != null ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(string));
+    
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaCierreParameter = fechaCierre.HasValue ?
+                new ObjectParameter("FechaCierre", fechaCierre) :
+                new ObjectParameter("FechaCierre", typeof(System.DateTime));
+    
+            var documentoAdicionalParameter = documentoAdicional != null ?
+                new ObjectParameter("DocumentoAdicional", documentoAdicional) :
+                new ObjectParameter("DocumentoAdicional", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Trabajo", nombreParameter, descripcionParameter, idEmpresaParameter, fechaInicioParameter, fechaCierreParameter, documentoAdicionalParameter);
         }
     }
 }

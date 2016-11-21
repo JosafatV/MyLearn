@@ -181,5 +181,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TRABAJO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.TRABAJO">
+        <MappingFragment StoreEntitySet="TRABAJO">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="EstrellasObtenidas" ColumnName="EstrellasObtenidas" />
+          <ScalarProperty Name="DocumentoAdicional" ColumnName="DocumentoAdicional" />
+          <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

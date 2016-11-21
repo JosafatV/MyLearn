@@ -172,5 +172,30 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TECNOLOGIA_POR_ESTUDIANTE">
+      <EntityTypeMapping TypeName="MyLearnDBModel.TECNOLOGIA_POR_ESTUDIANTE">
+        <MappingFragment StoreEntitySet="TECNOLOGIA_POR_ESTUDIANTE">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="IdTecnologia" ColumnName="IdTecnologia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRABAJO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.TRABAJO">
+        <MappingFragment StoreEntitySet="TRABAJO">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="EstrellasObtenidas" ColumnName="EstrellasObtenidas" />
+          <ScalarProperty Name="DocumentoAdicional" ColumnName="DocumentoAdicional" />
+          <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Insertar_Trabajo" FunctionName="MyLearnDBModel.Store.SP_Insertar_Trabajo" />
   </EntityContainerMapping>
 </Mapping>

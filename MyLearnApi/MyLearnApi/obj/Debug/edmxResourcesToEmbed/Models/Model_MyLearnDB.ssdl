@@ -73,6 +73,20 @@
     <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
+  <EntityType Name="TRABAJO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Descripcion" Type="char" MaxLength="500" Nullable="false" />
+    <Property Name="IdEmpresa" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="FechaInicio" Type="date" />
+    <Property Name="FechaCierre" Type="date" Nullable="false" />
+    <Property Name="DocumentoAdicional" Type="char" MaxLength="100" />
+    <Property Name="EstrellasObtenidas" Type="tinyint" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
   <EntityType Name="UNIVERSIDAD">
     <Key>
       <PropertyRef Name="Id" />
@@ -270,6 +284,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TRABAJO_POR_EMPRESA">
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+    <End Role="TRABAJO" Type="Self.TRABAJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TRABAJO">
+        <PropertyRef Name="IdEmpresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="SP_Insertar_Empresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="char" Mode="In" />
     <Parameter Name="Contrasena" Type="char" Mode="In" />
@@ -328,6 +354,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TECNOLOGIA" EntityType="Self.TECNOLOGIA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TECNOLOGIA_POR_ESTUDIANTE" EntityType="Self.TECNOLOGIA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRABAJO" EntityType="Self.TRABAJO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UNIVERSIDAD" EntityType="Self.UNIVERSIDAD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VIEW_EMPRESA" EntityType="Self.VIEW_EMPRESA" store:Type="Views" store:Schema="dbo">
@@ -430,6 +457,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     <AssociationSet Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE" Association="Self.FK_IDTECNOLOGIA_POR_ESTUDIANTE">
       <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
       <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRABAJO_POR_EMPRESA" Association="Self.FK_TRABAJO_POR_EMPRESA">
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+      <End Role="TRABAJO" EntitySet="TRABAJO" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
