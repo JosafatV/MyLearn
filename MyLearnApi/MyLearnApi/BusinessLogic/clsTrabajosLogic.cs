@@ -154,11 +154,11 @@ namespace MyLearnApi.BusinessLogic
             if (index > li_largoLista)
                 return lobj_resultado;
             //si index y el offset estan dentro del rango
-            else if ((li_largoLista >= (index + lby_offset)))
-                lobj_resultado = lista.GetRange(index, index + lby_offset - 1);
+            else if ((li_largoLista >= (index * lby_offset)))
+                lobj_resultado = lista.GetRange(index  , index * lby_offset - 1);
             //si hay un overflow en el rango devuelve del indice hasta el fin de la lista
             else
-                lobj_resultado = lista.GetRange(index, li_largoLista );
+                lobj_resultado = lista.GetRange(index , li_largoLista-1 );
 
             return lobj_resultado;
 
@@ -177,14 +177,14 @@ namespace MyLearnApi.BusinessLogic
             //obtengo el rango que se necesita
             int li_largoLista = lista.Count;
             //si el indice esta fuera del rango de la lista
-            if (index > li_largoLista)
+            if (index * lby_offset > (li_largoLista-1))
                 return lobj_resultado;
             //si index y el offset estan dentro del rango
-            else if ((li_largoLista >= (index + lby_offset)))
-                lobj_resultado = lista.GetRange(index, index + lby_offset - 1);
+            else if ((li_largoLista > (index * lby_offset + lby_offset -1 )))
+                lobj_resultado = lista.GetRange(index * lby_offset , index * lby_offset + lby_offset);
             //si hay un overflow en el rango devuelve del indice hasta el fin de la lista
             else
-                lobj_resultado = lista.GetRange(index, li_largoLista);
+                lobj_resultado = lista.GetRange(index * lby_offset , li_largoLista);
 
             return lobj_resultado;
 

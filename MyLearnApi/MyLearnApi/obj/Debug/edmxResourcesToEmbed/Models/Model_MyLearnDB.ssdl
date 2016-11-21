@@ -85,6 +85,7 @@
     <Property Name="FechaCierre" Type="date" Nullable="false" />
     <Property Name="DocumentoAdicional" Type="char" MaxLength="100" />
     <Property Name="EstrellasObtenidas" Type="tinyint" />
+    <Property Name="PresupuestoBase" Type="float" />
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="UNIVERSIDAD">
@@ -187,6 +188,29 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     <Property Name="Region" Type="char" MaxLength="30" />
     <Property Name="IdUniversidad" Type="int" Nullable="false" />
     <Property Name="Universidad" Type="char" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VIEW_TRABAJO">
+    <Key>
+      <PropertyRef Name="IdTrabajo" />
+    </Key>
+    <Property Name="FechaFinalizacion" Type="varchar" MaxLength="10" />
+    <Property Name="Monto" Type="int" />
+    <Property Name="Comentario" Type="char" MaxLength="300" />
+    <Property Name="IdTrabajo" Type="int" Nullable="false" />
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="ApellidoContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Descripcion" Type="char" MaxLength="500" Nullable="false" />
+    <Property Name="IdEmpresa" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="FechaInicioSubasta" Type="varchar" MaxLength="10" />
+    <Property Name="FechaCierreSubasta" Type="varchar" MaxLength="10" />
+    <Property Name="DocumentoAdicional" Type="char" MaxLength="100" />
+    <Property Name="EstrellasObtenidas" Type="tinyint" />
+    <Property Name="EstadoTrabajo" Type="char" MaxLength="1" />
+    <Property Name="EstadoTrabajoPorEstudiante" Type="char" MaxLength="1" />
   </EntityType>
   <Association Name="FK_EMPRESA_ID">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
@@ -343,6 +367,15 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     <Parameter Name="Region" Type="char" Mode="In" />
     <Parameter Name="IdUniversidad" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_Insertar_Trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="char" Mode="In" />
+    <Parameter Name="Descripcion" Type="char" Mode="In" />
+    <Parameter Name="IdEmpresa" Type="char" Mode="In" />
+    <Parameter Name="FechaInicio" Type="date" Mode="In" />
+    <Parameter Name="FechaCierre" Type="date" Mode="In" />
+    <Parameter Name="DocumentoAdicional" Type="char" Mode="In" />
+    <Parameter Name="presupuesto" Type="float" Mode="In" />
+  </Function>
   <Function Name="SP_Select_Cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="int" Mode="In" />
   </Function>
@@ -425,6 +458,26 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     [VIEW_PROFESOR].[IdUniversidad] AS [IdUniversidad], 
     [VIEW_PROFESOR].[Universidad] AS [Universidad]
     FROM [dbo].[VIEW_PROFESOR] AS [VIEW_PROFESOR]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VIEW_TRABAJO" EntityType="Self.VIEW_TRABAJO" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VIEW_TRABAJO].[FechaFinalizacion] AS [FechaFinalizacion], 
+    [VIEW_TRABAJO].[Monto] AS [Monto], 
+    [VIEW_TRABAJO].[Comentario] AS [Comentario], 
+    [VIEW_TRABAJO].[IdTrabajo] AS [IdTrabajo], 
+    [VIEW_TRABAJO].[IdEstudiante] AS [IdEstudiante], 
+    [VIEW_TRABAJO].[NombreContacto] AS [NombreContacto], 
+    [VIEW_TRABAJO].[ApellidoContacto] AS [ApellidoContacto], 
+    [VIEW_TRABAJO].[Nombre] AS [Nombre], 
+    [VIEW_TRABAJO].[Descripcion] AS [Descripcion], 
+    [VIEW_TRABAJO].[IdEmpresa] AS [IdEmpresa], 
+    [VIEW_TRABAJO].[FechaInicioSubasta] AS [FechaInicioSubasta], 
+    [VIEW_TRABAJO].[FechaCierreSubasta] AS [FechaCierreSubasta], 
+    [VIEW_TRABAJO].[DocumentoAdicional] AS [DocumentoAdicional], 
+    [VIEW_TRABAJO].[EstrellasObtenidas] AS [EstrellasObtenidas], 
+    [VIEW_TRABAJO].[EstadoTrabajo] AS [EstadoTrabajo], 
+    [VIEW_TRABAJO].[EstadoTrabajoPorEstudiante] AS [EstadoTrabajoPorEstudiante]
+    FROM [dbo].[VIEW_TRABAJO] AS [VIEW_TRABAJO]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_EMPRESA_ID" Association="Self.FK_EMPRESA_ID">
       <End Role="USUARIO" EntitySet="USUARIO" />
