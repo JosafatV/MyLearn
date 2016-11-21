@@ -40,23 +40,23 @@
 					              <div class="form-group">
 					                <br>
 					                <label for="nombre">Nombre del Proyecto:</label>
-					                <input  class="form-control" id="nombre"type="tect">
+					                <input  class="form-control" id="nombre"type="tect" data-ng-model="js_crearSubasta.Nombre">
 					              </div>
 												<div class="form-group">
 					                <br>
 					                <label for="presupuesto">Presupuesto Disponible:</label>
-					                <input  class="form-control" id="nombre"type="text">
+					                <input  class="form-control" id="nombre"type="text" data-ng-model="js_crearSubasta.PresupuestoBase">
 					              </div>
 												<div class="form-group">
 					                <br>
 					                <label for="fecha">Fecha Límite para recibir ofertas:</label>
-					                <input  class="form-control" id="nombre"type="date">
+					                <input  class="form-control" id="nombre"type="date" data-ng-model="js_crearSubasta.FechaCierre">
 					              </div>
 											</div>
 											<div class="col-md-10">
 												<div class="form-group">
 													<label for="mensaje">Descripción</label>
-													<textarea class="form-control" id="mensaje"></textarea>
+													<textarea class="form-control" id="mensaje" data-ng-model="js_crearSubasta.Descripcion"></textarea>
 													<br>
 													<div class="form-group">
 														<label for="mensaje">Tecnologías a utilizar</label>
@@ -65,7 +65,7 @@
 														<div class="container">
 															<div class="col-md-10">
 																<div class="col-md-offset-0">
-																	<a class="btn btn-tcc btn-default btn-lg">Crear</a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+																	<a class="btn btn-tcc btn-default btn-lg" data-ng-click="set_newSubasta()">Crear</a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
 																	<a class="btn btn-danger btn-lg">Cancelar</a>
 																</div>
 															</div>
