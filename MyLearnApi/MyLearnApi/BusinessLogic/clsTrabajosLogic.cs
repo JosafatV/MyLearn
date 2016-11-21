@@ -19,13 +19,13 @@ namespace MyLearnApi.BusinessLogic
         /// Retorna los trabajos activos
         /// </summary>
         /// <returns></returns>
-        public List<TRABAJO> getTrabajoActivos(string idEmpresa, int index)
+        public List<VIEW_TRABAJO> getTrabajoActivos(string idEmpresa, int index)
         {
             //retorna los proyectos activos
-            List<TRABAJO> listaTrabajos = db.TRABAJO
-                .Where(trab => trab.Estado == "A" && trab.IdEmpresa == idEmpresa  )
-                .OrderBy(trab => trab.FechaCierre)
-                .ToList<TRABAJO>();
+            List<VIEW_TRABAJO> listaTrabajos = db.VIEW_TRABAJO
+                .Where(trab => trab.EstadoTrabajo == "A" && trab.IdEmpresa == idEmpresa  )
+                .OrderBy(trab => trab.FechaFinalizacion)
+                .ToList<VIEW_TRABAJO>();
             //pagina el resultado de 20 en 20
             return algoritmoPaginacion(listaTrabajos, index, 20);
         }
@@ -36,14 +36,14 @@ namespace MyLearnApi.BusinessLogic
         /// </summary>
         /// <param name="idEmpresa"></param>
         /// <returns></returns>
-        public List<VIEW_TRABAJO> getSubastasdeTrabajosActivas(string idEmpresa, int index)
+        public List<TRABAJO> getSubastasdeTrabajosActivas(string idEmpresa, int index)
         {
             //estado "P" de trabajo pendiente, o sea es una subasta
 
-            List<VIEW_TRABAJO> listaTrabajos = db.VIEW_TRABAJO
-                .Where(trab => trab.EstadoTrabajo == "P" && trab.IdEmpresa == idEmpresa)
-                .OrderBy(trab => trab.FechaFinalizacion)
-                .ToList<VIEW_TRABAJO>();
+            List<TRABAJO> listaTrabajos = db.TRABAJO
+                .Where(trab => trab.Estado == "P" && trab.IdEmpresa == idEmpresa)
+                .OrderBy(trab => trab.FechaCierre)
+                .ToList<TRABAJO>();
             //pagina el resultado de 20 en 20
             return algoritmoPaginacion(listaTrabajos, index, 20);
         }
