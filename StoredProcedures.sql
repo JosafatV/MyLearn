@@ -73,6 +73,7 @@ CREATE PROCEDURE SP_Insertar_Empresa
 		VALUES (@Id, @NombreContacto, @ApellidoContacto, @NombreEmpresarial, @Email, @Telefono, getDate(),
 		@PaginaWebEmpresa, @Pais, @Region) 
 	GO
+
 //no se usa
 CREATE PROCEDURE SP_Insertar_Admin
 @Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
@@ -84,7 +85,8 @@ CREATE PROCEDURE SP_Insertar_Admin
 		INSERT INTO USUARIO_XMP (Id, NombreContacto, ApellidoContacto)
 		VALUES (@Id, @Nombre, @ApellidoContacto) 
 	GO
-/*  NO SE USAN PORQUE MADRIZ LAS QUITO DE LAS FUNCIONALIDADES
+
+/* 	PUNTOS EXTRA
 CREATE PROCEDURE SP_Insertar_Tecnologia @Nombre CHAR(30)
 	AS
 		INSERT INTO TECNOLOGIA (Nombre, Estado)
@@ -97,8 +99,10 @@ CREATE PROCEDURE SP_Insertar_Universidad @Nombre CHAR(30)
 		VALUES (@Nombre, 'A')
 	GO
 */
-/*****************MULTI-PARTED INSERTS*****************/
 
+
+
+/*****************MULTI-PARTED INSERTS*****************/
 
 /********** UNIVERSIDAD **********/
 CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30), @Codigo CHAR(10), @IdUniversidad INT, @NotaMinima tinyINT
@@ -154,9 +158,7 @@ CREATE PROCEDURE SP_Insertar_Propuesta_Proyecto @IdEstudiante CHAR(100), @Nombre
 	GO
 
 
-/*	YA NO SE USA
-
-
+/*	PUNTOS EXTRA
 	/*Marks a proyect proposition as an active project and asigns it badges*/
 CREATE PROCEDURE SP_Aceptar_Proyecto @IdProfesor CHAR(100), @IdPropuesta INT, @IdCurso INT 
 	AS
@@ -177,7 +179,6 @@ CREATE PROCEDURE SP_Aceptar_Proyecto @IdProfesor CHAR(100), @IdPropuesta INT, @I
 			FROM BADGE 
 			WHERE BADGE.IdCurso=@IdCurso
 	GO
-
 */
 
 /********** COMPAÑIAS **********/
@@ -243,13 +244,6 @@ CREATE PROCEDURE SP_Insertar_Respuesta @MensajeRaiz BIGINT, @Contenido CHAR(500)
 		VALUES (@MensajeRaiz, @Contenido, @Adjunto, @Fecha)
 	GO
 
-/*Automatizar?*/
-CREATE PROCEDURE SP_Insertar_Notificacion @Contenido CHAR(500), @Fecha DATETIME, @UserId CHAR(100)
-	AS
-		INSERT INTO NOTIFICACION (Contenido, Fecha, UserId, Estado)
-		VALUES (@Contenido, @Fecha, @UserId, 'A')
-	GO
-
 CREATE PROCEDURE SP_Asignar_Tecnologia_Proyecto @IdProyecto INT, @IdTecnologia INT
 	AS
 		INSERT INTO TECNOLOGIA_POR_PROYECTO (IdProyecto, IdTecnologia, Estado)
@@ -262,8 +256,15 @@ CREATE PROCEDURE SP_Asignar_Tecnologia_Trabajo @IdTrabajo INT, @IdTecnologia INT
 		VALUES (@IdTrabajo, @IdTecnologia, 'A')
 	GO
 
+/*Automatizar?*/
+CREATE PROCEDURE SP_Insertar_Notificacion @Contenido CHAR(500), @Fecha DATETIME, @UserId CHAR(100)
+	AS
+		INSERT INTO NOTIFICACION (Contenido, Fecha, UserId, Estado)
+		VALUES (@Contenido, @Fecha, @UserId, 'A')
+	GO
 
 
+/*My Employee*/
 
 
 

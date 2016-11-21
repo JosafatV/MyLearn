@@ -106,12 +106,37 @@ EXEC SP_Aceptar_Proyecto '1', '1', '1'
 EXEC SP_Insertar_Trabajo 'Decripción de STCs', 'Gran cantidad de informacion se encuentra en este STC, es necesario decriptarlo', '20', '11/10/2016', '12/01/2016', ''
 EXEC SP_Asignar_Tecnologia_Trabajo '1', '1'
 EXEC SP_Asignar_Tecnologia_Trabajo '1', '2'
+
 EXEC SP_Insertar_Trabajo 'DrPischel', 'Para ser más competitivo la farmacia DrPischel desea crear un sistema de atención en línea, donde los usuarios puedan pre-ordenar medicamentos para facilitar su recolección', '20', '10/17/2016', '11/26/2016', ''
 EXEC SP_Asignar_Tecnologia_Trabajo '2', '1'
 EXEC SP_Asignar_Tecnologia_Trabajo '2', '3'
+
+EXEC SP_Insertar_Trabajo 'Lectura de Labios', 'El fin de este trabajo es reconocer frases y oraciones dichas por un rostro hablando, con o sin audio', '22', '10/16/2016', '11/30/2016', ''
+EXEC SP_Asignar_Tecnologia_Trabajo '3', '13'
+EXEC SP_Asignar_Tecnologia_Trabajo '3', '17'
+
+EXEC SP_Insertar_Trabajo 'Relojes galacticos', 'Necesitamos desarrolladores que ayuden a implementar los nuevos relojes galacticos en las consolas de la flota imperial', '23', '10/18/2016', '11/29/2016', ''
+EXEC SP_Asignar_Tecnologia_Trabajo '3', '2'
+EXEC SP_Asignar_Tecnologia_Trabajo '3', '11'
+EXEC SP_Asignar_Tecnologia_Trabajo '3', '15'
+
+EXEC SP_Insertar_Trabajo 'Multi-tecnologias', 'Buscamos crear nuevas formas de tecnologias multi-. Gran oportunidad de aprender sobre las tecnologias del Imperio', '24', '10/18/2016', '11/29/2016', ''
+EXEC SP_Asignar_Tecnologia_Trabajo '3', '2'
+EXEC SP_Asignar_Tecnologia_Trabajo '3', '11'
+EXEC SP_Asignar_Tecnologia_Trabajo '3', '15'
+
 						
 EXEC SP_Insertar_Propuesta_Subasta 2, '1', 35000, 'Knowledge is power, Guard it well!'
+EXEC SP_Insertar_Propuesta_Subasta 5, '1', 95000, 'Knowledge is power, Guard it well!'
 EXEC SP_Insertar_Propuesta_Subasta 2, '2', 55000, 'Sisters, we must go as Martyrs! We must go up in flames!'
+EXEC SP_Insertar_Propuesta_Subasta 3, '3', 75000, 'The Flesh is Weak!'
+EXEC SP_Insertar_Propuesta_Subasta 1, '4', 37000, 'All is dust! All is dust! All is dust!'
+EXEC SP_Insertar_Propuesta_Subasta 4, '5', 40000, 'Iron within! Iron Without!'
+EXEC SP_Insertar_Propuesta_Subasta 5, '5', 80000, 'Iron within! Iron Without!'
+EXEC SP_Insertar_Propuesta_Subasta 3, '6', 85000, 'For the Emperor!'
+EXEC SP_Insertar_Propuesta_Subasta 5, '7', 73000, 'For Lupercal!'
+EXEC SP_Insertar_Propuesta_Subasta 1, '8', 25000, 'There is only the Emperor!'
+EXEC SP_Insertar_Propuesta_Subasta 4, '9', 46000, 'No pity! No remorse! No fear!'
 								
 EXEC SP_Aceptar_Subasta '2', '1'
 
