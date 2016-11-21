@@ -4,6 +4,7 @@
     <EntitySetMapping Name="ESTUDIANTE">
       <EntityTypeMapping TypeName="MyLearnDBModel.ESTUDIANTE">
         <MappingFragment StoreEntitySet="ESTUDIANTE">
+          <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
           <ScalarProperty Name="LinkHojaDeVida" ColumnName="LinkHojaDeVida" />
           <ScalarProperty Name="RepositorioCodigo" ColumnName="RepositorioCodigo" />
           <ScalarProperty Name="FechaInscripcion" ColumnName="FechaInscripcion" />
@@ -62,6 +63,7 @@
     <EntitySetMapping Name="VIEW_ESTUDIANTE">
       <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_ESTUDIANTE">
         <MappingFragment StoreEntitySet="VIEW_ESTUDIANTE">
+          <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
           <ScalarProperty Name="CredencialDrive" ColumnName="CredencialDrive" />
           <ScalarProperty Name="RepositorioArchivos" ColumnName="RepositorioArchivos" />

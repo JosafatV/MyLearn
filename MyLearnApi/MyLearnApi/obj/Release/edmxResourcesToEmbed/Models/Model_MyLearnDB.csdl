@@ -90,6 +90,7 @@
       <Parameter Name="Telefono" Mode="In" Type="String" />
       <Parameter Name="Pais" Mode="In" Type="String" />
       <Parameter Name="Region" Mode="In" Type="String" />
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
       <Parameter Name="RepositorioCodigo" Mode="In" Type="String" />
       <Parameter Name="LinkHojaDeVida" Mode="In" Type="String" />
     </FunctionImport>
@@ -159,6 +160,10 @@
       <End Role="TRABAJO" EntitySet="TRABAJO" />
       <End Role="TECNOLOGIA_POR_TRABAJO" EntitySet="TECNOLOGIA_POR_TRABAJO" />
     </AssociationSet>
+    <AssociationSet Name="FK_ESTUDIANTE_UNIVERSIDAD" Association="MyLearnDBModel.FK_ESTUDIANTE_UNIVERSIDAD">
+      <End Role="UNIVERSIDAD" EntitySet="UNIVERSIDAD" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -176,7 +181,7 @@
     <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="RepositorioCodigo" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="LinkHojaDeVida" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="TRABAJO_POR_ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE" FromRole="ESTUDIANTE" ToRole="TRABAJO_POR_ESTUDIANTE" />
+    <Property Name="IdUniversidad" Type="Int32" />
   </EntityType>
   <EntityType Name="USUARIO">
     <Key>
@@ -271,6 +276,7 @@
     <Property Name="RepositorioArchivos" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="IdUniversidad" Type="Int32" />
   </EntityType>
   <EntityType Name="EMPRESA">
     <Key>
@@ -389,6 +395,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="ESTUDIANTE" Relationship="MyLearnDBModel.FK_ESTUDIANTE_UNIVERSIDAD" FromRole="UNIVERSIDAD" ToRole="ESTUDIANTE" />
   </EntityType>
   <EntityType Name="TECNOLOGIA_POR_ESTUDIANTE">
     <Key>
@@ -558,6 +565,18 @@
       </Principal>
       <Dependent Role="TECNOLOGIA_POR_TRABAJO">
         <PropertyRef Name="IdTrabajo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ESTUDIANTE_UNIVERSIDAD">
+    <End Type="MyLearnDBModel.UNIVERSIDAD" Role="UNIVERSIDAD" Multiplicity="0..1" />
+    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UNIVERSIDAD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ESTUDIANTE">
+        <PropertyRef Name="IdUniversidad" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

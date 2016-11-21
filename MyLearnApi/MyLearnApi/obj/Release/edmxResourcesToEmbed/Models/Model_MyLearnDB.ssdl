@@ -29,6 +29,7 @@
     <Property Name="Foto" Type="char" MaxLength="30" />
     <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
     <Property Name="Region" Type="char" MaxLength="30" />
+    <Property Name="IdUniversidad" Type="int" />
     <Property Name="FechaInscripcion" Type="date" Nullable="false" />
     <Property Name="RepositorioCodigo" Type="char" MaxLength="100" />
     <Property Name="LinkHojaDeVida" Type="char" MaxLength="100" />
@@ -173,6 +174,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
     <Property Name="Telefono" Type="char" MaxLength="15" Nullable="false" />
     <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
     <Property Name="Region" Type="char" MaxLength="30" />
+    <Property Name="IdUniversidad" Type="int" />
     <Property Name="FechaInscripcion" Type="date" Nullable="false" />
     <Property Name="RepositorioCodigo" Type="char" MaxLength="100" />
     <Property Name="LinkHojaDeVida" Type="char" MaxLength="100" />
@@ -287,6 +289,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Principal>
       <Dependent Role="ESTUDIANTE">
         <PropertyRef Name="Pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ESTUDIANTE_UNIVERSIDAD">
+    <End Role="UNIVERSIDAD" Type="Self.UNIVERSIDAD" Multiplicity="0..1" />
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UNIVERSIDAD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ESTUDIANTE">
+        <PropertyRef Name="IdUniversidad" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -439,6 +453,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Parameter Name="Telefono" Type="char" Mode="In" />
     <Parameter Name="Pais" Type="char" Mode="In" />
     <Parameter Name="Region" Type="char" Mode="In" />
+    <Parameter Name="IdUniversidad" Type="int" Mode="In" />
     <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
     <Parameter Name="LinkHojaDeVida" Type="char" Mode="In" />
   </Function>
@@ -516,6 +531,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     [VIEW_ESTUDIANTE].[Telefono] AS [Telefono], 
     [VIEW_ESTUDIANTE].[Pais] AS [Pais], 
     [VIEW_ESTUDIANTE].[Region] AS [Region], 
+    [VIEW_ESTUDIANTE].[IdUniversidad] AS [IdUniversidad], 
     [VIEW_ESTUDIANTE].[FechaInscripcion] AS [FechaInscripcion], 
     [VIEW_ESTUDIANTE].[RepositorioCodigo] AS [RepositorioCodigo], 
     [VIEW_ESTUDIANTE].[LinkHojaDeVida] AS [LinkHojaDeVida], 
@@ -590,6 +606,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </AssociationSet>
     <AssociationSet Name="FK_ESTUDIANTE_PAIS" Association="Self.FK_ESTUDIANTE_PAIS">
       <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ESTUDIANTE_UNIVERSIDAD" Association="Self.FK_ESTUDIANTE_UNIVERSIDAD">
+      <End Role="UNIVERSIDAD" EntitySet="UNIVERSIDAD" />
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
