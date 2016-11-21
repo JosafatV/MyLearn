@@ -1,0 +1,77 @@
+﻿<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../Scripts/Angular and Bootstrap/Bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_login.css">
+</head>
+<header>
+		<div class="wrapper">
+			<div class="logo">Ofertas Disponibles
+				<div class="img">
+                    <a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
+				</div>
+			</div>
+			<nav>
+				<a data-ng-click="do_goPerfil()">Mi Perfil</a>
+                <a data-ng-click="do_goCrearSubasta()">Crear Subasta</a>
+				<a>Ayuda en Linea</a>
+				<a>Cerrar Sesión</a>
+			</nav>
+		</div>
+</header>
+<br><br><br>
+<body>
+	<div class="container-fluid">
+		<section class="main row">
+				<article class="col-md-12">
+					<h3>Nombre del Proyecto: {{nombreProyecto}}</h3><br>
+					<h3>Presupuesto Asignado: ${{presupuestoBasex}}</h3>
+			</article>
+
+			</div>
+
+		</section>
+		<br><br><br>
+		<div class="container-fluid pr2">
+			<div class="col-md-2">
+					<h1 class="pr1"><span class="glyphicon glyphicon-arrow-left" data-ng-click="do_goPerfil()"></span> Mi Perfil</h1>
+
+				</div>
+
+
+			</div>
+
+
+			<div class="col-md-9 color1">
+					<div class="col-md-offset-4">
+						<h2>Ofertas Recibidas:</h2><br>
+						<table class="table table-bordered table-hover table-condensed prom1">
+								<tr>
+										<th>Fecha de Finalización</th>
+										<th>Ofertante</th>
+										<th>Pago Solicitado</th>
+										<th>Estado</th>
+								</tr>
+                            <tr data-ng-repeat="propuesta in ls_propuestas  | filter: search">
+                                <td>{{propuesta.FechaFinalizacion}}</td>
+                                <td>{{propuesta.NombreContacto}}</td>
+                                <td>{{propuesta.Monto}}</td>
+                                <td><a class="btn btn-tcc btn-default btn-md" data-ng-click="do_aceptarPropuesta(propuesta)">Aceptar</a></td>
+                            </tr>
+					</table> <br><br>
+
+
+					</div>
+
+
+		</div>
+
+
+
+	</body>
+
+	<script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script
+</html>

@@ -59,15 +59,15 @@
 
         $scope.get_20MoreSubastas = function () {
             $scope.num_indexSubastas = $scope.num_indexSubastas + 1;
-            fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexTrabajos }).$promise.then(function (data) {
-                $scope.ls_trabajos = data;
+            fct_MyLearn_API_Client.query({ type: 'Subastas', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexSubastas }).$promise.then(function (data) {
+                $scope.ls_subastas = data;
             });
         };
 
-        $scope.get_20LessSubastas = function () {
+        $scope.get_20LessSubasta = function () {
             $scope.num_indexSubastas = $scope.num_indexSubastas - 1;
-            fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexSubastas }).$promise.then(function (data) {
-                $scope.ls_trabajos = data;
+            fct_MyLearn_API_Client.query({ type: 'Subastas', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexSubastas }).$promise.then(function (data) {
+                $scope.ls_subastas = data;
             });
         };
 
@@ -76,6 +76,11 @@
             fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexTrabajos }).$promise.then(function (data) {
                 $scope.ls_trabajos = data;
             });
+        };
+
+        $scope.do_goSubastas = function (subasta) {
+            //alert(angular.toJson(subasta.IdEmpresa));
+            $location.path("/MyLearn/Empresa/Subasta/" + parseInt(subasta.Id) + "/" + parseInt(subasta.IdEmpresa) +  "/" + subasta.Nombre +  "/" + parseInt(subasta.PresupuestoBase));
         };
 
         vm.do_goLogin = function () {

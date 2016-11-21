@@ -1,7 +1,12 @@
 ﻿angular.module('mod_MyLearn').controller('ctrl_crearCuentaProfesor', ['$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService',
     function ($q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService) {
 
+        $scope.universidadSelected = "";
+        $scope.ls_listaUniversidades = [];
 
+        fct_MyLearn_API_Client.query({ type: 'Universidades' }).$promise.then(function (data) {
+            $scope.ls_listaUniversidades = data;
+        });
 
         $scope.crearCuentaJson =
            {
@@ -33,6 +38,10 @@
             $scope.listaPaises = data;
         });
 
+        $scope.changeUniversidad = function () {
+            $scope.crearCuentaJson.IdUniversidad = $scope.universidadSelected.Id;
+        };
+
 
         $scope.changePais = function () {
             $scope.crearCuentaJson.Pais = $scope.paisSelected.Pais1;
@@ -43,7 +52,6 @@
         };
 
         $scope.sendCuenta = function () {
-            alert(angular.toJson($scope.crearCuentaJson));
             fct_MyLearn_API_Client.save({ type: 'Profesores' }, $scope.crearCuentaJson);
 
         }

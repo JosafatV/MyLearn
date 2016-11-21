@@ -287,6 +287,7 @@
     <Content Include="Scripts\app\Empresa\ctrl_crearCuentaEmpresa.js" />
     <Content Include="Scripts\app\Empresa\ctrl_crearSubasta.js" />
     <Content Include="Scripts\app\Empresa\ctrl_perfilEmpresa.js" />
+    <Content Include="Scripts\app\Empresa\ctrl_subasta.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_crearCuentaEstudiante.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_cursosDisponibles.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_ofertarSubasta.js" />
@@ -393,6 +394,7 @@
     <Content Include="Vistas\Empresa\CrearSubasta.html" />
     <Content Include="Vistas\Empresa\Crear_CuentaEmpresa.html" />
     <Content Include="Vistas\Empresa\Perfil_Empresa.html" />
+    <Content Include="Vistas\Empresa\Subasta_Empresa.html" />
     <Content Include="Vistas\Estilo\css\Estilos_AreaTEC.css" />
     <Content Include="Vistas\Estilo\css\Estilos_AreaTEE.css" />
     <Content Include="Vistas\Estilo\css\Estilos_AreaTPC.css" />

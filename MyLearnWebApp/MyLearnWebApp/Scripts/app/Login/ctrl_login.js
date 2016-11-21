@@ -12,7 +12,7 @@
             $location.path("/MyLearn/Estudiante/CrearCuenta");
         };
 
-        $scope.goCrearProfesor = function () {
+        $scope.goCrearCuentaProfesor = function () {
             $location.path("/MyLearn/Profesor/CrearCuenta");
         };
 

@@ -24,6 +24,11 @@
         controller: 'ctrl_crearSubasta'
     })
 
+    .when('/MyLearn/Empresa/Subasta/:id/:idEmp/:nombre/:presupuesto', {
+        templateUrl: 'Vistas/Empresa/Subasta_Empresa.html',
+        controller: 'ctrl_subasta'
+    })
+
 /*-------------------------------------Estudiante----------------------------------------*/
 
     .when('/MyLearn/Estudiante/CrearCuenta', {
