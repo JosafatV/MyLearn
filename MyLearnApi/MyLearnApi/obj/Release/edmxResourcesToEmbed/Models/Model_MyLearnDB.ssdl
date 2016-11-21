@@ -88,6 +88,18 @@
     <Property Name="PresupuestoBase" Type="float" />
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
+  <EntityType Name="TRABAJO_POR_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdTrabajo" />
+      <PropertyRef Name="IdEstudiante" />
+    </Key>
+    <Property Name="IdTrabajo" Type="int" Nullable="false" />
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Monto" Type="int" />
+    <Property Name="FechaFinalizacion" Type="date" />
+    <Property Name="Comentario" Type="char" MaxLength="300" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
   <EntityType Name="UNIVERSIDAD">
     <Key>
       <PropertyRef Name="Id" />
@@ -284,6 +296,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE">
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+    <End Role="TRABAJO_POR_ESTUDIANTE" Type="Self.TRABAJO_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TRABAJO_POR_ESTUDIANTE">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
     <End Role="IDIOMA" Type="Self.IDIOMA" Multiplicity="1" />
     <End Role="IDIOMA_POR_ESTUDIANTE" Type="Self.IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
@@ -308,6 +332,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE">
+    <End Role="TRABAJO" Type="Self.TRABAJO" Multiplicity="1" />
+    <End Role="TRABAJO_POR_ESTUDIANTE" Type="Self.TRABAJO_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TRABAJO_POR_ESTUDIANTE">
+        <PropertyRef Name="IdTrabajo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TRABAJO_POR_EMPRESA">
     <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
     <End Role="TRABAJO" Type="Self.TRABAJO" Multiplicity="*" />
@@ -320,6 +356,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_Aceptar_Subasta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdSubasta" Type="int" Mode="In" />
+    <Parameter Name="IdEstudiante" Type="char" Mode="In" />
+  </Function>
   <Function Name="SP_Insertar_Empresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="char" Mode="In" />
     <Parameter Name="Contrasena" Type="char" Mode="In" />
@@ -388,6 +428,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <EntitySet Name="TECNOLOGIA" EntityType="Self.TECNOLOGIA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TECNOLOGIA_POR_ESTUDIANTE" EntityType="Self.TECNOLOGIA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TRABAJO" EntityType="Self.TRABAJO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRABAJO_POR_ESTUDIANTE" EntityType="Self.TRABAJO_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UNIVERSIDAD" EntityType="Self.UNIVERSIDAD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VIEW_EMPRESA" EntityType="Self.VIEW_EMPRESA" store:Type="Views" store:Schema="dbo">
@@ -503,6 +544,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
       <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
     </AssociationSet>
+    <AssociationSet Name="FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE">
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="TRABAJO_POR_ESTUDIANTE" EntitySet="TRABAJO_POR_ESTUDIANTE" />
+    </AssociationSet>
     <AssociationSet Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
       <End Role="IDIOMA" EntitySet="IDIOMA" />
       <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
@@ -510,6 +555,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <AssociationSet Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE" Association="Self.FK_IDTECNOLOGIA_POR_ESTUDIANTE">
       <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
       <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE" Association="Self.FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE">
+      <End Role="TRABAJO" EntitySet="TRABAJO" />
+      <End Role="TRABAJO_POR_ESTUDIANTE" EntitySet="TRABAJO_POR_ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_TRABAJO_POR_EMPRESA" Association="Self.FK_TRABAJO_POR_EMPRESA">
       <End Role="EMPRESA" EntitySet="EMPRESA" />

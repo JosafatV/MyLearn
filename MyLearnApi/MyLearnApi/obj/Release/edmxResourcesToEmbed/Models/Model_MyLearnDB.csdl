@@ -128,6 +128,19 @@
       <Parameter Name="presupuesto" Mode="In" Type="Double" />
     </FunctionImport>
     <EntitySet Name="VIEW_TRABAJO" EntityType="MyLearnDBModel.VIEW_TRABAJO" />
+    <EntitySet Name="TRABAJO_POR_ESTUDIANTE" EntityType="MyLearnDBModel.TRABAJO_POR_ESTUDIANTE" />
+    <AssociationSet Name="FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE">
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="TRABAJO_POR_ESTUDIANTE" EntitySet="TRABAJO_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE">
+      <End Role="TRABAJO" EntitySet="TRABAJO" />
+      <End Role="TRABAJO_POR_ESTUDIANTE" EntitySet="TRABAJO_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <FunctionImport Name="SP_Aceptar_Subasta">
+      <Parameter Name="IdSubasta" Mode="In" Type="Int32" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -145,6 +158,7 @@
     <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="RepositorioCodigo" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="LinkHojaDeVida" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="TRABAJO_POR_ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE" FromRole="ESTUDIANTE" ToRole="TRABAJO_POR_ESTUDIANTE" />
   </EntityType>
   <EntityType Name="USUARIO">
     <Key>
@@ -405,6 +419,7 @@
     <Property Name="EstrellasObtenidas" Type="Byte" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="PresupuestoBase" Type="Double" />
+    <NavigationProperty Name="TRABAJO_POR_ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE" FromRole="TRABAJO" ToRole="TRABAJO_POR_ESTUDIANTE" />
   </EntityType>
   <Association Name="FK_TRABAJO_POR_EMPRESA">
     <End Type="MyLearnDBModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
@@ -439,4 +454,40 @@
     <Property Name="EstadoTrabajo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="EstadoTrabajoPorEstudiante" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
   </EntityType>
+  <EntityType Name="TRABAJO_POR_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdTrabajo" />
+      <PropertyRef Name="IdEstudiante" />
+    </Key>
+    <Property Name="IdTrabajo" Type="Int32" Nullable="false" />
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Monto" Type="Int32" />
+    <Property Name="FechaFinalizacion" Type="DateTime" Precision="0" />
+    <Property Name="Comentario" Type="String" MaxLength="300" FixedLength="true" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TRABAJO_POR_ESTUDIANTE" Role="TRABAJO_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TRABAJO_POR_ESTUDIANTE">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.TRABAJO" Role="TRABAJO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TRABAJO_POR_ESTUDIANTE" Role="TRABAJO_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TRABAJO_POR_ESTUDIANTE">
+        <PropertyRef Name="IdTrabajo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

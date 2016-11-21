@@ -6,6 +6,9 @@ GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Propuesta_Subasta')
 DROP PROCEDURE SP_Insertar_Propuesta_Subasta   
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Rechazar_Demas_Subastas')
+DROP PROCEDURE SP_Rechazar_Demas_Subastas  
+GO
 
 
 
@@ -200,19 +203,19 @@ CREATE PROCEDURE SP_Insertar_Propuesta_Subasta @IdTrabajo INT, @IdEstudiante CHA
 	GO
 
 	/*accepts an offer to an auction, canceling all others*/
-CREATE PROCEDURE SP_Aceptar_Subasta @IdSubasta CHAR(1), @IdEstudiante CHAR(100)
+CREATE PROCEDURE SP_Rechazar_Demas_Subastas @IdSubasta INT, @IdEstudiante CHAR(100)
 	AS
 		UPDATE TRABAJO_POR_ESTUDIANTE
 		SET Estado='X'
-		WHERE IdTrabajo=@IdSubasta
+		WHERE IdTrabajo = @IdSubasta AND IdEstudiante != @IdEstudiante
 
-		UPDATE TRABAJO_POR_ESTUDIANTE
+		/*UPDATE TRABAJO_POR_ESTUDIANTE
 		SET Estado='A'
-		WHERE IdEstudiante=@IdEstudiante AND IdTrabajo=@IdSubasta
+		WHERE IdEstudiante=@IdEstudiante AND IdTrabajo=@IdSubasta*/
 		
-		UPDATE TRABAJO
+	/*	UPDATE TRABAJO
 		SET Estado='A'
-		WHERE Id=@IdSubasta
+		WHERE Id=@IdSubasta*/
 	GO
 
 

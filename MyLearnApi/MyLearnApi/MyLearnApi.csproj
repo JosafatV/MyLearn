@@ -269,6 +269,9 @@
     <Compile Include="Models\TRABAJO.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TRABAJO_POR_ESTUDIANTE.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UNIVERSIDAD.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>

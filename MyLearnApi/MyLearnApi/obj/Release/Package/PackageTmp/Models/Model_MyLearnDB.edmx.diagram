@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e89c74aac38c472f9e27064a310e3ebf" Name="Diagram1" ZoomLevel="81">
+      <Diagram DiagramId="e89c74aac38c472f9e27064a310e3ebf" Name="Diagram1" ZoomLevel="60">
         <EntityTypeShape EntityType="MyLearnDBModel.ESTUDIANTE" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="MyLearnDBModel.USUARIO" Width="1.5" PointX="7.625" PointY="2.125" />
         <AssociationConnector Association="MyLearnDBModel.FK_ESTUDIANTE_ID" />
@@ -21,7 +21,12 @@
         <EntityTypeShape EntityType="MyLearnDBModel.PAIS" Width="1.5" PointX="11.875" PointY="3.75" />
         <AssociationConnector Association="MyLearnDBModel.FK_EMPRESA_PAIS" ManuallyRouted="false" >
         </AssociationConnector>
-        <AssociationConnector Association="MyLearnDBModel.FK_ESTUDIANTE_PAIS" ManuallyRouted="false" >
+        <AssociationConnector Association="MyLearnDBModel.FK_ESTUDIANTE_PAIS" ManuallyRouted="true" >
+          <ConnectorPoint PointX="13.34375" PointY="3.75" />
+          <ConnectorPoint PointX="13.34375" PointY="3.406284375" />
+          <ConnectorPoint PointX="13.993056086064467" PointY="3.406284375" />
+          <ConnectorPoint PointX="13.993056086064467" PointY="0.59375" />
+          <ConnectorPoint PointX="2" PointY="0.59375" />
         </AssociationConnector>
         <EntityTypeShape EntityType="MyLearnDBModel.TECNOLOGIA" Width="1.5" PointX="12" PointY="8.125" />
         <EntityTypeShape EntityType="MyLearnDBModel.UNIVERSIDAD" Width="1.5" PointX="16.75" PointY="6.625" />
@@ -32,6 +37,9 @@
         <EntityTypeShape EntityType="MyLearnDBModel.TRABAJO" Width="1.5" PointX="8.625" PointY="7.875" />
         <AssociationConnector Association="MyLearnDBModel.FK_TRABAJO_POR_EMPRESA" />
         <EntityTypeShape EntityType="MyLearnDBModel.VIEW_TRABAJO" Width="2.125" PointX="11.125" PointY="10.875" />
+        <EntityTypeShape EntityType="MyLearnDBModel.TRABAJO_POR_ESTUDIANTE" Width="2.375" PointX="10.875" PointY="0.75" />
+        <AssociationConnector Association="MyLearnDBModel.FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE" />
+        <AssociationConnector Association="MyLearnDBModel.FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

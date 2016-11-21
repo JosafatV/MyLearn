@@ -42,6 +42,7 @@ namespace MyLearnApi.Models
         public virtual DbSet<TECNOLOGIA_POR_ESTUDIANTE> TECNOLOGIA_POR_ESTUDIANTE { get; set; }
         public virtual DbSet<TRABAJO> TRABAJO { get; set; }
         public virtual DbSet<VIEW_TRABAJO> VIEW_TRABAJO { get; set; }
+        public virtual DbSet<TRABAJO_POR_ESTUDIANTE> TRABAJO_POR_ESTUDIANTE { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {
@@ -327,6 +328,32 @@ namespace MyLearnApi.Models
                 new ObjectParameter("presupuesto", typeof(double));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Trabajo", nombreParameter, descripcionParameter, idEmpresaParameter, fechaInicioParameter, fechaCierreParameter, documentoAdicionalParameter, presupuestoParameter);
+        }
+    
+        public virtual int SP_Aceptar_Subasta(Nullable<int> idSubasta, string idEstudiante)
+        {
+            var idSubastaParameter = idSubasta.HasValue ?
+                new ObjectParameter("IdSubasta", idSubasta) :
+                new ObjectParameter("IdSubasta", typeof(int));
+    
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Aceptar_Subasta", idSubastaParameter, idEstudianteParameter);
+        }
+    
+        public virtual int SP_Rechazar_Demas_Subastas(Nullable<int> idSubasta, string idEstudiante)
+        {
+            var idSubastaParameter = idSubasta.HasValue ?
+                new ObjectParameter("IdSubasta", idSubasta) :
+                new ObjectParameter("IdSubasta", typeof(int));
+    
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Rechazar_Demas_Subastas", idSubastaParameter, idEstudianteParameter);
         }
     }
 }

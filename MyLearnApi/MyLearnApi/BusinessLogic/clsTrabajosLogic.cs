@@ -31,6 +31,23 @@ namespace MyLearnApi.BusinessLogic
         }
 
         /// <summary>
+        /// obtiene las ofertas no aceptadas de un trabajo especifico de una empresa especifica
+        /// </summary>
+        /// <param name="idEmpresa"> llave primaria de la empresa </param>
+        /// <param name="idTrabajo"> identificador del trabajo </param>
+        /// <returns></returns>
+        public List<VIEW_TRABAJO> getOfertasParaSubasta(string idEmpresa, int idTrabajo)
+        {
+            //lista las orfetas de una subasta especifica de una empresa especifica
+            List<VIEW_TRABAJO> listaTrabajos = db.VIEW_TRABAJO
+                .Where(trab => trab.EstadoTrabajo == "P" && trab.IdEmpresa == idEmpresa && trab.EstadoTrabajoPorEstudiante == "P")
+                .OrderBy(trab => trab.FechaFinalizacion)
+                .ToList<VIEW_TRABAJO>();
+            //pagina el resultado de 20 en 20
+            return listaTrabajos;
+        }
+
+        /// <summary>
         /// Retorna las subastas que no han sido aceptadas como trabajos (subastados)
         /// Son trabajos en estado de subasta
         /// </summary>
@@ -78,28 +95,33 @@ namespace MyLearnApi.BusinessLogic
 
         
         /// <summary>
-        /// funcion para cambiar el estado de un trabajo
+        /// funcion para cambiar el estado de un trabajo y de una oferta a activos
+        /// o sea se convierten entrabajo
         /// </summary>
         /// <param name="idTrabajo"></param>
         /// <param name="estado"></param>
         /// <returns></returns>
-        private bool cambiarEstadoTrabajo(int idTrabajo, string estado)
+        private bool cambiarEstadoTrabajo(int idTrabajo, string idEstudiante , string estado)
         {
 
-            TRABAJO trabajo = db.TRABAJO.Find(idTrabajo);
-            trabajo.Estado = estado;
-
-            db.Entry(trabajo).State = EntityState.Modified;
-
+            //Cambia el estado en la tabla de trabajo 
+            TRABAJO lobj_trabajo = db.TRABAJO.Find(idTrabajo);
+            lobj_trabajo.Estado = estado;
+            //cambia el estado de la oferta de perndiente a aceptada
+            TRABAJO_POR_ESTUDIANTE lobj_trabajo_por_estudiante = db.TRABAJO_POR_ESTUDIANTE.Find(idTrabajo,idEstudiante);
+            lobj_trabajo_por_estudiante.Estado = estado;
+            //modificar estado
+            db.Entry(lobj_trabajo).State = EntityState.Modified;
+            db.Entry(lobj_trabajo_por_estudiante).State = EntityState.Modified;
             try
             {
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TRABAJOExists(idTrabajo))
-                {
-                    return false;
+                if (!TRABAJOExists(idTrabajo) || !trabajoPorEstudianteExists(idTrabajo, idEstudiante))
+                {   //si hay problema de concurrencia retorna falso
+                    return false; 
                 }
                 else
                 {
@@ -110,9 +132,31 @@ namespace MyLearnApi.BusinessLogic
             return true;
         }
 
-        public bool convertirSubastaEnTrabajo(int idTrabajo)
+        public bool convertirSubastaEnTrabajo(int idTrabajo, string idEstudiante)
         {
-            return cambiarEstadoTrabajo(idTrabajo, "A");
+
+            //cambio el estado en trabajo y trabajo por estudiante
+            if (cambiarEstadoTrabajo(idTrabajo, idEstudiante, "A") == false)
+                return false;
+            //rechazo las demás
+            db.SP_Rechazar_Demas_Subastas(idTrabajo, idEstudiante);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (!TRABAJOExists(idTrabajo) || !trabajoPorEstudianteExists(idTrabajo, idEstudiante))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return true;
         }
 
 
@@ -130,7 +174,10 @@ namespace MyLearnApi.BusinessLogic
         {
             return db.VIEW_TRABAJO.Count(e => e.IdTrabajo == id) > 0;
         }
-
+        private bool trabajoPorEstudianteExists(int idTrabajo, string idEstudiante)
+        {
+            return db.TRABAJO_POR_ESTUDIANTE.Find(idTrabajo,idEstudiante) != null ;
+        }
 
         public void Dispose(bool disposing)
         {
@@ -139,6 +186,12 @@ namespace MyLearnApi.BusinessLogic
                 db.Dispose();
             }
         }
+
+
+
+
+
+
         /// <summary>
         /// obtiene un rango de la lista
         /// </summary>

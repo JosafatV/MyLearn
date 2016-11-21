@@ -36,6 +36,19 @@ namespace MyLearnApi.Controllers
         }
 
         /// <summary>
+        ///  obtiene las ofertas no aceptadas de un trabajo especifico de una empresa especifica
+        /// </summary>
+        /// <param name="idEmpresa"> llave primaria de la empresa </param>
+        /// <param name="idTrabajo"> identificador del trabajo </param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("MyLearnApi/Subastas/Ofertas/{idEmpresa}/{idTrabajo}")]
+        [ResponseType(typeof(List<VIEW_TRABAJO>))]
+        public List<VIEW_TRABAJO> getOfertasDeSubasta(string idEmpresa, int idTrabajo)
+        {
+            return pobj_TrabajosLogic.getOfertasParaSubasta(idEmpresa, idTrabajo);
+        }
+        /// <summary>
         /// Get de los trabajos en estado de subasta
         /// </summary>
         /// <param name="idEmpresa"> </param>
@@ -71,15 +84,15 @@ namespace MyLearnApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [ResponseType(typeof(void))]
-        [Route("MyLearnApi/Trabajos")]
-        public IHttpActionResult convertirSubastaEnTrabajo(int idTrabajo)
+        [Route("MyLearnApi/Trabajos/{idTrabajo}/{idEstudiante}")]
+        public IHttpActionResult convertirSubastaEnTrabajo(int idTrabajo, string idEstudiante)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            bool lbo_isvalid = pobj_TrabajosLogic.convertirSubastaEnTrabajo(idTrabajo);
+            bool lbo_isvalid = pobj_TrabajosLogic.convertirSubastaEnTrabajo(idTrabajo,idEstudiante);
             if (!lbo_isvalid)
             {
                 return NotFound();

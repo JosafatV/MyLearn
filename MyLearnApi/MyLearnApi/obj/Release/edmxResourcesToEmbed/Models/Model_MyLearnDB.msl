@@ -220,5 +220,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TRABAJO_POR_ESTUDIANTE">
+      <EntityTypeMapping TypeName="MyLearnDBModel.TRABAJO_POR_ESTUDIANTE">
+        <MappingFragment StoreEntitySet="TRABAJO_POR_ESTUDIANTE">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="FechaFinalizacion" ColumnName="FechaFinalizacion" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="IdTrabajo" ColumnName="IdTrabajo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Aceptar_Subasta" FunctionName="MyLearnDBModel.Store.SP_Aceptar_Subasta" />
   </EntityContainerMapping>
 </Mapping>
