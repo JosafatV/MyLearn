@@ -119,7 +119,14 @@ namespace MyLearnApi.Controllers
             pobj_TrabajosLogic.Dispose(disposing);
             base.Dispose(disposing);
         }
+        
+        [HttpOptions]
+        [Route("MyLearnApi/Subastas")]
+        [Route("MyLearnApi/Trabajos")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
+        }
 
-       
     }
 }

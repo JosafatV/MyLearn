@@ -23,7 +23,7 @@ namespace MyLearnApi.BusinessLogic
         {
             //retorna los proyectos activos
             List<VIEW_TRABAJO> listaTrabajos = db.VIEW_TRABAJO
-                .Where(trab => trab.EstadoTrabajo == "A" && trab.IdEmpresa == idEmpresa  )
+                .Where(trab => trab.EstadoTrabajo == "A" && trab.IdEmpresa == idEmpresa && trab.EstadoTrabajoPorEstudiante =="A" )
                 .OrderBy(trab => trab.FechaFinalizacion)
                 .ToList<VIEW_TRABAJO>();
             //pagina el resultado de 20 en 20
