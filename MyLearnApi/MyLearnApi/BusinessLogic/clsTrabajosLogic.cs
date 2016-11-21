@@ -142,10 +142,20 @@ namespace MyLearnApi.BusinessLogic
         /// <returns></returns>
         private List<TRABAJO> algoritmoPaginacion(List<TRABAJO> lista, int index, byte lby_offset )
         {
-            List<TRABAJO> resultado = new List<TRABAJO>();
+            List<TRABAJO> lobj_resultado = new List<TRABAJO>();
             //obtengo el rango que se necesita
-            resultado = lista.GetRange(index, index + lby_offset -1);
-            return resultado;
+            int li_largoLista = lista.Count;
+            //si el indice esta fuera del rango de la lista
+            if (index > li_largoLista)
+                return lobj_resultado;
+            //si index y el offset estan dentro del rango
+            else if ((li_largoLista >= (index + lby_offset)))
+                lobj_resultado = lista.GetRange(index, index + lby_offset - 1);
+            //si hay un overflow en el rango devuelve del indice hasta el fin de la lista
+            else
+                lobj_resultado = lista.GetRange(index, li_largoLista );
+
+            return lobj_resultado;
 
         }
 
