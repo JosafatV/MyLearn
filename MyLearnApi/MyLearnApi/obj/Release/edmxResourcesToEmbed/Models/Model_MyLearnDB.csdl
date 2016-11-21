@@ -104,6 +104,47 @@
     </AssociationSet>
     <EntitySet Name="TECNOLOGIA" EntityType="MyLearnDBModel.TECNOLOGIA" />
     <EntitySet Name="UNIVERSIDAD" EntityType="MyLearnDBModel.UNIVERSIDAD" />
+    <EntitySet Name="TECNOLOGIA_POR_ESTUDIANTE" EntityType="MyLearnDBModel.TECNOLOGIA_POR_ESTUDIANTE" />
+    <AssociationSet Name="FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE">
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDTECNOLOGIA_POR_ESTUDIANTE">
+      <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
+      <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <EntitySet Name="TRABAJO" EntityType="MyLearnDBModel.TRABAJO" />
+    <AssociationSet Name="FK_TRABAJO_POR_EMPRESA" Association="MyLearnDBModel.FK_TRABAJO_POR_EMPRESA">
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+      <End Role="TRABAJO" EntitySet="TRABAJO" />
+    </AssociationSet>
+    <FunctionImport Name="SP_Insertar_Trabajo">
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="IdEmpresa" Mode="In" Type="String" />
+      <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
+      <Parameter Name="DocumentoAdicional" Mode="In" Type="String" />
+      <Parameter Name="presupuesto" Mode="In" Type="Double" />
+    </FunctionImport>
+    <EntitySet Name="VIEW_TRABAJO" EntityType="MyLearnDBModel.VIEW_TRABAJO" />
+    <EntitySet Name="TRABAJO_POR_ESTUDIANTE" EntityType="MyLearnDBModel.TRABAJO_POR_ESTUDIANTE" />
+    <AssociationSet Name="FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE">
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="TRABAJO_POR_ESTUDIANTE" EntitySet="TRABAJO_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE">
+      <End Role="TRABAJO" EntitySet="TRABAJO" />
+      <End Role="TRABAJO_POR_ESTUDIANTE" EntitySet="TRABAJO_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <FunctionImport Name="SP_Aceptar_Subasta">
+      <Parameter Name="IdSubasta" Mode="In" Type="Int32" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Rechazar_Demas_Subastas">
+      <Parameter Name="IdSubasta" Mode="In" Type="Int32" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -121,6 +162,7 @@
     <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="RepositorioCodigo" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="LinkHojaDeVida" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="TRABAJO_POR_ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE" FromRole="ESTUDIANTE" ToRole="TRABAJO_POR_ESTUDIANTE" />
   </EntityType>
   <EntityType Name="USUARIO">
     <Key>
@@ -334,4 +376,122 @@
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
   </EntityType>
+  <EntityType Name="TECNOLOGIA_POR_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdTecnologia" />
+      <PropertyRef Name="IdEstudiante" />
+    </Key>
+    <Property Name="IdTecnologia" Type="Int32" Nullable="false" />
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TECNOLOGIA_POR_ESTUDIANTE" Role="TECNOLOGIA_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TECNOLOGIA_POR_ESTUDIANTE">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.TECNOLOGIA" Role="TECNOLOGIA" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TECNOLOGIA_POR_ESTUDIANTE" Role="TECNOLOGIA_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TECNOLOGIA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TECNOLOGIA_POR_ESTUDIANTE">
+        <PropertyRef Name="IdTecnologia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TRABAJO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="false" />
+    <Property Name="IdEmpresa" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+    <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DocumentoAdicional" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="EstrellasObtenidas" Type="Byte" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="PresupuestoBase" Type="Double" />
+    <NavigationProperty Name="TRABAJO_POR_ESTUDIANTE" Relationship="MyLearnDBModel.FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE" FromRole="TRABAJO" ToRole="TRABAJO_POR_ESTUDIANTE" />
+  </EntityType>
+  <Association Name="FK_TRABAJO_POR_EMPRESA">
+    <End Type="MyLearnDBModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TRABAJO" Role="TRABAJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TRABAJO">
+        <PropertyRef Name="IdEmpresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="VIEW_TRABAJO">
+    <Key>
+      <PropertyRef Name="IdTrabajo" />
+    </Key>
+    <Property Name="FechaFinalizacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Monto" Type="Int32" />
+    <Property Name="Comentario" Type="String" MaxLength="300" FixedLength="true" Unicode="false" />
+    <Property Name="IdTrabajo" Type="Int32" Nullable="false" />
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="NombreContacto" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="ApellidoContacto" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="false" />
+    <Property Name="IdEmpresa" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="FechaInicioSubasta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCierreSubasta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DocumentoAdicional" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="EstrellasObtenidas" Type="Byte" />
+    <Property Name="EstadoTrabajo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="EstadoTrabajoPorEstudiante" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TRABAJO_POR_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdTrabajo" />
+      <PropertyRef Name="IdEstudiante" />
+    </Key>
+    <Property Name="IdTrabajo" Type="Int32" Nullable="false" />
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Monto" Type="Int32" />
+    <Property Name="FechaFinalizacion" Type="DateTime" Precision="0" />
+    <Property Name="Comentario" Type="String" MaxLength="300" FixedLength="true" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TRABAJO_POR_ESTUDIANTE" Role="TRABAJO_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TRABAJO_POR_ESTUDIANTE">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.TRABAJO" Role="TRABAJO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TRABAJO_POR_ESTUDIANTE" Role="TRABAJO_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TRABAJO_POR_ESTUDIANTE">
+        <PropertyRef Name="IdTrabajo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

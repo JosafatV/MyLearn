@@ -181,5 +181,57 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TRABAJO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.TRABAJO">
+        <MappingFragment StoreEntitySet="TRABAJO">
+          <ScalarProperty Name="PresupuestoBase" ColumnName="PresupuestoBase" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="EstrellasObtenidas" ColumnName="EstrellasObtenidas" />
+          <ScalarProperty Name="DocumentoAdicional" ColumnName="DocumentoAdicional" />
+          <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Insertar_Trabajo" FunctionName="MyLearnDBModel.Store.SP_Insertar_Trabajo" />
+    <EntitySetMapping Name="VIEW_TRABAJO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_TRABAJO">
+        <MappingFragment StoreEntitySet="VIEW_TRABAJO">
+          <ScalarProperty Name="EstadoTrabajoPorEstudiante" ColumnName="EstadoTrabajoPorEstudiante" />
+          <ScalarProperty Name="EstadoTrabajo" ColumnName="EstadoTrabajo" />
+          <ScalarProperty Name="EstrellasObtenidas" ColumnName="EstrellasObtenidas" />
+          <ScalarProperty Name="DocumentoAdicional" ColumnName="DocumentoAdicional" />
+          <ScalarProperty Name="FechaCierreSubasta" ColumnName="FechaCierreSubasta" />
+          <ScalarProperty Name="FechaInicioSubasta" ColumnName="FechaInicioSubasta" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ApellidoContacto" ColumnName="ApellidoContacto" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="IdTrabajo" ColumnName="IdTrabajo" />
+          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="FechaFinalizacion" ColumnName="FechaFinalizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRABAJO_POR_ESTUDIANTE">
+      <EntityTypeMapping TypeName="MyLearnDBModel.TRABAJO_POR_ESTUDIANTE">
+        <MappingFragment StoreEntitySet="TRABAJO_POR_ESTUDIANTE">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="FechaFinalizacion" ColumnName="FechaFinalizacion" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="IdTrabajo" ColumnName="IdTrabajo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Rechazar_Demas_Subastas" FunctionName="MyLearnDBModel.Store.SP_Rechazar_Demas_Subastas" />
   </EntityContainerMapping>
 </Mapping>

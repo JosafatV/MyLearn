@@ -1,0 +1,84 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../Scripts/Angular and Bootstrap/Bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_login.css">
+</head>
+<header>
+		<div class="wrapper">
+			<div class="logo"> Mi Perfil
+				<div class="img">
+                    <a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
+				</div>
+			</div>
+			<nav>
+				<a data-ng-click="do_goCrearSubasta()">Crear Subasta</a>
+				<a>Ayuda en Linea</a>
+				<a>Cerrar Sesión</a>
+			</nav>
+		</div>
+</header>
+<br><br><br>
+<body>
+	<div class="container-fluid">
+		<section class="main row">
+			<article class="col-md-8">
+				<br>
+			<h2>Informacion:</h2><br>
+                <label for="Nombre">Empresa: {{ js_datosEmpresa.NombreEmpresarial}}</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+				<label for="Link a Hoja de vida">Ubicación: {{ js_datosEmpresa.Region}}</label><br>
+				<label for="Carné Estudiantil">Teléfono: {{ js_datosEmpresa.Telefono}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+				<label for="País">Correo Electrónico: {{ js_datosEmpresa.Email}}</label>&nbsp; &nbsp; &nbsp;<br>
+				<label for="Universidad">Punto de Contacto: {{ js_datosEmpresa.NombreContacto}} {{ js_datosEmpresa.ApellidoContacto}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</article>
+		</section>
+		<br><br>
+		<div class="col-md-6">
+			<h2>Subastas:</h2>
+			<table class="table table-bordered table-hover table-condensed prom1">
+					<tr>
+							<th>Nombre</th>
+							<th>Presupuesto Base</th>
+							<th>Fecha final de recepción de ofertas</th>
+					</tr>
+                <tr data-ng-repeat="subasta in ls_subastas  | filter: search">
+                    <td>{{subasta.Nombre}}</td>
+                    <td>{{subasta.PresupuestoBase}}</td>
+                    <td>{{subasta.FechaCierre}}</td>
+                </tr>
+
+		</table> <br><br>
+
+
+</div>
+			<div class="col-md-6">
+				<h2>Trabajos:</h2>
+				<table class="table table-bordered table-hover table-condensed prom1">
+						<tr>
+								<th>Nombre</th>
+								<th>Fecha de Entrega</th>
+								<th>Estado</th>
+						</tr>
+                    <tr data-ng-repeat="trabajos in ls_trabajos  | filter: search">
+                        <td>{{trabajos.Nombre}}</td>
+                        <td>{{trabajos.FechaFinalizacion}}</td>
+                        <td>{{trabajos.EstadoTrabajo}}</td>
+
+                    </tr>
+
+			</table> <br><br>
+
+
+	</div>
+        <button data-ng-click="get_20MoreWork()">Mas 20 trabajos</button>
+        <button data-ng-disabled="num_indexTrabajos < 1" data-ng-click="get_20LessWork()">Menos 20 trabajos</button>
+        <button data-ng-click="get_20MoreSubasta()">Mas 20 subastas</button>
+        <button data-ng-disabled="num_indexSubastas < 1" data-ng-click="get_20LessSubasta()">Menos 20 subastas</button>
+
+
+	</body>
+
+	<script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script
+</html>

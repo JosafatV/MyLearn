@@ -3,6 +3,14 @@ GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Estudiante   ')
 DROP PROCEDURE SP_Insertar_Estudiante   
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Propuesta_Subasta')
+DROP PROCEDURE SP_Insertar_Propuesta_Subasta   
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Rechazar_Demas_Subastas')
+DROP PROCEDURE SP_Rechazar_Demas_Subastas  
+GO
+
+
 
 /*****************SELECTS*****************/
 
@@ -24,7 +32,7 @@ CREATE PROCEDURE SP_Nota_Poyecto @UserID INT, @ProjectId INT
 
 /*****************SIMPLE INSERTS*****************/
 
-//ya
+
 CREATE PROCEDURE SP_Insertar_Estudiante   
 	@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
@@ -40,7 +48,6 @@ CREATE PROCEDURE SP_Insertar_Estudiante
 		 @LinkHojaDeVida)
 	GO
 
-//ya
 CREATE PROCEDURE SP_Insertar_Profesor
 	@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
@@ -58,7 +65,7 @@ CREATE PROCEDURE SP_Insertar_Profesor
 			INSERT INTO PROFESOR_POR_UNIVERSIDAD (IdProfesor, IdUniversidad, Estado)
 			VALUES (@Id, @IdUniversidad, 'A')
 		GO
-//ya
+
 CREATE PROCEDURE SP_Insertar_Empresa
 @Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
@@ -73,7 +80,7 @@ CREATE PROCEDURE SP_Insertar_Empresa
 		VALUES (@Id, @NombreContacto, @ApellidoContacto, @NombreEmpresarial, @Email, @Telefono, getDate(),
 		@PaginaWebEmpresa, @Pais, @Region) 
 	GO
-//no se usa
+
 CREATE PROCEDURE SP_Insertar_Admin
 @Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 @Nombre CHAR(30), @ApellidoContacto CHAR(30)
@@ -84,7 +91,7 @@ CREATE PROCEDURE SP_Insertar_Admin
 		INSERT INTO USUARIO_XMP (Id, NombreContacto, ApellidoContacto)
 		VALUES (@Id, @Nombre, @ApellidoContacto) 
 	GO
-/*  NO SE USAN PORQUE MADRIZ LAS QUITO DE LAS FUNCIONALIDADES
+
 CREATE PROCEDURE SP_Insertar_Tecnologia @Nombre CHAR(30)
 	AS
 		INSERT INTO TECNOLOGIA (Nombre, Estado)
@@ -96,7 +103,7 @@ CREATE PROCEDURE SP_Insertar_Universidad @Nombre CHAR(30)
 		INSERT INTO UNIVERSIDAD (Nombre, Estado)
 		VALUES (@Nombre, 'A')
 	GO
-*/
+
 /*****************MULTI-PARTED INSERTS*****************/
 
 
@@ -154,7 +161,6 @@ CREATE PROCEDURE SP_Insertar_Propuesta_Proyecto @IdEstudiante CHAR(100), @Nombre
 	GO
 
 
-/*	YA NO SE USA
 
 
 	/*Marks a proyect proposition as an active project and asigns it badges*/
@@ -178,30 +184,36 @@ CREATE PROCEDURE SP_Aceptar_Proyecto @IdProfesor CHAR(100), @IdPropuesta INT, @I
 			WHERE BADGE.IdCurso=@IdCurso
 	GO
 
-*/
+
 
 /********** COMPAÑIAS **********/
 
 	/*Creates a new job in the action state*/
-CREATE PROCEDURE SP_Insertar_Trabajo @Nombre CHAR(30), @Descripcion CHAR(500), @IdEmpresa CHAR(100), @FechaInicio DATE, @FechaCierre DATE, @DocumentoAdicional CHAR(100)
+CREATE PROCEDURE SP_Insertar_Trabajo @Nombre CHAR(30), @Descripcion CHAR(500), @IdEmpresa CHAR(100), @FechaInicio DATE, @FechaCierre DATE, @DocumentoAdicional CHAR(100), @presupuesto float
 	AS
-		INSERT INTO TRABAJO (Nombre, Descripcion, IdEmpresa, FechaInicio, FechaCierre, DocumentoAdicional, Estado)
-		VALUES (@Nombre, @Descripcion, @IdEmpresa, @FechaInicio, @FechaCierre, @DocumentoAdicional, 'P')
+		INSERT INTO TRABAJO (Nombre, Descripcion, IdEmpresa, FechaInicio, FechaCierre, DocumentoAdicional,PresupuestoBase, Estado)
+		VALUES (@Nombre, @Descripcion, @IdEmpresa, @FechaInicio, @FechaCierre, @DocumentoAdicional,@presupuesto , 'P')
 	GO
 
 	/*Creates a new offer for the auctions*/
-CREATE PROCEDURE SP_Insertar_Propuesta_Subasta @IdTrabajo INT, @IdEstudiante CHAR(100), @Monto INT, @Comentario CHAR(300)
+CREATE PROCEDURE SP_Insertar_Propuesta_Subasta @IdTrabajo INT, @IdEstudiante CHAR(100), @Monto INT, @Comentario CHAR(300), @FechaFinal Date
 	AS
-		INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, Comentario, Estado)
-		VALUES (@IdTrabajo, @IdEstudiante, @Monto, @Comentario, 'P')
+		INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, Comentario, Estado, FechaFinalizacion)
+		VALUES (@IdTrabajo, @IdEstudiante, @Monto, @Comentario, 'P', @FechaFinal)
 	GO
 
 	/*accepts an offer to an auction, canceling all others*/
-CREATE PROCEDURE SP_Aceptar_Subasta @IdSubasta CHAR(1), @IdEstudiante CHAR(100)
+CREATE PROCEDURE SP_Rechazar_Demas_Subastas @IdSubasta INT, @IdEstudiante CHAR(100)
 	AS
 		UPDATE TRABAJO_POR_ESTUDIANTE
 		SET Estado='X'
-		WHERE IdTrabajo=@IdSubasta
+		WHERE IdTrabajo = @IdSubasta AND IdEstudiante != @IdEstudiante
+	GO
+CREATE PROCEDURE SP_Aceptar_Subasta @IdSubasta INT, @IdEstudiante CHAR(100)
+	AS
+		UPDATE TRABAJO_POR_ESTUDIANTE
+		SET Estado='X'
+		WHERE IdTrabajo = @IdSubasta AND IdEstudiante != @IdEstudiante
 
 		UPDATE TRABAJO_POR_ESTUDIANTE
 		SET Estado='A'
@@ -211,7 +223,6 @@ CREATE PROCEDURE SP_Aceptar_Subasta @IdSubasta CHAR(1), @IdEstudiante CHAR(100)
 		SET Estado='A'
 		WHERE Id=@IdSubasta
 	GO
-
 
 /********** MENSAJERIA **********/
 

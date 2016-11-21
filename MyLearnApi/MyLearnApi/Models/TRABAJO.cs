@@ -12,26 +12,24 @@ namespace MyLearnApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ESTUDIANTE
+    public partial class TRABAJO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ESTUDIANTE()
+        public TRABAJO()
         {
             this.TRABAJO_POR_ESTUDIANTE = new HashSet<TRABAJO_POR_ESTUDIANTE>();
         }
     
-        public string Id { get; set; }
-        public string NombreContacto { get; set; }
-        public string ApellidoContacto { get; set; }
-        public string Carne { get; set; }
-        public string Email { get; set; }
-        public string Telefono { get; set; }
-        public string Foto { get; set; }
-        public string Pais { get; set; }
-        public string Region { get; set; }
-        public System.DateTime FechaInscripcion { get; set; }
-        public string RepositorioCodigo { get; set; }
-        public string LinkHojaDeVida { get; set; }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public string IdEmpresa { get; set; }
+        public Nullable<System.DateTime> FechaInicio { get; set; }
+        public System.DateTime FechaCierre { get; set; }
+        public string DocumentoAdicional { get; set; }
+        public Nullable<byte> EstrellasObtenidas { get; set; }
+        public string Estado { get; set; }
+        public Nullable<double> PresupuestoBase { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRABAJO_POR_ESTUDIANTE> TRABAJO_POR_ESTUDIANTE { get; set; }

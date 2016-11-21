@@ -1,0 +1,97 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../Scripts/Angular and Bootstrap/Bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_login.css">
+</head>
+<header>
+		<div class="wrapper">
+			<div class="logo"> Crear Subasta
+				<div class="img">
+                    <a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
+				</div>
+			</div>
+			<nav>
+				<a data-ng-click="do_goPerfil()">Mi Perfil</a>
+				<a>Ayuda en Linea</a>
+				<a>Cerrar Sesión</a>
+			</nav>
+		</div>
+</header>
+<br><br><br>
+<body>
+	<div class="container-fluid">
+		<div class="container-fluid pr2">
+			<div class="col-md-2">
+					<h1 class="pr1"><span class="glyphicon glyphicon-arrow-left"></span> Mi Perfil</h1>
+			</div>
+		</div><br><br>
+		<div class="row">
+			<div class="col-md-9 color1">
+				<div class="col-md-offset-3">
+					<div class="container-fluid">
+							<section class="main row">
+								<article class="col-md-7">
+									<h2><b>Aspectos Generales:</h2></b><br>
+									<div class="container-fluid">
+					          <div class="col-md-6">
+					            <form action=""class="">
+					              <div class="form-group">
+					                <br>
+					                <label for="nombre">Nombre del Proyecto:</label>
+					                <input  class="form-control" id="nombre"type="tect" data-ng-model="js_crearSubasta.Nombre">
+					              </div>
+												<div class="form-group">
+					                <br>
+					                <label for="presupuesto">Presupuesto Disponible:</label>
+					                <input  class="form-control" id="nombre"type="text" data-ng-model="js_crearSubasta.PresupuestoBase">
+					              </div>
+												<div class="form-group">
+					                <br>
+					                <label for="fecha">Fecha Límite para recibir ofertas:</label>
+					                <input  class="form-control" id="nombre"type="date" data-ng-model="js_crearSubasta.FechaCierre">
+					              </div>
+											</div>
+											<div class="col-md-10">
+												<div class="form-group">
+													<label for="mensaje">Descripción</label>
+													<textarea class="form-control" id="mensaje" data-ng-model="js_crearSubasta.Descripcion"></textarea>
+													<br>
+													<div class="form-group">
+														<label for="mensaje">Tecnologías a utilizar</label>
+														<textarea class="form-control" id="mensaje"></textarea>
+														<br>
+														<div class="container">
+															<div class="col-md-10">
+																<div class="col-md-offset-0">
+																	<a class="btn btn-tcc btn-default btn-lg" data-ng-click="set_newSubasta()">Crear</a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+																	<a class="btn btn-danger btn-lg">Cancelar</a>
+																</div>
+															</div>
+
+														</div>
+												</div>
+
+											</div>
+										</div>
+						</div>
+
+
+					</div><br>
+
+				</div>
+
+				</div>
+
+
+
+	</div>
+
+
+
+	</body>
+
+	<script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script
+</html>

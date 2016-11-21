@@ -34,3 +34,6 @@ c:\users\giovanni\documents\visual studio 2015\Projects\GoogleDriveAPI\GoogleDri
 c:\users\giovanni\documents\visual studio 2015\Projects\GoogleDriveAPI\GoogleDriveAPI\bin\Debug\Google.Apis.Drive.v3.pdb
 c:\users\giovanni\documents\visual studio 2015\Projects\GoogleDriveAPI\GoogleDriveAPI\bin\Debug\Google.Apis.Drive.v3.xml
 C:\Users\Giovanni\Documents\Visual Studio 2015\Projects\GoogleDriveAPI\GoogleDriveAPI\bin\Debug\client_secret.json
+C:\Users\Giovanni\Documents\GitHub\MyLearn\GoogleDriveAPI\GoogleDriveAPI\bin\Debug\GoogleDriveAPI.exe.config
+C:\Users\Giovanni\Documents\GitHub\MyLearn\GoogleDriveAPI\GoogleDriveAPI\obj\Debug\GoogleDriveAPI.exe
+C:\Users\Giovanni\Documents\GitHub\MyLearn\GoogleDriveAPI\GoogleDriveAPI\obj\Debug\GoogleDriveAPI.pdb

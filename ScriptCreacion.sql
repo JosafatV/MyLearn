@@ -183,6 +183,7 @@ CREATE TABLE TRABAJO (
     FechaCierre DATE NOT NULL,
     DocumentoAdicional CHAR(100),
     EstrellasObtenidas tinyINT,
+	PresupuestoBase Float,
     Estado CHAR(1), /*Propuesta, Exito(Terminado), Fracaso(Terminado), Activo*/
 
 	CONSTRAINT PK_TRABAJO
@@ -399,6 +400,7 @@ CREATE TABLE TRABAJO_POR_ESTUDIANTE
     IdTrabajo INT,
     IdEstudiante CHAR(100),
 	Monto INT,
+	FechaFinalizacion Date,
 	Comentario CHAR(300),
 	Estado CHAR(1), /*Aceptada, Negada, Enviada*/
 
