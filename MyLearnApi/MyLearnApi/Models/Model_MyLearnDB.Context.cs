@@ -238,7 +238,7 @@ namespace MyLearnApi.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Profesor", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreContactoParameter, apellidoContactoParameter, emailParameter, telefonoParameter, horarioAtencionParameter, paisParameter, regionParameter, idUniversidadParameter);
         }
     
-        public virtual int SP_Insertar_Estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, string repositorioCodigo, string linkHojaDeVida)
+        public virtual int SP_Insertar_Estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<int> idUniversidad, string repositorioCodigo, string linkHojaDeVida)
         {
             var idParameter = id != null ?
                 new ObjectParameter("Id", id) :
@@ -288,6 +288,10 @@ namespace MyLearnApi.Models
                 new ObjectParameter("Region", region) :
                 new ObjectParameter("Region", typeof(string));
     
+            var idUniversidadParameter = idUniversidad.HasValue ?
+                new ObjectParameter("IdUniversidad", idUniversidad) :
+                new ObjectParameter("IdUniversidad", typeof(int));
+    
             var repositorioCodigoParameter = repositorioCodigo != null ?
                 new ObjectParameter("RepositorioCodigo", repositorioCodigo) :
                 new ObjectParameter("RepositorioCodigo", typeof(string));
@@ -296,7 +300,7 @@ namespace MyLearnApi.Models
                 new ObjectParameter("LinkHojaDeVida", linkHojaDeVida) :
                 new ObjectParameter("LinkHojaDeVida", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Estudiante", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreParameter, apellidoParameter, carneParameter, emailParameter, telefonoParameter, paisParameter, regionParameter, repositorioCodigoParameter, linkHojaDeVidaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Estudiante", idParameter, contrasenaParameter, salParameter, repositorioArchivosParameter, credencialDriveParameter, nombreParameter, apellidoParameter, carneParameter, emailParameter, telefonoParameter, paisParameter, regionParameter, idUniversidadParameter, repositorioCodigoParameter, linkHojaDeVidaParameter);
         }
     
         public virtual int SP_Insertar_Trabajo(string nombre, string descripcion, string idEmpresa, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaCierre, string documentoAdicional, Nullable<double> presupuesto)

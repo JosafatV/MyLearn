@@ -4,6 +4,7 @@
     <EntitySetMapping Name="ESTUDIANTE">
       <EntityTypeMapping TypeName="MyLearnDBModel.ESTUDIANTE">
         <MappingFragment StoreEntitySet="ESTUDIANTE">
+          <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
           <ScalarProperty Name="LinkHojaDeVida" ColumnName="LinkHojaDeVida" />
           <ScalarProperty Name="RepositorioCodigo" ColumnName="RepositorioCodigo" />
           <ScalarProperty Name="FechaInscripcion" ColumnName="FechaInscripcion" />
@@ -62,6 +63,7 @@
     <EntitySetMapping Name="VIEW_ESTUDIANTE">
       <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_ESTUDIANTE">
         <MappingFragment StoreEntitySet="VIEW_ESTUDIANTE">
+          <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
           <ScalarProperty Name="CredencialDrive" ColumnName="CredencialDrive" />
           <ScalarProperty Name="RepositorioArchivos" ColumnName="RepositorioArchivos" />
@@ -233,5 +235,23 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_Rechazar_Demas_Subastas" FunctionName="MyLearnDBModel.Store.SP_Rechazar_Demas_Subastas" />
+    <EntitySetMapping Name="TECNOLOGIA_POR_PROYECTO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.TECNOLOGIA_POR_PROYECTO">
+        <MappingFragment StoreEntitySet="TECNOLOGIA_POR_PROYECTO">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+          <ScalarProperty Name="IdTecnologia" ColumnName="IdTecnologia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TECNOLOGIA_POR_TRABAJO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.TECNOLOGIA_POR_TRABAJO">
+        <MappingFragment StoreEntitySet="TECNOLOGIA_POR_TRABAJO">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="IdTrabajo" ColumnName="IdTrabajo" />
+          <ScalarProperty Name="IdTecnologia" ColumnName="IdTecnologia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

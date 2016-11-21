@@ -54,8 +54,10 @@ namespace MyLearnApi.BusinessLogic
         /// <returns></returns>
         public bool doStudentInsertion(VIEW_ESTUDIANTE estudiante)
         {
-            db.SP_Insertar_Estudiante(estudiante.Id, estudiante.Contrasena, estudiante.Sal, estudiante.RepositorioArchivos, estudiante.CredencialDrive,
-                estudiante.NombreContacto, estudiante.ApellidoContacto, estudiante.Carne, estudiante.Email, estudiante.Telefono, estudiante.Pais, estudiante.Region,
+            db.SP_Insertar_Estudiante(estudiante.Id, estudiante.Contrasena, estudiante.Sal, 
+                estudiante.RepositorioArchivos, estudiante.CredencialDrive,
+                estudiante.NombreContacto, estudiante.ApellidoContacto, estudiante.Carne, 
+                estudiante.Email, estudiante.Telefono, estudiante.Pais, estudiante.Region, estudiante.IdUniversidad,
                  estudiante.RepositorioCodigo, estudiante.LinkHojaDeVida);
             try
             {
@@ -133,7 +135,7 @@ namespace MyLearnApi.BusinessLogic
             }
             catch (DbUpdateException)
             {
-                if (TecnologiaporEstudianteExists(tecnologia.IdTecnologia, tecnologia.IdEstudiante))
+                if (!TecnologiaporEstudianteExists(tecnologia.IdTecnologia, tecnologia.IdEstudiante))
                 {
                     return false;
                 }

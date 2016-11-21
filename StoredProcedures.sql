@@ -22,7 +22,7 @@ CREATE PROCEDURE SP_Select_Cursos @UserId INT
 		GROUP BY Curso, EstadoCurso
 	GO
 
-	/**Obtains the grade obtained in a project/
+	/**Obtains the grade obtained in a project*/
 CREATE PROCEDURE SP_Nota_Poyecto @UserID INT, @ProjectId INT
 	AS
 		SELECT SUM(PuntajeBadge) AS Nota
@@ -38,14 +38,14 @@ CREATE PROCEDURE SP_Insertar_Estudiante
 	@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 	@Nombre CHAR(30), @Apellido CHAR(30), @Carne CHAR(15), @Email CHAR(50), @Telefono CHAR(15), @Pais CHAR(30),
-	@Region CHAR(30), @RepositorioCodigo CHAR(100), @LinkHojaDeVida CHAR(100)  
+	@Region CHAR(30), @IdUniversidad INT , @RepositorioCodigo CHAR(100), @LinkHojaDeVida CHAR(100)  
 	AS
 		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado) 
 		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A')
 
 		INSERT INTO ESTUDIANTE (Id,NombreContacto, ApellidoContacto, Carne, Email, Telefono, Pais, Region,
-		FechaInscripcion, RepositorioCodigo, LinkHojaDeVida) 
-		VALUES (@Id, @Nombre, @Apellido, @Carne, @Email, @Telefono,@Pais,@Region, GETDATE(), @RepositorioCodigo,
+		IdUniversidad ,FechaInscripcion, RepositorioCodigo, LinkHojaDeVida) 
+		VALUES (@Id, @Nombre, @Apellido, @Carne, @Email, @Telefono,@Pais,@Region,@IdUniversidad , GETDATE(), @RepositorioCodigo,
 		 @LinkHojaDeVida)
 	GO
 

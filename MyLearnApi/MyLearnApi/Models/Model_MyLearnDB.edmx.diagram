@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e89c74aac38c472f9e27064a310e3ebf" Name="Diagram1" ZoomLevel="79">
-        <EntityTypeShape EntityType="MyLearnDBModel.ESTUDIANTE" Width="1.5" PointX="0.5" PointY="0.5" />
+      <Diagram DiagramId="e89c74aac38c472f9e27064a310e3ebf" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="MyLearnDBModel.ESTUDIANTE" Width="1.5" PointX="3" PointY="0.5" />
         <EntityTypeShape EntityType="MyLearnDBModel.USUARIO" Width="1.5" PointX="7.625" PointY="2.125" />
         <AssociationConnector Association="MyLearnDBModel.FK_ESTUDIANTE_ID" />
         <EntityTypeShape EntityType="MyLearnDBModel.IDIOMA" Width="2.5" PointX="10.625" PointY="5.625" />
@@ -40,6 +40,7 @@
         <EntityTypeShape EntityType="MyLearnDBModel.TECNOLOGIA_POR_TRABAJO" Width="2.125" PointX="19" PointY="8.5" />
         <AssociationConnector Association="MyLearnDBModel.FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO" />
         <AssociationConnector Association="MyLearnDBModel.FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO" />
+        <AssociationConnector Association="MyLearnDBModel.FK_ESTUDIANTE_UNIVERSIDAD" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
