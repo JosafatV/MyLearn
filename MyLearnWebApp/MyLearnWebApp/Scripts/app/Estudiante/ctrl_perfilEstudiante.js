@@ -2,13 +2,12 @@ angular.module('mod_MyLearn').controller('ctrl_perfilEstudiante', ['fct_Trabajo'
     function (fct_Trabajo,fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
 
-        fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Estudiante', extension2: fct_User.getId() }).$promise.then(function (data) {
+        fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Estudiante', extension2: $routeParams.IdUser }).$promise.then(function (data) {
             $scope.ls_trabajos = data;
         });
 
         $scope.do_goTrabajo = function (trabajo) {
-            fct_Trabajo.set_trabajo(trabajo);
-            $location.path('/MyLearn/Estudiante/Perfil/AreaTrabajo');
+            $location.path('/MyLearn/Estudiante/Perfil/AreaTrabajo/' + $routeParams.IdUser + "/" + trabajo.IdTrabajo);
         };
 
         $scope.goCursosDisponibles = function () {

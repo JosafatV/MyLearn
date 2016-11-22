@@ -6,19 +6,17 @@
 
         var vm = this;
 
-        fct_MyLearn_API_Client.get({ type: 'Empresas', extension1: fct_User.getId() }).$promise.then(function (data) {
+        fct_MyLearn_API_Client.get({ type: 'Empresas', extension1: $routeParams.IdUser }).$promise.then(function (data) {
             $scope.js_datosEmpresa = data;
         });
 
-        fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexTrabajos }).$promise.then(function (data) {
+        fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: $routeParams.IdUser, extension3: $scope.num_indexTrabajos }).$promise.then(function (data) {
             $scope.ls_trabajos = data;
         });
 
-        fct_MyLearn_API_Client.query({ type: 'Subastas', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexSubastas }).$promise.then(function (data) {
+        fct_MyLearn_API_Client.query({ type: 'Subastas', extension1: 'Empresa', extension2: $routeParams.IdUser, extension3: $scope.num_indexSubastas }).$promise.then(function (data) {
             $scope.ls_subastas = data;
         });
-
-        //alert($routeParams.id);
 
         fct_MyLearn_API_Client.query({ type: 'Paises' }).$promise.then(function (data) {
             vm.ls_listaPaises = data;
@@ -45,13 +43,13 @@
         }
 
         $scope.do_goCrearSubasta = function () {
-            $location.path('/MyLearn/Empresa/CrearSubasta');
+            $location.path('/MyLearn/Empresa/CrearSubasta/' + $routeParams.IdUser);
 
         };
 
         $scope.get_20MoreWork = function () {
             $scope.num_indexTrabajos = $scope.num_indexTrabajos + 1;
-            fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexTrabajos }).$promise.then(function (data) {
+            fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: $routeParams.IdUser, extension3: $scope.num_indexTrabajos }).$promise.then(function (data) {
                 $scope.ls_trabajos = data;
 
             });
@@ -59,21 +57,21 @@
 
         $scope.get_20MoreSubastas = function () {
             $scope.num_indexSubastas = $scope.num_indexSubastas + 1;
-            fct_MyLearn_API_Client.query({ type: 'Subastas', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexSubastas }).$promise.then(function (data) {
+            fct_MyLearn_API_Client.query({ type: 'Subastas', extension1: 'Empresa', extension2: $routeParams.IdUser, extension3: $scope.num_indexSubastas }).$promise.then(function (data) {
                 $scope.ls_subastas = data;
             });
         };
 
         $scope.get_20LessSubasta = function () {
             $scope.num_indexSubastas = $scope.num_indexSubastas - 1;
-            fct_MyLearn_API_Client.query({ type: 'Subastas', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexSubastas }).$promise.then(function (data) {
+            fct_MyLearn_API_Client.query({ type: 'Subastas', extension1: 'Empresa', extension2: $routeParams.IdUser, extension3: $scope.num_indexSubastas }).$promise.then(function (data) {
                 $scope.ls_subastas = data;
             });
         };
 
         $scope.get_20LessWork = function () {
             $scope.num_indexTrabajos = $scope.num_indexTrabajos - 1;
-            fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: fct_User.getId(), extension3: $scope.num_indexTrabajos }).$promise.then(function (data) {
+            fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: $routeParams.IdUser, extension3: $scope.num_indexTrabajos }).$promise.then(function (data) {
                 $scope.ls_trabajos = data;
             });
         };
@@ -85,6 +83,10 @@
 
         vm.do_goLogin = function () {
 
+        };
+
+        $scope.do_goTrabajos = function (trabajo) {
+            $location.path('/MyLearn/Empresa/Perfil/AreaDeTrabajo/' + $routeParams.IdUser +"/"+ trabajo.IdTrabajo);
         };
 
     }]);

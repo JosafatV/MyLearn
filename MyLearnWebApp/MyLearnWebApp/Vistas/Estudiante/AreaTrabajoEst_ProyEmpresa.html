@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<nav>
-				<a>Mi Perfil</a>
+				<a data-ng-click="do_goPerfilEstudiante()">Mi Perfil</a>
 				<a>Cerrar Sesión</a>
 			</nav>
 		</div>
@@ -25,29 +25,31 @@
 		<br>
 		<div class="container-fluid pr2">
 			<div class="col-md-2">
-					<h1 class="pr1"><span class="glyphicon glyphicon-arrow-left"></span> Mi Perfil</h1>
+					<h1 class="pr1" data-ng-click="do_goPerfilEstudiante()"><span class="glyphicon glyphicon-arrow-left" data-ng-click="do_goPerfilEstudiante()"></span> Mi Perfil</h1>
 			</div>
 		</div><br><br>
 		<div class="row">
 			<div class="col-md-6 color1">
 				<div class="container-fluid">
-					<section class="main row">
+					<section class="main row"  data-ng-repeat="msj in ls_msjs">
 						<article class="col-md-6">
-							<h2>Mensaje de:</h2>
-              <h4>Hora:</h4>
-              <h4>Fecha:</h4>
+							<h2>Mensaje de:{{msj.NombreEmisor}}</h2>
+              <h4>Fecha:{{msj.Fecha}}</h4>
+              <h4>Contenido:{{msj.Contenido}}</h4>
               <p>
-                Esta vara no sirve bretee mas
               </p>
               <a class="btn btn-tcc btn-default btn-md">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
-							<h2>Mensaje de:</h2>
-              <h4>Hora:</h4>
-              <h4>Fecha:</h4>
-              <p>
-                Esta vara no sirve bretee mas
-								<br><br>
-								<a class="btn btn-tcc btn-default btn-md">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
-              </p>
+							<div class="col-md-offset-2" data-ng-repeat="resp in msj.RESPUESTA">
+								<h2>Mensaje de:{{resp.NombreEmisor}} </h2>
+								<h4>Fecha:{{resp.Fecha}}</h4>
+                                <h4>Contenido:{{resp.Contenido}}</h4>
+								<p>
+									<br><br>
+									<a class="btn btn-tcc btn-default btn-md">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
+								</p>
+
+							</div>
+
 
 						</article>
           </section>
@@ -60,9 +62,9 @@
 							<div class="container-fluid">
 									<div class="col-md-10">
 										<div class="form-group">
-											<textarea class="form-control" id="mensaje"></textarea>
+											<textarea class="form-control" id="mensaje" data-ng-model= "js_enviarMensaje.Contenido"></textarea>
 											<br><br>
-											&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md">Enviar</a>&nbsp; &nbsp;&nbsp; &nbsp;
+											&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md" data-ng-click="enviarMensaje()">Enviar</a>&nbsp; &nbsp;&nbsp; &nbsp;
 											<a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a>
 										</div>
 

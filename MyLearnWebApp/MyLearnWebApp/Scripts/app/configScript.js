@@ -5,6 +5,16 @@
         templateUrl: 'Vistas/Profesor/Crear_CuentaProfesor.html',
         controller: 'ctrl_crearCuentaProfesor'
     })
+    .when('/MyLearn/Profesor/Perfil/:IdUser', {
+        templateUrl: 'Vistas/Profesor/Perfil_Profesor.html',
+        controller: 'ctrl_perfilProfesor'
+    })
+
+    .when('/MyLearn/Profesor/Perfil/AreaDeTrabajoProfesor', {
+        templateUrl: 'Vistas/Profesor/Perfil_Profesor.html',
+        controller: 'ctrl_perfilProfesor'
+    })
+
 
 /*-------------------------------------Empresa-------------------------------------------*/
 
@@ -14,12 +24,12 @@
         controller: 'ctrl_crearCuentaEmpresa'
     })
 
-    .when('/MyLearn/Empresa/Perfil', {
+    .when('/MyLearn/Empresa/Perfil/:IdUser', {
         templateUrl: 'Vistas/Empresa/Perfil_Empresa.html',
         controller: 'ctrl_perfilEmpresa'
     })
 
-    .when('/MyLearn/Empresa/CrearSubasta', {
+    .when('/MyLearn/Empresa/CrearSubasta/:IdUser', {
         templateUrl: 'Vistas/Empresa/CrearSubasta.html',
         controller: 'ctrl_crearSubasta'
     })
@@ -29,13 +39,18 @@
         controller: 'ctrl_subasta'
     })
 
+    .when('/MyLearn/Empresa/Perfil/AreaDeTrabajo/:IdUser/:IdTrabajo', {
+        templateUrl: 'Vistas/Empresa/AreaTrabajoEmpresa_ProyEmpresa.html',
+        controller: 'ctrl_areaTrabajoEmpresa'
+    })
+
 /*-------------------------------------Estudiante----------------------------------------*/
 
     .when('/MyLearn/Estudiante/CrearCuenta', {
         templateUrl: 'Vistas/Estudiante/Crear_CuentaEstudiante.html',
         controller: 'ctrl_crearCuentaEstudiante'
     })
-    .when('/MyLearn/Estudiante/Perfil', {
+    .when('/MyLearn/Estudiante/Perfil/:IdUser', {
         templateUrl: 'Vistas/Estudiante/Perfil_Estudiante.html',
         controller: 'ctrl_perfilEstudiante'
     })
@@ -55,7 +70,7 @@
         templateUrl: 'Vistas/Estudiante/Subasta_Estudiante.html',
         controller: 'ctrl_subastaEstudiante'
     })
-    .when('/MyLearn/Estudiante/Perfil/AreaTrabajo', {
+    .when('/MyLearn/Estudiante/Perfil/AreaTrabajo/:IdUser/:IdTrabajo', {
         templateUrl: 'Vistas/Estudiante/AreaTrabajoEst_ProyEmpresa.html',
         controller: 'ctrl_areaTrabajoEstudianteEmpresa'
     })

@@ -85,3 +85,22 @@ angular.module('mod_MyLearn').factory('fct_Trabajo', function ($resource) {
 
 });
 
+angular.module('mod_MyLearn').factory('fct_UserJson', function ($resource) {
+
+
+    var js_user = {};
+
+    this.set_user = function (js_newUser) {
+        js_user = js_newTrabajo;
+    };
+
+
+    this.get_user = function () {
+        return js_user;
+    };
+
+
+    return this;
+
+
+});

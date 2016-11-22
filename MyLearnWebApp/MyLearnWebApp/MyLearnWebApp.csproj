@@ -284,6 +284,7 @@
     <Content Include="Scripts\Angular and Bootstrap\Bootstrap\js\bootstrap.min.js" />
     <Content Include="Scripts\Angular and Bootstrap\Bootstrap\js\npm.js" />
     <Content Include="Scripts\app\configScript.js" />
+    <Content Include="Scripts\app\Empresa\ctrl_areaTrabajoEmpresa.js" />
     <Content Include="Scripts\app\Empresa\ctrl_crearCuentaEmpresa.js" />
     <Content Include="Scripts\app\Empresa\ctrl_crearSubasta.js" />
     <Content Include="Scripts\app\Empresa\ctrl_perfilEmpresa.js" />
@@ -295,6 +296,7 @@
     <Content Include="Scripts\app\Estudiante\ctrl_perfilEstudiante.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_proponerProyecto.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_subastaEstudiante.js" />
+    <Content Include="Scripts\app\Profesor\ctrl_areaTrabajoProfesor.js" />
     <Content Include="Scripts\app\Profesor\ctrl_crearCuentaProfesor.js" />
     <Content Include="Scripts\app\Profesor\ctrl_crearCurso.js" />
     <Content Include="Scripts\app\Profesor\ctrl_cursoProfesor.js" />
@@ -392,6 +394,7 @@
     <Content Include="Vistas\Configuracion\js\bootstrap.min.js" />
     <Content Include="Vistas\Configuracion\js\jquery.js" />
     <Content Include="Vistas\Configuracion\js\npm.js" />
+    <Content Include="Vistas\Empresa\AreaTrabajoEmpresa_ProyEmpresa.html" />
     <Content Include="Vistas\Empresa\CrearSubasta.html" />
     <Content Include="Vistas\Empresa\Crear_CuentaEmpresa.html" />
     <Content Include="Vistas\Empresa\Perfil_Empresa.html" />
@@ -426,6 +429,7 @@
     <Content Include="Vistas\Estudiante\Proponer_Proyecto.html" />
     <Content Include="Vistas\Estudiante\Subasta_Estudiante.html" />
     <Content Include="Vistas\Login\Login.html" />
+    <Content Include="Vistas\Profesor\AreaTrabajoProf_ProyCurso.html" />
     <Content Include="Vistas\Profesor\Crear_CuentaProfesor.html" />
     <Content Include="Vistas\Profesor\Crear_Curso.html" />
     <Content Include="Vistas\Profesor\Curso_Profesor.html" />
