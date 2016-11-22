@@ -61,7 +61,7 @@
 										<th>Estado</th>
 										<th>Detalle</th>
 								</tr>
-                            <tr data-ng-repeat="curso in ls_cursos  | filter: search" data-ng-click="do_goSubastas(subasta)">
+                            <tr data-ng-repeat="curso in ls_cursos  | filter: search" data-ng-click="do_goCurso(curso)">
                                 <td>{{curso.CURSO.Nombre}}</td>
                                 <td>{{curso.CURSO.Estado}}</td>
                                 <td><a class="btn btn-tcc btn-default btn-md">Ver</a></td>

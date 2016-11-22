@@ -28,6 +28,12 @@ angular.module('mod_MyLearn').controller('ctrl_perfilProfesor', ['fct_Trabajo', 
             $location.path('/MyLearn/Profesor/Perfil/CrearCurso/' + $routeParams.IdUser);
         };
 
+        $scope.do_goCurso = function (curso) {
+            console.log(curso);
+            $location.path('/MyLearn/Profesor/Perfil/CursoProfesor/' + $routeParams.IdUser + '/' + curso.IdCurso);
+
+        };
+
         $scope.goLogin = function () {
             $location.path('/MyLearn/Estudiante/Perfil/Login');
         };

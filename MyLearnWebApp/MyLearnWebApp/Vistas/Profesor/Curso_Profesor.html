@@ -3,7 +3,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="../../Scripts/Angular and Bootstrap/Bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_login.css">
+    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_CursosD.css">
 </head>
 <header>
 		<div class="wrapper">
@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<nav>
-				<a>Mi Perfil</a>
+				<a data-ng-click="do_goPerfil()">Mi Perfil</a>
 				<a>Crear Curso</a>
 				<a>Ayuda en Linea</a>
 				<a>Cerrar Sesión</a>
@@ -26,8 +26,7 @@
 		<section class="main row">
 			<article class="col-md-8">
 				<br>
-			<h3>Nombre del Profesor:</h3><br>
-			<h3>Universidad:</h3><br>
+			<h3>Nombre del Profesor: {{profesorActual.NombreContacto}} {{profesorActual.ApellidoContacto}}</h3><br>
 		</article>
 		</section>
 		<br><br><br>
@@ -37,36 +36,27 @@
 				<section class="main row">
 					<article class="col-md-6">
 						<h3>Informacion General:</h3><br>
-						<label for="Descripción General del Curso">Descripción general del curso:</label><br><br>
-						<label for="Fecha de inicio">Fecha de Inicio:</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+						<label for="Nombre del Curso">Nombre del curso: {{cursoActual.Nombre}}</label><br><br>
+						<label for="Fecha de inicio">Fecha de Inicio: {{cursoActual.FechaInicio}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
 						<label for="Fecha de finalización">Fecha de Finalización:</label><br><br><br>
-						<label for="Proyectos Exitosos">Nota mínima de aprobación:</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
-						<label for="Proyectos Fallidos">Estado:</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+						<label for="Proyectos Exitosos">Nota mínima de aprobación:{{cursoActual.NotaMinima}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+						<label for="Proyectos Fallidos">Estado:{{cursoActual.Estado}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
 				</article>
 			</section>
 			</div> <br><br>
 			<h3>Badges:</h3>
 			<table class="table table-bordered table-condensed prom2">
 					<tr>
-							<th>Número</th>
+							<th>Nombre</th>
 							<th>Ícono</th>
 							<th>Valor</th>
 					</tr>
-					<tr>
-							<td>1</td>
-							<td><img src="img/badgepeq.png" class="img-responsive img-rounded"alt=""></td>
-							<td>50%</td>
+					<tr data-ng-repeat="badge in ls_badges">
+							<td>{{badge.Nombre}}</td>
+							<td><img src="../../Vistas/Estilo/img/badgepeq.png" class="img-responsive img-rounded"alt=""></td>
+							<td>{{badge.Puntaje}}</td>
 					</tr>
-					<tr>
-							<td>2</td>
-						<td><img src="img/badgepeq.png" class="img-responsive img-rounded"alt=""></td>
-							<td>25%</td>
-					</tr>
-					<tr>
-							<td>3</td>
-						<td><img src="img/badgepeq.png" class="img-responsive img-rounded"alt=""></td>
-							<td>25%</td>
-					</tr>
+
 		</table>
 
 			</div>

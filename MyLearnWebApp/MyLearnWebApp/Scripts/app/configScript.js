@@ -20,6 +20,11 @@
         controller: 'ctrl_crearCurso'
     })
 
+    .when('/MyLearn/Profesor/Perfil/CursoProfesor/:IdUser/:IdCurso', {
+        templateUrl: 'Vistas/Profesor/Curso_Profesor.html',
+        controller: 'ctrl_cursoProfesor'
+    })
+
 /*-------------------------------------Empresa-------------------------------------------*/
 
 
