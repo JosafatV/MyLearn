@@ -36,7 +36,8 @@ namespace MyLearnApi.BusinessLogic
         /// <returns></returns>
         public bool PostCURSO_POR_PROFESOR(clsCursoSpModel Curso)
         {
-            db.SP_Insertar_Curso(Curso.IdProfesor, Curso.Nombre, Curso.Codigo, Curso.IdUniversidad, Curso.NotaMinima);
+            db.SP_Insertar_Curso(Curso.IdProfesor, Curso.Nombre, Curso.Codigo, Curso.IdUniversidad, 
+                Curso.NotaMinima,Curso.FechaInicio,Curso.NumeroGrupo);
             try
             {
                 db.SaveChanges();

@@ -19,5 +19,7 @@ namespace MyLearnApi.Models
         public string Codigo { get; set; }
         public byte NotaMinima { get; set; }
         public string Estado { get; set; }
+        public Nullable<System.DateTime> FechaInicio { get; set; }
+        public Nullable<int> NumeroGrupo { get; set; }
     }
 }

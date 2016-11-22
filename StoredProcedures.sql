@@ -121,11 +121,12 @@ CREATE PROCEDURE SP_Insertar_Universidad @Nombre CHAR(30)
 
 /********** UNIVERSIDAD **********/
 	/*Creates a new course*/
-CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30), @Codigo CHAR(10), @IdUniversidad INT, @NotaMinima tinyINT
+CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30), 
+		@Codigo CHAR(10), @IdUniversidad INT, @NotaMinima tinyINT, @FechaInicio DATE , @NumeroGrupo INT
 	AS
 		DECLARE @IdCurso INT
-		INSERT INTO CURSO (Nombre, Codigo, NotaMinima, Estado)
-		VALUES (@Nombre, @Codigo, @NotaMinima, 'A')
+		INSERT INTO CURSO (Nombre, Codigo, NotaMinima, Estado,FechaInicio, NumeroGrupo)
+		VALUES (@Nombre, @Codigo, @NotaMinima, 'A', @FechaInicio , @NumeroGrupo)
 
 		SELECT @IdCurso = @@IDENTITY
 		INSERT INTO CURSO_POR_PROFESOR (IdCurso, IdProfesor, Estado)

@@ -409,7 +409,7 @@ namespace MyLearnApi.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Respuesta", mensajeRaizParameter, contenidoParameter, adjuntoParameter, nombreEmisorParameter);
         }
     
-        public virtual int SP_Insertar_Curso(string idProfesor, string nombre, string codigo, Nullable<int> idUniversidad, Nullable<byte> notaMinima)
+        public virtual int SP_Insertar_Curso(string idProfesor, string nombre, string codigo, Nullable<int> idUniversidad, Nullable<byte> notaMinima, Nullable<System.DateTime> fechaInicio, Nullable<int> numeroGrupo)
         {
             var idProfesorParameter = idProfesor != null ?
                 new ObjectParameter("IdProfesor", idProfesor) :
@@ -431,7 +431,15 @@ namespace MyLearnApi.Models
                 new ObjectParameter("NotaMinima", notaMinima) :
                 new ObjectParameter("NotaMinima", typeof(byte));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Curso", idProfesorParameter, nombreParameter, codigoParameter, idUniversidadParameter, notaMinimaParameter);
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var numeroGrupoParameter = numeroGrupo.HasValue ?
+                new ObjectParameter("NumeroGrupo", numeroGrupo) :
+                new ObjectParameter("NumeroGrupo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Curso", idProfesorParameter, nombreParameter, codigoParameter, idUniversidadParameter, notaMinimaParameter, fechaInicioParameter, numeroGrupoParameter);
         }
     }
 }

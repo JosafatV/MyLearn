@@ -13,6 +13,8 @@
           <Property Name="Nombre" Type="char" MaxLength="30" />
           <Property Name="Codigo" Type="char" MaxLength="10" />
           <Property Name="NotaMinima" Type="tinyint" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="NumeroGrupo" Type="int" />
           <Property Name="Estado" Type="char" MaxLength="1" />
         </EntityType>
         <EntityType Name="CURSO_POR_PROFESOR">
@@ -556,6 +558,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Parameter Name="Codigo" Type="char" Mode="In" />
           <Parameter Name="IdUniversidad" Type="int" Mode="In" />
           <Parameter Name="NotaMinima" Type="tinyint" Mode="In" />
+          <Parameter Name="FechaInicio" Type="date" Mode="In" />
+          <Parameter Name="NumeroGrupo" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_Insertar_Empresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="char" Mode="In" />
@@ -1026,6 +1030,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <Parameter Name="Codigo" Mode="In" Type="String" />
             <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
             <Parameter Name="NotaMinima" Mode="In" Type="Byte" />
+            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="NumeroGrupo" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
@@ -1519,6 +1525,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="NotaMinima" Type="Byte" Nullable="false" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="NumeroGrupo" Type="Int32" />
         </EntityType>
         <EntityType Name="CURSO_POR_PROFESOR">
           <Key>
@@ -1836,6 +1844,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySetMapping Name="CURSO">
             <EntityTypeMapping TypeName="MyLearnDBModel.CURSO">
               <MappingFragment StoreEntitySet="CURSO">
+                <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="NotaMinima" ColumnName="NotaMinima" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />

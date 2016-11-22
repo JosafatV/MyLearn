@@ -83,7 +83,7 @@ EXEC SP_Insertar_Admin '29','1234','3re6d3k45gf3l4h53jk4', '', '','Josafat','Var
 EXEC SP_Insertar_Admin '30','1234','563kp4j3uiopbgny878c', '', '', 'Giovanni','Villalobos'
 
 
-EXEC SP_Insertar_Curso '13', 'Especificacion y Diseño de Software', 'CE-4101', '1', 68
+EXEC SP_Insertar_Curso '13', 'Especificacion y Diseño de Software', 'CE-4101', '1', 68, '10/17/2016', 7
 
 /*CE-4101*/
 EXEC SP_Insertar_Badge 'Usabilidad', '25', '1'

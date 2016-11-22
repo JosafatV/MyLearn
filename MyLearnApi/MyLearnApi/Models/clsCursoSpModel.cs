@@ -12,5 +12,7 @@ namespace MyLearnApi.Models
         public string Codigo;
         public int IdUniversidad;
         public byte NotaMinima;
+        public DateTime FechaInicio;
+        public int NumeroGrupo;
     }
 }

@@ -144,6 +144,8 @@ CREATE TABLE CURSO (
     Nombre CHAR(30),
     Codigo CHAR(10),
     NotaMinima tinyINT NOT NULL ,
+	FechaInicio DATE,
+	NumeroGrupo INT,
     Estado CHAR(1), /*Activo, Cerrado*/
 
 	CONSTRAINT PK_CURSO
