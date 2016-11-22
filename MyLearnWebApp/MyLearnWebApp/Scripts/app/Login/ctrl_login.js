@@ -1,4 +1,4 @@
-﻿var str_id = 13;
+﻿var str_id = 1;
 angular.module('mod_MyLearn').controller('ctrl_login', ['fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
     function (fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
         

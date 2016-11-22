@@ -1,5 +1,5 @@
 ﻿//Var used to save the URL 
-var urlGeneric = 'http://192.168.0.108';
+var urlGeneric = 'http://sebastian95';
 
 //This script is the resource that is used to connect to the web Api od DrPhischel
 angular.module('mod_MyLearn').factory('fct_MyLearn_API_Client', function ($resource) {

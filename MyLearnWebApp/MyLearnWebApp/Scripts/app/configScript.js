@@ -58,7 +58,7 @@
         templateUrl: 'Vistas/Estudiante/Perfil_Estudiante.html',
         controller: 'ctrl_perfilEstudiante'
     })
-    .when('/MyLearn/Estudiante/Perfil/CursosDisponibles', {
+    .when('/MyLearn/Estudiante/Perfil/:IdUser/CursosDisponibles', {
         templateUrl: 'Vistas/Estudiante/Cursos_Disponibles.html',
         controller: 'ctrl_cursosDisponibles'
     })
