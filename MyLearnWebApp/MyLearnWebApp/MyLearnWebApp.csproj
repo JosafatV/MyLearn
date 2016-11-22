@@ -288,6 +288,7 @@
     <Content Include="Scripts\app\Empresa\ctrl_crearSubasta.js" />
     <Content Include="Scripts\app\Empresa\ctrl_perfilEmpresa.js" />
     <Content Include="Scripts\app\Empresa\ctrl_subasta.js" />
+    <Content Include="Scripts\app\Estudiante\ctrl_areaTrabajoEstudianteEmpresa.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_crearCuentaEstudiante.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_cursosDisponibles.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_ofertarSubasta.js" />
@@ -417,6 +418,7 @@
     <Content Include="Vistas\Estilo\js\bootstrap.min.js" />
     <Content Include="Vistas\Estilo\js\jquery.js" />
     <Content Include="Vistas\Estilo\js\npm.js" />
+    <Content Include="Vistas\Estudiante\AreaTrabajoEst_ProyEmpresa.html" />
     <Content Include="Vistas\Estudiante\Crear_CuentaEstudiante.html" />
     <Content Include="Vistas\Estudiante\Cursos_Disponibles.html" />
     <Content Include="Vistas\Estudiante\Ofertar_Subasta.html" />

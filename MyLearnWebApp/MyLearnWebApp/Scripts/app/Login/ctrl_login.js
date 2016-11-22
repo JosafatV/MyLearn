@@ -5,7 +5,7 @@
         var str_id = "20";
         var contrasena = "Contraseña"
 
-        fct_User.setId("20");
+        fct_User.setId("1");
         fct_User.setContra("this");
 
         $scope.goCrearCuentaEstudiante = function () {
@@ -20,12 +20,11 @@
             $location.path("/MyLearn/Empresa/CrearCuenta");
         };
 
-        $scope.goPerfil = function () {
-            alert($scope.usuario);
+        $scope.do_goPerfilEstudiante = function () {
             $location.path('/MyLearn/Estudiante/Perfil');
         };
 
-        $scope.do_goPerfil = function () {
+        $scope.do_goPerfilEmpresa = function () {
             $location.path('/MyLearn/Empresa/Perfil');
         };
 

@@ -55,6 +55,10 @@
         templateUrl: 'Vistas/Estudiante/Subasta_Estudiante.html',
         controller: 'ctrl_subastaEstudiante'
     })
+    .when('/MyLearn/Estudiante/Perfil/AreaTrabajo', {
+        templateUrl: 'Vistas/Estudiante/AreaTrabajoEst_ProyEmpresa.html',
+        controller: 'ctrl_areaTrabajoEstudianteEmpresa'
+    })
 /*-------------------------------------Default--------------------------------------------*/
     .otherwise({
         templateUrl: 'Vistas/Login/Login.html',
