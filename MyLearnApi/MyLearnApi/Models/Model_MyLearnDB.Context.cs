@@ -365,7 +365,7 @@ namespace MyLearnApi.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Rechazar_Demas_Subastas", idSubastaParameter, idEstudianteParameter);
         }
     
-        public virtual int SP_Insertar_Mensaje_Trabajo(string contenido, string adjunto, Nullable<int> idTrabajo)
+        public virtual int SP_Insertar_Mensaje_Trabajo(string contenido, string adjunto, Nullable<int> idTrabajo, string nombreEmisor)
         {
             var contenidoParameter = contenido != null ?
                 new ObjectParameter("Contenido", contenido) :
@@ -379,10 +379,14 @@ namespace MyLearnApi.Models
                 new ObjectParameter("IdTrabajo", idTrabajo) :
                 new ObjectParameter("IdTrabajo", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Mensaje_Trabajo", contenidoParameter, adjuntoParameter, idTrabajoParameter);
+            var nombreEmisorParameter = nombreEmisor != null ?
+                new ObjectParameter("NombreEmisor", nombreEmisor) :
+                new ObjectParameter("NombreEmisor", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Mensaje_Trabajo", contenidoParameter, adjuntoParameter, idTrabajoParameter, nombreEmisorParameter);
         }
     
-        public virtual int SP_Insertar_Respuesta(Nullable<long> mensajeRaiz, string contenido, string adjunto)
+        public virtual int SP_Insertar_Respuesta(Nullable<long> mensajeRaiz, string contenido, string adjunto, string nombreEmisor)
         {
             var mensajeRaizParameter = mensajeRaiz.HasValue ?
                 new ObjectParameter("MensajeRaiz", mensajeRaiz) :
@@ -396,7 +400,11 @@ namespace MyLearnApi.Models
                 new ObjectParameter("Adjunto", adjunto) :
                 new ObjectParameter("Adjunto", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Respuesta", mensajeRaizParameter, contenidoParameter, adjuntoParameter);
+            var nombreEmisorParameter = nombreEmisor != null ?
+                new ObjectParameter("NombreEmisor", nombreEmisor) :
+                new ObjectParameter("NombreEmisor", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Respuesta", mensajeRaizParameter, contenidoParameter, adjuntoParameter, nombreEmisorParameter);
         }
     }
 }

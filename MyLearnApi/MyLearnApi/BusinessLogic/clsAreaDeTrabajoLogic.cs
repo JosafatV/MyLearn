@@ -47,7 +47,7 @@ namespace MyLearnApi.BusinessLogic
         public bool agregarMensajeATrabajo(MENSAJE mensaje, int idTrabajo)
         { 
             //guarda el menssaje y el la tabla mensaje por proyecto relaciona el mensaje al proyecto
-            db.SP_Insertar_Mensaje_Trabajo(mensaje.Contenido, mensaje.Adjunto, idTrabajo);    
+            db.SP_Insertar_Mensaje_Trabajo(mensaje.Contenido, mensaje.Adjunto, idTrabajo,mensaje.NombreEmisor );    
             try
             {
                 db.SaveChanges();
@@ -65,7 +65,7 @@ namespace MyLearnApi.BusinessLogic
         /// <returns></returns>
         public RESPUESTA responderMensaje(RESPUESTA respuesta)
         {
-            db.SP_Insertar_Respuesta(respuesta.MensajeRaiz, respuesta.Contenido, respuesta.Adjunto);
+            db.SP_Insertar_Respuesta(respuesta.MensajeRaiz, respuesta.Contenido, respuesta.Adjunto,respuesta.NombreEmisor);
             try
             {
                 db.SaveChanges();

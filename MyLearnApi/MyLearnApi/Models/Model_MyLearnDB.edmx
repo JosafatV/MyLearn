@@ -63,6 +63,7 @@
           <Property Name="Contenido" Type="char" MaxLength="500" />
           <Property Name="Adjunto" Type="char" MaxLength="500" />
           <Property Name="Fecha" Type="datetime" />
+          <Property Name="NombreEmisor" Type="char" MaxLength="30" />
         </EntityType>
         <EntityType Name="MENSAJE_POR_TRABAJO">
           <Key>
@@ -89,6 +90,7 @@
           <Property Name="Contenido" Type="char" MaxLength="500" />
           <Property Name="Adjunto" Type="char" MaxLength="500" />
           <Property Name="Fecha" Type="datetime" />
+          <Property Name="NombreEmisor" Type="char" MaxLength="30" />
         </EntityType>
         <EntityType Name="TECNOLOGIA">
           <Key>
@@ -554,6 +556,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Parameter Name="Contenido" Type="char" Mode="In" />
           <Parameter Name="Adjunto" Type="char" Mode="In" />
           <Parameter Name="IdTrabajo" Type="int" Mode="In" />
+          <Parameter Name="NombreEmisor" Type="char" Mode="In" />
         </Function>
         <Function Name="SP_Insertar_Profesor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="char" Mode="In" />
@@ -574,6 +577,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Parameter Name="MensajeRaiz" Type="bigint" Mode="In" />
           <Parameter Name="Contenido" Type="char" Mode="In" />
           <Parameter Name="Adjunto" Type="char" Mode="In" />
+          <Parameter Name="NombreEmisor" Type="char" Mode="In" />
         </Function>
         <Function Name="SP_Insertar_Trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre" Type="char" Mode="In" />
@@ -958,11 +962,13 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <Parameter Name="Contenido" Mode="In" Type="String" />
             <Parameter Name="Adjunto" Mode="In" Type="String" />
             <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+            <Parameter Name="NombreEmisor" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Insertar_Respuesta">
             <Parameter Name="MensajeRaiz" Mode="In" Type="Int64" />
             <Parameter Name="Contenido" Mode="In" Type="String" />
             <Parameter Name="Adjunto" Mode="In" Type="String" />
+            <Parameter Name="NombreEmisor" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
@@ -1388,6 +1394,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Name="Adjunto" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RESPUESTA" Relationship="MyLearnDBModel.FK_RESPUESTA_RAIZ" FromRole="MENSAJE" ToRole="RESPUESTA" />
+          <Property Name="NombreEmisor" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="MENSAJE_POR_TRABAJO">
           <Key>
@@ -1408,6 +1415,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Name="Contenido" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
           <Property Name="Adjunto" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="NombreEmisor" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
         </EntityType>
         <Association Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
           <End Type="MyLearnDBModel.MENSAJE" Role="MENSAJE" Multiplicity="1" />
@@ -1706,6 +1714,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySetMapping Name="MENSAJE">
             <EntityTypeMapping TypeName="MyLearnDBModel.MENSAJE">
               <MappingFragment StoreEntitySet="MENSAJE">
+                <ScalarProperty Name="NombreEmisor" ColumnName="NombreEmisor" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Adjunto" ColumnName="Adjunto" />
                 <ScalarProperty Name="Contenido" ColumnName="Contenido" />
@@ -1725,6 +1734,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySetMapping Name="RESPUESTA">
             <EntityTypeMapping TypeName="MyLearnDBModel.RESPUESTA">
               <MappingFragment StoreEntitySet="RESPUESTA">
+                <ScalarProperty Name="NombreEmisor" ColumnName="NombreEmisor" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Adjunto" ColumnName="Adjunto" />
                 <ScalarProperty Name="Contenido" ColumnName="Contenido" />

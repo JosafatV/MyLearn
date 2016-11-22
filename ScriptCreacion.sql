@@ -207,7 +207,7 @@ CREATE TABLE MENSAJE
     Contenido CHAR(500),
     Adjunto CHAR(500),
     Fecha DATETIME,
-    
+    NombreEmisor  CHAR(30),
     CONSTRAINT PK_MENSAJE
 		PRIMARY KEY (Id)
 );
@@ -219,7 +219,7 @@ CREATE TABLE RESPUESTA
     Contenido CHAR(500),
     Adjunto CHAR(500),
     Fecha DATETIME,
-    
+    NombreEmisor  CHAR(30),
     CONSTRAINT PK_RESPUESTA
 		PRIMARY KEY (Id),
     CONSTRAINT FK_RESPUESTA_RAIZ

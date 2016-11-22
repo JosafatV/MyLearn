@@ -242,11 +242,12 @@ CREATE PROCEDURE SP_Aceptar_Subasta @IdSubasta INT, @IdEstudiante CHAR(100)
 
 /********** MENSAJERIA **********/
 	/*Creates a new message for a project*/
-CREATE PROCEDURE SP_Insertar_Mensaje_Proyecto @Contenido CHAR(500), @Adjunto CHAR(500), @Fecha DATETIME, @IdProyecto INT
+CREATE PROCEDURE SP_Insertar_Mensaje_Proyecto @Contenido CHAR(500), @Adjunto CHAR(500), 
+	@IdProyecto INT, @NombreEmisor CHAR(30)
 	AS
 		DECLARE @IdMensaje BIGINT
-		INSERT INTO MENSAJE (Contenido, Adjunto, Fecha)
-		VALUES (@Contenido, @Adjunto, @Fecha)
+		INSERT INTO MENSAJE (Contenido, Adjunto, Fecha, NombreEmisor)
+		VALUES (@Contenido, @Adjunto, GETDATE(), @NombreEmisor)
 		
 		SELECT @IdMensaje = @@IDENTITY
 		INSERT INTO MENSAJE_POR_PROYECTO (IdMensaje, IdProyecto, Estado)
@@ -254,11 +255,12 @@ CREATE PROCEDURE SP_Insertar_Mensaje_Proyecto @Contenido CHAR(500), @Adjunto CHA
 	GO
 
 	/*Creates a new message for a job*/
-CREATE PROCEDURE SP_Insertar_Mensaje_Trabajo @Contenido CHAR(500), @Adjunto CHAR(500), @IdTrabajo INT
+CREATE PROCEDURE SP_Insertar_Mensaje_Trabajo @Contenido CHAR(500), @Adjunto CHAR(500), 
+	@IdTrabajo INT, @NombreEmisor CHAR(30)
 	AS
 		DECLARE @IdMensaje BIGINT
-		INSERT INTO MENSAJE (Contenido, Adjunto, Fecha)
-		VALUES (@Contenido, @Adjunto, GETDATE())
+		INSERT INTO MENSAJE (Contenido, Adjunto, Fecha,NombreEmisor)
+		VALUES (@Contenido, @Adjunto, GETDATE(), @NombreEmisor)
 		
 		SELECT @IdMensaje = @@IDENTITY
 		INSERT INTO MENSAJE_POR_TRABAJO (IdMensaje, IdTrabajo, Estado)
@@ -266,10 +268,11 @@ CREATE PROCEDURE SP_Insertar_Mensaje_Trabajo @Contenido CHAR(500), @Adjunto CHAR
 	GO
 
 	/*creates a new answer to a root message*/
-CREATE PROCEDURE SP_Insertar_Respuesta @MensajeRaiz BIGINT, @Contenido CHAR(500), @Adjunto CHAR(500)
+CREATE PROCEDURE SP_Insertar_Respuesta @MensajeRaiz BIGINT, @Contenido CHAR(500), 
+				@Adjunto CHAR(500), @NombreEmisor CHAR(30)
 	AS
-		INSERT INTO RESPUESTA (MensajeRaiz, Contenido, Adjunto, Fecha)
-		VALUES (@MensajeRaiz, @Contenido, @Adjunto, GETDATE())
+		INSERT INTO RESPUESTA (MensajeRaiz, Contenido, Adjunto, Fecha,NombreEmisor)
+		VALUES (@MensajeRaiz, @Contenido, @Adjunto, GETDATE(), @NombreEmisor)
 	GO
 
 	/*Assigns a technology to a project*/

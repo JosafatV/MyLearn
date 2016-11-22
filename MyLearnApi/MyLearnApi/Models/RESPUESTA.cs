@@ -19,5 +19,6 @@ namespace MyLearnApi.Models
         public string Contenido { get; set; }
         public string Adjunto { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
+        public string NombreEmisor { get; set; }
     }
 }

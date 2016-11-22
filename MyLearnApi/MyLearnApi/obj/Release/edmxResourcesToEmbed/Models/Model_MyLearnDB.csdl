@@ -183,11 +183,13 @@
       <Parameter Name="Contenido" Mode="In" Type="String" />
       <Parameter Name="Adjunto" Mode="In" Type="String" />
       <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+      <Parameter Name="NombreEmisor" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_Insertar_Respuesta">
       <Parameter Name="MensajeRaiz" Mode="In" Type="Int64" />
       <Parameter Name="Contenido" Mode="In" Type="String" />
       <Parameter Name="Adjunto" Mode="In" Type="String" />
+      <Parameter Name="NombreEmisor" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
@@ -613,6 +615,7 @@
     <Property Name="Adjunto" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
     <Property Name="Fecha" Type="DateTime" Precision="3" />
     <NavigationProperty Name="RESPUESTA" Relationship="MyLearnDBModel.FK_RESPUESTA_RAIZ" FromRole="MENSAJE" ToRole="RESPUESTA" />
+    <Property Name="NombreEmisor" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
   </EntityType>
   <EntityType Name="MENSAJE_POR_TRABAJO">
     <Key>
@@ -633,6 +636,7 @@
     <Property Name="Contenido" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
     <Property Name="Adjunto" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
     <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="NombreEmisor" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
   </EntityType>
   <Association Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
     <End Type="MyLearnDBModel.MENSAJE" Role="MENSAJE" Multiplicity="1" />
