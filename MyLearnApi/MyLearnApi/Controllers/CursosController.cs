@@ -64,7 +64,7 @@ namespace MyLearnApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("MyLearnApi/CursosPorProfesor")]
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(CURSO))]
         public IHttpActionResult PostCURSO_POR_PROFESOR(clsCursoSpModel Curso)
         {
             if (!ModelState.IsValid)
@@ -72,9 +72,9 @@ namespace MyLearnApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            pobj_cursosLogic.PostCURSO_POR_PROFESOR(Curso);
+            Curso = pobj_cursosLogic.PostCURSO_POR_PROFESOR(Curso);
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(Curso);
         }
 
         /// <summary>

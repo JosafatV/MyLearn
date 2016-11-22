@@ -15,6 +15,9 @@ GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Respuesta')
 DROP PROCEDURE SP_Insertar_Respuesta  
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Curso')
+DROP PROCEDURE SP_Insertar_Curso  
+GO
 
 
 
@@ -128,12 +131,14 @@ CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30),
 		INSERT INTO CURSO (Nombre, Codigo, NotaMinima, Estado,FechaInicio, NumeroGrupo)
 		VALUES (@Nombre, @Codigo, @NotaMinima, 'A', @FechaInicio , @NumeroGrupo)
 
-		SELECT @IdCurso = @@IDENTITY
+		SELECT @IdCurso = scope_identity() 
 		INSERT INTO CURSO_POR_PROFESOR (IdCurso, IdProfesor, Estado)
 		VALUES (@IdCurso, @IdProfesor, 'A')
 
 		INSERT INTO CURSO_POR_UNIVERSIDAD (IdCurso, IdUniversidad, Estado)
 		VALUES (@IdCurso, @IdUniversidad, 'A')
+
+		SELECT @IdCurso
 	GO
 
 	/*SP_Terminar_Curso*/

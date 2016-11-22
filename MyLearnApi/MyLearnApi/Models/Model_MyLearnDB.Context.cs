@@ -442,5 +442,38 @@ namespace MyLearnApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Curso", idProfesorParameter, nombreParameter, codigoParameter, idUniversidadParameter, notaMinimaParameter, fechaInicioParameter, numeroGrupoParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> Sp_InsertarCurso(string idProfesor, string nombre, string codigo, Nullable<int> idUniversidad, Nullable<byte> notaMinima, Nullable<System.DateTime> fechaInicio, Nullable<int> numeroGrupo)
+        {
+            var idProfesorParameter = idProfesor != null ?
+                new ObjectParameter("IdProfesor", idProfesor) :
+                new ObjectParameter("IdProfesor", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("Codigo", codigo) :
+                new ObjectParameter("Codigo", typeof(string));
+    
+            var idUniversidadParameter = idUniversidad.HasValue ?
+                new ObjectParameter("IdUniversidad", idUniversidad) :
+                new ObjectParameter("IdUniversidad", typeof(int));
+    
+            var notaMinimaParameter = notaMinima.HasValue ?
+                new ObjectParameter("NotaMinima", notaMinima) :
+                new ObjectParameter("NotaMinima", typeof(byte));
+    
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var numeroGrupoParameter = numeroGrupo.HasValue ?
+                new ObjectParameter("NumeroGrupo", numeroGrupo) :
+                new ObjectParameter("NumeroGrupo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_InsertarCurso", idProfesorParameter, nombreParameter, codigoParameter, idUniversidadParameter, notaMinimaParameter, fechaInicioParameter, numeroGrupoParameter);
+        }
     }
 }

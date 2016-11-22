@@ -34,10 +34,10 @@ namespace MyLearnApi.BusinessLogic
         /// </summary>
         /// <param name="Curso"></param>
         /// <returns></returns>
-        public bool PostCURSO_POR_PROFESOR(clsCursoSpModel Curso)
+        public clsCursoSpModel PostCURSO_POR_PROFESOR(clsCursoSpModel Curso)
         {
-            db.SP_Insertar_Curso(Curso.IdProfesor, Curso.Nombre, Curso.Codigo, Curso.IdUniversidad, 
-                Curso.NotaMinima,Curso.FechaInicio,Curso.NumeroGrupo);
+            Curso.idCurso = db.Sp_InsertarCurso(Curso.IdProfesor, Curso.Nombre, Curso.Codigo, Curso.IdUniversidad,
+                Curso.NotaMinima, Curso.FechaInicio, Curso.NumeroGrupo).SingleOrDefault().Value;
             try
             {
                 db.SaveChanges();
@@ -46,7 +46,7 @@ namespace MyLearnApi.BusinessLogic
             {
                 throw;
             }
-            return true;
+            return Curso;
         }
 
         /// <summary>

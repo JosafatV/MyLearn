@@ -211,6 +211,15 @@
       <End Role="CURSO" EntitySet="CURSO" />
       <End Role="BADGE" EntitySet="BADGE" />
     </AssociationSet>
+    <FunctionImport Name="Sp_InsertarCurso" ReturnType="Collection(Int32)">
+      <Parameter Name="IdProfesor" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Codigo" Mode="In" Type="String" />
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="NotaMinima" Mode="In" Type="Byte" />
+      <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+      <Parameter Name="NumeroGrupo" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>

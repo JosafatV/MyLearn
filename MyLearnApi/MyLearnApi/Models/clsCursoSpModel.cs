@@ -7,6 +7,7 @@ namespace MyLearnApi.Models
 {
     public class clsCursoSpModel
     {
+        public int idCurso;
         public string IdProfesor;
         public string Nombre;
         public string Codigo;

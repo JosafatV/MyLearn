@@ -319,5 +319,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Sp_InsertarCurso" FunctionName="MyLearnDBModel.Store.SP_Insertar_Curso" />
   </EntityContainerMapping>
 </Mapping>
