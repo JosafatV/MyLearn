@@ -57,6 +57,11 @@ namespace MyLearnApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }*/
 
+        /// <summary>
+        /// Post de un curso
+        /// </summary>
+        /// <param name="Curso"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("MyLearnApi/CursosPorProfesor")]
         [ResponseType(typeof(void))]
@@ -72,7 +77,43 @@ namespace MyLearnApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        
+        /// <summary>
+        /// post de un badge (a un curso)
+        /// </summary>
+        /// <param name="badge"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("MyLearnApi/Cursos/Badges")]
+        [ResponseType(typeof(List<BADGE>))]
+        public IHttpActionResult PostBADGE(List<BADGE> badges)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            //valida ell puntaje total
+            if (pobj_cursosLogic.isTotalPuntajeValido(badges))
+                badges = pobj_cursosLogic.insertBadge(badges);
+            //si no lo cum´ple retorna conflicto
+            else
+                return Conflict();
+
+            return Ok(badges);
+        }
+
+        /// <summary>
+        /// Get de una lista de los bagdes de un curso
+        /// </summary>
+        /// <param name="idCurso"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("MyLearnApi/Cursos/Badges/{idCurso}")]
+        [ResponseType(typeof(List<BADGE>))]
+        public List<BADGE> getBadgesCurso(int idCurso)
+        {
+            return pobj_cursosLogic.getBadgePorCurso(idCurso);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
@@ -82,6 +123,7 @@ namespace MyLearnApi.Controllers
 
         [HttpOptions]
         [Route("MyLearnApi/CursosPorProfesor")]
+        [Route("MyLearnApi/Cursos/Badges")]
         public HttpResponseMessage Options()
         {
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };

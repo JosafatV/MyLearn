@@ -183,7 +183,34 @@
       <Parameter Name="Contenido" Mode="In" Type="String" />
       <Parameter Name="Adjunto" Mode="In" Type="String" />
       <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+      <Parameter Name="NombreEmisor" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="SP_Insertar_Respuesta">
+      <Parameter Name="MensajeRaiz" Mode="In" Type="Int64" />
+      <Parameter Name="Contenido" Mode="In" Type="String" />
+      <Parameter Name="Adjunto" Mode="In" Type="String" />
+      <Parameter Name="NombreEmisor" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="CURSO" EntityType="MyLearnDBModel.CURSO" />
+    <EntitySet Name="CURSO_POR_PROFESOR" EntityType="MyLearnDBModel.CURSO_POR_PROFESOR" />
+    <AssociationSet Name="FK_IDCURSO_CURSO_POR_PROFESOR" Association="MyLearnDBModel.FK_IDCURSO_CURSO_POR_PROFESOR">
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="CURSO_POR_PROFESOR" EntitySet="CURSO_POR_PROFESOR" />
+    </AssociationSet>
+    <FunctionImport Name="SP_Insertar_Curso">
+      <Parameter Name="IdProfesor" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Codigo" Mode="In" Type="String" />
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="NotaMinima" Mode="In" Type="Byte" />
+      <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+      <Parameter Name="NumeroGrupo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="BADGE" EntityType="MyLearnDBModel.BADGE" />
+    <AssociationSet Name="FK_CURSO_ID_BADGE" Association="MyLearnDBModel.FK_CURSO_ID_BADGE">
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="BADGE" EntitySet="BADGE" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -608,6 +635,7 @@
     <Property Name="Adjunto" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
     <Property Name="Fecha" Type="DateTime" Precision="3" />
     <NavigationProperty Name="RESPUESTA" Relationship="MyLearnDBModel.FK_RESPUESTA_RAIZ" FromRole="MENSAJE" ToRole="RESPUESTA" />
+    <Property Name="NombreEmisor" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
   </EntityType>
   <EntityType Name="MENSAJE_POR_TRABAJO">
     <Key>
@@ -628,6 +656,7 @@
     <Property Name="Contenido" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
     <Property Name="Adjunto" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
     <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="NombreEmisor" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
   </EntityType>
   <Association Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
     <End Type="MyLearnDBModel.MENSAJE" Role="MENSAJE" Multiplicity="1" />
@@ -662,6 +691,60 @@
       </Principal>
       <Dependent Role="MENSAJE_POR_TRABAJO">
         <PropertyRef Name="IdTrabajo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CURSO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="NotaMinima" Type="Byte" Nullable="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+    <Property Name="NumeroGrupo" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CURSO_POR_PROFESOR">
+    <Key>
+      <PropertyRef Name="IdCurso" />
+      <PropertyRef Name="IdProfesor" />
+    </Key>
+    <Property Name="IdCurso" Type="Int32" Nullable="false" />
+    <Property Name="IdProfesor" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="CURSO" Relationship="MyLearnDBModel.FK_IDCURSO_CURSO_POR_PROFESOR" FromRole="CURSO_POR_PROFESOR" ToRole="CURSO" />
+  </EntityType>
+  <Association Name="FK_IDCURSO_CURSO_POR_PROFESOR">
+    <End Type="MyLearnDBModel.CURSO" Role="CURSO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.CURSO_POR_PROFESOR" Role="CURSO_POR_PROFESOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CURSO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CURSO_POR_PROFESOR">
+        <PropertyRef Name="IdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BADGE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Puntaje" Type="Byte" />
+    <Property Name="IdCurso" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_CURSO_ID_BADGE">
+    <End Type="MyLearnDBModel.CURSO" Role="CURSO" Multiplicity="0..1" />
+    <End Type="MyLearnDBModel.BADGE" Role="BADGE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CURSO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BADGE">
+        <PropertyRef Name="IdCurso" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -1,5 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MyLearnDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BADGE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" />
+    <Property Name="Puntaje" Type="tinyint" />
+    <Property Name="IdCurso" Type="int" />
+  </EntityType>
+  <EntityType Name="CURSO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" />
+    <Property Name="Codigo" Type="char" MaxLength="10" />
+    <Property Name="NotaMinima" Type="tinyint" Nullable="false" />
+    <Property Name="FechaInicio" Type="date" />
+    <Property Name="NumeroGrupo" Type="int" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="CURSO_POR_PROFESOR">
+    <Key>
+      <PropertyRef Name="IdCurso" />
+      <PropertyRef Name="IdProfesor" />
+    </Key>
+    <Property Name="IdCurso" Type="int" Nullable="false" />
+    <Property Name="IdProfesor" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
   <EntityType Name="EMPRESA">
     <Key>
       <PropertyRef Name="Id" />
@@ -58,6 +88,7 @@
     <Property Name="Contenido" Type="char" MaxLength="500" />
     <Property Name="Adjunto" Type="char" MaxLength="500" />
     <Property Name="Fecha" Type="datetime" />
+    <Property Name="NombreEmisor" Type="char" MaxLength="30" />
   </EntityType>
   <EntityType Name="MENSAJE_POR_TRABAJO">
     <Key>
@@ -84,6 +115,7 @@
     <Property Name="Contenido" Type="char" MaxLength="500" />
     <Property Name="Adjunto" Type="char" MaxLength="500" />
     <Property Name="Fecha" Type="datetime" />
+    <Property Name="NombreEmisor" Type="char" MaxLength="30" />
   </EntityType>
   <EntityType Name="TECNOLOGIA">
     <Key>
@@ -272,6 +304,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Property Name="EstadoTrabajo" Type="char" MaxLength="1" />
     <Property Name="EstadoTrabajoPorEstudiante" Type="char" MaxLength="1" />
   </EntityType>
+  <Association Name="FK_CURSO_ID_BADGE">
+    <End Role="CURSO" Type="Self.CURSO" Multiplicity="0..1" />
+    <End Role="BADGE" Type="Self.BADGE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CURSO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BADGE">
+        <PropertyRef Name="IdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_EMPRESA_ID">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
     <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
@@ -329,6 +373,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Principal>
       <Dependent Role="ESTUDIANTE">
         <PropertyRef Name="IdUniversidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDCURSO_CURSO_POR_PROFESOR">
+    <End Role="CURSO" Type="Self.CURSO" Multiplicity="1" />
+    <End Role="CURSO_POR_PROFESOR" Type="Self.CURSO_POR_PROFESOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CURSO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CURSO_POR_PROFESOR">
+        <PropertyRef Name="IdCurso" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -488,6 +544,15 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_Insertar_Curso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdProfesor" Type="char" Mode="In" />
+    <Parameter Name="Nombre" Type="char" Mode="In" />
+    <Parameter Name="Codigo" Type="char" Mode="In" />
+    <Parameter Name="IdUniversidad" Type="int" Mode="In" />
+    <Parameter Name="NotaMinima" Type="tinyint" Mode="In" />
+    <Parameter Name="FechaInicio" Type="date" Mode="In" />
+    <Parameter Name="NumeroGrupo" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_Insertar_Empresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="char" Mode="In" />
     <Parameter Name="Contrasena" Type="char" Mode="In" />
@@ -525,6 +590,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Parameter Name="Contenido" Type="char" Mode="In" />
     <Parameter Name="Adjunto" Type="char" Mode="In" />
     <Parameter Name="IdTrabajo" Type="int" Mode="In" />
+    <Parameter Name="NombreEmisor" Type="char" Mode="In" />
   </Function>
   <Function Name="SP_Insertar_Profesor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="char" Mode="In" />
@@ -540,6 +606,12 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Parameter Name="Pais" Type="char" Mode="In" />
     <Parameter Name="Region" Type="char" Mode="In" />
     <Parameter Name="IdUniversidad" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_Insertar_Respuesta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MensajeRaiz" Type="bigint" Mode="In" />
+    <Parameter Name="Contenido" Type="char" Mode="In" />
+    <Parameter Name="Adjunto" Type="char" Mode="In" />
+    <Parameter Name="NombreEmisor" Type="char" Mode="In" />
   </Function>
   <Function Name="SP_Insertar_Trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Nombre" Type="char" Mode="In" />
@@ -558,6 +630,9 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Parameter Name="UserId" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="MyLearnDBModelStoreContainer">
+    <EntitySet Name="BADGE" EntityType="Self.BADGE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CURSO" EntityType="Self.CURSO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CURSO_POR_PROFESOR" EntityType="Self.CURSO_POR_PROFESOR" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDIOMA" EntityType="Self.IDIOMA" Schema="dbo" store:Type="Tables" />
@@ -664,6 +739,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     [VIEW_TRABAJO].[EstadoTrabajoPorEstudiante] AS [EstadoTrabajoPorEstudiante]
     FROM [dbo].[VIEW_TRABAJO] AS [VIEW_TRABAJO]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK_CURSO_ID_BADGE" Association="Self.FK_CURSO_ID_BADGE">
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="BADGE" EntitySet="BADGE" />
+    </AssociationSet>
     <AssociationSet Name="FK_EMPRESA_ID" Association="Self.FK_EMPRESA_ID">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="EMPRESA" EntitySet="EMPRESA" />
@@ -683,6 +762,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <AssociationSet Name="FK_ESTUDIANTE_UNIVERSIDAD" Association="Self.FK_ESTUDIANTE_UNIVERSIDAD">
       <End Role="UNIVERSIDAD" EntitySet="UNIVERSIDAD" />
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDCURSO_CURSO_POR_PROFESOR" Association="Self.FK_IDCURSO_CURSO_POR_PROFESOR">
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="CURSO_POR_PROFESOR" EntitySet="CURSO_POR_PROFESOR" />
     </AssociationSet>
     <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />

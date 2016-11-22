@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MyLearnDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BADGE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="char" MaxLength="30" />
+          <Property Name="Puntaje" Type="tinyint" />
+          <Property Name="IdCurso" Type="int" />
+        </EntityType>
         <EntityType Name="CURSO">
           <Key>
             <PropertyRef Name="Id" />
@@ -324,6 +333,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Name="EstadoTrabajo" Type="char" MaxLength="1" />
           <Property Name="EstadoTrabajoPorEstudiante" Type="char" MaxLength="1" />
         </EntityType>
+        <Association Name="FK_CURSO_ID_BADGE">
+          <End Role="CURSO" Type="Self.CURSO" Multiplicity="0..1" />
+          <End Role="BADGE" Type="Self.BADGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BADGE">
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_EMPRESA_ID">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
           <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
@@ -638,6 +659,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="MyLearnDBModelStoreContainer">
+          <EntitySet Name="BADGE" EntityType="Self.BADGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CURSO" EntityType="Self.CURSO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CURSO_POR_PROFESOR" EntityType="Self.CURSO_POR_PROFESOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
@@ -746,6 +768,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     [VIEW_TRABAJO].[EstadoTrabajoPorEstudiante] AS [EstadoTrabajoPorEstudiante]
     FROM [dbo].[VIEW_TRABAJO] AS [VIEW_TRABAJO]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_CURSO_ID_BADGE" Association="Self.FK_CURSO_ID_BADGE">
+            <End Role="CURSO" EntitySet="CURSO" />
+            <End Role="BADGE" EntitySet="BADGE" />
+          </AssociationSet>
           <AssociationSet Name="FK_EMPRESA_ID" Association="Self.FK_EMPRESA_ID">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="EMPRESA" EntitySet="EMPRESA" />
@@ -1033,6 +1059,11 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="NumeroGrupo" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="BADGE" EntityType="MyLearnDBModel.BADGE" />
+          <AssociationSet Name="FK_CURSO_ID_BADGE" Association="MyLearnDBModel.FK_CURSO_ID_BADGE">
+            <End Role="CURSO" EntitySet="CURSO" />
+            <End Role="BADGE" EntitySet="BADGE" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
           <Key>
@@ -1549,6 +1580,27 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="BADGE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Puntaje" Type="Byte" />
+          <Property Name="IdCurso" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_CURSO_ID_BADGE">
+          <End Type="MyLearnDBModel.CURSO" Role="CURSO" Multiplicity="0..1" />
+          <End Type="MyLearnDBModel.BADGE" Role="BADGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BADGE">
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1863,6 +1915,16 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_Insertar_Curso" FunctionName="MyLearnDBModel.Store.SP_Insertar_Curso" />
+          <EntitySetMapping Name="BADGE">
+            <EntityTypeMapping TypeName="MyLearnDBModel.BADGE">
+              <MappingFragment StoreEntitySet="BADGE">
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="Puntaje" ColumnName="Puntaje" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

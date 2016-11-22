@@ -70,5 +70,51 @@ namespace MyLearnApi.BusinessLogic
         {
             return db.CURSO_POR_PROFESOR.Count(e => e.IdCurso == id) > 0;
         }
+        
+        /// <summary>
+        /// obtiene los badges de un curso
+        /// </summary>
+        /// <param name="idCurso"></param>
+        /// <returns></returns>
+        public List<BADGE> getBadgePorCurso(int idCurso)
+        {
+            return db.BADGE.Where(b=> b.IdCurso == idCurso).ToList<BADGE>();
+        }
+
+        /// <summary>
+        /// iinserta in badge en la base de datos
+        /// </summary>
+        /// <param name="badge"></param>
+        /// <returns></returns>
+        public List<BADGE> insertBadge(List<BADGE> badges)
+        {
+            for (int i = 0; i < badges.Count; i++)
+            {
+                db.BADGE.Add(badges[i]);
+                db.SaveChanges();
+            }
+            
+
+            return badges;
+        }
+
+        /// <summary>
+        /// funcion que verifica que la suma de la puntaje de los badges sea 100
+        /// </summary>
+        /// <param name="badges"></param>
+        /// <returns></returns>
+        public bool isTotalPuntajeValido(List<BADGE> badges)
+        {
+            int? lby_nota_total = 0;
+            for (int i = 0; i < badges.Count; i++)
+            {
+                lby_nota_total = lby_nota_total +  badges[i].Puntaje;
+            }
+            if (lby_nota_total == 100)
+                return true;
+            else
+                return false;
+        }
+
     }
 }
