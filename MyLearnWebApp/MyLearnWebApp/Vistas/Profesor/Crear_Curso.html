@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<nav>
-				<a>Mi Perfil</a>
+				<a data-ng-click="do_goPerfilEmpresa()">Mi Perfil</a>
 				<a>Ayuda en Linea</a>
 				<a>Cerrar Sesión</a>
 			</nav>
@@ -24,7 +24,7 @@
 	<div class="container-fluid">
 		<div class="container-fluid pr2">
 			<div class="col-md-2">
-					<h1 class="pr1"><span class="glyphicon glyphicon-arrow-left"></span> Mi Perfil</h1>
+					<h1 class="pr1"  data-ng-click="do_goPerfilEmpresa()"><span class="glyphicon glyphicon-arrow-left"  data-ng-click="do_goPerfilEmpresa()"></span> Mi Perfil</h1>
 			</div>
 		</div><br><br>
 		<div class="row">
@@ -75,13 +75,13 @@
 			              <div class="form-group">
 			                <br>
 			                <label for="nombre">Nombre del Badge:</label>
-			                <input  class="form-control" id="nombre"type="text">
+			                <input  class="form-control" id="nombre"type="text" data-ng-model="js_badgeActual.Nombre">
 			              </div>
 										<div class="form-group">
 			                <label for="valor">Valor:</label>
-			                <input  class="form-control" id="valor"type="text">
+			                <input  class="form-control" id="valor"type="text" data-ng-model="js_badgeActual.Puntaje">
 			              </div>
-										<a class="btn btn-tcc btn-default btn-lg">Agregar</a>&nbsp; &nbsp;&nbsp; &nbsp;
+										<a class="btn btn-tcc btn-default btn-lg" data-ng-click="do_agregarBadge()">Agregar</a>&nbsp; &nbsp;&nbsp; &nbsp;
 									</div>
 								</div>
 							<form>
@@ -94,29 +94,17 @@
 				<h2>Badges Agregados:</h2>
 				<table class="table table-bordered table-condensed prom1">
 						<tr>
-								<th>Número</th>
+								<th>Nombre</th>
 								<th>Ícono</th>
 								<th>Valor</th>
 								<th>Eliminar</th>
 						</tr>
                     <tr data-ng-repeat="badge in ls_badges | filter: search" >
-                        <td>1</td>
+                        <td>{{badge.Nombre}}</td>
                         <td><img src="../../Vistas/Estilo/img/badgepeq.png" class="img-responsive img-rounded" alt=""></td>
-                        <td>50%</td>
-                        <td><a class="btn btn-danger btn-md" data-ng-click="do_deleteBadge(badge)">Eliminar</a></td>
+                        <td>{{badge.Puntaje}}</td>
+                        <td><a class="btn btn-danger btn-md" data-ng-click="do_deleteBadge($index)">Eliminar</a></td>
                     </tr>
-						<tr>
-								<td>2</td>
-							<td><img src="img/badgepeq.png" class="img-responsive img-rounded"alt=""></td>
-								<td>25%</td>
-								<td><a class="btn btn-danger btn-md">Eliminar</a></td>
-						</tr>
-						<tr>
-								<td>3</td>
-							<td><img src="img/badgepeq.png" class="img-responsive img-rounded"alt=""></td>
-								<td>25%</td>
-								<td><a class="btn btn-danger btn-md">Eliminar</a></td>
-						</tr>
 			</table><br>
 			<div class="container-fluid">
 				<div class="col-md-offset-5">

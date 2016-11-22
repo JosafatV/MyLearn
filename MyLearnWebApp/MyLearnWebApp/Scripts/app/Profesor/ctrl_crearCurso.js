@@ -21,6 +21,12 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
 
         };
 
+        $scope.js_badgeActual = {
+            "Nombre": "",
+            "Puntaje": "",
+            "IdCurso": ""
+        };
+
 
         fct_MyLearn_API_Client.query({ type: 'Universidades' }).$promise.then(function (data) {
             $scope.ls_listaUniversidades = data;
@@ -35,9 +41,27 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
 
             console.log($scope.js_crearCurso);
             fct_MyLearn_API_Client.save({ type: 'CursosPorProfesor' }, $scope.js_crearCurso).$promise.then(function (data) {
-                alert(angular.toJson(data));
+
+                angular.forEach($scope.ls_badges, function (value, key) {
+                    value.IdCurso = data.IdCurso
+                   // alert(angular.toJson(data.IdCurso));
+                });
+
+                fct_MyLearn_API_Client.save({ type: 'Cursos', extension1: 'Badges', extension2: data.IdCurso }, $scope.ls_badges).$promise.then(function (data) {
+                    console.log(angular.toJson(data));
+                });
             });
         };
+
+        $scope.do_agregarBadge = function () {
+            $scope.ls_badges.push({
+                "Nombre":  $scope.js_badgeActual.Nombre,
+                "Puntaje": $scope.js_badgeActual.Puntaje,
+                "IdCurso": ""
+            });
+            console.log(angular.toJson($scope.ls_badges));
+        };
+
 
         $scope.changeUniversidad = function () {
             $scope.js_crearCurso.IdUniversidad = $scope.universidadSelected.Id;
@@ -49,6 +73,14 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
 
         $scope.goNotificaciones = function () {
             $location.path('/MyLearn/Profesor/Perfil');
+        };
+
+        $scope.do_goPerfilEmpresa = function () {
+            $location.path('/MyLearn/Profesor/Perfil/' + $routeParams.IdUser);
+        };
+
+        $scope.do_deleteBadge = function (index) {
+            $scope.ls_badges.splice(index);
         };
 
         $scope.goLogin = function () {
