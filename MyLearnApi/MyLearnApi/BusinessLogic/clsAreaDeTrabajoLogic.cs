@@ -9,7 +9,7 @@ using MyLearnApi.Models;
 
 namespace MyLearnApi.BusinessLogic
 {
-    public class clsAreaDeTrabajoEmpresaLogic
+    public class clsAreaDeTrabajoLogic
     {
         private MyLearnDBEntities db = new MyLearnDBEntities();
 
@@ -38,13 +38,16 @@ namespace MyLearnApi.BusinessLogic
             return lobj_result ;
         }
         
-
+        /// <summary>
+        /// agrega mensaje a un trabajo
+        /// </summary>
+        /// <param name="mensaje"> el mensaje </param>
+        /// <param name="idTrabajo"> trabajo</param>
+        /// <returns></returns>
         public bool agregarMensajeATrabajo(MENSAJE mensaje, int idTrabajo)
-        {
-
+        { 
             //guarda el menssaje y el la tabla mensaje por proyecto relaciona el mensaje al proyecto
-            db.SP_Insertar_Mensaje_Trabajo(mensaje.Contenido, mensaje.Adjunto, idTrabajo);
-                
+            db.SP_Insertar_Mensaje_Trabajo(mensaje.Contenido, mensaje.Adjunto, idTrabajo);    
             try
             {
                 db.SaveChanges();
@@ -54,6 +57,24 @@ namespace MyLearnApi.BusinessLogic
                 throw;   
             }
             return true;
+        }
+        /// <summary>
+        /// responde cualquier mensaje
+        /// </summary>
+        /// <param name="respuesta"></param>
+        /// <returns></returns>
+        public RESPUESTA responderMensaje(RESPUESTA respuesta)
+        {
+            db.SP_Insertar_Respuesta(respuesta.MensajeRaiz, respuesta.Contenido, respuesta.Adjunto);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+            return respuesta;
         }
 
     

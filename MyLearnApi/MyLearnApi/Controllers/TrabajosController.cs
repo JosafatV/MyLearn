@@ -153,6 +153,18 @@ namespace MyLearnApi.Controllers
             return Ok(tecnologia);
 
         }
+
+
+        [HttpPut]
+        [Route("MyLearnApi/Trabajos/Terminados")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult responderMensaje(int idTrabajo, string idEstudiante, byte estrellas)
+        {
+            if (pobj_TrabajosLogic.terminarTrabajo(idTrabajo,idEstudiante,estrellas))
+                return StatusCode(HttpStatusCode.NoContent);
+            else
+                return Conflict();
+        }
         /// <summary>
         /// 
         /// </summary>

@@ -12,6 +12,9 @@ GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Mensaje_Trabajo')
 DROP PROCEDURE SP_Insertar_Mensaje_Trabajo  
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Respuesta')
+DROP PROCEDURE SP_Insertar_Respuesta  
+GO
 
 
 
@@ -263,10 +266,10 @@ CREATE PROCEDURE SP_Insertar_Mensaje_Trabajo @Contenido CHAR(500), @Adjunto CHAR
 	GO
 
 	/*creates a new answer to a root message*/
-CREATE PROCEDURE SP_Insertar_Respuesta @MensajeRaiz BIGINT, @Contenido CHAR(500), @Adjunto CHAR(500), @Fecha DATETIME
+CREATE PROCEDURE SP_Insertar_Respuesta @MensajeRaiz BIGINT, @Contenido CHAR(500), @Adjunto CHAR(500)
 	AS
 		INSERT INTO RESPUESTA (MensajeRaiz, Contenido, Adjunto, Fecha)
-		VALUES (@MensajeRaiz, @Contenido, @Adjunto, @Fecha)
+		VALUES (@MensajeRaiz, @Contenido, @Adjunto, GETDATE())
 	GO
 
 	/*Assigns a technology to a project*/

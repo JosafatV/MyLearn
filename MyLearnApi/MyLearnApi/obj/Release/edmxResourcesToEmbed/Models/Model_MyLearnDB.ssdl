@@ -524,7 +524,6 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   <Function Name="SP_Insertar_Mensaje_Trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Contenido" Type="char" Mode="In" />
     <Parameter Name="Adjunto" Type="char" Mode="In" />
-    <Parameter Name="Fecha" Type="datetime" Mode="In" />
     <Parameter Name="IdTrabajo" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_Insertar_Profesor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -541,6 +540,11 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Parameter Name="Pais" Type="char" Mode="In" />
     <Parameter Name="Region" Type="char" Mode="In" />
     <Parameter Name="IdUniversidad" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_Insertar_Respuesta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MensajeRaiz" Type="bigint" Mode="In" />
+    <Parameter Name="Contenido" Type="char" Mode="In" />
+    <Parameter Name="Adjunto" Type="char" Mode="In" />
   </Function>
   <Function Name="SP_Insertar_Trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Nombre" Type="char" Mode="In" />

@@ -570,6 +570,11 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Parameter Name="Region" Type="char" Mode="In" />
           <Parameter Name="IdUniversidad" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_Insertar_Respuesta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MensajeRaiz" Type="bigint" Mode="In" />
+          <Parameter Name="Contenido" Type="char" Mode="In" />
+          <Parameter Name="Adjunto" Type="char" Mode="In" />
+        </Function>
         <Function Name="SP_Insertar_Trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre" Type="char" Mode="In" />
           <Parameter Name="Descripcion" Type="char" Mode="In" />
@@ -953,6 +958,11 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <Parameter Name="Contenido" Mode="In" Type="String" />
             <Parameter Name="Adjunto" Mode="In" Type="String" />
             <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Insertar_Respuesta">
+            <Parameter Name="MensajeRaiz" Mode="In" Type="Int64" />
+            <Parameter Name="Contenido" Mode="In" Type="String" />
+            <Parameter Name="Adjunto" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
@@ -1724,6 +1734,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_Insertar_Mensaje_Trabajo" FunctionName="MyLearnDBModel.Store.SP_Insertar_Mensaje_Trabajo" />
+          <FunctionImportMapping FunctionImportName="SP_Insertar_Respuesta" FunctionName="MyLearnDBModel.Store.SP_Insertar_Respuesta" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

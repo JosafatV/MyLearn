@@ -12,6 +12,8 @@ O: Obtenido (Badge)
 P: Pendiente(Trabajo, Proyecto), Propuesto(Oferta, Propuesta), Posible (Badge), Disponible (Curso)
 
 
-X: Terminado(Trabajo, Proyecto, Curso), Rechazado(Oferta, Propuesta)
+X: Rechazado(Oferta, Propuesta)
+
+T:  Terminado(Trabajo, Proyecto, Curso)
 
 

@@ -30,12 +30,19 @@ namespace MyLearnApi.BusinessLogic
             return algoritmoPaginacion(listaTrabajos, index, 20);
         }
 
-
+        /// <summary>
+        /// retorna proyectos activos y terminados
+        /// </summary>
+        /// <param name="idEstudiante"></param>
+        /// <returns></returns>
         public List<VIEW_TRABAJO> getTrabajoDeEstudiante(string idEstudiante)
         {
             //retorna los proyectos activos
             List<VIEW_TRABAJO> listaTrabajos = db.VIEW_TRABAJO
-                .Where(trab => trab.EstadoTrabajo == "A" && trab.IdEstudiante == idEstudiante && trab.EstadoTrabajoPorEstudiante == "A")
+                //si es activo "A" o terminado "T"
+                .Where(trab => (trab.EstadoTrabajo == "A"  || trab.EstadoTrabajo == "T" )&&
+                trab.IdEstudiante == idEstudiante &&
+                trab.EstadoTrabajoPorEstudiante == "A")
                 .OrderBy(trab => trab.Nombre)
                 .ToList<VIEW_TRABAJO>();
             //pagina el resultado de 20 en 20
@@ -172,6 +179,53 @@ namespace MyLearnApi.BusinessLogic
             return true;
         }
 
+        /// <summary>
+        /// Termina un trabajo y le asiga estrellas
+        /// </summary>
+        /// <param name="idTrabajo"></param>
+        /// <param name="idEstudiante"></param>
+        /// <param name="estrellas"> las estrellas deben estar de cero a 5 (inclusive)</param>
+        /// <returns>true si se completa o false si hay error</returns>
+        public bool terminarTrabajo(int idTrabajo, string idEstudiante,byte estrellas)
+        {
+            TRABAJO lobj_trabajo = db.TRABAJO.Find(idTrabajo);
+            if (lobj_trabajo == null)
+            {
+                return false;
+            }
+            if (estrellas<= 5 && estrellas >= 0)
+                lobj_trabajo.EstrellasObtenidas = estrellas;
+            else
+                return false;
+
+            db.Entry(lobj_trabajo).State = EntityState.Modified;
+
+            //cambio el estado en trabajo y trabajo por estudiante a terminado
+            if (cambiarEstadoTrabajo(idTrabajo, idEstudiante, "T") == false)
+                return false;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (!TRABAJOExists(idTrabajo) || !trabajoPorEstudianteExists(idTrabajo, idEstudiante))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return true;
+        }
+        /// <summary>
+        /// agrega una tecnologia a un trabajo
+        /// </summary>
+        /// <param name="tecnologia"></param>
+        /// <returns></returns>
         public bool addTecnologiaToTrabajo(TECNOLOGIA_POR_TRABAJO tecnologia)
         {
             tecnologia.Estado = "A";

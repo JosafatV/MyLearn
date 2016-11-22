@@ -381,5 +381,22 @@ namespace MyLearnApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Mensaje_Trabajo", contenidoParameter, adjuntoParameter, idTrabajoParameter);
         }
+    
+        public virtual int SP_Insertar_Respuesta(Nullable<long> mensajeRaiz, string contenido, string adjunto)
+        {
+            var mensajeRaizParameter = mensajeRaiz.HasValue ?
+                new ObjectParameter("MensajeRaiz", mensajeRaiz) :
+                new ObjectParameter("MensajeRaiz", typeof(long));
+    
+            var contenidoParameter = contenido != null ?
+                new ObjectParameter("Contenido", contenido) :
+                new ObjectParameter("Contenido", typeof(string));
+    
+            var adjuntoParameter = adjunto != null ?
+                new ObjectParameter("Adjunto", adjunto) :
+                new ObjectParameter("Adjunto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Respuesta", mensajeRaizParameter, contenidoParameter, adjuntoParameter);
+        }
     }
 }

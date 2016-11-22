@@ -14,7 +14,7 @@ namespace MyLearnApi.Controllers
     public class MensajePorTrabajoController : ApiController
     {
         //objeto que maneja la logica del area de trabajo de estudiante-empresa
-        private clsAreaDeTrabajoEmpresaLogic pobj_areaLogic = new clsAreaDeTrabajoEmpresaLogic();
+        private clsAreaDeTrabajoLogic pobj_areaLogic = new clsAreaDeTrabajoLogic();
 
         [HttpGet]
         [Route("MyLearnApi/Mensajes/Trabajo/{idTrabajo}")]
@@ -42,6 +42,25 @@ namespace MyLearnApi.Controllers
   
         }
 
+        /// <summary>
+        /// postea una respuesta aun mensaje
+        /// </summary>
+        /// <param name="respuesta"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("MyLearnApi/Mensajes/Trabajo/Respuesta")]
+        [ResponseType(typeof(RESPUESTA))]
+        public IHttpActionResult responderMensaje(RESPUESTA respuesta)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            pobj_areaLogic.responderMensaje(respuesta);
+            return Ok(respuesta);
+        }
+
+ 
         [HttpOptions]
         [Route("MyLearnApi/Mensajes/Trabajo/{idTrabajo}")]
         public HttpResponseMessage Options()

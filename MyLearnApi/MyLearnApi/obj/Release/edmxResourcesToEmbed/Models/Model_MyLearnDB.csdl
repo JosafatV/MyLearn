@@ -182,8 +182,12 @@
     <FunctionImport Name="SP_Insertar_Mensaje_Trabajo">
       <Parameter Name="Contenido" Mode="In" Type="String" />
       <Parameter Name="Adjunto" Mode="In" Type="String" />
-      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
       <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Insertar_Respuesta">
+      <Parameter Name="MensajeRaiz" Mode="In" Type="Int64" />
+      <Parameter Name="Contenido" Mode="In" Type="String" />
+      <Parameter Name="Adjunto" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
