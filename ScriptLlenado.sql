@@ -124,3 +124,8 @@ EXEC SP_Insertar_Mensaje_Trabajo 'Necesito que me envie el perfil de la empresa'
 EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto DrPischel', '10/17/2016', '1'
 EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto Barbarras', '10/17/2016', '1'
 
+EXEC SP_Insertar_Curso '13', 'Especificacion y Diseño de Software', 'CE-4101', '1', 68 ,'10/17/2018' , 6
+EXEC SP_Insertar_Curso '14', 'Bases De Datos', 'CE-4101', '1', 68,'12/07/2015' , 5
+EXEC SP_Insertar_Curso '14', 'Matemática General', 'CE-4101', '1', 68,'10/17/2014' , 4
+EXEC SP_Insertar_Curso '15', 'Introducción a la Física', 'CE-4101', '1', 68,'10/02/2016' , 3
+EXEC SP_Insertar_Curso '16', 'Estructuras de Datos 2', 'CE-4101', '1', 68,'10/03/2016' , 2

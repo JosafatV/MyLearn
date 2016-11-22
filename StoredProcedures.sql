@@ -18,6 +18,16 @@ GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Curso')
 DROP PROCEDURE SP_Insertar_Curso  
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Agregar_Al_Curso')
+DROP PROCEDURE SP_Agregar_Al_Curso
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_Estudiante')
+DROP PROCEDURE SP_Select_Cursos_Estudiante
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_De_Universidad')
+DROP PROCEDURE SP_Select_Cursos_De_Universidad
+
 
 
 
@@ -123,6 +133,27 @@ CREATE PROCEDURE SP_Insertar_Universidad @Nombre CHAR(30)
 
 
 /********** UNIVERSIDAD **********/
+CREATE PROCEDURE SP_Select_Cursos_Estudiante @IdEstudiante CHAR(100) 
+	AS
+		SELECT CURSO.Id, CURSO.Nombre, CURSO.Codigo, CURSO.NotaMinima, CURSO.FechaInicio, CURSO.NumeroGrupo, CURSO.Estado
+		FROM CURSO INNER JOIN ESTUDIANTE_POR_CURSO ON CURSO.Id = ESTUDIANTE_POR_CURSO.IdCurso
+		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante 
+					AND ( ESTUDIANTE_POR_CURSO.Estado = 'A' OR ESTUDIANTE_POR_CURSO.Estado = 'T' )
+	GO
+
+CREATE PROCEDURE SP_Select_Cursos_De_Universidad ( @IdUniversidad INT , @EstadoCurso CHAR(1), @IdEstudiante CHAR(100) )
+	AS
+		SELECT CURSO.Id, CURSO.Nombre, CURSO.Codigo, CURSO.NotaMinima, CURSO.FechaInicio, CURSO.NumeroGrupo, CURSO.Estado
+		FROM CURSO INNER JOIN CURSO_POR_UNIVERSIDAD ON CURSO.Id = CURSO_POR_UNIVERSIDAD.IdCurso
+				   /*INNER JOIN ESTUDIANTE_POR_CURSO ON CURSO.Id = ESTUDIANTE_POR_CURSO.IdCurso*/	
+		WHERE CURSO_POR_UNIVERSIDAD.IdUniversidad  = @IdUniversidad 
+				AND CURSO.Estado = @EstadoCurso 
+				/*AND ESTUDIANTE_POR_CURSO.Estado != 'A'
+				AND ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante*/
+	GO
+
+
+
 	/*Creates a new course*/
 CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30), 
 		@Codigo CHAR(10), @IdUniversidad INT, @NotaMinima tinyINT, @FechaInicio DATE , @NumeroGrupo INT
@@ -142,6 +173,20 @@ CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30),
 	GO
 
 	/*SP_Terminar_Curso*/
+ 
+
+CREATE PROCEDURE SP_TerminarCurso (@IdCurso INT) 
+	AS
+		UPDATE CURSO 
+		SET CURSO.ESTADO = 'T'
+		WHERE CURSO.Id = @IdCurso;
+
+		UPDATE ESTUDIANTE_POR_CURSO 
+		SET ESTUDIANTE_POR_CURSO.ESTADO = 'T'
+		WHERE ESTUDIANTE_POR_CURSO.IdCurso = @IdCurso ;
+
+	GO
+
 
 	/*Creates a badge for a course*/
 CREATE PROCEDURE SP_Insertar_Badge (@Nombre CHAR (30), @Puntaje TINYINT, @IdCurso INT) 

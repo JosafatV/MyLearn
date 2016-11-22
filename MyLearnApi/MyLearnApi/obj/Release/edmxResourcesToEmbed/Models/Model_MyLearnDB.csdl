@@ -226,6 +226,34 @@
     <FunctionImport Name="SP_SelectTecnologiasPorTrabajo" EntitySet="TECNOLOGIA" ReturnType="Collection(MyLearnDBModel.TECNOLOGIA)">
       <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SP_Select_Cursos_Estudiante" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SelectCursosEstudiante" EntitySet="CURSO" ReturnType="Collection(MyLearnDBModel.CURSO)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Select_Cursos_De_Universidad" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_De_Universidad_Result)">
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="EstadoCurso" Mode="In" Type="String" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SelectCursosDeUniversidad" EntitySet="CURSO" ReturnType="Collection(MyLearnDBModel.CURSO)">
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="EstadoCurso" Mode="In" Type="String" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="ESTUDIANTE_POR_CURSO" EntityType="MyLearnDBModel.ESTUDIANTE_POR_CURSO" />
+    <AssociationSet Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO" Association="MyLearnDBModel.FK_IDCURSO_ESTUDIANTE_POR_CURSO">
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO" Association="MyLearnDBModel.FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO">
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
+    </AssociationSet>
+    <FunctionImport Name="SP_TerminarCurso">
+      <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -768,4 +796,56 @@
     <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
     <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
   </ComplexType>
+  <ComplexType Name="SP_Select_Cursos_Estudiante_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Codigo" Nullable="true" MaxLength="10" />
+    <Property Type="Byte" Name="NotaMinima" Nullable="false" />
+    <Property Type="DateTime" Name="FechaInicio" Nullable="true" />
+    <Property Type="Int32" Name="NumeroGrupo" Nullable="true" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="SP_Select_Cursos_De_Universidad_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Codigo" Nullable="true" MaxLength="10" />
+    <Property Type="Byte" Name="NotaMinima" Nullable="false" />
+    <Property Type="DateTime" Name="FechaInicio" Nullable="true" />
+    <Property Type="Int32" Name="NumeroGrupo" Nullable="true" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+  </ComplexType>
+  <EntityType Name="ESTUDIANTE_POR_CURSO">
+    <Key>
+      <PropertyRef Name="IdEstudiante" />
+      <PropertyRef Name="IdCurso" />
+    </Key>
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="IdCurso" Type="Int32" Nullable="false" />
+    <Property Name="Nota" Type="Int32" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO">
+    <End Type="MyLearnDBModel.CURSO" Role="CURSO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.ESTUDIANTE_POR_CURSO" Role="ESTUDIANTE_POR_CURSO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CURSO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ESTUDIANTE_POR_CURSO">
+        <PropertyRef Name="IdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO">
+    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
+    <End Type="MyLearnDBModel.ESTUDIANTE_POR_CURSO" Role="ESTUDIANTE_POR_CURSO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ESTUDIANTE_POR_CURSO">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

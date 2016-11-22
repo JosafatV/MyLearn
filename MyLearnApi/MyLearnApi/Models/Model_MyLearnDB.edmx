@@ -69,6 +69,16 @@
           <Property Name="RepositorioCodigo" Type="char" MaxLength="100" />
           <Property Name="LinkHojaDeVida" Type="char" MaxLength="100" />
         </EntityType>
+        <EntityType Name="ESTUDIANTE_POR_CURSO">
+          <Key>
+            <PropertyRef Name="IdEstudiante" />
+            <PropertyRef Name="IdCurso" />
+          </Key>
+          <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="IdCurso" Type="int" Nullable="false" />
+          <Property Name="Nota" Type="int" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
         <EntityType Name="IDIOMA">
           <Key>
             <PropertyRef Name="Id" />
@@ -417,6 +427,30 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO">
+          <End Role="CURSO" Type="Self.CURSO" Multiplicity="1" />
+          <End Role="ESTUDIANTE_POR_CURSO" Type="Self.ESTUDIANTE_POR_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ESTUDIANTE_POR_CURSO">
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO">
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+          <End Role="ESTUDIANTE_POR_CURSO" Type="Self.ESTUDIANTE_POR_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTUDIANTE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ESTUDIANTE_POR_CURSO">
+              <PropertyRef Name="IdEstudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
           <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
           <End Role="IDIOMA_POR_ESTUDIANTE" Type="Self.IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
@@ -658,8 +692,19 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
         <Function Name="SP_Select_Cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_Select_Cursos_De_Universidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUniversidad" Type="int" Mode="In" />
+          <Parameter Name="EstadoCurso" Type="char" Mode="In" />
+          <Parameter Name="IdEstudiante" Type="char" Mode="In" />
+        </Function>
+        <Function Name="SP_Select_Cursos_Estudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEstudiante" Type="char" Mode="In" />
+        </Function>
         <Function Name="SP_select_tecnologias_por_trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdTrabajo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_TerminarCurso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCurso" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="MyLearnDBModelStoreContainer">
           <EntitySet Name="BADGE" EntityType="Self.BADGE" Schema="dbo" store:Type="Tables" />
@@ -667,6 +712,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySet Name="CURSO_POR_PROFESOR" EntityType="Self.CURSO_POR_PROFESOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESTUDIANTE_POR_CURSO" EntityType="Self.ESTUDIANTE_POR_CURSO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IDIOMA" EntityType="Self.IDIOMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="Self.IDIOMA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MENSAJE" EntityType="Self.MENSAJE" Schema="dbo" store:Type="Tables" />
@@ -798,6 +844,14 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <AssociationSet Name="FK_IDCURSO_CURSO_POR_PROFESOR" Association="Self.FK_IDCURSO_CURSO_POR_PROFESOR">
             <End Role="CURSO" EntitySet="CURSO" />
             <End Role="CURSO_POR_PROFESOR" EntitySet="CURSO_POR_PROFESOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO" Association="Self.FK_IDCURSO_ESTUDIANTE_POR_CURSO">
+            <End Role="CURSO" EntitySet="CURSO" />
+            <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO" Association="Self.FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO">
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+            <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
           </AssociationSet>
           <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
             <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
@@ -1077,10 +1131,38 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <Parameter Name="NumeroGrupo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_select_tecnologias_por_trabajo" ReturnType="Collection(MyLearnDBModel.SP_select_tecnologias_por_trabajo_Result)">
-            <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+          <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_SelectTecnologiasPorTrabajo" EntitySet="TECNOLOGIA" ReturnType="Collection(MyLearnDBModel.TECNOLOGIA)">
-            <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+          <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Select_Cursos_Estudiante" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+          <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SelectCursosEstudiante" EntitySet="CURSO" ReturnType="Collection(MyLearnDBModel.CURSO)">
+          <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Select_Cursos_De_Universidad" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_De_Universidad_Result)">
+            <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+            <Parameter Name="EstadoCurso" Mode="In" Type="String" />
+            <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SelectCursosDeUniversidad" EntitySet="CURSO" ReturnType="Collection(MyLearnDBModel.CURSO)">
+            <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+            <Parameter Name="EstadoCurso" Mode="In" Type="String" />
+            <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="ESTUDIANTE_POR_CURSO" EntityType="MyLearnDBModel.ESTUDIANTE_POR_CURSO" />
+          <AssociationSet Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO" Association="MyLearnDBModel.FK_IDCURSO_ESTUDIANTE_POR_CURSO">
+            <End Role="CURSO" EntitySet="CURSO" />
+            <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO" Association="MyLearnDBModel.FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO">
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+            <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
+          </AssociationSet>
+          <FunctionImport Name="SP_TerminarCurso">
+            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
@@ -1624,6 +1706,58 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
           <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
         </ComplexType>
+        <ComplexType Name="SP_Select_Cursos_Estudiante_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="10" />
+          <Property Type="Byte" Name="NotaMinima" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicio" Nullable="true" />
+          <Property Type="Int32" Name="NumeroGrupo" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="SP_Select_Cursos_De_Universidad_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="10" />
+          <Property Type="Byte" Name="NotaMinima" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicio" Nullable="true" />
+          <Property Type="Int32" Name="NumeroGrupo" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <EntityType Name="ESTUDIANTE_POR_CURSO">
+          <Key>
+            <PropertyRef Name="IdEstudiante" />
+            <PropertyRef Name="IdCurso" />
+          </Key>
+          <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="Nota" Type="Int32" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO">
+          <End Type="MyLearnDBModel.CURSO" Role="CURSO" Multiplicity="1" />
+          <End Type="MyLearnDBModel.ESTUDIANTE_POR_CURSO" Role="ESTUDIANTE_POR_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CURSO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ESTUDIANTE_POR_CURSO">
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO">
+          <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
+          <End Type="MyLearnDBModel.ESTUDIANTE_POR_CURSO" Role="ESTUDIANTE_POR_CURSO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTUDIANTE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ESTUDIANTE_POR_CURSO">
+              <PropertyRef Name="IdEstudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1959,6 +2093,45 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_SelectTecnologiasPorTrabajo" FunctionName="MyLearnDBModel.Store.SP_select_tecnologias_por_trabajo" />
+          <FunctionImportMapping FunctionImportName="SP_Select_Cursos_Estudiante" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_Estudiante">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_Cursos_Estudiante_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="NotaMinima" ColumnName="NotaMinima" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SelectCursosEstudiante" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_Estudiante" />
+          <FunctionImportMapping FunctionImportName="SP_Select_Cursos_De_Universidad" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_De_Universidad">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_Cursos_De_Universidad_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="NotaMinima" ColumnName="NotaMinima" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SelectCursosDeUniversidad" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_De_Universidad" />
+          <EntitySetMapping Name="ESTUDIANTE_POR_CURSO">
+            <EntityTypeMapping TypeName="MyLearnDBModel.ESTUDIANTE_POR_CURSO">
+              <MappingFragment StoreEntitySet="ESTUDIANTE_POR_CURSO">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_TerminarCurso" FunctionName="MyLearnDBModel.Store.SP_TerminarCurso" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

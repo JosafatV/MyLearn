@@ -175,6 +175,30 @@ namespace MyLearnApi.BusinessLogic
 
             return true;
         }
+        public bool addCursoToEstudiante(ESTUDIANTE_POR_CURSO curso)
+        {
+            curso.Nota = 0;
+            curso.Estado = "A";
+            db.ESTUDIANTE_POR_CURSO.Add(curso);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (estudiantePorCursoExists(curso.IdEstudiante, curso.IdCurso))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return true;
+        }
+
 
 
         /// <summary>
@@ -195,6 +219,10 @@ namespace MyLearnApi.BusinessLogic
         private bool IdiomaPorEstudianteExists(int idIdioma, string idestudiante)
         {
             return db.IDIOMA_POR_ESTUDIANTE.Find(idIdioma, idestudiante) != null;
+        }
+        private bool estudiantePorCursoExists(string idEstudiante, int idCurso)
+        {
+            return db.ESTUDIANTE_POR_CURSO.Find(idEstudiante,idCurso) != null;
         }
     }
 }

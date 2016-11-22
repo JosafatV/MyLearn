@@ -22,6 +22,22 @@ namespace MyLearnApi.Controllers
         }
 
         [HttpGet]
+        [Route("MyLearnApi/Cursos/Estudiante/{idEstudiante}")]
+        [ResponseType(typeof(List<CURSO>))]
+        public List<CURSO> getCursosDeEstudiante(string idEstudiante)
+        {
+            return pobj_cursosLogic.getCursosPorEstudiante(idEstudiante);
+        }
+
+        [HttpGet]
+        [Route("MyLearnApi/Cursos/Universidad/{idUniversidad}/{idEstudiante}")]
+        [ResponseType(typeof(List<CURSO>))]
+        public List<CURSO> getCursosDeUniversidad(int idUniversidad,string idEstudiante)
+        {
+            return pobj_cursosLogic.getCursosPorUniversidad(idUniversidad,idEstudiante);
+        }
+
+        [HttpGet]
         [Route("MyLearnApi/Cursos/{idCurso}")]
         [ResponseType(typeof(CURSO))]
         public IHttpActionResult getCurso(int idCurso)
@@ -32,6 +48,15 @@ namespace MyLearnApi.Controllers
                 return NotFound();
             }
             return Ok(curso);
+        }
+
+        [HttpGet]
+        [Route("MyLearnApi/Cursos/Terminado/{idCurso}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult terminarCurso(int idCurso)
+        {
+            pobj_cursosLogic.terminarCurso(idCurso);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         /*

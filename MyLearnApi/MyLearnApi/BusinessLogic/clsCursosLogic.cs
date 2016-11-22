@@ -3,7 +3,8 @@ using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using MyLearnApi.Models;
-
+using System;
+using System.Globalization;
 
 namespace MyLearnApi.BusinessLogic
 {
@@ -25,14 +26,36 @@ namespace MyLearnApi.BusinessLogic
         {
             List<CURSO_POR_PROFESOR> lobj_list = db.CURSO_POR_PROFESOR.
                 Where(curso => curso.IdProfesor == idProfesor && (curso.CURSO.Estado== "A" || curso.CURSO.Estado == "T"))
+                .OrderByDescending(curso=> curso.CURSO.FechaInicio)
                 .ToList<CURSO_POR_PROFESOR>();
             return clsAlgoritmoPaginacion.paginar(lobj_list, index, 20);
+        }
+
+        public List<CURSO> getCursosPorEstudiante(string idEstudiante)
+        {
+            return db.SP_SelectCursosEstudiante(idEstudiante).ToList<CURSO>();
+        }
+        
+        public List<CURSO> getCursosPorUniversidad(int idUniversidad,string idEstudiante)
+        {
+            return db.SP_SelectCursosDeUniversidad(idUniversidad, "A" , idEstudiante).ToList<CURSO>();
         }
 
 
         public CURSO getSpecificCurso(int idCurso)
         {
-            return db.CURSO.Find(idCurso);
+            CURSO curso = db.CURSO.Find(idCurso);
+            if (curso.Estado == "A")
+                curso.Estado = "En curso";
+            else if (curso.Estado == "T")
+                curso.Estado = "Terminado";
+
+            curso.FechaInicio =  DateTime.Parse(curso.FechaInicio.ToString().Replace("T00:00:00", ""));
+
+            //DateTime.TryParseExact(curso.FechaInicio.ToString(), "MM-dd-yy", null,
+              //                     DateTimeStyles.AdjustToUniversal, out lstr_fechaBuena);
+            //curso.FechaInicio = lstr_fechaBuena;
+            return curso;
         }
         /// <summary>
         /// crea un nuevo curso
@@ -53,6 +76,27 @@ namespace MyLearnApi.BusinessLogic
             }
             return Curso;
         }
+
+        /// <summary>
+        /// cambia el estado de un curso a T (terminado)
+        /// </summary>
+        /// <param name="idCurso"></param>
+        /// <returns></returns>
+        public bool terminarCurso(int idCurso)
+        {
+            db.SP_TerminarCurso(idCurso);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+            return true;
+        }
+
+
 
         /// <summary>
         ///         disposer

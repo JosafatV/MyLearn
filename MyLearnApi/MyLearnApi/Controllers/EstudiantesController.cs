@@ -103,6 +103,29 @@ namespace MyLearnApi.Controllers
         }
 
         /// <summary>
+        /// matricula un estudiante en un curso
+        /// </summary>
+        /// <param name="curso"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("MyLearnApi/Estudiantes/Curso")]
+        [ResponseType(typeof(ESTUDIANTE_POR_CURSO))]
+        public IHttpActionResult postCursoToEstudiante(ESTUDIANTE_POR_CURSO curso)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            bool lbo_isValid = pobj_studentsLogic.addCursoToEstudiante(curso);
+
+            if (!lbo_isValid)
+            {
+                return Conflict();
+            }
+            return Ok(curso);
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="tecnologia"></param>
