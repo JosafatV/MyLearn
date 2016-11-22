@@ -4,22 +4,28 @@ angular.module('mod_MyLearn').controller('ctrl_perfilProfesor', ['fct_Trabajo', 
         $scope.profesorActual = {
 
         };
+        $scope.ls_cursos = [];
 
-        fct_MyLearn_API_Client.query({ type: 'Profesores', extension: $routeParams.IdUser }).$promise.then(function (data) {
-            $scope.profesorActual = data[0];
+        $scope.indexCursos = 0;
+
+        fct_MyLearn_API_Client.get({ type: 'Profesores', extension1: $routeParams.IdUser }).$promise.then(function (data) {
+            $scope.profesorActual = data;
         });
 
-        $scope.do_goTrabajo = function (trabajo) {
-            fct_Trabajo.set_trabajo(trabajo);
-            $location.path('/MyLearn/Estudiante/Perfil/AreaTrabajo');
+        fct_MyLearn_API_Client.query({ type: 'Cursos', extension1: 'Profesor', extension2: $routeParams.IdUser, extension3: $scope.indexCursos }).$promise.then(function (data) {
+            $scope.ls_cursos = data;
+        });
+
+        $scope.do_goTrabajos = function (curso) {
+            $location.path('/MyLearn/Profesor/Perfil/AreaDeTrabajo/' + $routeParams.IdUser + "/" + curso.IdCurso);
         };
 
         $scope.goNotificaciones = function () {
-            $location.path('/MyLearn/Estudiante/Perfil');
+            $location.path('/MyLearn/Profesor/Perfil');
         };
 
-        $scope.crearCurso = function () {
-
+        $scope.do_goCrearCurso = function () {
+            $location.path('/MyLearn/Profesor/Perfil/CrearCurso/' + $routeParams.IdUser);
         };
 
         $scope.goLogin = function () {
