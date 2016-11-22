@@ -12,10 +12,12 @@ namespace MyLearnApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UNIVERSIDAD
+    public partial class MENSAJE_POR_TRABAJO
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
+        public long IdMensaje { get; set; }
+        public int IdTrabajo { get; set; }
         public string Estado { get; set; }
+    
+        public virtual MENSAJE MENSAJE { get; set; }
     }
 }

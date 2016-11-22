@@ -117,9 +117,9 @@ EXEC SP_Aceptar_Subasta '2', '1'
 
 EXEC SP_Otorgar_Badge '1', '1'
 
-EXEC SP_Insertar_Mensaje_Trabajo 'Por favor enviarme una propuesta inicial del proyecto', '', '10/17/2016', '2'
+EXEC SP_Insertar_Mensaje_Trabajo 'Por favor enviarme una propuesta inicial del proyecto', '', '2'
 EXEC SP_Insertar_Respuesta '1', 'Aquí adjunto la propuesta', '', '10/18/2016'
-EXEC SP_Insertar_Mensaje_Trabajo 'Necesito que me envie el perfil de la empresa', '', '10/18/2016', '2'
+EXEC SP_Insertar_Mensaje_Trabajo 'Necesito que me envie el perfil de la empresa', '', '2'
 
 EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto DrPischel', '10/17/2016', '1'
 EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto Barbarras', '10/17/2016', '1'

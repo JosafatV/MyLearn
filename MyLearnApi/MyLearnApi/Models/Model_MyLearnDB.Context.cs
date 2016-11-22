@@ -45,6 +45,9 @@ namespace MyLearnApi.Models
         public virtual DbSet<TRABAJO_POR_ESTUDIANTE> TRABAJO_POR_ESTUDIANTE { get; set; }
         public virtual DbSet<TECNOLOGIA_POR_PROYECTO> TECNOLOGIA_POR_PROYECTO { get; set; }
         public virtual DbSet<TECNOLOGIA_POR_TRABAJO> TECNOLOGIA_POR_TRABAJO { get; set; }
+        public virtual DbSet<MENSAJE> MENSAJE { get; set; }
+        public virtual DbSet<MENSAJE_POR_TRABAJO> MENSAJE_POR_TRABAJO { get; set; }
+        public virtual DbSet<RESPUESTA> RESPUESTA { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {
@@ -360,6 +363,23 @@ namespace MyLearnApi.Models
                 new ObjectParameter("IdEstudiante", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Rechazar_Demas_Subastas", idSubastaParameter, idEstudianteParameter);
+        }
+    
+        public virtual int SP_Insertar_Mensaje_Trabajo(string contenido, string adjunto, Nullable<int> idTrabajo)
+        {
+            var contenidoParameter = contenido != null ?
+                new ObjectParameter("Contenido", contenido) :
+                new ObjectParameter("Contenido", typeof(string));
+    
+            var adjuntoParameter = adjunto != null ?
+                new ObjectParameter("Adjunto", adjunto) :
+                new ObjectParameter("Adjunto", typeof(string));
+    
+            var idTrabajoParameter = idTrabajo.HasValue ?
+                new ObjectParameter("IdTrabajo", idTrabajo) :
+                new ObjectParameter("IdTrabajo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Mensaje_Trabajo", contenidoParameter, adjuntoParameter, idTrabajoParameter);
         }
     }
 }

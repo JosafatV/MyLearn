@@ -164,6 +164,27 @@
       <End Role="UNIVERSIDAD" EntitySet="UNIVERSIDAD" />
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
+    <EntitySet Name="MENSAJE" EntityType="MyLearnDBModel.MENSAJE" />
+    <EntitySet Name="MENSAJE_POR_TRABAJO" EntityType="MyLearnDBModel.MENSAJE_POR_TRABAJO" />
+    <EntitySet Name="RESPUESTA" EntityType="MyLearnDBModel.RESPUESTA" />
+    <AssociationSet Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO" Association="MyLearnDBModel.FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
+      <End Role="MENSAJE" EntitySet="MENSAJE" />
+      <End Role="MENSAJE_POR_TRABAJO" EntitySet="MENSAJE_POR_TRABAJO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESPUESTA_RAIZ" Association="MyLearnDBModel.FK_RESPUESTA_RAIZ">
+      <End Role="MENSAJE" EntitySet="MENSAJE" />
+      <End Role="RESPUESTA" EntitySet="RESPUESTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDTRABAJO_MENSAJE_POR_TRABAJO" Association="MyLearnDBModel.FK_IDTRABAJO_MENSAJE_POR_TRABAJO">
+      <End Role="TRABAJO" EntitySet="TRABAJO" />
+      <End Role="MENSAJE_POR_TRABAJO" EntitySet="MENSAJE_POR_TRABAJO" />
+    </AssociationSet>
+    <FunctionImport Name="SP_Insertar_Mensaje_Trabajo">
+      <Parameter Name="Contenido" Mode="In" Type="String" />
+      <Parameter Name="Adjunto" Mode="In" Type="String" />
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+      <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -395,7 +416,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-    <NavigationProperty Name="ESTUDIANTE" Relationship="MyLearnDBModel.FK_ESTUDIANTE_UNIVERSIDAD" FromRole="UNIVERSIDAD" ToRole="ESTUDIANTE" />
   </EntityType>
   <EntityType Name="TECNOLOGIA_POR_ESTUDIANTE">
     <Key>
@@ -577,6 +597,72 @@
       </Principal>
       <Dependent Role="ESTUDIANTE">
         <PropertyRef Name="IdUniversidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MENSAJE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Contenido" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+    <Property Name="Adjunto" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="RESPUESTA" Relationship="MyLearnDBModel.FK_RESPUESTA_RAIZ" FromRole="MENSAJE" ToRole="RESPUESTA" />
+  </EntityType>
+  <EntityType Name="MENSAJE_POR_TRABAJO">
+    <Key>
+      <PropertyRef Name="IdMensaje" />
+      <PropertyRef Name="IdTrabajo" />
+    </Key>
+    <Property Name="IdMensaje" Type="Int64" Nullable="false" />
+    <Property Name="IdTrabajo" Type="Int32" Nullable="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="MENSAJE" Relationship="MyLearnDBModel.FK_IDMENSAJE_MENSAJE_POR_TRABAJO" FromRole="MENSAJE_POR_TRABAJO" ToRole="MENSAJE" />
+  </EntityType>
+  <EntityType Name="RESPUESTA">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MensajeRaiz" Type="Int64" Nullable="false" />
+    <Property Name="Contenido" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+    <Property Name="Adjunto" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+  </EntityType>
+  <Association Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
+    <End Type="MyLearnDBModel.MENSAJE" Role="MENSAJE" Multiplicity="1" />
+    <End Type="MyLearnDBModel.MENSAJE_POR_TRABAJO" Role="MENSAJE_POR_TRABAJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MENSAJE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MENSAJE_POR_TRABAJO">
+        <PropertyRef Name="IdMensaje" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESPUESTA_RAIZ">
+    <End Type="MyLearnDBModel.MENSAJE" Role="MENSAJE" Multiplicity="1" />
+    <End Type="MyLearnDBModel.RESPUESTA" Role="RESPUESTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MENSAJE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RESPUESTA">
+        <PropertyRef Name="MensajeRaiz" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDTRABAJO_MENSAJE_POR_TRABAJO">
+    <End Type="MyLearnDBModel.TRABAJO" Role="TRABAJO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.MENSAJE_POR_TRABAJO" Role="MENSAJE_POR_TRABAJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MENSAJE_POR_TRABAJO">
+        <PropertyRef Name="IdTrabajo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

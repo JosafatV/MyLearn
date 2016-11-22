@@ -50,12 +50,40 @@
     <Property Name="IdIdioma" Type="int" Nullable="false" />
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
+  <EntityType Name="MENSAJE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Contenido" Type="char" MaxLength="500" />
+    <Property Name="Adjunto" Type="char" MaxLength="500" />
+    <Property Name="Fecha" Type="datetime" />
+  </EntityType>
+  <EntityType Name="MENSAJE_POR_TRABAJO">
+    <Key>
+      <PropertyRef Name="IdMensaje" />
+      <PropertyRef Name="IdTrabajo" />
+    </Key>
+    <Property Name="IdMensaje" Type="bigint" Nullable="false" />
+    <Property Name="IdTrabajo" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
   <EntityType Name="PAIS">
     <Key>
       <PropertyRef Name="Pais" />
     </Key>
     <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="RESPUESTA">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MensajeRaiz" Type="bigint" Nullable="false" />
+    <Property Name="Contenido" Type="char" MaxLength="500" />
+    <Property Name="Adjunto" Type="char" MaxLength="500" />
+    <Property Name="Fecha" Type="datetime" />
   </EntityType>
   <EntityType Name="TECNOLOGIA">
     <Key>
@@ -352,6 +380,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
+    <End Role="MENSAJE" Type="Self.MENSAJE" Multiplicity="1" />
+    <End Role="MENSAJE_POR_TRABAJO" Type="Self.MENSAJE_POR_TRABAJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MENSAJE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MENSAJE_POR_TRABAJO">
+        <PropertyRef Name="IdMensaje" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE">
     <End Role="TECNOLOGIA" Type="Self.TECNOLOGIA" Multiplicity="1" />
     <End Role="TECNOLOGIA_POR_ESTUDIANTE" Type="Self.TECNOLOGIA_POR_ESTUDIANTE" Multiplicity="*" />
@@ -388,6 +428,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_IDTRABAJO_MENSAJE_POR_TRABAJO">
+    <End Role="TRABAJO" Type="Self.TRABAJO" Multiplicity="1" />
+    <End Role="MENSAJE_POR_TRABAJO" Type="Self.MENSAJE_POR_TRABAJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRABAJO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MENSAJE_POR_TRABAJO">
+        <PropertyRef Name="IdTrabajo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO">
     <End Role="TRABAJO" Type="Self.TRABAJO" Multiplicity="1" />
     <End Role="TECNOLOGIA_POR_TRABAJO" Type="Self.TECNOLOGIA_POR_TRABAJO" Multiplicity="*" />
@@ -409,6 +461,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Principal>
       <Dependent Role="TRABAJO_POR_ESTUDIANTE">
         <PropertyRef Name="IdTrabajo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESPUESTA_RAIZ">
+    <End Role="MENSAJE" Type="Self.MENSAJE" Multiplicity="1" />
+    <End Role="RESPUESTA" Type="Self.RESPUESTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MENSAJE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RESPUESTA">
+        <PropertyRef Name="MensajeRaiz" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -457,6 +521,11 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
     <Parameter Name="LinkHojaDeVida" Type="char" Mode="In" />
   </Function>
+  <Function Name="SP_Insertar_Mensaje_Trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Contenido" Type="char" Mode="In" />
+    <Parameter Name="Adjunto" Type="char" Mode="In" />
+    <Parameter Name="IdTrabajo" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_Insertar_Profesor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="char" Mode="In" />
     <Parameter Name="Contrasena" Type="char" Mode="In" />
@@ -493,7 +562,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDIOMA" EntityType="Self.IDIOMA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="Self.IDIOMA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MENSAJE" EntityType="Self.MENSAJE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MENSAJE_POR_TRABAJO" EntityType="Self.MENSAJE_POR_TRABAJO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RESPUESTA" EntityType="Self.RESPUESTA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TECNOLOGIA" EntityType="Self.TECNOLOGIA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TECNOLOGIA_POR_ESTUDIANTE" EntityType="Self.TECNOLOGIA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TECNOLOGIA_POR_PROYECTO" EntityType="Self.TECNOLOGIA_POR_PROYECTO" Schema="dbo" store:Type="Tables" />
@@ -628,6 +700,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       <End Role="IDIOMA" EntitySet="IDIOMA" />
       <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
     </AssociationSet>
+    <AssociationSet Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO" Association="Self.FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
+      <End Role="MENSAJE" EntitySet="MENSAJE" />
+      <End Role="MENSAJE_POR_TRABAJO" EntitySet="MENSAJE_POR_TRABAJO" />
+    </AssociationSet>
     <AssociationSet Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE" Association="Self.FK_IDTECNOLOGIA_POR_ESTUDIANTE">
       <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
       <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
@@ -640,6 +716,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
       <End Role="TECNOLOGIA_POR_TRABAJO" EntitySet="TECNOLOGIA_POR_TRABAJO" />
     </AssociationSet>
+    <AssociationSet Name="FK_IDTRABAJO_MENSAJE_POR_TRABAJO" Association="Self.FK_IDTRABAJO_MENSAJE_POR_TRABAJO">
+      <End Role="TRABAJO" EntitySet="TRABAJO" />
+      <End Role="MENSAJE_POR_TRABAJO" EntitySet="MENSAJE_POR_TRABAJO" />
+    </AssociationSet>
     <AssociationSet Name="FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO" Association="Self.FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO">
       <End Role="TRABAJO" EntitySet="TRABAJO" />
       <End Role="TECNOLOGIA_POR_TRABAJO" EntitySet="TECNOLOGIA_POR_TRABAJO" />
@@ -647,6 +727,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <AssociationSet Name="FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE" Association="Self.FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE">
       <End Role="TRABAJO" EntitySet="TRABAJO" />
       <End Role="TRABAJO_POR_ESTUDIANTE" EntitySet="TRABAJO_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESPUESTA_RAIZ" Association="Self.FK_RESPUESTA_RAIZ">
+      <End Role="MENSAJE" EntitySet="MENSAJE" />
+      <End Role="RESPUESTA" EntitySet="RESPUESTA" />
     </AssociationSet>
     <AssociationSet Name="FK_TRABAJO_POR_EMPRESA" Association="Self.FK_TRABAJO_POR_EMPRESA">
       <End Role="EMPRESA" EntitySet="EMPRESA" />

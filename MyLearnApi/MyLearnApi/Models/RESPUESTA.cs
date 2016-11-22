@@ -12,10 +12,12 @@ namespace MyLearnApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UNIVERSIDAD
+    public partial class RESPUESTA
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Estado { get; set; }
+        public long Id { get; set; }
+        public long MensajeRaiz { get; set; }
+        public string Contenido { get; set; }
+        public string Adjunto { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
     }
 }

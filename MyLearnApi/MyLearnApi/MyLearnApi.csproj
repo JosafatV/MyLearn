@@ -206,7 +206,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="BusinessLogic\clsAreaDeTrabajoLogic.cs" />
+    <Compile Include="BusinessLogic\clsAreaDeTrabajoEmpresaLogic.cs" />
     <Compile Include="BusinessLogic\clsBasicAuthenticationAttribute.cs.cs" />
     <Compile Include="BusinessLogic\clsCuentaDeUsuario.cs" />
     <Compile Include="BusinessLogic\clsEmpresasLogic.cs" />
@@ -217,6 +217,7 @@
     <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdiomasController.cs" />
+    <Compile Include="Controllers\MensajePorTrabajoController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\ProfesoresController.cs" />
     <Compile Include="Controllers\TecnologiasController.cs" />
@@ -243,6 +244,12 @@
     <Compile Include="Models\IDIOMA_POR_ESTUDIANTE.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MENSAJE.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MENSAJE_POR_TRABAJO.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Model_MyLearnDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -259,6 +266,9 @@
       <DependentUpon>Model_MyLearnDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\PAIS.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RESPUESTA.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TECNOLOGIA.cs">

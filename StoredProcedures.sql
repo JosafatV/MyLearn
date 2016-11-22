@@ -9,6 +9,9 @@ GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Rechazar_Demas_Subastas')
 DROP PROCEDURE SP_Rechazar_Demas_Subastas  
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Mensaje_Trabajo')
+DROP PROCEDURE SP_Insertar_Mensaje_Trabajo  
+GO
 
 
 
@@ -248,11 +251,11 @@ CREATE PROCEDURE SP_Insertar_Mensaje_Proyecto @Contenido CHAR(500), @Adjunto CHA
 	GO
 
 	/*Creates a new message for a job*/
-CREATE PROCEDURE SP_Insertar_Mensaje_Trabajo @Contenido CHAR(500), @Adjunto CHAR(500), @Fecha DATETIME, @IdTrabajo INT
+CREATE PROCEDURE SP_Insertar_Mensaje_Trabajo @Contenido CHAR(500), @Adjunto CHAR(500), @IdTrabajo INT
 	AS
 		DECLARE @IdMensaje BIGINT
 		INSERT INTO MENSAJE (Contenido, Adjunto, Fecha)
-		VALUES (@Contenido, @Adjunto, @Fecha)
+		VALUES (@Contenido, @Adjunto, GETDATE())
 		
 		SELECT @IdMensaje = @@IDENTITY
 		INSERT INTO MENSAJE_POR_TRABAJO (IdMensaje, IdTrabajo, Estado)
