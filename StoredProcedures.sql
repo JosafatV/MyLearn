@@ -214,7 +214,13 @@ CREATE PROCEDURE SP_Insertar_Trabajo @Nombre CHAR(30), @Descripcion CHAR(500), @
 		INSERT INTO TRABAJO (Nombre, Descripcion, IdEmpresa, FechaInicio, FechaCierre, DocumentoAdicional,PresupuestoBase, Estado)
 		VALUES (@Nombre, @Descripcion, @IdEmpresa, @FechaInicio, @FechaCierre, @DocumentoAdicional,@presupuesto , 'P')
 	GO
-
+	
+CREATE PROCEDURE SP_select_tecnologias_por_trabajo @IdTrabajo INT
+	AS
+		SELECT TECNOLOGIA.Id , TECNOLOGIA.Nombre,TECNOLOGIA.Estado
+		FROM TECNOLOGIA INNER JOIN TECNOLOGIA_POR_TRABAJO ON TECNOLOGIA.Id = TECNOLOGIA_POR_TRABAJO.IdTecnologia 
+		WHERE TECNOLOGIA_POR_TRABAJO.IdTrabajo = @IdTrabajo
+	GO
 	/*Creates a new offer for the auctions*/
 CREATE PROCEDURE SP_Insertar_Propuesta_Subasta @IdTrabajo INT, @IdEstudiante CHAR(100), @Monto INT, @Comentario CHAR(300), @FechaFinal Date
 	AS
@@ -339,3 +345,5 @@ CREATE PROCEDURE SP_Promedio_Cursos_Aprobados @IdEstudiante CHAR(100)
 		FROM VIEW_CURSOS
 		WHERE IdEstudiante=@IdEstudiante AND (EstadoCurso='E' OR EstadoCurso='F')
 	GO
+
+

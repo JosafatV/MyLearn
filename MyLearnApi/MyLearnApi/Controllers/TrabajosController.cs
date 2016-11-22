@@ -75,7 +75,11 @@ namespace MyLearnApi.Controllers
             return pobj_TrabajosLogic.getSubastasdeTrabajosActivas(idEmpresa,index);
         }
 
-
+        /// <summary>
+        /// get de un trabajo especifico
+        /// </summary>
+        /// <param name="idTrabajo"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("MyLearnApi/Trabajos/{idTrabajo}")]
         [ResponseType(typeof(VIEW_TRABAJO))]
@@ -90,6 +94,14 @@ namespace MyLearnApi.Controllers
             return Ok(tRABAJO);
         }
 
+        [HttpGet]
+        [Route("MyLearnApi/Trabajos/Tecnologias/{idTrabajo}")]
+        [ResponseType(typeof(List<TECNOLOGIA>))]
+        public IHttpActionResult GetTecnologiasTrabajo(int idTrabajo)
+        {
+            return Ok(pobj_TrabajosLogic.getTecnologiasTrabajo(idTrabajo));
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -156,9 +168,9 @@ namespace MyLearnApi.Controllers
 
 
         [HttpPut]
-        [Route("MyLearnApi/Trabajos/Terminados")]
+        [Route("MyLearnApi/Trabajos/Terminados/{idTrabajo}/{idEstudiante}/{estrellas}")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult responderMensaje(int idTrabajo, string idEstudiante, byte estrellas)
+        public IHttpActionResult terminartrabajo(int idTrabajo, string idEstudiante, byte estrellas)
         {
             if (pobj_TrabajosLogic.terminarTrabajo(idTrabajo,idEstudiante,estrellas))
                 return StatusCode(HttpStatusCode.NoContent);

@@ -475,5 +475,32 @@ namespace MyLearnApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_InsertarCurso", idProfesorParameter, nombreParameter, codigoParameter, idUniversidadParameter, notaMinimaParameter, fechaInicioParameter, numeroGrupoParameter);
         }
+    
+        public virtual ObjectResult<SP_select_tecnologias_por_trabajo_Result> SP_select_tecnologias_por_trabajo(Nullable<int> idTrabajo)
+        {
+            var idTrabajoParameter = idTrabajo.HasValue ?
+                new ObjectParameter("IdTrabajo", idTrabajo) :
+                new ObjectParameter("IdTrabajo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_select_tecnologias_por_trabajo_Result>("SP_select_tecnologias_por_trabajo", idTrabajoParameter);
+        }
+    
+        public virtual ObjectResult<TECNOLOGIA> SP_SelectTecnologiasPorTrabajo(Nullable<int> idTrabajo)
+        {
+            var idTrabajoParameter = idTrabajo.HasValue ?
+                new ObjectParameter("IdTrabajo", idTrabajo) :
+                new ObjectParameter("IdTrabajo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TECNOLOGIA>("SP_SelectTecnologiasPorTrabajo", idTrabajoParameter);
+        }
+    
+        public virtual ObjectResult<TECNOLOGIA> SP_SelectTecnologiasPorTrabajo(Nullable<int> idTrabajo, MergeOption mergeOption)
+        {
+            var idTrabajoParameter = idTrabajo.HasValue ?
+                new ObjectParameter("IdTrabajo", idTrabajo) :
+                new ObjectParameter("IdTrabajo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TECNOLOGIA>("SP_SelectTecnologiasPorTrabajo", mergeOption, idTrabajoParameter);
+        }
     }
 }

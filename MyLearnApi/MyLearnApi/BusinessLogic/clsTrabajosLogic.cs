@@ -50,6 +50,13 @@ namespace MyLearnApi.BusinessLogic
             return listaTrabajos;
         }
 
+
+        public List<TECNOLOGIA> getTecnologiasTrabajo(int idTrabajo)
+        {
+                    
+            return db.SP_SelectTecnologiasPorTrabajo(idTrabajo).ToList<TECNOLOGIA>();
+        }
+
         /// <summary>
         /// obtiene las ofertas no aceptadas de un trabajo especifico de una empresa especifica
         /// </summary>

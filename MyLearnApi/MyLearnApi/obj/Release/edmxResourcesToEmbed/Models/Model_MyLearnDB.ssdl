@@ -629,6 +629,9 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   <Function Name="SP_Select_Cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_select_tecnologias_por_trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdTrabajo" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="MyLearnDBModelStoreContainer">
     <EntitySet Name="BADGE" EntityType="Self.BADGE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CURSO" EntityType="Self.CURSO" Schema="dbo" store:Type="Tables" />

@@ -220,6 +220,12 @@
       <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="NumeroGrupo" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SP_select_tecnologias_por_trabajo" ReturnType="Collection(MyLearnDBModel.SP_select_tecnologias_por_trabajo_Result)">
+      <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SelectTecnologiasPorTrabajo" EntitySet="TECNOLOGIA" ReturnType="Collection(MyLearnDBModel.TECNOLOGIA)">
+      <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -757,4 +763,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="SP_select_tecnologias_por_trabajo_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+  </ComplexType>
 </Schema>

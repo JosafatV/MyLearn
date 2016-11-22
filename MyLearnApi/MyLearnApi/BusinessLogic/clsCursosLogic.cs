@@ -29,6 +29,11 @@ namespace MyLearnApi.BusinessLogic
             return clsAlgoritmoPaginacion.paginar(lobj_list, index, 20);
         }
 
+
+        public CURSO getSpecificCurso(int idCurso)
+        {
+            return db.CURSO.Find(idCurso);
+        }
         /// <summary>
         /// crea un nuevo curso
         /// </summary>

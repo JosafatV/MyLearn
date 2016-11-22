@@ -320,5 +320,15 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Sp_InsertarCurso" FunctionName="MyLearnDBModel.Store.SP_Insertar_Curso" />
+    <FunctionImportMapping FunctionImportName="SP_select_tecnologias_por_trabajo" FunctionName="MyLearnDBModel.Store.SP_select_tecnologias_por_trabajo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_select_tecnologias_por_trabajo_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_SelectTecnologiasPorTrabajo" FunctionName="MyLearnDBModel.Store.SP_select_tecnologias_por_trabajo" />
   </EntityContainerMapping>
 </Mapping>

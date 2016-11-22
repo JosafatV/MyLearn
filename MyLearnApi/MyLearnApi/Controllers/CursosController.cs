@@ -21,41 +21,54 @@ namespace MyLearnApi.Controllers
             return pobj_cursosLogic.getCursosDeProfesor(idProfesor,index);
         }
 
-  /*
-        // PUT: api/Cursos/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCURSO_POR_PROFESOR(int id, CURSO_POR_PROFESOR cURSO_POR_PROFESOR)
+        [HttpGet]
+        [Route("MyLearnApi/Cursos/{idCurso}")]
+        [ResponseType(typeof(CURSO))]
+        public IHttpActionResult getCurso(int idCurso)
         {
-            if (!ModelState.IsValid)
+            CURSO curso = pobj_cursosLogic.getSpecificCurso(idCurso);
+            if (curso == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
+            return Ok(curso);
+        }
 
-            if (id != cURSO_POR_PROFESOR.IdCurso)
-            {
-                return BadRequest();
-            }
+        /*
+              // PUT: api/Cursos/5
+              [ResponseType(typeof(void))]
+              public IHttpActionResult PutCURSO_POR_PROFESOR(int id, CURSO_POR_PROFESOR cURSO_POR_PROFESOR)
+              {
+                  if (!ModelState.IsValid)
+                  {
+                      return BadRequest(ModelState);
+                  }
 
-            db.Entry(cURSO_POR_PROFESOR).State = EntityState.Modified;
+                  if (id != cURSO_POR_PROFESOR.IdCurso)
+                  {
+                      return BadRequest();
+                  }
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CURSO_POR_PROFESORExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                  db.Entry(cURSO_POR_PROFESOR).State = EntityState.Modified;
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }*/
+                  try
+                  {
+                      db.SaveChanges();
+                  }
+                  catch (DbUpdateConcurrencyException)
+                  {
+                      if (!CURSO_POR_PROFESORExists(id))
+                      {
+                          return NotFound();
+                      }
+                      else
+                      {
+                          throw;
+                      }
+                  }
+
+                  return StatusCode(HttpStatusCode.NoContent);
+              }*/
 
         /// <summary>
         /// Post de un curso
