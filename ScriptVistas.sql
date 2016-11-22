@@ -35,12 +35,24 @@ CREATE VIEW [dbo].[VIEW_ESTUDIANTE]
                          dbo.USUARIO ON dbo.EMPRESA.Id = dbo.USUARIO.Id
 	GO
 
+CREATE VIEW [dbo].[VIEW_CURSOS]
+	AS
+		SELECT        dbo.CURSO_POR_UNIVERSIDAD.IdUniversidad, dbo.CURSO_POR_PROFESOR.IdProfesor, dbo.ESTUDIANTE_POR_CURSO.IdEstudiante, dbo.CURSO.Id AS IdCurso, 
+                         dbo.ESTUDIANTE_POR_CURSO.Nota AS NotaEstudiante, dbo.CURSO.Nombre AS NombreCurso, dbo.CURSO.Codigo AS CodigoCurso, dbo.CURSO.NotaMinima, dbo.CURSO.Estado AS EstadoCurso
+		FROM            dbo.CURSO INNER JOIN
+                         dbo.CURSO_POR_PROFESOR ON dbo.CURSO.Id = dbo.CURSO_POR_PROFESOR.IdCurso INNER JOIN
+                         dbo.CURSO_POR_UNIVERSIDAD ON dbo.CURSO.Id = dbo.CURSO_POR_UNIVERSIDAD.IdCurso INNER JOIN
+                         dbo.ESTUDIANTE_POR_CURSO ON dbo.CURSO.Id = dbo.ESTUDIANTE_POR_CURSO.IdCurso
+	GO
 
 			CREATE VIEW [dbo].[VIEW_PROYECTOS]
 	AS
-		SELECT        dbo.PROYECTO.Nombre, dbo.PROYECTO_POR_ESTUDIANTE.Estado
+		SELECT        dbo.PROYECTO_POR_ESTUDIANTE.IdEstudiante, dbo.PROYECTO_POR_PROFESOR.IdProfesor, dbo.PROYECTO.Id AS IdProyecto, dbo.PROYECTO.Nombre AS NombreProyecto, dbo.PROYECTO.Problematica, 
+                         dbo.PROYECTO.Descripcion, dbo.PROYECTO.IdCurso, dbo.PROYECTO.FechaInicio, dbo.PROYECTO.FechaFinal, dbo.PROYECTO.DocumentoAdicional, dbo.PROYECTO.NotaObtenida, 
+                         dbo.PROYECTO.Estado AS EstadoProyecto
 		FROM            dbo.PROYECTO INNER JOIN
-                         dbo.PROYECTO_POR_ESTUDIANTE ON dbo.PROYECTO.Id = dbo.PROYECTO_POR_ESTUDIANTE.IdProyecto
+                         dbo.PROYECTO_POR_ESTUDIANTE ON dbo.PROYECTO.Id = dbo.PROYECTO_POR_ESTUDIANTE.IdProyecto INNER JOIN
+                         dbo.PROYECTO_POR_PROFESOR ON dbo.PROYECTO.Id = dbo.PROYECTO_POR_PROFESOR.IdProyecto
 	GO
 
 
