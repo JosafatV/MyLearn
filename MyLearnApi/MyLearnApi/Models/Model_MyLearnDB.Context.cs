@@ -48,6 +48,8 @@ namespace MyLearnApi.Models
         public virtual DbSet<MENSAJE> MENSAJE { get; set; }
         public virtual DbSet<MENSAJE_POR_TRABAJO> MENSAJE_POR_TRABAJO { get; set; }
         public virtual DbSet<RESPUESTA> RESPUESTA { get; set; }
+        public virtual DbSet<CURSO> CURSO { get; set; }
+        public virtual DbSet<CURSO_POR_PROFESOR> CURSO_POR_PROFESOR { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {
@@ -405,6 +407,31 @@ namespace MyLearnApi.Models
                 new ObjectParameter("NombreEmisor", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Respuesta", mensajeRaizParameter, contenidoParameter, adjuntoParameter, nombreEmisorParameter);
+        }
+    
+        public virtual int SP_Insertar_Curso(string idProfesor, string nombre, string codigo, Nullable<int> idUniversidad, Nullable<byte> notaMinima)
+        {
+            var idProfesorParameter = idProfesor != null ?
+                new ObjectParameter("IdProfesor", idProfesor) :
+                new ObjectParameter("IdProfesor", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("Codigo", codigo) :
+                new ObjectParameter("Codigo", typeof(string));
+    
+            var idUniversidadParameter = idUniversidad.HasValue ?
+                new ObjectParameter("IdUniversidad", idUniversidad) :
+                new ObjectParameter("IdUniversidad", typeof(int));
+    
+            var notaMinimaParameter = notaMinima.HasValue ?
+                new ObjectParameter("NotaMinima", notaMinima) :
+                new ObjectParameter("NotaMinima", typeof(byte));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Curso", idProfesorParameter, nombreParameter, codigoParameter, idUniversidadParameter, notaMinimaParameter);
         }
     }
 }

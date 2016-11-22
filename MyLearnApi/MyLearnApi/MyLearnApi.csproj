@@ -206,13 +206,16 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="BusinessLogic\clsAlgoritmoPaginacion.cs" />
     <Compile Include="BusinessLogic\clsAreaDeTrabajoLogic.cs" />
     <Compile Include="BusinessLogic\clsBasicAuthenticationAttribute.cs.cs" />
     <Compile Include="BusinessLogic\clsCuentaDeUsuario.cs" />
+    <Compile Include="BusinessLogic\clsCursosLogic.cs" />
     <Compile Include="BusinessLogic\clsEmpresasLogic.cs" />
     <Compile Include="BusinessLogic\clsProfesoresLogic.cs" />
     <Compile Include="BusinessLogic\clsStudentsLogic.cs" />
     <Compile Include="BusinessLogic\clsTrabajosLogic.cs" />
+    <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -223,14 +226,20 @@
     <Compile Include="Controllers\TecnologiasController.cs" />
     <Compile Include="Controllers\TrabajosController.cs" />
     <Compile Include="Controllers\UniversidadesController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\clsCursoSpModel.cs" />
     <Compile Include="Models\clsJSONResource.cs" />
     <Compile Include="Models\clsLink.cs" />
+    <Compile Include="Models\CURSO.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CURSO_POR_PROFESOR.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EMPRESA.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>

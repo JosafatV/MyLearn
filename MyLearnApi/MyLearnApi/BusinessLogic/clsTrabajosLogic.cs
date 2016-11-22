@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -27,7 +28,7 @@ namespace MyLearnApi.BusinessLogic
                 .OrderBy(trab => trab.FechaFinalizacion)
                 .ToList<VIEW_TRABAJO>();
             //pagina el resultado de 20 en 20
-            return algoritmoPaginacion(listaTrabajos, index, 20);
+            return clsAlgoritmoPaginacion.paginar(listaTrabajos, index, 20);
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace MyLearnApi.BusinessLogic
                 .OrderBy(trab => trab.FechaCierre)
                 .ToList<TRABAJO>();
             //pagina el resultado de 20 en 20
-            return algoritmoPaginacion(listaTrabajos, index, 20);
+            return clsAlgoritmoPaginacion.paginar(listaTrabajos, index, 20);
         }
 
         /// <summary>
@@ -279,61 +280,6 @@ namespace MyLearnApi.BusinessLogic
             }
         }
 
-
-
-
-
-
-        /// <summary>
-        /// obtiene un rango de la lista
-        /// </summary>
-        /// <param name="lista"> lista que se quiere paginar </param>
-        /// <param name="index"> indice desde donde se quiere comenzar </param>
-        /// <returns></returns>
-        private List<TRABAJO> algoritmoPaginacion(List<TRABAJO> lista, int index, byte lby_offset )
-        {
-            List<TRABAJO> lobj_resultado = new List<TRABAJO>();
-            //obtengo el rango que se necesita
-            int li_largoLista = lista.Count;
-            //si el indice esta fuera del rango de la lista
-            if (index * lby_offset > (li_largoLista - 1))
-                return lobj_resultado;
-            //si index y el offset estan dentro del rango
-            else if ((li_largoLista > (index * lby_offset + lby_offset - 1)))
-                lobj_resultado = lista.GetRange(index * lby_offset, index * lby_offset + lby_offset);
-            //si hay un overflow en el rango devuelve del indice hasta el fin de la lista
-            else
-                lobj_resultado = lista.GetRange(index * lby_offset, li_largoLista);
-
-            return lobj_resultado;
-
-        }
-
-
-        /// <summary>
-        /// obtiene un rango de la lista
-        /// </summary>
-        /// <param name="lista"> lista que se quiere paginar </param>
-        /// <param name="index"> indice desde donde se quiere comenzar </param>
-        /// <returns></returns>
-        private List<VIEW_TRABAJO> algoritmoPaginacion(List<VIEW_TRABAJO> lista, int index, byte lby_offset)
-        {
-            List<VIEW_TRABAJO> lobj_resultado = new List<VIEW_TRABAJO>();
-            //obtengo el rango que se necesita
-            int li_largoLista = lista.Count;
-            //si el indice esta fuera del rango de la lista
-            if (index * lby_offset > (li_largoLista-1))
-                return lobj_resultado;
-            //si index y el offset estan dentro del rango
-            else if ((li_largoLista > (index * lby_offset + lby_offset -1 )))
-                lobj_resultado = lista.GetRange(index * lby_offset , index * lby_offset + lby_offset);
-            //si hay un overflow en el rango devuelve del indice hasta el fin de la lista
-            else
-                lobj_resultado = lista.GetRange(index * lby_offset , li_largoLista);
-
-            return lobj_resultado;
-
-        }
 
 
     }
