@@ -298,16 +298,38 @@ CREATE PROCEDURE SP_Insertar_Notificacion @Contenido CHAR(500), @Fecha DATETIME,
 
 /********** MY LEARN **********/
 
+CREATE PROCEDURE SP_Promedio_Notas @IdEstudiante CHAR(100)
+	AS
+		SELECT (SUM(NotaEstudiante) / COUNT(IdCurso) * 0.3) AS PonderadoNotas
+		FROM VIEW_CURSOS
+		WHERE IdEstudiante = @IdEstudiante AND (EstadoCurso = 'E' OR EstadoCurso = 'F')
+	GO
 
+CREATE PROCEDURE SP_Promedio_de_Estrellas @IdEstudiante CHAR(100)
+	AS
+		SELECT (SUM(EstrellasObtenidas) / (COUNT(IdTrabajo) * 5)) * 0.3 AS PromedioEstrellas
+		FROM VIEW_TRABAJO
+		WHERE IdEstudiante = @IdEstudiante AND (EstadoTrabajo = 'E' OR EstadoTrabajo = 'F')
+	GO
 
+CREATE PROCEDURE SP_Promedio_Trabajos_Exitosos @IdEstudiante CHAR(100)
+	AS
+		SELECT COUNT(IdProyecto) AS ProyectosExitosos
+		FROM VIEW_PROYECTOS
+		WHERE IdEstudiante=@IdEstudiante AND EstadoProyecto='E'
+		UNION
+		SELECT COUNT(IdProyecto) AS ProyectosTerminados
+		FROM VIEW_PROYECTOS
+		WHERE IdEstudiante=@IdEstudiante AND (EstadoProyecto='E' OR EstadoProyecto='F')
+	GO
 
-
-
-
-
-
-
-
-
-
-
+CREATE PROCEDURE SP_Promedio_Cursos_Aprobados @IdEstudiante CHAR(100)
+	AS
+		SELECT COUNT(IdCurso) AS CursosExitosos
+		FROM VIEW_CURSOS
+		WHERE IdEstudiante=@IdEstudiante AND EstadoCurso='E'
+		UNION
+		SELECT COUNT(IdCurso) AS CursosTerminados
+		FROM VIEW_CURSOS
+		WHERE IdEstudiante=@IdEstudiante AND (EstadoCurso='E' OR EstadoCurso='F')
+	GO
