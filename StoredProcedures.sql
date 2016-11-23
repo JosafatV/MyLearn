@@ -37,7 +37,24 @@ IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Pr
 DROP PROCEDURE SP_Insertar_Propuesta_Proyecto
 
 
+IF OBJECT_ID (N'dbo.FN_Get_Last_User_Id', N'FN') IS NOT NULL  
+    DROP FUNCTION dbo.FN_Get_Last_User_Id;  
+GO  
 
+CREATE FUNCTION dbo.FN_Get_Last_User_Id()  
+RETURNS CHAR(100)   
+AS    
+BEGIN  
+    DECLARE @generated CHAR(100);
+    SELECT TOP 1 @generated = USUARIO.Id  
+	FROM USUARIO ORDER BY CAST ( USUARIO.Id AS INT )DESC
+    IF (@generated IS NULL)   
+        SET @generated = '0';  
+    RETURN @generated;
+END;  
+GO
+
+SELECT dbo.FN_Get_Last_User_Id() 
 
 /*****************SELECTS*****************/
 	/*Obtains the values needed to fill the Courses table in student's profile*/
