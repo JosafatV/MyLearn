@@ -9,12 +9,19 @@
             Fecha: "" ,
             NombreEmisor:""
         };
+
+        $scope.trabajoActual = {};
+
        fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
            $scope.ls_msjs = data;
        });
 
-       fct_MyLearn_API_Client.get({ type: 'Empresas', extension1: $routeParams.IdUser }).$promise.then(function (data) {
-           $scope.userActual = data;
+       fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+           $scope.ls_msjs = data;
+       });
+
+       fct_MyLearn_API_Client.get({ type: 'Trabajos', extension1: $routeParams.IdTrabajo, extension2:$routeParams.IdEst.trim() }).$promise.then(function (data) {
+           $scope.trabajoActual = data;
        });
 
        $scope.enviarMensaje = function () {
@@ -27,6 +34,37 @@
                                 });
            });
        };
+
+       $scope.enviarMensajeResp = function () {
+           fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Trabajo', extension2: 'Respuesta' }, {
+               Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreEmpresarial,
+               MensajeRaiz: mensajeAGuardar.Id
+           }).$promise.then(function () {
+               modal.close();
+           });
+
+       };
+
+       $scope.responder = function (mensaje) {
+           console.log(mensaje);
+           usuarioPrincipal = $scope.userActual;
+           mensajeAGuardar = mensaje;
+           modal = uibModal.open({
+               animation: true,
+               templateUrl: 'Vistas/Estudiante/ResponderMsj.html',
+               controller: 'ctrl_areaTrabajoEmpresa',
+               size: 'lg',
+               backdrop: true,
+               windowClass: 'center-modal',
+           });
+           modal.closed.then(function () {
+               fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+                   $scope.ls_msjs = data;
+               });
+           });
+
+       };
+
 
 
         $scope.goSubastas = function () {
@@ -43,3 +81,4 @@
         };
 
     }]);
+var modal = "";

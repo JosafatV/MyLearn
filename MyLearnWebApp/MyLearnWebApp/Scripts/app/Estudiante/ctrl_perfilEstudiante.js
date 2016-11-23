@@ -15,7 +15,7 @@ angular.module('mod_MyLearn').controller('ctrl_perfilEstudiante', ['fct_Trabajo'
         };
 
         $scope.goSubastas = function () {
-            $location.path('/MyLearn/Estudiante/Perfil/SubastaEstudiante');
+            $location.path('/MyLearn/Estudiante/Perfil/'+$routeParams.IdUser+'/SubastaEstudiante');
         };
 
         $scope.goNotificaciones = function () {

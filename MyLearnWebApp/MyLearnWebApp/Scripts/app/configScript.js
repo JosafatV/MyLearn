@@ -48,7 +48,7 @@
         controller: 'ctrl_subasta'
     })
 
-    .when('/MyLearn/Empresa/Perfil/AreaDeTrabajo/:IdUser/:IdTrabajo', {
+    .when('/MyLearn/Empresa/Perfil/AreaDeTrabajo/:IdUser/:IdTrabajo/:IdEst', {
         templateUrl: 'Vistas/Empresa/AreaTrabajoEmpresa_ProyEmpresa.html',
         controller: 'ctrl_areaTrabajoEmpresa'
     })
@@ -75,7 +75,7 @@
         templateUrl: 'Vistas/Estudiante/Proponer_Proyecto.html',
         controller: 'ctrl_proponerProyecto'
     })
-    .when('/MyLearn/Estudiante/Perfil/SubastaEstudiante', {
+    .when('/MyLearn/Estudiante/Perfil/:IdUser/SubastaEstudiante', {
         templateUrl: 'Vistas/Estudiante/Subasta_Estudiante.html',
         controller: 'ctrl_subastaEstudiante'
     })

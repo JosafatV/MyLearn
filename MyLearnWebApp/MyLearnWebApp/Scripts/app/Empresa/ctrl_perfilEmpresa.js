@@ -78,7 +78,7 @@
 
         $scope.do_goSubastas = function (subasta) {
             //alert(angular.toJson(subasta.IdEmpresa));
-            $location.path("/MyLearn/Empresa/Subasta/" + parseInt(subasta.Id) + "/" + parseInt(subasta.IdEmpresa) +  "/" + subasta.Nombre +  "/" + parseInt(subasta.PresupuestoBase));
+            $location.path("/MyLearn/Empresa/Subasta/" + subasta.Id.trim() + "/" + subasta.IdEmpresa.trim() +  "/" + subasta.Nombre +  "/" + subasta.PresupuestoBase.trim());
         };
 
         vm.do_goLogin = function () {
@@ -86,7 +86,7 @@
         };
 
         $scope.do_goTrabajos = function (trabajo) {
-            $location.path('/MyLearn/Empresa/Perfil/AreaDeTrabajo/' + $routeParams.IdUser +"/"+ trabajo.IdTrabajo);
+            $location.path('/MyLearn/Empresa/Perfil/AreaDeTrabajo/' + $routeParams.IdUser +"/"+ trabajo.IdTrabajo + "/" + trabajo.IdEstudiante);
         };
 
     }]);

@@ -7,7 +7,7 @@ header {
 
 .wrapper {
 	width:90%; /* Establecemos que el ancho sera del 90% */
-	max-width:900px; /* Aqui le decimos que el ancho máximo sera de 1000px */
+	max-width:850px; /* Aqui le decimos que el ancho máximo sera de 1000px */
 	margin:auto; /* Centramos los elementos */
 	overflow:hidden; /* Eliminamos errores de float */
 }
@@ -38,13 +38,6 @@ header nav a {
 	-o-transition:all 500ms ease;
 	transition:all 500ms ease;
 }
-body h1:hover{
-	background:#f56f3a;
-	border-radius:10px;
-	color:#252932;
-	cursor:pointer;
-
-}
 
 header nav a:hover {
 	background:#f56f3a;
@@ -59,18 +52,21 @@ header nav a:hover {
  left: 50px;
 }
 /*Finaiza parte CSS cabecera*/
+body h1:hover{
+	background:#f56f3a;
+	border-radius:10px;
+	color:#252932;
+	cursor:pointer;
+
+}
 
 .btn-tcc{
-background:#252932;
-	color: #fff;
-}
-.btn-ttc{
 	background:#252932;
-		color: #F39F5F;
-
-
+	color:#fff;
 }
-
+.btn-ttc:hover {
+	color:#f56f3a;
+}
 .main{
   background:#F39F5F;
 	color: #252932
@@ -85,17 +81,7 @@ body{
 }
 
 body .prom1 tr:hover{
-	background:#252932;
-	color: #fff;
-
-}
-
-.center-modal {
-    position: fixed;
-    top: 10%;
-    left: 18.5%;
-    z-index: 1050;
-    width: 80%;
-    height: 80%;
-    margin-left: -10%;
+	background:#F39F5F;
+	color: #252932;
+	cursor: pointer;
 }

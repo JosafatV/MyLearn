@@ -87,7 +87,36 @@ body{
 body .prom1 tr:hover{
 	background:#252932;
 	color: #fff;
+}
+.ec-stars-wrapper {
+	font-size: 50;
+	display: inline-block;
+}
+.ec-stars-wrapper a {
+	text-decoration: none;
+	display: inline-block;
+	font-size: 50px;
+	font-size: 75px;
 
+	color: #252932;
+}
+
+.ec-stars-wrapper:hover a {
+	color:#f56f3a;
+	cursor: pointer;
+}
+.ec-stars-wrapper > a:hover ~ a {
+	color: #888;
+}
+
+.center-modal {
+    position: fixed;
+    top: 10%;
+    left: 18.5%;
+    z-index: 1050;
+    width: 80%;
+    height: 80%;
+    margin-left: -10%;
 }
 
 .center-modal {
