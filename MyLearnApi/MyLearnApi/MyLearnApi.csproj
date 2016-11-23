@@ -292,6 +292,9 @@
     <Compile Include="Models\RESPUESTA.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_Select_Badge_Por_Proyecto_Result.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_Select_Cursos_De_Universidad_Result.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>

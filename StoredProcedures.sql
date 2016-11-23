@@ -211,6 +211,13 @@ CREATE PROCEDURE SP_Otorgar_Badge (@IdBadge INT, @IdProyecto INT , @Estado CHAR(
 		WHERE IdProyecto=@IdProyecto AND IdBadge=@IdBadge
 	GO
 
+CREATE PROCEDURE SP_Select_Badge_Por_Proyecto (@IdProyecto INT)
+	AS
+		SELECT BADGE.Id, BADGE.Nombre, BADGE.Puntaje, BADGE.IdCurso
+		FROM BADGE JOIN BADGE_POR_PROYECTO ON BADGE.Id = BADGE_POR_PROYECTO.IdBadge
+		WHERE BADGE_POR_PROYECTO.IdProyecto = @IdProyecto
+	GO
+
 	/*Marks a student as attending a course*/
 CREATE PROCEDURE SP_Agregar_Al_Curso @IdEstudiante CHAR(100), @IdCurso INT
 	AS

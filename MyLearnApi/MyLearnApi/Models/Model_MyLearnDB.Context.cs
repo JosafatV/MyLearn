@@ -682,5 +682,32 @@ namespace MyLearnApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_InsertarPropuestaProyecto", idEstudianteParameter, nombreParameter, problematicaParameter, descripcionParameter, idCursoParameter, fechaInicioParameter, fechaFinalParameter, documentoAdicionalParameter, estadoParameter, notaParameter);
         }
+    
+        public virtual ObjectResult<SP_Select_Badge_Por_Proyecto_Result> SP_Select_Badge_Por_Proyecto(Nullable<int> idProyecto)
+        {
+            var idProyectoParameter = idProyecto.HasValue ?
+                new ObjectParameter("IdProyecto", idProyecto) :
+                new ObjectParameter("IdProyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Select_Badge_Por_Proyecto_Result>("SP_Select_Badge_Por_Proyecto", idProyectoParameter);
+        }
+    
+        public virtual ObjectResult<BADGE> SP_SelectBadgePorProyecto(Nullable<int> idProyecto)
+        {
+            var idProyectoParameter = idProyecto.HasValue ?
+                new ObjectParameter("IdProyecto", idProyecto) :
+                new ObjectParameter("IdProyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BADGE>("SP_SelectBadgePorProyecto", idProyectoParameter);
+        }
+    
+        public virtual ObjectResult<BADGE> SP_SelectBadgePorProyecto(Nullable<int> idProyecto, MergeOption mergeOption)
+        {
+            var idProyectoParameter = idProyecto.HasValue ?
+                new ObjectParameter("IdProyecto", idProyecto) :
+                new ObjectParameter("IdProyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BADGE>("SP_SelectBadgePorProyecto", mergeOption, idProyectoParameter);
+        }
     }
 }

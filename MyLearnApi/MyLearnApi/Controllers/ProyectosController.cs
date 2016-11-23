@@ -85,11 +85,12 @@ namespace MyLearnApi.Controllers
         [ResponseType(typeof(BADGE_POR_PROYECTO))]
         public IHttpActionResult PostBADGE_POR_PROYECTO(BADGE_POR_PROYECTO badge)
         {
+            //pregunta si el formato es correcto
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            //almancea el badge y confirma si el almacenaje fue exitoso
             if (pobj_ProyectoLogic.otorgarBadge(badge) == null )
             {
                 return Conflict();
@@ -99,6 +100,14 @@ namespace MyLearnApi.Controllers
             return Ok(badge);
             }
             
+        }
+
+        [HttpGet]
+        [Route("MyLearnApi/Badges/{idProyecto}")]
+        [ResponseType(typeof(List<BADGE>))]
+        public IHttpActionResult getBadgesDeProyecto(int idProyecto)
+        {
+            return Ok(pobj_ProyectoLogic.getBadgesDeProyecto(idProyecto));
         }
 
         /// <summary>
