@@ -756,5 +756,194 @@ namespace MyLearnApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Mensaje_Proyecto", contenidoParameter, adjuntoParameter, idProyectoParameter, nombreEmisorParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> SP_CursosAprobados(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_CursosAprobados", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_CursosReprobados(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_CursosReprobados", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_Promedio_Notas(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Promedio_Notas", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_TrabajosExitosos(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_TrabajosExitosos", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_TrabajosNoExitosos(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_TrabajosNoExitosos", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> numeroTrabajosExitosos(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("numeroTrabajosExitosos", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> NumeroTrabajosNoExitosos(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("NumeroTrabajosNoExitosos", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> PromedioNotas(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("PromedioNotas", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> NumeroCursosAprobados(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("NumeroCursosAprobados", idEstudianteParameter);
+        }
+    
+        public virtual int NumeroCursosReprobados(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NumeroCursosReprobados", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> reprobados(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("reprobados", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<SP_Buscar_Subastas_Por_Tecnologia_Nombre_Result> SP_Buscar_Subastas_Por_Tecnologia_Nombre(string tecnologia, string nombre, Nullable<int> numResultados)
+        {
+            var tecnologiaParameter = tecnologia != null ?
+                new ObjectParameter("Tecnologia", tecnologia) :
+                new ObjectParameter("Tecnologia", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var numResultadosParameter = numResultados.HasValue ?
+                new ObjectParameter("NumResultados", numResultados) :
+                new ObjectParameter("NumResultados", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Buscar_Subastas_Por_Tecnologia_Nombre_Result>("SP_Buscar_Subastas_Por_Tecnologia_Nombre", tecnologiaParameter, nombreParameter, numResultadosParameter);
+        }
+    
+        public virtual ObjectResult<TRABAJO> FiltrarSubastasPorTecnologiaYNombre(string tecnologia, string nombre, Nullable<int> numResultados)
+        {
+            var tecnologiaParameter = tecnologia != null ?
+                new ObjectParameter("Tecnologia", tecnologia) :
+                new ObjectParameter("Tecnologia", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var numResultadosParameter = numResultados.HasValue ?
+                new ObjectParameter("NumResultados", numResultados) :
+                new ObjectParameter("NumResultados", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TRABAJO>("FiltrarSubastasPorTecnologiaYNombre", tecnologiaParameter, nombreParameter, numResultadosParameter);
+        }
+    
+        public virtual ObjectResult<TRABAJO> FiltrarSubastasPorTecnologiaYNombre(string tecnologia, string nombre, Nullable<int> numResultados, MergeOption mergeOption)
+        {
+            var tecnologiaParameter = tecnologia != null ?
+                new ObjectParameter("Tecnologia", tecnologia) :
+                new ObjectParameter("Tecnologia", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var numResultadosParameter = numResultados.HasValue ?
+                new ObjectParameter("NumResultados", numResultados) :
+                new ObjectParameter("NumResultados", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TRABAJO>("FiltrarSubastasPorTecnologiaYNombre", mergeOption, tecnologiaParameter, nombreParameter, numResultadosParameter);
+        }
+    
+        public virtual ObjectResult<SP_Select_Badge_Por_Proyecto_No_Otorgado_Result> SP_Select_Badge_Por_Proyecto_No_Otorgado(Nullable<int> idCurso, Nullable<int> idProyecto)
+        {
+            var idCursoParameter = idCurso.HasValue ?
+                new ObjectParameter("IdCurso", idCurso) :
+                new ObjectParameter("IdCurso", typeof(int));
+    
+            var idProyectoParameter = idProyecto.HasValue ?
+                new ObjectParameter("IdProyecto", idProyecto) :
+                new ObjectParameter("IdProyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Select_Badge_Por_Proyecto_No_Otorgado_Result>("SP_Select_Badge_Por_Proyecto_No_Otorgado", idCursoParameter, idProyectoParameter);
+        }
+    
+        public virtual ObjectResult<BADGE> SP_SelectBadgePorProyectoNoOtorgado(Nullable<int> idCurso, Nullable<int> idProyecto)
+        {
+            var idCursoParameter = idCurso.HasValue ?
+                new ObjectParameter("IdCurso", idCurso) :
+                new ObjectParameter("IdCurso", typeof(int));
+    
+            var idProyectoParameter = idProyecto.HasValue ?
+                new ObjectParameter("IdProyecto", idProyecto) :
+                new ObjectParameter("IdProyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BADGE>("SP_SelectBadgePorProyectoNoOtorgado", idCursoParameter, idProyectoParameter);
+        }
+    
+        public virtual ObjectResult<BADGE> SP_SelectBadgePorProyectoNoOtorgado(Nullable<int> idCurso, Nullable<int> idProyecto, MergeOption mergeOption)
+        {
+            var idCursoParameter = idCurso.HasValue ?
+                new ObjectParameter("IdCurso", idCurso) :
+                new ObjectParameter("IdCurso", typeof(int));
+    
+            var idProyectoParameter = idProyecto.HasValue ?
+                new ObjectParameter("IdProyecto", idProyecto) :
+                new ObjectParameter("IdProyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BADGE>("SP_SelectBadgePorProyectoNoOtorgado", mergeOption, idCursoParameter, idProyectoParameter);
+        }
     }
 }

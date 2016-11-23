@@ -237,13 +237,27 @@ CREATE PROCEDURE SP_Incrementar_Puntaje_Proyecto (@IdBadge INT, @IdProyecto INT)
 
 	GO
 
-
+	/*badges obtenidosen un p*/
 CREATE PROCEDURE SP_Select_Badge_Por_Proyecto (@IdProyecto INT,@Estado CHAR(1))
 	AS
 		SELECT BADGE.Id, BADGE.Nombre, BADGE.Puntaje, BADGE.IdCurso
 		FROM BADGE JOIN BADGE_POR_PROYECTO ON BADGE.Id = BADGE_POR_PROYECTO.IdBadge
 		WHERE BADGE_POR_PROYECTO.IdProyecto = @IdProyecto AND BADGE_POR_PROYECTO.Estado = @Estado
 	GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Badge_Por_Proyecto_No_Otorgado')
+DROP PROCEDURE SP_Select_Badge_Por_Proyecto_No_Otorgado
+	/*badges obtenidosen un p*/
+CREATE PROCEDURE SP_Select_Badge_Por_Proyecto_No_Otorgado (@IdCurso INT,@IdProyecto INT)
+	AS
+		SELECT DISTINCT (BADGE.Id), BADGE.Nombre, BADGE.Puntaje, BADGE.IdCurso
+		FROM BADGE INNER JOIN CURSO ON BADGE.IdCurso= CURSO.Id , BADGE_POR_PROYECTO 
+
+		WHERE CURSO.Id = @IdCurso AND BADGE_POR_PROYECTO.IdProyecto = @IdProyecto 
+		AND BADGE_POR_PROYECTO.IdBadge != BADGE.Id
+	GO
+exec SP_Select_Badge_Por_Proyecto_No_Otorgado 1,1
+
 
 	/*Marks a student as attending a course*/
 CREATE PROCEDURE SP_Agregar_Al_Curso @IdEstudiante CHAR(100), @IdCurso INT
@@ -299,6 +313,20 @@ CREATE PROCEDURE SP_Aceptar_Proyecto @IdProfesor CHAR(100), @IdPropuesta INT, @I
 
 
 /********** COMPAÑIAS **********/
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Buscar_Subastas_Por_Tecnologia_Nombre')
+DROP PROCEDURE SP_Buscar_Subastas_Por_Tecnologia_Nombre
+CREATE PROCEDURE SP_Buscar_Subastas_Por_Tecnologia_Nombre (@Tecnologia CHAR(30), @Nombre CHAR(30), @NumResultados INT)
+	AS
+	SELECT TOP(@NumResultados) TRABAJO.ID , TRABAJO.NOMBRE, TRABAJO.Descripcion, TRABAJO.IdEmpresa, TRABAJO.FechaInicio, TRABAJO.FechaCierre,
+	TRABAJO.DocumentoAdicional, TRABAJO.EstrellasObtenidas, TRABAJO.PresupuestoBase, TRABAJO.Estado, TRABAJO.Exitoso
+
+	FROM TRABAJO INNER JOIN TECNOLOGIA_POR_TRABAJO ON TRABAJO.Id = TECNOLOGIA_POR_TRABAJO.IdTrabajo
+		INNER JOIN TECNOLOGIA ON TECNOLOGIA.Id = TECNOLOGIA_POR_TRABAJO.IdTecnologia
+	WHERE TECNOLOGIA.Nombre LIKE  '%'+@Nombre+'%' AND TRABAJO.Nombre = @Nombre 
+
+GO
+
 
 	/*Creates a new job in the action state*/
 CREATE PROCEDURE SP_Insertar_Trabajo @Nombre CHAR(30), @Descripcion CHAR(500), @IdEmpresa CHAR(100), @FechaInicio DATE, @FechaCierre DATE, @DocumentoAdicional CHAR(100), @presupuesto float
@@ -407,12 +435,52 @@ CREATE PROCEDURE SP_CursosAprobados @IdEstudiante CHAR(100)
 	AS
 		SELECT COUNT(Distinct VIEW_CURSOS.IdCurso)
 		FROM VIEW_CURSOS
-		WHERE VIEW_CURSOS.IdEstudiante = @IdEstudiante AND (VIEW_CURSOS.NotaEstudiante <= VIEW_CURSOS.NotaMinima )
-
+		WHERE VIEW_CURSOS.IdEstudiante = @IdEstudiante AND (VIEW_CURSOS.NotaEstudiante >= VIEW_CURSOS.NotaMinima )
+					AND VIEW_CURSOS.EstadoCurso = 'T'
 
 	GO
 exec SP_CursosAprobados 1
 
+
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_CursosReprobados')
+DROP PROCEDURE SP_CursosReprobados
+CREATE PROCEDURE SP_CursosReprobados @IdEstudiante CHAR(100)
+	AS
+		SELECT COUNT(Distinct VIEW_CURSOS.IdCurso)
+		FROM VIEW_CURSOS
+		WHERE VIEW_CURSOS.IdEstudiante = @IdEstudiante AND (VIEW_CURSOS.NotaEstudiante < VIEW_CURSOS.NotaMinima )
+					AND VIEW_CURSOS.EstadoCurso = 'T'
+
+GO
+exec SP_CursosAprobados 1
+
+
+
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_TrabajosExitosos')
+DROP PROCEDURE SP_TrabajosExitosos
+CREATE PROCEDURE SP_TrabajosExitosos @IdEstudiante CHAR(100)
+	AS
+		SELECT COUNT(Distinct VIEW_TRABAJO.IdTrabajo)
+		FROM VIEW_TRABAJO
+		WHERE VIEW_TRABAJO.IdEstudiante = @IdEstudiante AND VIEW_TRABAJO.Exitoso = 1
+					AND VIEW_TRABAJO.EstadoTrabajo = 'T'
+
+GO
+
+
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_TrabajosNoExitosos')
+DROP PROCEDURE SP_TrabajosNoExitosos
+CREATE PROCEDURE SP_TrabajosNoExitosos @IdEstudiante CHAR(100)
+	AS
+		SELECT COUNT(Distinct VIEW_TRABAJO.IdTrabajo)
+		FROM VIEW_TRABAJO
+		WHERE VIEW_TRABAJO.IdEstudiante = @IdEstudiante AND VIEW_TRABAJO.Exitoso = 0
+					AND VIEW_TRABAJO.EstadoTrabajo = 'T'
+
+GO
 /********** MY LEARN **********/
 
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Promedio_Notas')

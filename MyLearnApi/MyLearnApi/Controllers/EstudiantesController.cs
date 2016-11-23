@@ -57,6 +57,14 @@ namespace MyLearnApi.Controllers
             return Ok(pobj_studentsLogic.GetIdiomasPorEstudiante(idEstudiante));
         }
 
+        [HttpGet]
+        [Route("MyLearnApi/Estudiantes/Estadisticas/{idEstudiante}")]
+        [ResponseType(typeof(clsEstadisticasEstudiante))]
+        public IHttpActionResult Getstadistics(string idEstudiante)
+        {
+            return Ok(pobj_studentsLogic.getEstadisticasDeEstudiante(idEstudiante));
+        }
+
         /// <summary>
         /// 
         /// </summary>

@@ -199,6 +199,18 @@ namespace MyLearnApi.BusinessLogic
             return true;
         }
 
+        public clsEstadisticasEstudiante getEstadisticasDeEstudiante(string idEstudiante)
+        {
+            clsEstadisticasEstudiante estadisticas = new clsEstadisticasEstudiante();
+            estadisticas.PromedioNotasProyecto = db.PromedioNotas(idEstudiante).SingleOrDefault().Value ;
+            estadisticas.numProyectosAprobados= db.NumeroCursosAprobados(idEstudiante).SingleOrDefault().Value;
+            estadisticas.numProyectosReprobados = db.reprobados(idEstudiante).SingleOrDefault().Value;
+            estadisticas.numTrabajosExitosos = db.numeroTrabajosExitosos(idEstudiante).SingleOrDefault().Value ;
+            estadisticas.numTrabajosNoExitosos= db.NumeroTrabajosNoExitosos(idEstudiante).SingleOrDefault().Value;
+
+            return estadisticas;
+        }
+
 
 
         /// <summary>

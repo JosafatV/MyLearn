@@ -101,7 +101,15 @@ namespace MyLearnApi.Controllers
         {
             return Ok(pobj_TrabajosLogic.getTecnologiasTrabajo(idTrabajo));
         }
-        
+
+        [HttpGet]
+        [Route("MyLearnApi/Subastas/{NombreTecnologia}/{NombreTrabajo}")]
+        [ResponseType(typeof(List<TECNOLOGIA>))]
+        public IHttpActionResult buscarPorTecnologiaYNombreTrabajo(string  NombreTecnologia, string NombreTrabajo)
+        {
+            return Ok(pobj_TrabajosLogic.getTabajosPorTecnologiaYNombre(NombreTecnologia,NombreTrabajo));
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -141,7 +149,7 @@ namespace MyLearnApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            
             tRABAJO = pobj_TrabajosLogic.insertarTrabajo(tRABAJO);
 
             return Ok(tRABAJO);

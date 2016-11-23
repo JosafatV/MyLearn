@@ -115,6 +115,8 @@ namespace MyLearnApi.BusinessLogic
         {
             //se crea como pendiente (o sea esta en estado de subasta)
             tRABAJO.Estado = "P";
+            //aun no es exitoso
+            tRABAJO.Exitoso = false;
             tRABAJO.EstrellasObtenidas = 0;
             db.TRABAJO.Add(tRABAJO);
             db.SaveChanges();
@@ -257,6 +259,24 @@ namespace MyLearnApi.BusinessLogic
             return true;
         }
 
+        public List<TRABAJO> getTabajosPorTecnologiaYNombre(string nombreTecnologia, string nombreTrabajo)
+        {
+            int numeroDeResultados = 20;
+            /*return db.FiltrarSubastasPorTecnologiaYNombre(nombreTecnologia, nombreTrabajo, numeroDeResultados)
+                //ordenar por fecha
+                .OrderByDescending(t=> t.FechaInicio)
+                .ToList<TRABAJO>();
+
+            */
+
+           return  db.TRABAJO.SqlQuery(
+                "  SELECT TOP("+numeroDeResultados+") TRABAJO.ID, TRABAJO.NOMBRE, TRABAJO.Descripcion, TRABAJO.IdEmpresa, TRABAJO.FechaInicio, TRABAJO.FechaCierre,"
+                +" TRABAJO.DocumentoAdicional, TRABAJO.EstrellasObtenidas, TRABAJO.PresupuestoBase, TRABAJO.Estado, TRABAJO.Exitoso "
+                +" FROM TRABAJO INNER JOIN TECNOLOGIA_POR_TRABAJO ON TRABAJO.Id = TECNOLOGIA_POR_TRABAJO.IdTrabajo "
+                +" INNER JOIN TECNOLOGIA ON TECNOLOGIA.Id = TECNOLOGIA_POR_TRABAJO.IdTecnologia "
+                +" WHERE TECNOLOGIA.Nombre LIKE  '%"+nombreTecnologia+"%' AND TRABAJO.Nombre = '"+nombreTrabajo+"' ")
+                .ToList<TRABAJO>();
+        }
 
         /// <summary>
         /// pregunta si el trabajo existe

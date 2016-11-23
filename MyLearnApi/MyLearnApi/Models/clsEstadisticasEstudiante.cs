@@ -7,10 +7,10 @@ namespace MyLearnApi.Models
 {
     public class clsEstadisticasEstudiante
     {
-        private float PromedioNotasProyecto = 100;
-        private int numProyectosAprobados = 0;
-        private int numProyectosReprobados = 0;
-        private int numTrabajosExitosos = 0;
-        private int numTrabajosNoExitosos = 0;
+        public float PromedioNotasProyecto = 100;
+        public  int numProyectosAprobados = 0;
+        public int numProyectosReprobados = 0;
+        public int numTrabajosExitosos = 0;
+        public int numTrabajosNoExitosos = 0;
     }
 }

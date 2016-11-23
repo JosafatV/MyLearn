@@ -119,6 +119,14 @@ namespace MyLearnApi.Controllers
             return Ok(pobj_ProyectoLogic.getBadgesDeProyecto(idProyecto));
         }
 
+        [HttpGet]
+        [Route("MyLearnApi/Proyectos/BadgesNoOtorgados/{idCurso}/{idProyecto}")]
+        [ResponseType(typeof(List<BADGE>))]
+        public IHttpActionResult getBadgesDeProyectoNoDados(int idCurso,int idProyecto)
+        {
+            return Ok(pobj_ProyectoLogic.getBadgesDeProyectoNoOtorgados(idCurso,idProyecto));
+        }
+
         /// <summary>
         /// 
         /// </summary>
