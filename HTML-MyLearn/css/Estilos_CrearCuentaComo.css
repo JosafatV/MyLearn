@@ -14,7 +14,7 @@ header {
 
 header .logo {
 	color:#f56f3a;
-	font-size:75px;
+	font-size:60px;
 	line-height:200px;
 	float:left;
 	font-family:Broadway;
@@ -37,9 +37,5 @@ header .logo {
 }
 body{
 	background: #D8D8D8;
-	color:#252932;
-}
-.prom1{
-	background:#252932;
-	color: #fff;
+	color:#252932
 }
