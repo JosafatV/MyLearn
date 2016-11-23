@@ -105,7 +105,9 @@ namespace MyLearnApi.BusinessLogic
         /// <returns></returns>
         public List<BADGE> getBadgesDeProyecto(int idProyecto)
         {
-            return db.SP_SelectBadgePorProyecto(idProyecto).ToList<BADGE>();
+            //se busca mediante el estado obtenido O
+            string lstr_Estado = "O";
+            return db.SP_SelectBadgePorProyecto(idProyecto, lstr_Estado).ToList<BADGE>();
         }
 
         private bool VIEW_PROYECTOSExists(string idEstudiante, int idProyecto)

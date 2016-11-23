@@ -749,6 +749,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
         </Function>
         <Function Name="SP_Select_Badge_Por_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdProyecto" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="char" Mode="In" />
         </Function>
         <Function Name="SP_Select_Cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
@@ -1277,10 +1278,12 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <End Role="BADGE_POR_PROYECTO" EntitySet="BADGE_POR_PROYECTO" />
           </AssociationSet>
           <FunctionImport Name="SP_Select_Badge_Por_Proyecto" ReturnType="Collection(MyLearnDBModel.SP_Select_Badge_Por_Proyecto_Result)">
-            <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+          <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_SelectBadgePorProyecto" EntitySet="BADGE" ReturnType="Collection(MyLearnDBModel.BADGE)">
-            <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+          <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">

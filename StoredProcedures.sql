@@ -24,8 +24,9 @@ GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Otorgar_Badge')
 DROP PROCEDURE SP_Otorgar_Badge
 GO
-
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Badge_Por_Proyecto')
+DROP PROCEDURE SP_Select_Badge_Por_Proyecto
+GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_Estudiante')
 DROP PROCEDURE SP_Select_Cursos_Estudiante
 
@@ -211,11 +212,11 @@ CREATE PROCEDURE SP_Otorgar_Badge (@IdBadge INT, @IdProyecto INT , @Estado CHAR(
 		WHERE IdProyecto=@IdProyecto AND IdBadge=@IdBadge
 	GO
 
-CREATE PROCEDURE SP_Select_Badge_Por_Proyecto (@IdProyecto INT)
+CREATE PROCEDURE SP_Select_Badge_Por_Proyecto (@IdProyecto INT,@Estado CHAR(1))
 	AS
 		SELECT BADGE.Id, BADGE.Nombre, BADGE.Puntaje, BADGE.IdCurso
 		FROM BADGE JOIN BADGE_POR_PROYECTO ON BADGE.Id = BADGE_POR_PROYECTO.IdBadge
-		WHERE BADGE_POR_PROYECTO.IdProyecto = @IdProyecto
+		WHERE BADGE_POR_PROYECTO.IdProyecto = @IdProyecto AND BADGE_POR_PROYECTO.Estado = @Estado
 	GO
 
 	/*Marks a student as attending a course*/

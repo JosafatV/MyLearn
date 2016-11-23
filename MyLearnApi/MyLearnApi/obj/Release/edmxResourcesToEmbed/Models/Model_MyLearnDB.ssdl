@@ -713,6 +713,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Parameter Name="IdSubasta" Type="int" Mode="In" />
     <Parameter Name="IdEstudiante" Type="char" Mode="In" />
   </Function>
+  <Function Name="SP_Select_Badge_Por_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdProyecto" Type="int" Mode="In" />
+    <Parameter Name="Estado" Type="char" Mode="In" />
+  </Function>
   <Function Name="SP_Select_Cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="int" Mode="In" />
   </Function>

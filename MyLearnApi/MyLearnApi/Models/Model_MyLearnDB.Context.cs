@@ -683,31 +683,43 @@ namespace MyLearnApi.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_InsertarPropuestaProyecto", idEstudianteParameter, nombreParameter, problematicaParameter, descripcionParameter, idCursoParameter, fechaInicioParameter, fechaFinalParameter, documentoAdicionalParameter, estadoParameter, notaParameter);
         }
     
-        public virtual ObjectResult<SP_Select_Badge_Por_Proyecto_Result> SP_Select_Badge_Por_Proyecto(Nullable<int> idProyecto)
+        public virtual ObjectResult<SP_Select_Badge_Por_Proyecto_Result> SP_Select_Badge_Por_Proyecto(Nullable<int> idProyecto, string estado)
         {
             var idProyectoParameter = idProyecto.HasValue ?
                 new ObjectParameter("IdProyecto", idProyecto) :
                 new ObjectParameter("IdProyecto", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Select_Badge_Por_Proyecto_Result>("SP_Select_Badge_Por_Proyecto", idProyectoParameter);
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Select_Badge_Por_Proyecto_Result>("SP_Select_Badge_Por_Proyecto", idProyectoParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<BADGE> SP_SelectBadgePorProyecto(Nullable<int> idProyecto)
+        public virtual ObjectResult<BADGE> SP_SelectBadgePorProyecto(Nullable<int> idProyecto, string estado)
         {
             var idProyectoParameter = idProyecto.HasValue ?
                 new ObjectParameter("IdProyecto", idProyecto) :
                 new ObjectParameter("IdProyecto", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BADGE>("SP_SelectBadgePorProyecto", idProyectoParameter);
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BADGE>("SP_SelectBadgePorProyecto", idProyectoParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<BADGE> SP_SelectBadgePorProyecto(Nullable<int> idProyecto, MergeOption mergeOption)
+        public virtual ObjectResult<BADGE> SP_SelectBadgePorProyecto(Nullable<int> idProyecto, string estado, MergeOption mergeOption)
         {
             var idProyectoParameter = idProyecto.HasValue ?
                 new ObjectParameter("IdProyecto", idProyecto) :
                 new ObjectParameter("IdProyecto", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BADGE>("SP_SelectBadgePorProyecto", mergeOption, idProyectoParameter);
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BADGE>("SP_SelectBadgePorProyecto", mergeOption, idProyectoParameter, estadoParameter);
         }
     }
 }
