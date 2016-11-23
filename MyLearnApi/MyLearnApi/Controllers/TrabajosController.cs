@@ -81,11 +81,11 @@ namespace MyLearnApi.Controllers
         /// <param name="idTrabajo"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("MyLearnApi/Trabajos/{idTrabajo}")]
+        [Route("MyLearnApi/Trabajos/{idTrabajo}/{idEstudiante}")]
         [ResponseType(typeof(VIEW_TRABAJO))]
-        public IHttpActionResult GetTRABAJO(int idTrabajo)
+        public IHttpActionResult GetTRABAJO(int idTrabajo, string idEstudiante)
         {
-            VIEW_TRABAJO tRABAJO = pobj_TrabajosLogic.getSpecificTrabajo(idTrabajo);
+            VIEW_TRABAJO tRABAJO = pobj_TrabajosLogic.getSpecificTrabajo(idTrabajo, idEstudiante);
             if (tRABAJO == null)
             {
                 return NotFound();

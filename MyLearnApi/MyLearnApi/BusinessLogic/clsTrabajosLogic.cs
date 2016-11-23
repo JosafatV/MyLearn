@@ -98,10 +98,10 @@ namespace MyLearnApi.BusinessLogic
         /// </summary>
         /// <param name="idTrabajo"></param>
         /// <returns></returns>
-        public VIEW_TRABAJO getSpecificTrabajo(int idTrabajo)
+        public VIEW_TRABAJO getSpecificTrabajo(int idTrabajo, string idEstudiante)
         {
-            if (View_TRABAJOExists(idTrabajo))
-                return db.VIEW_TRABAJO.Find(idTrabajo);
+            if (View_TRABAJOExists(idTrabajo,idEstudiante))
+                return db.VIEW_TRABAJO.Find(idTrabajo, idEstudiante);
             else
                 return null;       
         }
@@ -267,9 +267,9 @@ namespace MyLearnApi.BusinessLogic
         {
             return db.TRABAJO.Count(e => e.Id == id) > 0;
         }
-        private bool View_TRABAJOExists(int id)
+        private bool View_TRABAJOExists(int idTrabajo, string idEstudiante)
         {
-            return db.VIEW_TRABAJO.Count(e => e.IdTrabajo == id) > 0;
+            return db.VIEW_TRABAJO.Find(idTrabajo,idEstudiante) != null;
         }
         private bool trabajoPorEstudianteExists(int idTrabajo, string idEstudiante)
         {

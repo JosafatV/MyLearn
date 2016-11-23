@@ -114,6 +114,15 @@
           <Property Name="Fecha" Type="datetime" />
           <Property Name="NombreEmisor" Type="char" MaxLength="30" />
         </EntityType>
+        <EntityType Name="MENSAJE_POR_PROYECTO">
+          <Key>
+            <PropertyRef Name="IdMensaje" />
+            <PropertyRef Name="IdProyecto" />
+          </Key>
+          <Property Name="IdMensaje" Type="bigint" Nullable="false" />
+          <Property Name="IdProyecto" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
         <EntityType Name="MENSAJE_POR_TRABAJO">
           <Key>
             <PropertyRef Name="IdMensaje" />
@@ -353,7 +362,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
         <EntityType Name="VIEW_TRABAJO">
           <Key>
             <PropertyRef Name="IdTrabajo" />
-            
+            <PropertyRef Name="IdEstudiante" />
             
             
             
@@ -545,6 +554,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IDMENSAJE_MENSAJE_POR_PROYECTO">
+          <End Role="MENSAJE" Type="Self.MENSAJE" Multiplicity="1" />
+          <End Role="MENSAJE_POR_PROYECTO" Type="Self.MENSAJE_POR_PROYECTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENSAJE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MENSAJE_POR_PROYECTO">
+              <PropertyRef Name="IdMensaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
           <End Role="MENSAJE" Type="Self.MENSAJE" Multiplicity="1" />
           <End Role="MENSAJE_POR_TRABAJO" Type="Self.MENSAJE_POR_TRABAJO" Multiplicity="*" />
@@ -699,6 +720,12 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
           <Parameter Name="LinkHojaDeVida" Type="char" Mode="In" />
         </Function>
+        <Function Name="SP_Insertar_Mensaje_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Contenido" Type="char" Mode="In" />
+          <Parameter Name="Adjunto" Type="char" Mode="In" />
+          <Parameter Name="IdProyecto" Type="int" Mode="In" />
+          <Parameter Name="NombreEmisor" Type="char" Mode="In" />
+        </Function>
         <Function Name="SP_Insertar_Mensaje_Trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Contenido" Type="char" Mode="In" />
           <Parameter Name="Adjunto" Type="char" Mode="In" />
@@ -783,6 +810,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySet Name="IDIOMA" EntityType="Self.IDIOMA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="Self.IDIOMA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MENSAJE" EntityType="Self.MENSAJE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MENSAJE_POR_PROYECTO" EntityType="Self.MENSAJE_POR_PROYECTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MENSAJE_POR_TRABAJO" EntityType="Self.MENSAJE_POR_TRABAJO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RESPUESTA" EntityType="Self.RESPUESTA" Schema="dbo" store:Type="Tables" />
@@ -955,6 +983,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <AssociationSet Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
             <End Role="IDIOMA" EntitySet="IDIOMA" />
             <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDMENSAJE_MENSAJE_POR_PROYECTO" Association="Self.FK_IDMENSAJE_MENSAJE_POR_PROYECTO">
+            <End Role="MENSAJE" EntitySet="MENSAJE" />
+            <End Role="MENSAJE_POR_PROYECTO" EntitySet="MENSAJE_POR_PROYECTO" />
           </AssociationSet>
           <AssociationSet Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO" Association="Self.FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
             <End Role="MENSAJE" EntitySet="MENSAJE" />
@@ -1293,6 +1325,17 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <Parameter Name="IdBadge" Mode="In" Type="Int32" />
             <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="MENSAJE_POR_PROYECTO" EntityType="MyLearnDBModel.MENSAJE_POR_PROYECTO" />
+          <AssociationSet Name="FK_IDMENSAJE_MENSAJE_POR_PROYECTO" Association="MyLearnDBModel.FK_IDMENSAJE_MENSAJE_POR_PROYECTO">
+            <End Role="MENSAJE" EntitySet="MENSAJE" />
+            <End Role="MENSAJE_POR_PROYECTO" EntitySet="MENSAJE_POR_PROYECTO" />
+          </AssociationSet>
+          <FunctionImport Name="SP_Insertar_Mensaje_Proyecto">
+            <Parameter Name="Contenido" Mode="In" Type="String" />
+            <Parameter Name="Adjunto" Mode="In" Type="String" />
+            <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+            <Parameter Name="NombreEmisor" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
           <Key>
@@ -1588,6 +1631,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
         <EntityType Name="VIEW_TRABAJO">
           <Key>
             <PropertyRef Name="IdTrabajo" />
+            <PropertyRef Name="IdEstudiante" />
           </Key>
           <Property Name="FechaFinalizacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Monto" Type="Int32" />
@@ -1932,6 +1976,28 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Type="Byte" Name="Puntaje" Nullable="true" />
           <Property Type="Int32" Name="IdCurso" Nullable="true" />
         </ComplexType>
+        <EntityType Name="MENSAJE_POR_PROYECTO">
+          <Key>
+            <PropertyRef Name="IdMensaje" />
+            <PropertyRef Name="IdProyecto" />
+          </Key>
+          <Property Name="IdMensaje" Type="Int64" Nullable="false" />
+          <Property Name="IdProyecto" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="MENSAJE" Relationship="MyLearnDBModel.FK_IDMENSAJE_MENSAJE_POR_PROYECTO" FromRole="MENSAJE_POR_PROYECTO" ToRole="MENSAJE" />
+        </EntityType>
+        <Association Name="FK_IDMENSAJE_MENSAJE_POR_PROYECTO">
+          <End Type="MyLearnDBModel.MENSAJE" Role="MENSAJE" Multiplicity="1" />
+          <End Type="MyLearnDBModel.MENSAJE_POR_PROYECTO" Role="MENSAJE_POR_PROYECTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENSAJE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MENSAJE_POR_PROYECTO">
+              <PropertyRef Name="IdMensaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2347,6 +2413,16 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_SelectBadgePorProyecto" FunctionName="MyLearnDBModel.Store.SP_Select_Badge_Por_Proyecto" />
           <FunctionImportMapping FunctionImportName="SP_Incrementar_Puntaje_Proyecto" FunctionName="MyLearnDBModel.Store.SP_Incrementar_Puntaje_Proyecto" />
+          <EntitySetMapping Name="MENSAJE_POR_PROYECTO">
+            <EntityTypeMapping TypeName="MyLearnDBModel.MENSAJE_POR_PROYECTO">
+              <MappingFragment StoreEntitySet="MENSAJE_POR_PROYECTO">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+                <ScalarProperty Name="IdMensaje" ColumnName="IdMensaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Insertar_Mensaje_Proyecto" FunctionName="MyLearnDBModel.Store.SP_Insertar_Mensaje_Proyecto" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

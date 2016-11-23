@@ -410,5 +410,14 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_SelectBadgePorProyecto" FunctionName="MyLearnDBModel.Store.SP_Select_Badge_Por_Proyecto" />
     <FunctionImportMapping FunctionImportName="SP_Incrementar_Puntaje_Proyecto" FunctionName="MyLearnDBModel.Store.SP_Incrementar_Puntaje_Proyecto" />
+    <EntitySetMapping Name="MENSAJE_POR_PROYECTO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.MENSAJE_POR_PROYECTO">
+        <MappingFragment StoreEntitySet="MENSAJE_POR_PROYECTO">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+          <ScalarProperty Name="IdMensaje" ColumnName="IdMensaje" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

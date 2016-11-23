@@ -54,6 +54,7 @@ namespace MyLearnApi.Models
         public virtual DbSet<ESTUDIANTE_POR_CURSO> ESTUDIANTE_POR_CURSO { get; set; }
         public virtual DbSet<VIEW_PROYECTOS> VIEW_PROYECTOS { get; set; }
         public virtual DbSet<BADGE_POR_PROYECTO> BADGE_POR_PROYECTO { get; set; }
+        public virtual DbSet<MENSAJE_POR_PROYECTO> MENSAJE_POR_PROYECTO { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {
@@ -733,6 +734,27 @@ namespace MyLearnApi.Models
                 new ObjectParameter("IdProyecto", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Incrementar_Puntaje_Proyecto", idBadgeParameter, idProyectoParameter);
+        }
+    
+        public virtual int SP_Insertar_Mensaje_Proyecto(string contenido, string adjunto, Nullable<int> idProyecto, string nombreEmisor)
+        {
+            var contenidoParameter = contenido != null ?
+                new ObjectParameter("Contenido", contenido) :
+                new ObjectParameter("Contenido", typeof(string));
+    
+            var adjuntoParameter = adjunto != null ?
+                new ObjectParameter("Adjunto", adjunto) :
+                new ObjectParameter("Adjunto", typeof(string));
+    
+            var idProyectoParameter = idProyecto.HasValue ?
+                new ObjectParameter("IdProyecto", idProyecto) :
+                new ObjectParameter("IdProyecto", typeof(int));
+    
+            var nombreEmisorParameter = nombreEmisor != null ?
+                new ObjectParameter("NombreEmisor", nombreEmisor) :
+                new ObjectParameter("NombreEmisor", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insertar_Mensaje_Proyecto", contenidoParameter, adjuntoParameter, idProyectoParameter, nombreEmisorParameter);
         }
     }
 }

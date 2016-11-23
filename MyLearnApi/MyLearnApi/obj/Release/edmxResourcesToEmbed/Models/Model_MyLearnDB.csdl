@@ -296,6 +296,11 @@
       <Parameter Name="IdBadge" Mode="In" Type="Int32" />
       <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="MENSAJE_POR_PROYECTO" EntityType="MyLearnDBModel.MENSAJE_POR_PROYECTO" />
+    <AssociationSet Name="FK_IDMENSAJE_MENSAJE_POR_PROYECTO" Association="MyLearnDBModel.FK_IDMENSAJE_MENSAJE_POR_PROYECTO">
+      <End Role="MENSAJE" EntitySet="MENSAJE" />
+      <End Role="MENSAJE_POR_PROYECTO" EntitySet="MENSAJE_POR_PROYECTO" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -591,6 +596,7 @@
   <EntityType Name="VIEW_TRABAJO">
     <Key>
       <PropertyRef Name="IdTrabajo" />
+      <PropertyRef Name="IdEstudiante" />
     </Key>
     <Property Name="FechaFinalizacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="Monto" Type="Int32" />
@@ -935,4 +941,26 @@
     <Property Type="Byte" Name="Puntaje" Nullable="true" />
     <Property Type="Int32" Name="IdCurso" Nullable="true" />
   </ComplexType>
+  <EntityType Name="MENSAJE_POR_PROYECTO">
+    <Key>
+      <PropertyRef Name="IdMensaje" />
+      <PropertyRef Name="IdProyecto" />
+    </Key>
+    <Property Name="IdMensaje" Type="Int64" Nullable="false" />
+    <Property Name="IdProyecto" Type="Int32" Nullable="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="MENSAJE" Relationship="MyLearnDBModel.FK_IDMENSAJE_MENSAJE_POR_PROYECTO" FromRole="MENSAJE_POR_PROYECTO" ToRole="MENSAJE" />
+  </EntityType>
+  <Association Name="FK_IDMENSAJE_MENSAJE_POR_PROYECTO">
+    <End Type="MyLearnDBModel.MENSAJE" Role="MENSAJE" Multiplicity="1" />
+    <End Type="MyLearnDBModel.MENSAJE_POR_PROYECTO" Role="MENSAJE_POR_PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MENSAJE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MENSAJE_POR_PROYECTO">
+        <PropertyRef Name="IdMensaje" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

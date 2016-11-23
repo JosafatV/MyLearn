@@ -109,6 +109,15 @@
     <Property Name="Fecha" Type="datetime" />
     <Property Name="NombreEmisor" Type="char" MaxLength="30" />
   </EntityType>
+  <EntityType Name="MENSAJE_POR_PROYECTO">
+    <Key>
+      <PropertyRef Name="IdMensaje" />
+      <PropertyRef Name="IdProyecto" />
+    </Key>
+    <Property Name="IdMensaje" Type="bigint" Nullable="false" />
+    <Property Name="IdProyecto" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
   <EntityType Name="MENSAJE_POR_TRABAJO">
     <Key>
       <PropertyRef Name="IdMensaje" />
@@ -325,6 +334,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   <EntityType Name="VIEW_TRABAJO">
     <Key>
       <PropertyRef Name="IdTrabajo" />
+      <PropertyRef Name="IdEstudiante" />
     </Key>
     <Property Name="FechaFinalizacion" Type="varchar" MaxLength="10" />
     <Property Name="Monto" Type="int" />
@@ -508,6 +518,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Principal>
       <Dependent Role="IDIOMA_POR_ESTUDIANTE">
         <PropertyRef Name="IdIdioma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDMENSAJE_MENSAJE_POR_PROYECTO">
+    <End Role="MENSAJE" Type="Self.MENSAJE" Multiplicity="1" />
+    <End Role="MENSAJE_POR_PROYECTO" Type="Self.MENSAJE_POR_PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MENSAJE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MENSAJE_POR_PROYECTO">
+        <PropertyRef Name="IdMensaje" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -749,6 +771,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <EntitySet Name="IDIOMA" EntityType="Self.IDIOMA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="Self.IDIOMA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MENSAJE" EntityType="Self.MENSAJE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MENSAJE_POR_PROYECTO" EntityType="Self.MENSAJE_POR_PROYECTO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MENSAJE_POR_TRABAJO" EntityType="Self.MENSAJE_POR_TRABAJO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RESPUESTA" EntityType="Self.RESPUESTA" Schema="dbo" store:Type="Tables" />
@@ -921,6 +944,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <AssociationSet Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
       <End Role="IDIOMA" EntitySet="IDIOMA" />
       <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDMENSAJE_MENSAJE_POR_PROYECTO" Association="Self.FK_IDMENSAJE_MENSAJE_POR_PROYECTO">
+      <End Role="MENSAJE" EntitySet="MENSAJE" />
+      <End Role="MENSAJE_POR_PROYECTO" EntitySet="MENSAJE_POR_PROYECTO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO" Association="Self.FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
       <End Role="MENSAJE" EntitySet="MENSAJE" />

@@ -268,6 +268,9 @@
     <Compile Include="Models\MENSAJE.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MENSAJE_POR_PROYECTO.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MENSAJE_POR_TRABAJO.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>

@@ -33,7 +33,7 @@ namespace MyLearnApi.BusinessLogic
                 lobj_result.Add(lobj_temp);
             }
           
-            return lobj_result ;
+            return lobj_result ;      
         }
         
         /// <summary>
@@ -56,6 +56,46 @@ namespace MyLearnApi.BusinessLogic
             }
             return true;
         }
+
+
+        public List<MENSAJE> getListaMensajesDeProyecto(int idProyecto)
+        {
+
+            //se obtiene la lista de mensajes pro trabajo
+            List<MENSAJE_POR_PROYECTO> lobj_mensajesPorProyecto = db.MENSAJE_POR_PROYECTO.Where(men => men.IdProyecto == idProyecto)
+                .OrderByDescending(men => men.IdMensaje)
+                .ToList<MENSAJE_POR_PROYECTO>();
+            //lista de resultado
+            List<MENSAJE> lobj_result = new List<MENSAJE>();
+            //extrae los mensajes
+            for (int li_x = 0; li_x < lobj_mensajesPorProyecto.Count; li_x++)
+            {
+                MENSAJE lobj_temp = lobj_mensajesPorProyecto[li_x].MENSAJE;
+                lobj_result.Add(lobj_temp);
+            }
+
+            return lobj_result;
+        }
+
+      
+        public bool agregarMensajeAProyecto(MENSAJE mensaje, int idProyecto)
+        {
+            //guarda el menssaje y el la tabla mensaje por proyecto relaciona el mensaje al proyecto
+            db.SP_Insertar_Mensaje_Proyecto(mensaje.Contenido, mensaje.Adjunto, idProyecto, mensaje.NombreEmisor);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+            return true;
+        }
+
+
+
+
         /// <summary>
         /// responde cualquier mensaje
         /// </summary>
@@ -75,7 +115,8 @@ namespace MyLearnApi.BusinessLogic
             return respuesta;
         }
 
-    
+        
+
 
         public void Dispose(bool disposing)
         {
