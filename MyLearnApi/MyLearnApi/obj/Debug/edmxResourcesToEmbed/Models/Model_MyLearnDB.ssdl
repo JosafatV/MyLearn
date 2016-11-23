@@ -9,6 +9,15 @@
     <Property Name="Puntaje" Type="tinyint" />
     <Property Name="IdCurso" Type="int" />
   </EntityType>
+  <EntityType Name="BADGE_POR_PROYECTO">
+    <Key>
+      <PropertyRef Name="IdBadge" />
+      <PropertyRef Name="IdProyecto" />
+    </Key>
+    <Property Name="IdBadge" Type="int" Nullable="false" />
+    <Property Name="IdProyecto" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
   <EntityType Name="CURSO">
     <Key>
       <PropertyRef Name="Id" />
@@ -63,6 +72,16 @@
     <Property Name="FechaInscripcion" Type="date" Nullable="false" />
     <Property Name="RepositorioCodigo" Type="char" MaxLength="100" />
     <Property Name="LinkHojaDeVida" Type="char" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ESTUDIANTE_POR_CURSO">
+    <Key>
+      <PropertyRef Name="IdEstudiante" />
+      <PropertyRef Name="IdCurso" />
+    </Key>
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="IdCurso" Type="int" Nullable="false" />
+    <Property Name="Nota" Type="int" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="IDIOMA">
     <Key>
@@ -282,6 +301,26 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
     <Property Name="Universidad" Type="char" MaxLength="30" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROYECTOS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VIEW_PROYECTOS">
+    <Key>
+      <PropertyRef Name="IdEstudiante" />
+      <PropertyRef Name="IdProyecto" />
+    </Key>
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="IdProfesor" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="IdProyecto" Type="int" Nullable="false" />
+    <Property Name="NombreProyecto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Problematica" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Descripcion" Type="char" MaxLength="500" Nullable="false" />
+    <Property Name="IdCurso" Type="int" />
+    <Property Name="FechaInicio" Type="date" Nullable="false" />
+    <Property Name="FechaFinal" Type="date" />
+    <Property Name="DocumentoAdicional" Type="char" MaxLength="100" />
+    <Property Name="NotaObtenida" Type="tinyint" />
+    <Property Name="EstadoProyecto" Type="char" MaxLength="1" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VIEW_TRABAJO">
     <Key>
@@ -376,6 +415,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_IDBADGE_BADGE_POR_PROYECTO">
+    <End Role="BADGE" Type="Self.BADGE" Multiplicity="1" />
+    <End Role="BADGE_POR_PROYECTO" Type="Self.BADGE_POR_PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BADGE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BADGE_POR_PROYECTO">
+        <PropertyRef Name="IdBadge" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_IDCURSO_CURSO_POR_PROFESOR">
     <End Role="CURSO" Type="Self.CURSO" Multiplicity="1" />
     <End Role="CURSO_POR_PROFESOR" Type="Self.CURSO_POR_PROFESOR" Multiplicity="*" />
@@ -385,6 +436,30 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Principal>
       <Dependent Role="CURSO_POR_PROFESOR">
         <PropertyRef Name="IdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO">
+    <End Role="CURSO" Type="Self.CURSO" Multiplicity="1" />
+    <End Role="ESTUDIANTE_POR_CURSO" Type="Self.ESTUDIANTE_POR_CURSO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CURSO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ESTUDIANTE_POR_CURSO">
+        <PropertyRef Name="IdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO">
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+    <End Role="ESTUDIANTE_POR_CURSO" Type="Self.ESTUDIANTE_POR_CURSO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ESTUDIANTE_POR_CURSO">
+        <PropertyRef Name="IdEstudiante" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -607,6 +682,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Parameter Name="Region" Type="char" Mode="In" />
     <Parameter Name="IdUniversidad" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_Insertar_Propuesta_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEstudiante" Type="char" Mode="In" />
+    <Parameter Name="Nombre" Type="char" Mode="In" />
+    <Parameter Name="Problematica" Type="char" Mode="In" />
+    <Parameter Name="Descripcion" Type="char" Mode="In" />
+    <Parameter Name="IdCurso" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="date" Mode="In" />
+    <Parameter Name="FechaFinal" Type="date" Mode="In" />
+    <Parameter Name="DocumentoAdicional" Type="char" Mode="In" />
+    <Parameter Name="Estado" Type="char" Mode="In" />
+    <Parameter Name="Nota" Type="tinyint" Mode="In" />
+  </Function>
   <Function Name="SP_Insertar_Respuesta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MensajeRaiz" Type="bigint" Mode="In" />
     <Parameter Name="Contenido" Type="char" Mode="In" />
@@ -629,12 +716,28 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   <Function Name="SP_Select_Cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_Select_Cursos_De_Universidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdUniversidad" Type="int" Mode="In" />
+    <Parameter Name="EstadoCurso" Type="char" Mode="In" />
+    <Parameter Name="IdEstudiante" Type="char" Mode="In" />
+  </Function>
+  <Function Name="SP_Select_Cursos_Estudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEstudiante" Type="char" Mode="In" />
+  </Function>
+  <Function Name="SP_select_tecnologias_por_trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdTrabajo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_TerminarCurso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdCurso" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="MyLearnDBModelStoreContainer">
     <EntitySet Name="BADGE" EntityType="Self.BADGE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BADGE_POR_PROYECTO" EntityType="Self.BADGE_POR_PROYECTO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CURSO" EntityType="Self.CURSO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CURSO_POR_PROFESOR" EntityType="Self.CURSO_POR_PROFESOR" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ESTUDIANTE_POR_CURSO" EntityType="Self.ESTUDIANTE_POR_CURSO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDIOMA" EntityType="Self.IDIOMA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="Self.IDIOMA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MENSAJE" EntityType="Self.MENSAJE" Schema="dbo" store:Type="Tables" />
@@ -719,6 +822,22 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     [VIEW_PROFESOR].[Universidad] AS [Universidad]
     FROM [dbo].[VIEW_PROFESOR] AS [VIEW_PROFESOR]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="VIEW_PROYECTOS" EntityType="Self.VIEW_PROYECTOS" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VIEW_PROYECTOS].[IdEstudiante] AS [IdEstudiante], 
+    [VIEW_PROYECTOS].[IdProfesor] AS [IdProfesor], 
+    [VIEW_PROYECTOS].[IdProyecto] AS [IdProyecto], 
+    [VIEW_PROYECTOS].[NombreProyecto] AS [NombreProyecto], 
+    [VIEW_PROYECTOS].[Problematica] AS [Problematica], 
+    [VIEW_PROYECTOS].[Descripcion] AS [Descripcion], 
+    [VIEW_PROYECTOS].[IdCurso] AS [IdCurso], 
+    [VIEW_PROYECTOS].[FechaInicio] AS [FechaInicio], 
+    [VIEW_PROYECTOS].[FechaFinal] AS [FechaFinal], 
+    [VIEW_PROYECTOS].[DocumentoAdicional] AS [DocumentoAdicional], 
+    [VIEW_PROYECTOS].[NotaObtenida] AS [NotaObtenida], 
+    [VIEW_PROYECTOS].[EstadoProyecto] AS [EstadoProyecto]
+    FROM [dbo].[VIEW_PROYECTOS] AS [VIEW_PROYECTOS]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="VIEW_TRABAJO" EntityType="Self.VIEW_TRABAJO" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [VIEW_TRABAJO].[FechaFinalizacion] AS [FechaFinalizacion], 
@@ -763,9 +882,21 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       <End Role="UNIVERSIDAD" EntitySet="UNIVERSIDAD" />
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
+    <AssociationSet Name="FK_IDBADGE_BADGE_POR_PROYECTO" Association="Self.FK_IDBADGE_BADGE_POR_PROYECTO">
+      <End Role="BADGE" EntitySet="BADGE" />
+      <End Role="BADGE_POR_PROYECTO" EntitySet="BADGE_POR_PROYECTO" />
+    </AssociationSet>
     <AssociationSet Name="FK_IDCURSO_CURSO_POR_PROFESOR" Association="Self.FK_IDCURSO_CURSO_POR_PROFESOR">
       <End Role="CURSO" EntitySet="CURSO" />
       <End Role="CURSO_POR_PROFESOR" EntitySet="CURSO_POR_PROFESOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO" Association="Self.FK_IDCURSO_ESTUDIANTE_POR_CURSO">
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO" Association="Self.FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO">
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />

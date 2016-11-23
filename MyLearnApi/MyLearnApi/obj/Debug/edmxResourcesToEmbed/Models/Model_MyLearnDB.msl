@@ -320,5 +320,83 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Sp_InsertarCurso" FunctionName="MyLearnDBModel.Store.SP_Insertar_Curso" />
+    <FunctionImportMapping FunctionImportName="SP_select_tecnologias_por_trabajo" FunctionName="MyLearnDBModel.Store.SP_select_tecnologias_por_trabajo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_select_tecnologias_por_trabajo_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_SelectTecnologiasPorTrabajo" FunctionName="MyLearnDBModel.Store.SP_select_tecnologias_por_trabajo" />
+    <FunctionImportMapping FunctionImportName="SP_Select_Cursos_Estudiante" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_Estudiante">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_Cursos_Estudiante_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="NotaMinima" ColumnName="NotaMinima" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_SelectCursosEstudiante" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_Estudiante" />
+    <FunctionImportMapping FunctionImportName="SP_Select_Cursos_De_Universidad" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_De_Universidad">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_Cursos_De_Universidad_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="NotaMinima" ColumnName="NotaMinima" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_SelectCursosDeUniversidad" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_De_Universidad" />
+    <EntitySetMapping Name="ESTUDIANTE_POR_CURSO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.ESTUDIANTE_POR_CURSO">
+        <MappingFragment StoreEntitySet="ESTUDIANTE_POR_CURSO">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Nota" ColumnName="Nota" />
+          <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_TerminarCurso" FunctionName="MyLearnDBModel.Store.SP_TerminarCurso" />
+    <EntitySetMapping Name="VIEW_PROYECTOS">
+      <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_PROYECTOS">
+        <MappingFragment StoreEntitySet="VIEW_PROYECTOS">
+          <ScalarProperty Name="EstadoProyecto" ColumnName="EstadoProyecto" />
+          <ScalarProperty Name="NotaObtenida" ColumnName="NotaObtenida" />
+          <ScalarProperty Name="DocumentoAdicional" ColumnName="DocumentoAdicional" />
+          <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Problematica" ColumnName="Problematica" />
+          <ScalarProperty Name="NombreProyecto" ColumnName="NombreProyecto" />
+          <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+          <ScalarProperty Name="IdProfesor" ColumnName="IdProfesor" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Insertar_Propuesta_Proyecto" FunctionName="MyLearnDBModel.Store.SP_Insertar_Propuesta_Proyecto" />
+    <FunctionImportMapping FunctionImportName="SP_InsertarPropuestaProyecto" FunctionName="MyLearnDBModel.Store.SP_Insertar_Propuesta_Proyecto" />
+    <EntitySetMapping Name="BADGE_POR_PROYECTO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.BADGE_POR_PROYECTO">
+        <MappingFragment StoreEntitySet="BADGE_POR_PROYECTO">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+          <ScalarProperty Name="IdBadge" ColumnName="IdBadge" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

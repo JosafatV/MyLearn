@@ -52,6 +52,8 @@ namespace MyLearnApi.Models
         public virtual DbSet<CURSO_POR_PROFESOR> CURSO_POR_PROFESOR { get; set; }
         public virtual DbSet<BADGE> BADGE { get; set; }
         public virtual DbSet<ESTUDIANTE_POR_CURSO> ESTUDIANTE_POR_CURSO { get; set; }
+        public virtual DbSet<VIEW_PROYECTOS> VIEW_PROYECTOS { get; set; }
+        public virtual DbSet<BADGE_POR_PROYECTO> BADGE_POR_PROYECTO { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {
@@ -589,6 +591,96 @@ namespace MyLearnApi.Models
                 new ObjectParameter("IdCurso", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_TerminarCurso", idCursoParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_Insertar_Propuesta_Proyecto(string idEstudiante, string nombre, string problematica, string descripcion, Nullable<int> idCurso, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal, string documentoAdicional, string estado, Nullable<byte> nota)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var problematicaParameter = problematica != null ?
+                new ObjectParameter("Problematica", problematica) :
+                new ObjectParameter("Problematica", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var idCursoParameter = idCurso.HasValue ?
+                new ObjectParameter("IdCurso", idCurso) :
+                new ObjectParameter("IdCurso", typeof(int));
+    
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            var documentoAdicionalParameter = documentoAdicional != null ?
+                new ObjectParameter("DocumentoAdicional", documentoAdicional) :
+                new ObjectParameter("DocumentoAdicional", typeof(string));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var notaParameter = nota.HasValue ?
+                new ObjectParameter("Nota", nota) :
+                new ObjectParameter("Nota", typeof(byte));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Insertar_Propuesta_Proyecto", idEstudianteParameter, nombreParameter, problematicaParameter, descripcionParameter, idCursoParameter, fechaInicioParameter, fechaFinalParameter, documentoAdicionalParameter, estadoParameter, notaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_InsertarPropuestaProyecto(string idEstudiante, string nombre, string problematica, string descripcion, Nullable<int> idCurso, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFinal, string documentoAdicional, string estado, Nullable<byte> nota)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var problematicaParameter = problematica != null ?
+                new ObjectParameter("Problematica", problematica) :
+                new ObjectParameter("Problematica", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var idCursoParameter = idCurso.HasValue ?
+                new ObjectParameter("IdCurso", idCurso) :
+                new ObjectParameter("IdCurso", typeof(int));
+    
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            var documentoAdicionalParameter = documentoAdicional != null ?
+                new ObjectParameter("DocumentoAdicional", documentoAdicional) :
+                new ObjectParameter("DocumentoAdicional", typeof(string));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var notaParameter = nota.HasValue ?
+                new ObjectParameter("Nota", nota) :
+                new ObjectParameter("Nota", typeof(byte));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_InsertarPropuestaProyecto", idEstudianteParameter, nombreParameter, problematicaParameter, descripcionParameter, idCursoParameter, fechaInicioParameter, fechaFinalParameter, documentoAdicionalParameter, estadoParameter, notaParameter);
         }
     }
 }

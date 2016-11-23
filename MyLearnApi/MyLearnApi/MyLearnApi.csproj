@@ -214,6 +214,7 @@
     <Compile Include="BusinessLogic\clsDateFormater.cs" />
     <Compile Include="BusinessLogic\clsEmpresasLogic.cs" />
     <Compile Include="BusinessLogic\clsProfesoresLogic.cs" />
+    <Compile Include="BusinessLogic\clsProyectosLogic.cs" />
     <Compile Include="BusinessLogic\clsStudentsLogic.cs" />
     <Compile Include="BusinessLogic\clsTrabajosLogic.cs" />
     <Compile Include="Controllers\CursosController.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="Controllers\MensajePorTrabajoController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\ProfesoresController.cs" />
+    <Compile Include="Controllers\ProyectosController.cs" />
     <Compile Include="Controllers\TecnologiasController.cs" />
     <Compile Include="Controllers\TrabajosController.cs" />
     <Compile Include="Controllers\UniversidadesController.cs" />
@@ -233,6 +235,9 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BADGE.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BADGE_POR_PROYECTO.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\clsCursoSpModel.cs" />
@@ -330,6 +335,9 @@
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VIEW_PROFESOR.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VIEW_PROYECTOS.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VIEW_TRABAJO.cs">

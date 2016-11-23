@@ -220,6 +220,70 @@
       <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
       <Parameter Name="NumeroGrupo" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SP_select_tecnologias_por_trabajo" ReturnType="Collection(MyLearnDBModel.SP_select_tecnologias_por_trabajo_Result)">
+      <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SelectTecnologiasPorTrabajo" EntitySet="TECNOLOGIA" ReturnType="Collection(MyLearnDBModel.TECNOLOGIA)">
+      <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Select_Cursos_Estudiante" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SelectCursosEstudiante" EntitySet="CURSO" ReturnType="Collection(MyLearnDBModel.CURSO)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Select_Cursos_De_Universidad" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_De_Universidad_Result)">
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="EstadoCurso" Mode="In" Type="String" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SelectCursosDeUniversidad" EntitySet="CURSO" ReturnType="Collection(MyLearnDBModel.CURSO)">
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="EstadoCurso" Mode="In" Type="String" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="ESTUDIANTE_POR_CURSO" EntityType="MyLearnDBModel.ESTUDIANTE_POR_CURSO" />
+    <AssociationSet Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO" Association="MyLearnDBModel.FK_IDCURSO_ESTUDIANTE_POR_CURSO">
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO" Association="MyLearnDBModel.FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO">
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
+    </AssociationSet>
+    <FunctionImport Name="SP_TerminarCurso">
+      <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="VIEW_PROYECTOS" EntityType="MyLearnDBModel.VIEW_PROYECTOS" />
+    <FunctionImport Name="SP_Insertar_Propuesta_Proyecto" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Problematica" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+      <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="DocumentoAdicional" Mode="In" Type="String" />
+      <Parameter Name="Estado" Mode="In" Type="String" />
+      <Parameter Name="Nota" Mode="In" Type="Byte" />
+    </FunctionImport>
+    <FunctionImport Name="SP_InsertarPropuestaProyecto" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Problematica" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+      <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="DocumentoAdicional" Mode="In" Type="String" />
+      <Parameter Name="Estado" Mode="In" Type="String" />
+      <Parameter Name="Nota" Mode="In" Type="Byte" />
+    </FunctionImport>
+    <EntitySet Name="BADGE_POR_PROYECTO" EntityType="MyLearnDBModel.BADGE_POR_PROYECTO" />
+    <AssociationSet Name="FK_IDBADGE_BADGE_POR_PROYECTO" Association="MyLearnDBModel.FK_IDBADGE_BADGE_POR_PROYECTO">
+      <End Role="BADGE" EntitySet="BADGE" />
+      <End Role="BADGE_POR_PROYECTO" EntitySet="BADGE_POR_PROYECTO" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -754,6 +818,102 @@
       </Principal>
       <Dependent Role="BADGE">
         <PropertyRef Name="IdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="SP_select_tecnologias_por_trabajo_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="SP_Select_Cursos_Estudiante_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Codigo" Nullable="true" MaxLength="10" />
+    <Property Type="Byte" Name="NotaMinima" Nullable="false" />
+    <Property Type="DateTime" Name="FechaInicio" Nullable="true" />
+    <Property Type="Int32" Name="NumeroGrupo" Nullable="true" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="SP_Select_Cursos_De_Universidad_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Codigo" Nullable="true" MaxLength="10" />
+    <Property Type="Byte" Name="NotaMinima" Nullable="false" />
+    <Property Type="DateTime" Name="FechaInicio" Nullable="true" />
+    <Property Type="Int32" Name="NumeroGrupo" Nullable="true" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+  </ComplexType>
+  <EntityType Name="ESTUDIANTE_POR_CURSO">
+    <Key>
+      <PropertyRef Name="IdEstudiante" />
+      <PropertyRef Name="IdCurso" />
+    </Key>
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="IdCurso" Type="Int32" Nullable="false" />
+    <Property Name="Nota" Type="Int32" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO">
+    <End Type="MyLearnDBModel.CURSO" Role="CURSO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.ESTUDIANTE_POR_CURSO" Role="ESTUDIANTE_POR_CURSO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CURSO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ESTUDIANTE_POR_CURSO">
+        <PropertyRef Name="IdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO">
+    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
+    <End Type="MyLearnDBModel.ESTUDIANTE_POR_CURSO" Role="ESTUDIANTE_POR_CURSO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ESTUDIANTE_POR_CURSO">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="VIEW_PROYECTOS">
+    <Key>
+      <PropertyRef Name="IdEstudiante" />
+      <PropertyRef Name="IdProyecto" />
+    </Key>
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="IdProfesor" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="IdProyecto" Nullable="false" Type="Int32" />
+    <Property Name="NombreProyecto" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Problematica" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Descripcion" Nullable="false" MaxLength="500" FixedLength="true" Unicode="false" Type="String" />
+    <Property Name="IdCurso" Type="Int32" />
+    <Property Name="FechaInicio" Nullable="false" Precision="0" Type="DateTime" />
+    <Property Name="FechaFinal" Type="DateTime" Precision="0" />
+    <Property Name="DocumentoAdicional" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="NotaObtenida" Type="Byte" />
+    <Property Name="EstadoProyecto" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="BADGE_POR_PROYECTO">
+    <Key>
+      <PropertyRef Name="IdBadge" />
+      <PropertyRef Name="IdProyecto" />
+    </Key>
+    <Property Name="IdBadge" Type="Int32" Nullable="false" />
+    <Property Name="IdProyecto" Type="Int32" Nullable="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IDBADGE_BADGE_POR_PROYECTO">
+    <End Type="MyLearnDBModel.BADGE" Role="BADGE" Multiplicity="1" />
+    <End Type="MyLearnDBModel.BADGE_POR_PROYECTO" Role="BADGE_POR_PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BADGE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BADGE_POR_PROYECTO">
+        <PropertyRef Name="IdBadge" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

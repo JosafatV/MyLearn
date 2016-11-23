@@ -21,12 +21,20 @@ GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Agregar_Al_Curso')
 DROP PROCEDURE SP_Agregar_Al_Curso
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Otorgar_Badge')
+DROP PROCEDURE SP_Otorgar_Badge
+GO
+
 
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_Estudiante')
 DROP PROCEDURE SP_Select_Cursos_Estudiante
 
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_De_Universidad')
 DROP PROCEDURE SP_Select_Cursos_De_Universidad
+
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Propuesta_Proyecto')
+DROP PROCEDURE SP_Insertar_Propuesta_Proyecto
 
 
 
@@ -196,10 +204,10 @@ CREATE PROCEDURE SP_Insertar_Badge (@Nombre CHAR (30), @Puntaje TINYINT, @IdCurs
 	GO
 
 	/*Grants a student a badge*/
-CREATE PROCEDURE SP_Otorgar_Badge (@IdBadge INT, @IdProyecto INT)
+CREATE PROCEDURE SP_Otorgar_Badge (@IdBadge INT, @IdProyecto INT , @Estado CHAR(1))
 	AS
 		UPDATE BADGE_POR_PROYECTO 
-		SET Estado='O'
+		SET Estado=@Estado
 		WHERE IdProyecto=@IdProyecto AND IdBadge=@IdBadge
 	GO
 
@@ -211,20 +219,25 @@ CREATE PROCEDURE SP_Agregar_Al_Curso @IdEstudiante CHAR(100), @IdCurso INT
 	GO
 
 	/*Creates a proyect in the proposition stage*/
-CREATE PROCEDURE SP_Insertar_Propuesta_Proyecto @IdEstudiante CHAR(100), @Nombre CHAR(30), @Problematica CHAR(100), @Descripcion CHAR(500), @IdCurso INT, @FechaInicio DATE, @FechaFinal DATE, @DocumentoAdicional CHAR(100)
+CREATE PROCEDURE SP_Insertar_Propuesta_Proyecto @IdEstudiante CHAR(100), @Nombre CHAR(30),
+				 @Problematica CHAR(100), @Descripcion CHAR(500), @IdCurso INT, @FechaInicio DATE,
+				  @FechaFinal DATE, @DocumentoAdicional CHAR(100), @Estado CHAR(1), @Nota TINYINT
 	AS
 		DECLARE @IdProyecto INT
-		INSERT INTO PROYECTO (Nombre, Problematica, Descripcion, IdCurso, FechaInicio, FechaFinal, DocumentoAdicional, Estado)
-		VALUES (@Nombre,@Problematica, @Descripcion, @IdCurso, @FechaInicio, @FechaFinal, @DocumentoAdicional, 'P')
+		INSERT INTO 
+		PROYECTO (Nombre, Problematica, Descripcion, IdCurso, FechaInicio, FechaFinal, DocumentoAdicional, Estado, NotaObtenida)
+		VALUES (@Nombre,@Problematica, @Descripcion, @IdCurso, @FechaInicio, @FechaFinal, @DocumentoAdicional, @Estado,@Nota)
 
 		SELECT @IdProyecto = @@IDENTITY
 		INSERT INTO PROYECTO_POR_ESTUDIANTE (IdProyecto, IdEstudiante, Estado)
-		VALUES (@IdProyecto, @IdEstudiante, 'P')
+		VALUES (@IdProyecto, @IdEstudiante, @Estado)
 
 		INSERT INTO PROYECTO_POR_PROFESOR (IdProyecto, IdProfesor, Estado)
-			SELECT @IdProyecto, Cpp.IdProfesor, 'P' 
+			SELECT @IdProyecto, Cpp.IdProfesor, @Estado
 			FROM CURSO_POR_PROFESOR AS Cpp 
 			WHERE Cpp.IdCurso=@IdCurso
+
+		SELECT @IdProyecto
 	GO
 
 
