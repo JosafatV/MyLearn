@@ -204,6 +204,7 @@ CREATE PROCEDURE SP_Insertar_Badge (@Nombre CHAR (30), @Puntaje TINYINT, @IdCurs
 		VALUES (@Nombre, @Puntaje, @IdCurso)
 	GO
 
+/* este no lo use*/
 	/*Grants a student a badge*/
 CREATE PROCEDURE SP_Otorgar_Badge (@IdBadge INT, @IdProyecto INT , @Estado CHAR(1))
 	AS
@@ -211,6 +212,24 @@ CREATE PROCEDURE SP_Otorgar_Badge (@IdBadge INT, @IdProyecto INT , @Estado CHAR(
 		SET Estado=@Estado
 		WHERE IdProyecto=@IdProyecto AND IdBadge=@IdBadge
 	GO
+
+CREATE PROCEDURE SP_Incrementar_Puntaje_Proyecto (@IdBadge INT, @IdProyecto INT)
+	AS
+		DECLARE @Puntaje TINYINT
+		DECLARE @PuntajeActual TINYINT
+
+		SELECT @Puntaje = BADGE.Puntaje
+		FROM BADGE WHERE BADGE.Id = @IdBadge
+
+		SELECT @PuntajeActual = PROYECTO.NotaObtenida 
+		FROM PROYECTO WHERE PROYECTO.Id = @IdProyecto
+		  
+		UPDATE PROYECTO 
+		SET NotaObtenida = (@PuntajeActual + @Puntaje)
+		WHERE PROYECTO.Id = @IdProyecto
+
+	GO
+
 
 CREATE PROCEDURE SP_Select_Badge_Por_Proyecto (@IdProyecto INT,@Estado CHAR(1))
 	AS

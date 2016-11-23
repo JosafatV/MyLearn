@@ -721,5 +721,18 @@ namespace MyLearnApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BADGE>("SP_SelectBadgePorProyecto", mergeOption, idProyectoParameter, estadoParameter);
         }
+    
+        public virtual int SP_Incrementar_Puntaje_Proyecto(Nullable<int> idBadge, Nullable<int> idProyecto)
+        {
+            var idBadgeParameter = idBadge.HasValue ?
+                new ObjectParameter("IdBadge", idBadge) :
+                new ObjectParameter("IdBadge", typeof(int));
+    
+            var idProyectoParameter = idProyecto.HasValue ?
+                new ObjectParameter("IdProyecto", idProyecto) :
+                new ObjectParameter("IdProyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Incrementar_Puntaje_Proyecto", idBadgeParameter, idProyectoParameter);
+        }
     }
 }

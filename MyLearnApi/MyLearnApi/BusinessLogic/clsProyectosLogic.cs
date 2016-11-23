@@ -70,7 +70,7 @@ namespace MyLearnApi.BusinessLogic
 
 
         /// <summary>
-        /// otorga un badge a un proyecto
+        /// otorga un badge a un proyecto y se lo suma a la nota del proyecto y curso
         /// </summary>
         /// <param name="badge"></param>
         /// <returns></returns>
@@ -78,7 +78,10 @@ namespace MyLearnApi.BusinessLogic
         {
             //estado de obtenido
             badge.Estado = "O"; 
+            //se inserta un nuevo badge a un proyecto
             db.BADGE_POR_PROYECTO.Add(badge);
+            //se incrementa la nota del proyecto con el puntaje del badge insertardo
+            db.SP_Incrementar_Puntaje_Proyecto(badge.IdBadge, badge.IdProyecto);
             try
             {
                 db.SaveChanges();
