@@ -30,8 +30,7 @@ GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_Estudiante')
 DROP PROCEDURE SP_Select_Cursos_Estudiante
 
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_De_Universidad')
-DROP PROCEDURE SP_Select_Cursos_De_Universidad
+
 
 
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Propuesta_Proyecto')
@@ -150,16 +149,26 @@ CREATE PROCEDURE SP_Select_Cursos_Estudiante @IdEstudiante CHAR(100)
 					AND ( ESTUDIANTE_POR_CURSO.Estado = 'A' OR ESTUDIANTE_POR_CURSO.Estado = 'T' )
 	GO
 
+
+
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_De_Universidad')
+DROP PROCEDURE SP_Select_Cursos_De_Universidad
 CREATE PROCEDURE SP_Select_Cursos_De_Universidad ( @IdUniversidad INT , @EstadoCurso CHAR(1), @IdEstudiante CHAR(100) )
 	AS
-		SELECT CURSO.Id, CURSO.Nombre, CURSO.Codigo, CURSO.NotaMinima, CURSO.FechaInicio, CURSO.NumeroGrupo, CURSO.Estado
-		FROM CURSO INNER JOIN CURSO_POR_UNIVERSIDAD ON CURSO.Id = CURSO_POR_UNIVERSIDAD.IdCurso
-				   /*INNER JOIN ESTUDIANTE_POR_CURSO ON CURSO.Id = ESTUDIANTE_POR_CURSO.IdCurso*/	
+		SELECT DISTINCT (CURSO.Id) , CURSO.Nombre, CURSO.Codigo, CURSO.NotaMinima, CURSO.FechaInicio, CURSO.NumeroGrupo, CURSO.Estado
+		FROM CURSO INNER JOIN CURSO_POR_UNIVERSIDAD ON CURSO.Id = CURSO_POR_UNIVERSIDAD.IdCurso,
+				   ESTUDIANTE_POR_CURSO 	
+
 		WHERE CURSO_POR_UNIVERSIDAD.IdUniversidad  = @IdUniversidad 
 				AND CURSO.Estado = @EstadoCurso 
-				/*AND ESTUDIANTE_POR_CURSO.Estado != 'A'
-				AND ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante*/
+				AND ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante
+				AND CURSO.Id != ESTUDIANTE_POR_CURSO.IdCurso
 	GO
+
+
+
+
 
 CREATE PROCEDURE SP_Select_Cursos_Estudiante (@IdEstudiante CHAR(100)) 
 	AS
@@ -318,12 +327,12 @@ IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Buscar_Suba
 DROP PROCEDURE SP_Buscar_Subastas_Por_Tecnologia_Nombre
 CREATE PROCEDURE SP_Buscar_Subastas_Por_Tecnologia_Nombre (@Tecnologia CHAR(30), @Nombre CHAR(30), @NumResultados INT)
 	AS
-	SELECT TOP(@NumResultados) TRABAJO.ID , TRABAJO.NOMBRE, TRABAJO.Descripcion, TRABAJO.IdEmpresa, TRABAJO.FechaInicio, TRABAJO.FechaCierre,
+	SELECT DISTINCT TOP(@NumResultados) TRABAJO.ID , TRABAJO.NOMBRE, TRABAJO.Descripcion, TRABAJO.IdEmpresa, TRABAJO.FechaInicio, TRABAJO.FechaCierre,
 	TRABAJO.DocumentoAdicional, TRABAJO.EstrellasObtenidas, TRABAJO.PresupuestoBase, TRABAJO.Estado, TRABAJO.Exitoso
 
 	FROM TRABAJO INNER JOIN TECNOLOGIA_POR_TRABAJO ON TRABAJO.Id = TECNOLOGIA_POR_TRABAJO.IdTrabajo
 		INNER JOIN TECNOLOGIA ON TECNOLOGIA.Id = TECNOLOGIA_POR_TRABAJO.IdTecnologia
-	WHERE TECNOLOGIA.Nombre LIKE  '%'+@Nombre+'%' AND TRABAJO.Nombre = @Nombre 
+	WHERE TECNOLOGIA.Nombre LIKE  '%'+@Nombre+'%' or TRABAJO.Nombre = @Nombre 
 
 GO
 

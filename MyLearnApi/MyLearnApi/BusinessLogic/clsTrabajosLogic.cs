@@ -270,11 +270,11 @@ namespace MyLearnApi.BusinessLogic
             */
 
            return  db.TRABAJO.SqlQuery(
-                "  SELECT TOP("+numeroDeResultados+") TRABAJO.ID, TRABAJO.NOMBRE, TRABAJO.Descripcion, TRABAJO.IdEmpresa, TRABAJO.FechaInicio, TRABAJO.FechaCierre,"
+                "  SELECT DISTINCT TOP(" + numeroDeResultados+") TRABAJO.ID, TRABAJO.NOMBRE, TRABAJO.Descripcion, TRABAJO.IdEmpresa, TRABAJO.FechaInicio, TRABAJO.FechaCierre,"
                 +" TRABAJO.DocumentoAdicional, TRABAJO.EstrellasObtenidas, TRABAJO.PresupuestoBase, TRABAJO.Estado, TRABAJO.Exitoso "
                 +" FROM TRABAJO INNER JOIN TECNOLOGIA_POR_TRABAJO ON TRABAJO.Id = TECNOLOGIA_POR_TRABAJO.IdTrabajo "
                 +" INNER JOIN TECNOLOGIA ON TECNOLOGIA.Id = TECNOLOGIA_POR_TRABAJO.IdTecnologia "
-                +" WHERE TECNOLOGIA.Nombre LIKE  '%"+nombreTecnologia+"%' AND TRABAJO.Nombre = '"+nombreTrabajo+"' ")
+                +" WHERE TECNOLOGIA.Nombre LIKE  '%"+nombreTecnologia+"%' OR TRABAJO.Nombre = '"+nombreTrabajo+"' ")
                 .ToList<TRABAJO>();
         }
 
