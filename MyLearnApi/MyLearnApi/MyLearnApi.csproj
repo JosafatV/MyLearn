@@ -222,6 +222,7 @@
     <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdiomasController.cs" />
+    <Compile Include="Controllers\MensajePorProyectoController.cs" />
     <Compile Include="Controllers\MensajePorTrabajoController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\ProfesoresController.cs" />
@@ -241,6 +242,7 @@
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\clsCursoSpModel.cs" />
+    <Compile Include="Models\clsEstadisticasEstudiante.cs" />
     <Compile Include="Models\clsJSONResource.cs" />
     <Compile Include="Models\clsLink.cs" />
     <Compile Include="Models\CURSO.cs">

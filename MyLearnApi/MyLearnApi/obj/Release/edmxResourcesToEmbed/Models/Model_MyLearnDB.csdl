@@ -301,6 +301,12 @@
       <End Role="MENSAJE" EntitySet="MENSAJE" />
       <End Role="MENSAJE_POR_PROYECTO" EntitySet="MENSAJE_POR_PROYECTO" />
     </AssociationSet>
+    <FunctionImport Name="SP_Insertar_Mensaje_Proyecto">
+      <Parameter Name="Contenido" Mode="In" Type="String" />
+      <Parameter Name="Adjunto" Mode="In" Type="String" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+      <Parameter Name="NombreEmisor" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -580,6 +586,7 @@
     <Property Name="EstrellasObtenidas" Type="Byte" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="PresupuestoBase" Type="Double" />
+    <Property Name="Exitoso" Type="Boolean" />
   </EntityType>
   <Association Name="FK_TRABAJO_POR_EMPRESA">
     <End Type="MyLearnDBModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
@@ -614,6 +621,7 @@
     <Property Name="EstrellasObtenidas" Type="Byte" />
     <Property Name="EstadoTrabajo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="EstadoTrabajoPorEstudiante" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Exitoso" Type="Boolean" />
   </EntityType>
   <EntityType Name="TRABAJO_POR_ESTUDIANTE">
     <Key>
@@ -913,6 +921,8 @@
     <Property Name="DocumentoAdicional" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="NotaObtenida" Type="Byte" />
     <Property Name="EstadoProyecto" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="NOMBRE_EST" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="APELLIDO_EST" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
   </EntityType>
   <EntityType Name="BADGE_POR_PROYECTO">
     <Key>

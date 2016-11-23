@@ -167,12 +167,12 @@ namespace MyLearnApi.Controllers
         }
 
 
-        [HttpPut]
-        [Route("MyLearnApi/Trabajos/Terminados/{idTrabajo}/{idEstudiante}/{estrellas}")]
+        [HttpPost]
+        [Route("MyLearnApi/Trabajos/Terminados/{idTrabajo}/{idEstudiante}/{estrellas}/{exitoso}")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult terminartrabajo(int idTrabajo, string idEstudiante, byte estrellas)
+        public IHttpActionResult terminartrabajo(int idTrabajo, string idEstudiante, byte estrellas, bool exitoso)
         {
-            if (pobj_TrabajosLogic.terminarTrabajo(idTrabajo,idEstudiante,estrellas))
+            if (pobj_TrabajosLogic.terminarTrabajo(idTrabajo,idEstudiante,estrellas,exitoso))
                 return StatusCode(HttpStatusCode.NoContent);
             else
                 return Conflict();
@@ -191,6 +191,7 @@ namespace MyLearnApi.Controllers
         [Route("MyLearnApi/Trabajos/{idTrabajo}/{idEstudiante}")]
         [Route("MyLearnApi/Subastas")]
         [Route("MyLearnApi/Trabajos")]
+        [Route("MyLearnApi/Trabajos/Terminados/{idTrabajo}/{idEstudiante}/{estrellas}/{exitoso}")]
         [Route("MyLearnApi/Subastas/Tecnoloogia/{idTecnologia}")]
         public HttpResponseMessage Options()
         {

@@ -186,6 +186,7 @@
     <EntitySetMapping Name="TRABAJO">
       <EntityTypeMapping TypeName="MyLearnDBModel.TRABAJO">
         <MappingFragment StoreEntitySet="TRABAJO">
+          <ScalarProperty Name="Exitoso" ColumnName="Exitoso" />
           <ScalarProperty Name="PresupuestoBase" ColumnName="PresupuestoBase" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
           <ScalarProperty Name="EstrellasObtenidas" ColumnName="EstrellasObtenidas" />
@@ -203,6 +204,7 @@
     <EntitySetMapping Name="VIEW_TRABAJO">
       <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_TRABAJO">
         <MappingFragment StoreEntitySet="VIEW_TRABAJO">
+          <ScalarProperty Name="Exitoso" ColumnName="Exitoso" />
           <ScalarProperty Name="EstadoTrabajoPorEstudiante" ColumnName="EstadoTrabajoPorEstudiante" />
           <ScalarProperty Name="EstadoTrabajo" ColumnName="EstadoTrabajo" />
           <ScalarProperty Name="EstrellasObtenidas" ColumnName="EstrellasObtenidas" />
@@ -372,6 +374,8 @@
     <EntitySetMapping Name="VIEW_PROYECTOS">
       <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_PROYECTOS">
         <MappingFragment StoreEntitySet="VIEW_PROYECTOS">
+          <ScalarProperty Name="APELLIDO_EST" ColumnName="APELLIDO_EST" />
+          <ScalarProperty Name="NOMBRE_EST" ColumnName="NOMBRE_EST" />
           <ScalarProperty Name="EstadoProyecto" ColumnName="EstadoProyecto" />
           <ScalarProperty Name="NotaObtenida" ColumnName="NotaObtenida" />
           <ScalarProperty Name="DocumentoAdicional" ColumnName="DocumentoAdicional" />
@@ -419,5 +423,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Insertar_Mensaje_Proyecto" FunctionName="MyLearnDBModel.Store.SP_Insertar_Mensaje_Proyecto" />
   </EntityContainerMapping>
 </Mapping>

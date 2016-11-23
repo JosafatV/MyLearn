@@ -194,7 +194,7 @@ namespace MyLearnApi.BusinessLogic
         /// <param name="idEstudiante"></param>
         /// <param name="estrellas"> las estrellas deben estar de cero a 5 (inclusive)</param>
         /// <returns>true si se completa o false si hay error</returns>
-        public bool terminarTrabajo(int idTrabajo, string idEstudiante,byte estrellas)
+        public bool terminarTrabajo(int idTrabajo, string idEstudiante,byte estrellas,bool exitoso)
         {
             TRABAJO lobj_trabajo = db.TRABAJO.Find(idTrabajo);
             if (lobj_trabajo == null)
@@ -205,7 +205,7 @@ namespace MyLearnApi.BusinessLogic
                 lobj_trabajo.EstrellasObtenidas = estrellas;
             else
                 return false;
-
+            lobj_trabajo.Exitoso = exitoso;
             db.Entry(lobj_trabajo).State = EntityState.Modified;
 
             //cambio el estado en trabajo y trabajo por estudiante a terminado

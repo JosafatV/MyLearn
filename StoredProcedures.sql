@@ -400,15 +400,33 @@ CREATE PROCEDURE SP_Insertar_Notificacion @Contenido CHAR(500), @Fecha DATETIME,
 		VALUES (@Contenido, @Fecha, @UserId, 'A')
 	GO
 
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_CursosAprobados')
+DROP PROCEDURE SP_CursosAprobados
+CREATE PROCEDURE SP_CursosAprobados @IdEstudiante CHAR(100)
+	AS
+		SELECT COUNT(Distinct VIEW_CURSOS.IdCurso)
+		FROM VIEW_CURSOS
+		WHERE VIEW_CURSOS.IdEstudiante = @IdEstudiante AND (VIEW_CURSOS.NotaEstudiante <= VIEW_CURSOS.NotaMinima )
+
+
+	GO
+exec SP_CursosAprobados 1
+
 /********** MY LEARN **********/
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Promedio_Notas')
+DROP PROCEDURE SP_Promedio_Notas
 
 CREATE PROCEDURE SP_Promedio_Notas @IdEstudiante CHAR(100)
 	AS
-		SELECT (SUM(NotaEstudiante) / COUNT(IdCurso) * 0.3) AS PonderadoNotas
+		SELECT (SUM(NotaEstudiante) / COUNT(Distinct IdCurso) ) AS PonderadoNotas
 		FROM VIEW_CURSOS
-		WHERE IdEstudiante = @IdEstudiante AND (EstadoCurso = 'E' OR EstadoCurso = 'F')
-	GO
+		WHERE IdEstudiante = @IdEstudiante AND (EstadoCurso = 'T')
 
+
+	GO
+exec SP_Promedio_Notas 2
 CREATE PROCEDURE SP_Promedio_de_Estrellas @IdEstudiante CHAR(100)
 	AS
 		SELECT (SUM(EstrellasObtenidas) / (COUNT(IdTrabajo) * 5)) * 0.3 AS PromedioEstrellas

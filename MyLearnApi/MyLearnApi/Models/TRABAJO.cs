@@ -24,5 +24,6 @@ namespace MyLearnApi.Models
         public Nullable<byte> EstrellasObtenidas { get; set; }
         public string Estado { get; set; }
         public Nullable<double> PresupuestoBase { get; set; }
+        public Nullable<bool> Exitoso { get; set; }
     }
 }

@@ -194,6 +194,7 @@
     <Property Name="EstrellasObtenidas" Type="tinyint" />
     <Property Name="PresupuestoBase" Type="float" />
     <Property Name="Estado" Type="char" MaxLength="1" />
+    <Property Name="Exitoso" Type="bit" />
   </EntityType>
   <EntityType Name="TRABAJO_POR_ESTUDIANTE">
     <Key>
@@ -317,6 +318,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROYECTOS' does not have a prim
       <PropertyRef Name="IdProyecto" />
     </Key>
     <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="NOMBRE_EST" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="APELLIDO_EST" Type="char" MaxLength="30" Nullable="false" />
     <Property Name="IdProfesor" Type="char" MaxLength="100" Nullable="false" />
     <Property Name="IdProyecto" Type="int" Nullable="false" />
     <Property Name="NombreProyecto" Type="char" MaxLength="30" Nullable="false" />
@@ -350,6 +353,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Property Name="FechaCierreSubasta" Type="varchar" MaxLength="10" />
     <Property Name="DocumentoAdicional" Type="char" MaxLength="100" />
     <Property Name="EstrellasObtenidas" Type="tinyint" />
+    <Property Name="Exitoso" Type="bit" />
     <Property Name="EstadoTrabajo" Type="char" MaxLength="1" />
     <Property Name="EstadoTrabajoPorEstudiante" Type="char" MaxLength="1" />
   </EntityType>
@@ -687,6 +691,12 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
     <Parameter Name="LinkHojaDeVida" Type="char" Mode="In" />
   </Function>
+  <Function Name="SP_Insertar_Mensaje_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Contenido" Type="char" Mode="In" />
+    <Parameter Name="Adjunto" Type="char" Mode="In" />
+    <Parameter Name="IdProyecto" Type="int" Mode="In" />
+    <Parameter Name="NombreEmisor" Type="char" Mode="In" />
+  </Function>
   <Function Name="SP_Insertar_Mensaje_Trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Contenido" Type="char" Mode="In" />
     <Parameter Name="Adjunto" Type="char" Mode="In" />
@@ -856,6 +866,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <EntitySet Name="VIEW_PROYECTOS" EntityType="Self.VIEW_PROYECTOS" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [VIEW_PROYECTOS].[IdEstudiante] AS [IdEstudiante], 
+    [VIEW_PROYECTOS].[NOMBRE_EST] AS [NOMBRE_EST], 
+    [VIEW_PROYECTOS].[APELLIDO_EST] AS [APELLIDO_EST], 
     [VIEW_PROYECTOS].[IdProfesor] AS [IdProfesor], 
     [VIEW_PROYECTOS].[IdProyecto] AS [IdProyecto], 
     [VIEW_PROYECTOS].[NombreProyecto] AS [NombreProyecto], 
@@ -885,6 +897,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     [VIEW_TRABAJO].[FechaCierreSubasta] AS [FechaCierreSubasta], 
     [VIEW_TRABAJO].[DocumentoAdicional] AS [DocumentoAdicional], 
     [VIEW_TRABAJO].[EstrellasObtenidas] AS [EstrellasObtenidas], 
+    [VIEW_TRABAJO].[Exitoso] AS [Exitoso], 
     [VIEW_TRABAJO].[EstadoTrabajo] AS [EstadoTrabajo], 
     [VIEW_TRABAJO].[EstadoTrabajoPorEstudiante] AS [EstadoTrabajoPorEstudiante]
     FROM [dbo].[VIEW_TRABAJO] AS [VIEW_TRABAJO]</DefiningQuery>

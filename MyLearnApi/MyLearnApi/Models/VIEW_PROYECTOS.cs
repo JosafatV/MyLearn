@@ -26,5 +26,7 @@ namespace MyLearnApi.Models
         public string DocumentoAdicional { get; set; }
         public Nullable<byte> NotaObtenida { get; set; }
         public string EstadoProyecto { get; set; }
+        public string NOMBRE_EST { get; set; }
+        public string APELLIDO_EST { get; set; }
     }
 }
