@@ -5,7 +5,7 @@
         $scope.presupuestoBasex = $routeParams.presupuesto;
 
         $scope.do_goPerfil = function () {
-            $location.path('/MyLearn/Empresa/Perfil');
+            $location.path('/MyLearn/Empresa/Perfil/' + $routeParams.idEmp.trim());
         };
 
         $scope.do_goCrearSubasta = function () {

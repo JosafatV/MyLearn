@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div id="ventana1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!--Header Ventana-->
+                <div class="modal-header">
+                    <h2 class="modal-tittle">Badges Obtenidos:</h2>
+                </div>
+                <!--Contenido-->
+                <div class="modal-body">
+                    <div class="container-fluid" data-ng-repeat="badge in ls_badgesSA">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="NBadge">{{badge.Nombre}}</label>
+                                <img src="../../Vistas/Estilo/img/badgepeq.png" class="img-responsive img-rounded" alt="">
+                                <a class="btn btn-tcc btn-default btn-sm">Asignar</a>
+                            </div>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                        </div>
+                    </div>
+
+                </div>
+                <!--Footer-->
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

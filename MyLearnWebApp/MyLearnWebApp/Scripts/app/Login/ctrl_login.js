@@ -1,4 +1,4 @@
-﻿var str_id = 20;
+﻿var str_id = 13;
 angular.module('mod_MyLearn').controller('ctrl_login', ['fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
     function (fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
         
@@ -48,6 +48,14 @@ angular.module('mod_MyLearn').controller('ctrl_login', ['fct_User', '$q', '$scop
 
         $scope.do_goPerfilEmpresa = function () {
             $location.path('/MyLearn/Empresa/Perfil/' + str_id);
+        };
+
+        $scope.goAreaTrabajoEstudianteProfesor = function () {
+            $location.path('/MyLearn/Estudiante/Perfil/AreaTrabajoEstudianteProfesor/'+2+'/'+1);
+        };
+
+        $scope.goAreaTrabajoProfesor = function () {
+            $location.path('/MyLearn/Estudiante/Perfil/AreaTrabajoProfesor/' + 13 + '/' + 2 +'/'+ 1);
         };
 
         $scope.testModal = function () {

@@ -17,7 +17,7 @@ angular.module('mod_MyLearn').controller('ctrl_perfilProfesor', ['fct_Trabajo', 
         });
 
         $scope.do_goTrabajos = function (curso) {
-            $location.path('/MyLearn/Profesor/Perfil/AreaDeTrabajo/' + $routeParams.IdUser + "/" + curso.IdCurso);
+            $location.path('/MyLearn/Profesor/Perfil/AreaDeTrabajo/' + $routeParams.IdUser.trim() + "/" + curso.IdCurso);
         };
 
         $scope.goNotificaciones = function () {

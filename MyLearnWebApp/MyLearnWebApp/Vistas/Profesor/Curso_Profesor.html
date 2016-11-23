@@ -67,15 +67,13 @@
 								<th>Nombre del Estudiante</th>
 								<th>Proyecto Activo</th>
 								<th>Nota</th>
-								<th>Propuesta de Proyecto</th>
-								<th>Eliminar</th>
+
 						</tr>
-						<tr>
-								<td>1</td>
+						<tr data-ng-repeat="est in ls_estudiantes">
+								<td>{{est.NombreContacto}}</td>
 								<td><a class="btn btn-tcc btn-default btn-md">Ver Proyecto</a></td>
-								<td>80</td>
-								<td></td>
-								<td><a class="btn btn-danger btn-md">Eliminar</a></td>
+								<td>{{est.NotaObtenida}}</td>
+
 
 
 						</tr>

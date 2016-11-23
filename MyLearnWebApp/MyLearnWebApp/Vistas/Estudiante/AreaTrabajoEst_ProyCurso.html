@@ -4,22 +4,21 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="../../Vistas/Estilo/js/bootstrap.min.js">
-	<link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_AreaTPE.css">
+	<link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_AreaTEC.css">
 </head>
 <header>
 		<div class="wrapper">
-			<div class="logo">Nombre de Proyecto:
+			<div class="logo">Nombre curso:&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota:
 				<div class="img">
                     <a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
 				</div>
 			</div>
 			<nav>
-				<a data-ng-click="do_goPerfilEmpresa()">Mi Perfil</a>
-				<a>Crear Subaasta</a>
-				<a>Ayuda en Línea</a>
-				<a>Cerrar Sesión</a>
-			</nav>
-		</div>
+				<a data-ng-click="do_goPerfilEstudiante()">Mi Perfil</a>
+                <a data-ng-click="verBadges()">Ver Badges</a>
+                <a>Cerrar Sesion</a>
+            </nav>
+
 </header>
 <br><br><br>
 <body>
@@ -27,30 +26,10 @@
 		<br>
 		<div class="container-fluid pr2">
 			<div class="col-md-2">
-					<h1 class="pr1"><span class="glyphicon glyphicon-arrow-left" data-ng-click="do_goPerfilEmpresa()"></span data-ng-click="do_goPerfilEmpresa()"> Mi Perfil</h1>
+					<h1 class="pr1" data-ng-click="do_goPerfilEstudiante()"><span class="glyphicon glyphicon-arrow-left"></span> Mi Perfil</h1>
 			</div>
 		</div><br><br>
-		<div class="container-fluid">
-			<section class="main row">
-				<article class="col-md-8">
-					<br>
-				<h2>Información general del proyecto:</h2><br>
-					<label for="Nombre">Nombre del Proyecto: {{trabajoActual.Nombre}}</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-					<br><br>
-					<label for="Estudiante">Estudiante Encargado:{{trabajoActual.NombreContacto}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-					<br><br>
-					<label for="Universidad">Presupuesto Asignado:{{trabajoActual.Monto}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</article>
-			<aside class="col-md-4">
-				<br>
-				<h2>Objetivos:</h2><br>
-					<label for="Estudiante">Fecha de Inicio: {{trabajoActual.FechaCierreSubasta}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-					<br><br>
-					<label for="Universidad">Fecha de Finlización: {{trabajoActual.FechaFinalizacion}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</aside>
-		</section><br><br><br>
-
-		</div>
+        <!-------------------------------------------------------------------------------------------------------------------------->
         <div id="div1" style="background-color:#b4b4b4; height: 500px;position:relative;">
             <div id="div2" style="max-height:100%;overflow:auto;border:4px solid black;">
 
@@ -120,61 +99,28 @@
 
 
 		</div>
-		<div class="row">
-			<div class="container-fluid">
-				<div class="col-md-7">
-						<div class="col-md-offset-0">
-								<div class="container-fluid">
-										<section class="main row">
-												<article class="col-md-5">
-														<h2>Escribir Mensaje:</h2>
-														<div class="container-fluid">
-																<div class="col-md-10">
-																		<div class="form-group">
-																				<textarea class="form-control" id="mensaje" data-ng-model="js_enviarMensaje.Contenido"></textarea>
-																				<br><br>
-																				&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md" data-ng-click="enviarMensaje()">Enviar</a>&nbsp; &nbsp;&nbsp; &nbsp;
-																				<a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a>
-																		</div>
-
+		<div class="col-md-9">
+				<div class="col-md-offset-0">
+						<div class="container-fluid">
+								<section class="main row">
+										<article class="col-md-5">
+												<h2>Escribir Mensaje:</h2>
+												<div class="container-fluid">
+														<div class="col-md-10">
+																<div class="form-group">
+																		<textarea class="form-control" id="mensaje"  data-ng-model="js_enviarMensaje.Contenido"></textarea>
+																		<br><br>
+																		&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md"  data-ng-click="enviarMensaje()">Enviar</a>&nbsp; &nbsp;&nbsp; &nbsp;
+																		<a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a>
 																</div>
+
 														</div>
+												</div>
 
-								</div>
 						</div>
-					</div>
-					<div class="container-fluid">
-						<div class="col-md-4">
-							<div class="col-md-offset-3">
-								<h3>Calificación del Proyecto:</h3>
-								<div class="ec-stars-wrapper">
-									<a data-value="1" title="Valorar con 1 estrella"data-ng-click="terminarCalificar(1)">&#9733;</a>
-									<a data-value="2" title="Votar con 2 estrellas" data-ng-click="terminarCalificar(2)">&#9733;</a>
-									<a data-value="3" title="Votar con 3 estrellas" data-ng-click="terminarCalificar(3)">&#9733;</a>
-									<a data-value="4" title="Votar con 4 estrellas" data-ng-click="terminarCalificar(4)">&#9733;</a>
-									<a  data-value="5" title="Votar con 5 estrellas"data-ng-click="terminarCalificar(5)">&#9733;</a>
-								</div>
-								<noscript></noscript><br><br>
-							<div class="container-fluid">
-								<div class="col-md-offset-2">
-									<a class="btn btn-danger btn-lg" >Terminar Proyecto</a><br>
-								</div>
-
-							</div><br>
-							</div>
-
-							</div>
-
-
-
-
-					  </div>
-
-			</div>
+				</div><br><br>
 
 		</div>
-
-
 
 
 
@@ -184,6 +130,9 @@
 
 
 </div>
+
+
+
 
 	</body>
 

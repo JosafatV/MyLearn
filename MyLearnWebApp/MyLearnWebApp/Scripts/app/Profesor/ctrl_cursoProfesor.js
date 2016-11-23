@@ -4,11 +4,16 @@ angular.module('mod_MyLearn').controller('ctrl_cursoProfesor', ['fct_Trabajo', '
         $scope.profesorActual = {};
         $scope.cursoActual = {};
         $scope.ls_badges = [];
+        $scope.ls_estudiantes = [];
 
         $scope.indexCursos = 0;
 
         fct_MyLearn_API_Client.get({ type: 'Profesores', extension1: $routeParams.IdUser }).$promise.then(function (data) {
             $scope.profesorActual = data;
+        });
+
+        fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'Profesores', extension2:'Curso',extension3: $routeParams.IdCurso.trim() }).$promise.then(function (data) {
+            $scope.ls_estudiantes = data;
         });
 
         fct_MyLearn_API_Client.get({ type: 'Cursos', extension1: $routeParams.IdCurso }).$promise.then(function (data) {

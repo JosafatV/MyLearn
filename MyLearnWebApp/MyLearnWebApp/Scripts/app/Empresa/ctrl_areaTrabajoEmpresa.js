@@ -2,7 +2,7 @@
     function (fct_UserJson,fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.ls_msjs = [];
-
+        $scope.starss = totStars;
         $scope.js_enviarMensaje = {
             Contenido: "",
             Adjunto: "",
@@ -80,5 +80,47 @@
             $location.path('/MyLearn/Empresa/Perfil/' + $routeParams.IdUser);
         };
 
+
+        $scope.terminarCalificar = function (stars) {
+            ///alert('¿Desea Terminar y calificar con ' + stars + 'estrellas?');
+            totStars = stars;
+            modal = uibModal.open({
+                animation: true,
+                templateUrl: 'Vistas/Empresa/calificarProyecto.html',
+                controller: 'ctrl_areaTrabajoEmpresa',
+                size: 'sm',
+                backdrop: true,
+                windowClass: 'center-modal',
+            });
+            modal.closed.then(function () {
+                fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+                    $scope.ls_msjs = data;
+                });
+            });
+        };
+
+        $scope.set_exitoso = function () {
+           exitoso = true;
+        };
+
+        $scope.set_fallido = function () {
+           exitoso = false;
+        };
+
+
+        $scope.sendCalificacion = function () {
+            alert($routeParams.IdEst);
+            alert(totStars);
+            alert(exitoso);
+            fct_MyLearn_API_Client.update({
+                type: 'Trabajos', extension1: 'Terminados', extension2: $routeParams.IdTrabajo,
+                extension3: $routeParams.IdEst.trim(), extension4: totStars, extension5: exitoso
+            }).$promise.then(function (data) {
+                $scope.ls_msjs = data;
+            });
+        };
+
     }]);
 var modal = "";
+var exitoso = true;
+var totStars = 5;

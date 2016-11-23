@@ -78,7 +78,7 @@
 
         $scope.do_goSubastas = function (subasta) {
             //alert(angular.toJson(subasta.IdEmpresa));
-            $location.path("/MyLearn/Empresa/Subasta/" + subasta.Id.trim() + "/" + subasta.IdEmpresa.trim() +  "/" + subasta.Nombre +  "/" + subasta.PresupuestoBase.trim());
+            $location.path("/MyLearn/Empresa/Subasta/" + subasta.Id + "/" + subasta.IdEmpresa +  "/" + subasta.Nombre +  "/" + subasta.PresupuestoBase);
         };
 
         vm.do_goLogin = function () {
