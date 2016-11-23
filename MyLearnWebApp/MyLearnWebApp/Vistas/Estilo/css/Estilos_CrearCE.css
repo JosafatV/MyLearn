@@ -35,3 +35,11 @@ header .logo {
 .btn-ttc:hover {
 	color:#f56f3a;
 }
+body{
+	background: #D8D8D8;
+	color:#252932;
+}
+.prom1{
+	background:#252932;
+	color: #fff;
+}
