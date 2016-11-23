@@ -409,5 +409,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_SelectBadgePorProyecto" FunctionName="MyLearnDBModel.Store.SP_Select_Badge_Por_Proyecto" />
+    <FunctionImportMapping FunctionImportName="SP_Incrementar_Puntaje_Proyecto" FunctionName="MyLearnDBModel.Store.SP_Incrementar_Puntaje_Proyecto" />
   </EntityContainerMapping>
 </Mapping>

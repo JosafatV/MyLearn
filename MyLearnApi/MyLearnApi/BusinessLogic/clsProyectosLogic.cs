@@ -16,6 +16,13 @@ namespace MyLearnApi.BusinessLogic
             return db.VIEW_PROYECTOS.Where(p => p.IdCurso == idCurso).ToList<VIEW_PROYECTOS>();
         }
 
+        public List<VIEW_PROYECTOS> getProyectosDeEstudiante(string idEstudiante)
+        {
+            return db.VIEW_PROYECTOS.Where(p =>  p.IdEstudiante == idEstudiante &&
+                (p.EstadoProyecto == "A" || p.EstadoProyecto == "T"))
+                .ToList<VIEW_PROYECTOS>();
+        }
+
 
         public VIEW_PROYECTOS getSpecificProyecto(string idProyecto)
         {

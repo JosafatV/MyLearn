@@ -292,6 +292,10 @@
       <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
       <Parameter Name="Estado" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="SP_Incrementar_Puntaje_Proyecto">
+      <Parameter Name="IdBadge" Mode="In" Type="Int32" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>

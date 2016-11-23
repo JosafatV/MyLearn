@@ -161,6 +161,13 @@ CREATE PROCEDURE SP_Select_Cursos_De_Universidad ( @IdUniversidad INT , @EstadoC
 				AND ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante*/
 	GO
 
+CREATE PROCEDURE SP_Select_Cursos_Estudiante (@IdEstudiante CHAR(100)) 
+	AS
+		SELECT CURSO.Id, CURSO.Nombre, CURSO.Codigo, CURSO.NotaMinima, CURSO.FechaInicio, CURSO.NumeroGrupo, CURSO.Estado
+		FROM CURSO INNER JOIN ESTUDIANTE_POR_CURSO ON CURSO.Id = ESTUDIANTE_POR_CURSO.IdCurso
+		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante 
+					AND ( ESTUDIANTE_POR_CURSO.Estado = 'A' OR ESTUDIANTE_POR_CURSO.Estado = 'T' )
+	GO
 
 
 	/*Creates a new course*/

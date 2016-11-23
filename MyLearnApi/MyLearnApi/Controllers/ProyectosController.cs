@@ -22,27 +22,40 @@ namespace MyLearnApi.Controllers
         private clsProyectosLogic pobj_ProyectoLogic = new clsProyectosLogic();
         
         /// <summary>
-        /// 
+        /// get proyectos de un curso
         /// </summary>
         /// <param name="idCurso"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("MyLearnApi/Proyectos/Curso/{idCurso}")]
+        [Route("MyLearnApi/Proyectos/Profesores/Curso/{idCurso}")]
         [ResponseType(typeof(List<VIEW_PROYECTOS>))]
-        public IHttpActionResult GetVIEW_PROYECTOS(int idCurso)
+        public IHttpActionResult GetProyectosDeCurso(int idCurso)
         {
             return Ok(pobj_ProyectoLogic.getProyectosDeCurso(idCurso));
         }
 
         /// <summary>
-        /// 
+        /// get de royectos de un estudiante
+        /// </summary>
+        /// <param name="idEstudiante"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("MyLearnApi/Proyectos/Estudiantes/{idEstudiante}")]
+        [ResponseType(typeof(List<VIEW_PROYECTOS>))]
+        public IHttpActionResult GetProyectosDeEstudiante(string idEstudiante)
+        {
+            return Ok(pobj_ProyectoLogic.getProyectosDeEstudiante(idEstudiante));
+        }
+
+        /// <summary>
+        /// Get de un proyecto en específico
         /// </summary>
         /// <param name="idProyecto"></param>
         /// <returns></returns>
         [HttpGet]
         [Route("MyLearnApi/Proyectos/Curso/{idProyecto}")]
         [ResponseType(typeof(VIEW_PROYECTOS))]
-        public IHttpActionResult GetVIEW_PROYECTOS(string idProyecto)
+        public IHttpActionResult GetProyecto(string idProyecto)
         {
             VIEW_PROYECTOS vIEW_PROYECTOS = pobj_ProyectoLogic.getSpecificProyecto(idProyecto);
             if (vIEW_PROYECTOS == null)
@@ -81,7 +94,7 @@ namespace MyLearnApi.Controllers
         /// <param name="bADGE_POR_PROYECTO"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("MyLearnApi/Badge")]
+        [Route("MyLearnApi/Proyectos/Badge")]
         [ResponseType(typeof(BADGE_POR_PROYECTO))]
         public IHttpActionResult PostBADGE_POR_PROYECTO(BADGE_POR_PROYECTO badge)
         {
@@ -103,7 +116,7 @@ namespace MyLearnApi.Controllers
         }
 
         [HttpGet]
-        [Route("MyLearnApi/Badges/{idProyecto}")]
+        [Route("MyLearnApi/Proyectos/Badges/{idProyecto}")]
         [ResponseType(typeof(List<BADGE>))]
         public IHttpActionResult getBadgesDeProyecto(int idProyecto)
         {
@@ -120,6 +133,15 @@ namespace MyLearnApi.Controllers
             base.Dispose(disposing);
         }
 
-       
+
+        [HttpOptions]
+        [Route("MyLearnApi/Proyectos/Badge")]
+        [Route("MyLearnApi/Proyectos")]
+        public HttpResponseMessage Options()
+        {
+            return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
+        }
+
+
     }
 }
