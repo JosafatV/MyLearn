@@ -18,24 +18,41 @@ namespace MyLearnApi.Controllers
         private MyLearnDBEntities db = new MyLearnDBEntities();
 
 
-      /*  [HttpGet]
-        [Route("MyLearnApi/Usuario/{idUsuario}/Password/{Password}")]
-        [ResponseType(typeof(USUARIO))]
-        public IHttpActionResult GetUSUARIO(string idUsuario, string Password)
+        [HttpGet]
+        [Route("MyLearnApi/Usuario/{NombreUsuario}/Password/{Password}")]
+        [ResponseType(typeof(List<USUARIO>))]
+        public IHttpActionResult GetUSUARIO(string NombreUsuario, string Password)
         {
-             cuenta = new clsCuentaDeUsuario();
-
-            if(clsCuentaDeUsuario.login(id)
-            USUARIO uSUARIO = db.USUARIO.Find(idUsuario);
-            if (uSUARIO == null)
+            clsLink link = new clsLink();
+            link.rel = "userProfile";
+            if (clsCuentaDeUsuario.login(NombreUsuario, Password))
             {
-                return NotFound();
+                byte rol = clsCuentaDeUsuario.getRol(NombreUsuario);
+                USUARIO usuario = db.USUARIO.Where(u => u.NombreDeUsuario == NombreUsuario).ToList()[0];
+                switch (rol)
+                {
+                    case clsCuentaDeUsuario.ROL_ESTUDIANTE:
+                        link.href = "/MyLearn/Estudiante/Perfil/";
+                        break;
+                    case clsCuentaDeUsuario.ROL_EMPRESA:
+                        link.href = "/MyLearn/Empresa/Perfil/";
+                        break;
+                    case clsCuentaDeUsuario.ROL_PROFESOR:
+                        link.href = "/MyLearn/Profesor/Perfil/";
+                        break;
+                   
+                }
+                usuario.agregarLink(link);
+                List<USUARIO> result = new List<USUARIO>();
+                usuario.Sal = "********";
+                usuario.Contrasena = "*******";
+                result.Add(usuario);
+                return Ok(result);
             }
 
-            return Ok(uSUARIO);
+            //si no lo encuentra retorna la lista vacia
+            return Ok(new List<USUARIO>());
         }
-
-      */
 
         protected override void Dispose(bool disposing)
         {

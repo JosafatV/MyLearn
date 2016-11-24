@@ -60,6 +60,7 @@
       <Parameter Name="Pais" Mode="In" Type="String" />
       <Parameter Name="Region" Mode="In" Type="String" />
       <Parameter Name="RepositorioCodigo" Mode="In" Type="String" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="VIEW_PROFESOR" EntityType="MyLearnDBModel.VIEW_PROFESOR" />
     <FunctionImport Name="SP_Insertar_Profesor">
@@ -76,6 +77,7 @@
       <Parameter Name="Pais" Mode="In" Type="String" />
       <Parameter Name="Region" Mode="In" Type="String" />
       <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_Insertar_Estudiante">
       <Parameter Name="Id" Mode="In" Type="String" />
@@ -93,6 +95,7 @@
       <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
       <Parameter Name="RepositorioCodigo" Mode="In" Type="String" />
       <Parameter Name="LinkHojaDeVida" Mode="In" Type="String" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="PAIS" EntityType="MyLearnDBModel.PAIS" />
     <AssociationSet Name="FK_EMPRESA_PAIS" Association="MyLearnDBModel.FK_EMPRESA_PAIS">
@@ -358,6 +361,8 @@
       <Parameter Name="IdCurso" Mode="In" Type="Int32" />
       <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SP_Get_Last_User_Id" />
+    <FunctionImport Name="sp_GetLAstUserId" ReturnType="Collection(String)" />
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -387,6 +392,7 @@
     <Property Name="RepositorioArchivos" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="NombreDeUsuario" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
   </EntityType>
   <Association Name="FK_ESTUDIANTE_ID">
     <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
@@ -471,6 +477,7 @@
     <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="IdUniversidad" Type="Int32" />
+    <Property Name="NombreDeUsuario" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
   </EntityType>
   <EntityType Name="EMPRESA">
     <Key>
@@ -508,6 +515,7 @@
     <Property Name="RepositorioArchivos" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="NombreDeUsuario" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
   </EntityType>
   <Association Name="FK_EMPRESA_ID">
     <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
@@ -542,6 +550,7 @@
     <Property Name="Region" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
     <Property Name="IdUniversidad" Type="Int32" Nullable="false" />
     <Property Name="Universidad" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="NombreDeUsuario" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
   </EntityType>
   <EntityType Name="PAIS">
     <Key>
