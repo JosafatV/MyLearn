@@ -109,14 +109,12 @@
 
 
         $scope.sendCalificacion = function () {
-            alert($routeParams.IdEst);
-            alert(totStars);
-            alert(exitoso);
-            fct_MyLearn_API_Client.update({
+            fct_MyLearn_API_Client.save({
                 type: 'Trabajos', extension1: 'Terminados', extension2: $routeParams.IdTrabajo,
                 extension3: $routeParams.IdEst.trim(), extension4: totStars, extension5: exitoso
-            }).$promise.then(function (data) {
+            },{}).$promise.then(function (data) {
                 $scope.ls_msjs = data;
+                $scope.do_goPerfilEmpresa();
             });
         };
 

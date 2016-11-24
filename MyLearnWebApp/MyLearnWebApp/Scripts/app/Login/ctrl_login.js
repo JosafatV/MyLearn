@@ -4,6 +4,12 @@ angular.module('mod_MyLearn').controller('ctrl_login', ['fct_User', '$q', '$scop
         
         var contrasena = "Contraseña"
 
+        $scope.doLogin = function () {
+            /*fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+                $scope.ls_msjs = data;
+            });*/
+        };
+
         fct_User.setId(str_id);
         fct_User.setContra("this");
        /* fct_UserJson.set_user({
@@ -25,6 +31,10 @@ angular.module('mod_MyLearn').controller('ctrl_login', ['fct_User', '$q', '$scop
             "Estado": "sample string 16",
             "IdUniversidad": 1
         });*/
+
+        $scope.login = function () {
+
+        };
 
         $scope.goCrearCuentaEstudiante = function () {
             $location.path("/MyLearn/Estudiante/CrearCuenta");

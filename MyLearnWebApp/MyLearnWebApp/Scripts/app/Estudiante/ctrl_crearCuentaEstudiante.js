@@ -63,7 +63,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', '$
 
         $scope.do_doleteSelected = function (tec) {
             $scope.ls_tecnologias.push(tec);
-            $scope.ls_tecnologiasSelect.splice($scope.ls_tecnologias.indexOf(tec), 1);
+            $scope.ls_tecnologiasSelect.splice($scope.ls_tecnologiasSelect.indexOf(tec), 1);
         };
 
         $scope.do_agregueTec = function (tec) {

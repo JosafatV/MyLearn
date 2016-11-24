@@ -3,17 +3,17 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="../../Scripts/Angular and Bootstrap/Bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_login.css">
+    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_OfertarSub.css">
 </head>
 <header>
 		<div class="wrapper">
 			<div class="logo"> Subastas de Empleo
 				<div class="img">
-                    <a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
+                
 				</div>
 			</div>
 			<nav>
-				<a>Mi Perfil</a>
+				<a  data-ng-click="do_goPerfilEstudiante()">Mi Perfil</a>
 				<a>Cursos Disponibles</a>
 				<a>Subastas</a>
 				<a href="#ventana1"data-toggle="modal">Notificaciones</a>
@@ -31,8 +31,7 @@
 					</div>
 					<!--Contenido-->
 					<div class="modal-body">
-						<label for="">Chancher es playo</label> <br>
-							<label for="">Alto,macho y guapo...mmmm</label>
+	
 					</div>
 					<!--Footer-->
 					<div class="modal-footer">
@@ -49,18 +48,17 @@
 			<article class="col-md-8">
 				<br>
 			<h2>Mi Infomación:</h2><br>
-				<label for="Nombre">Nombre de usuario:</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-				<label for="Link a Hoja de vida">Link de Hoja de vida:</label><br>
-				<label for="Carné Estudiantil">Carné Estudiantil:</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-				<label for="País">País:</label>&nbsp; &nbsp; &nbsp;<br>
-				<label for="Universidad">Universidad:</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<label for="Repositorio de código">Repositorio de Código:</label>
+                <label for="Nombre">Nombre de usuario: {{js_datosEstudiante.NombreContacto}}</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                <label for="Link a Hoja de vida">Link de Hoja de vida: {{js_datosEstudiante.LinkHojaDeVida}}</label><br>
+                <label for="Carné Estudiantil">Carné Estudiantil: {{js_datosEstudiante.Carne}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                <label for="País">País: {{js_datosEstudiante.Pais}}</label>&nbsp; &nbsp; &nbsp;<br>
+                <label for="Repositorio de código">Repositorio de Código: {{js_datosEstudiante.RepositorioCodigo}}</label>
 		</article>
 		</section>
 		<br>
 		<div class="container-fluid pr2">
 			<div class="col-md-2">
-					<h1 class="pr1"><span class="glyphicon glyphicon-arrow-left"></span> Mi Perfil</h1>
+					<h1 class="pr1" data-ng-click="do_goPerfilEstudiante()"><span class="glyphicon glyphicon-arrow-left" data-ng-click="do_goPerfilEstudiante()"></span> Mi Perfil</h1>
 			</div>
 		</div><br><br>
 		<div class="row">
@@ -70,13 +68,10 @@
 						<article class="col-md-6">
 							<h2>Información General:</h2>
 							<p>
-							 <b>El empleo consiste en quedar con.......
-							 sdskjdhskhdkjshdjksjdofsdjfkpdskfñdskfñdkfñkdfñkdñfkdñfavicon</b><br>
+                                <br>
 							</p>
 							<h2>Tecnologías a implementar:</h2>
-							<p>
-							 <b>El empleo consiste en quedar con.......
-							 sdskjdhskhdkjshdjksjdofsdjfkpdskfñdskfñdkfñkdfñkdñfkdñfavicon</b><br>
+							<p><br>
 							</p>
 					</article>
 
@@ -106,7 +101,7 @@
 											<label for="mensaje">Comentario</label>
 											<textarea class="form-control" id="mensaje"></textarea>
 											<br>
-											&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md">Ofertar</a>&nbsp; &nbsp;&nbsp; &nbsp;
+											&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md" data-ng-click="set_propuestaDeSubasta()">Ofertar</a>&nbsp; &nbsp;&nbsp; &nbsp;
 											<a class="btn btn-danger btn-md">Cancelar</a>
 										</div>
 
@@ -125,20 +120,11 @@
 								<th>Monto</th>
 								<th>Fecha</th>
 						</tr>
-						<tr>
-								<td>Guper</td>
-								<td>$2000</td>
-								<td>12/12/16</td>
-						</tr>
-						<tr>
-							<td>Guper</td>
-							<td>$2000</td>
-							<td>12/12/16</td>
-						</tr>
-						<tr>
-							<td>Guper</td>
-							<td>$2000</td>
-							<td>12/12/16</td>
+						<tr data-ng-repeat="subastas in ls_otrasSubastas">
+								<td>{{subastas.NombreUsuario}}</td>
+								<td>{{subastas.Monto}}</td>
+                                <td>{{subastas.FechaFinalizacion}}</td>
+								<td></td>
 						</tr>
 			</table> <br><br>
 

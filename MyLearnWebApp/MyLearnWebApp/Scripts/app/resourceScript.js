@@ -15,7 +15,7 @@ angular.module('mod_MyLearn').factory('fct_MyLearn_API_Client', function ($resou
         get: {
             method: 'GET',
             transformResponse: function (data) {
-                return angular.fromJson(data);
+                return angular.fromJson(data);  
             },
             isArray: false
         },

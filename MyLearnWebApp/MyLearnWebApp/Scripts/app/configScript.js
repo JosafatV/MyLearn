@@ -73,7 +73,7 @@
         templateUrl: 'Vistas/Estudiante/Cursos_Disponibles.html',
         controller: 'ctrl_cursosDisponibles'
     })
-    .when('/MyLearn/Estudiante/Perfil/OfertarSubasta', {
+    .when('/MyLearn/Estudiante/Perfil/:IdUser/OfertarSubasta/:IdSub', {
         templateUrl: 'Vistas/Estudiante/Ofertar_Subasta.html',
         controller: 'ctrl_ofertarSubasta'
     })
