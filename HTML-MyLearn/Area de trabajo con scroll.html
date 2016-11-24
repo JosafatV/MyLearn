@@ -1,0 +1,181 @@
+|
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/Estilos_PerfilEmpresa.css">
+</head>
+<header>
+    <div class="wrapper">
+        <div class="logo">
+            Nombre curso:&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota:
+            <div class="img">
+                <a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
+            </div>
+        </div>
+        <nav>
+            <a>Mi Perfil</a>
+            <a href="#ventana1" data-toggle="modal">Ver Badges</a>
+            <a>Cerrar Sesión</a>
+        </nav>
+    </div>
+    <div class="modal fade" id="ventana1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!--Header Ventana-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="false">&times;</button>
+                    <h2 class="modal-tittle">Badges Obtenidos:</h2>
+                </div>
+                <!--Contenido-->
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="NBadge">HTML</label>
+                                <img src="img/ball.png" class="img-responsive img-rounded" alt="">
+                                <a class="btn btn-tcc btn-default btn-sm">Alardear</a>
+                            </div>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                            <div class="col-md-3">
+                                <label for="NBadge">CSS</label>
+                                <img src="img/ball.png" class="img-responsive img-rounded" alt="">
+                                <a class="btn btn-tcc btn-default btn-sm">Alardear</a>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="NBadge">Bases de datos</label>
+                                <img src="img/ball.png" class="img-responsive img-rounded" alt="">
+                                <a class="btn btn-tcc btn-default btn-sm">Alardear</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<br>
+<br>
+<br>
+<body>
+    <div class="container-fluid">
+        <br>
+        <div class="container-fluid pr2">
+            <div class="col-md-2">
+                <h1 class="pr1"><span class="glyphicon glyphicon-arrow-left"></span> Mi Perfil</h1>
+            </div>
+        </div><br><br>
+
+
+
+        <!-- --------------------------------------------------------------No cambiaar por angular de aqui hasta abajo---------------------------------------------------------------------------------------------- -->
+
+        <div id="div1" style="background-color:#252932; height: 500px;position:relative;">
+            <div id="div2" style="max-height:100%;overflow:auto;border:1px solid black;">
+                <br><br>
+                <div class="container-fluid" data-ng-repeat="msj in ls_msjs">
+                    <div class="row">
+                        <div class="col-md-offset-2">
+                            <div class="col-md-9 color1">
+                                <div class="container-fluid">
+                                    <section class="main row">
+                                        <article class="col-md-6">
+                                            <h2>Mensaje de:{{msj.NombreEmisor}}</h2>
+                                            <h4>Fecha:{{msj.Fecha}}</h4>
+                                            <h4>Contenido:{{msj.Contenido}}</h4>
+                                            <p>
+                                                <br><br>
+                                                <a class="btn btn-tcc btn-default btn-md">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
+                                            </p>
+                                        </article>
+
+                                    </section>
+                                </div>
+
+                            </div>
+                        </div><br><br><br><br><br><br><br><br><br><br><br><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9 color1">
+                            <div class="container-fluid">
+                                <div class="col-md-offset-4">
+                                    <section class="main row">
+                                        <div class="col-md-offset-1">
+
+                                        </div>
+                                        <article class="col-md-6" data-ng-repeat="resp in msj.RESPUESTA">
+                                            <h2>Mensaje de:{{resp.NombreEmisor}}</h2>
+                                            <h4>Fecha:{{resp.Fecha}}</h4>
+                                            <h4>Contenido:{{resp.Contenido}}</h4>
+                                            <p>
+                                                Esta vara no sirve bretee mas<br><br>
+                                                <a class="btn btn-tcc btn-default btn-md">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
+                                            </p>
+                                        </article>
+
+                                    </section>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><br><br>
+            </div>
+        </div> <br><br><br><br>
+
+
+
+
+
+            <!-- --------------------------------------------------------------No cambiaar por angular de aqui hasta abajo------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+        </div>
+        <div class="col-md-9">
+            <div class="col-md-offset-0">
+                <div class="container-fluid">
+                    <section class="main row">
+                        <article class="col-md-5">
+                            <h2>Escribir Mensaje:</h2>
+                            <div class="container-fluid">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="mensaje"></textarea>
+                                        <br><br>
+                                        &nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md">Enviar</a>&nbsp; &nbsp;&nbsp; &nbsp;
+                                        <a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                </div>
+            </div><br><br>
+
+        </div>
+
+
+
+
+
+        <br>
+
+
+    </div>
+
+
+
+</body>
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</html>

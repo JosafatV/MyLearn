@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <form action="">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Calificar proyecto</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <h4 class="modal-title" id="modal-title">
+                Total estrellas: {{starss}} <br>
+                <input type="radio" name="gender" value="male" data-ng-click="set_exitoso()"> Exitoso<br>
+                <input type="radio" name="gender" value="female" data-ng-click="set_fallido()">Fallido<br>
+            </h4>
+       </div>
+        <div class="modal-footer">
+            <a class="btn btn-tcc btn-default btn-md" data-ng-click="sendCalificacion()">Terminar Proyecto</a>
+        </div>
+</form>
+</body>
+</html>

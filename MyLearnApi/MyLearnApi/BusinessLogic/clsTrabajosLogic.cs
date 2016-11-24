@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -27,7 +28,33 @@ namespace MyLearnApi.BusinessLogic
                 .OrderBy(trab => trab.FechaFinalizacion)
                 .ToList<VIEW_TRABAJO>();
             //pagina el resultado de 20 en 20
-            return algoritmoPaginacion(listaTrabajos, index, 20);
+            return clsAlgoritmoPaginacion.paginar(listaTrabajos, index, 20);
+        }
+
+        /// <summary>
+        /// retorna proyectos activos y terminados
+        /// </summary>
+        /// <param name="idEstudiante"></param>
+        /// <returns></returns>
+        public List<VIEW_TRABAJO> getTrabajoDeEstudiante(string idEstudiante)
+        {
+            //retorna los proyectos activos
+            List<VIEW_TRABAJO> listaTrabajos = db.VIEW_TRABAJO
+                //si es activo "A" o terminado "T"
+                .Where(trab => (trab.EstadoTrabajo == "A"  || trab.EstadoTrabajo == "T" )&&
+                trab.IdEstudiante == idEstudiante &&
+                trab.EstadoTrabajoPorEstudiante == "A")
+                .OrderBy(trab => trab.Nombre)
+                .ToList<VIEW_TRABAJO>();
+            //pagina el resultado de 20 en 20
+            return listaTrabajos;
+        }
+
+
+        public List<TECNOLOGIA> getTecnologiasTrabajo(int idTrabajo)
+        {
+                    
+            return db.SP_SelectTecnologiasPorTrabajo(idTrabajo).ToList<TECNOLOGIA>();
         }
 
         /// <summary>
@@ -40,7 +67,8 @@ namespace MyLearnApi.BusinessLogic
         {
             //lista las orfetas de una subasta especifica de una empresa especifica
             List<VIEW_TRABAJO> listaTrabajos = db.VIEW_TRABAJO
-                .Where(trab => trab.EstadoTrabajo == "P" && trab.IdEmpresa == idEmpresa && trab.EstadoTrabajoPorEstudiante == "P")
+                .Where(trab => trab.EstadoTrabajo == "P" && trab.IdEmpresa == idEmpresa &&
+                trab.EstadoTrabajoPorEstudiante == "P" && trab.IdTrabajo == idTrabajo)
                 .OrderBy(trab => trab.FechaFinalizacion)
                 .ToList<VIEW_TRABAJO>();
             //pagina el resultado de 20 en 20
@@ -62,7 +90,7 @@ namespace MyLearnApi.BusinessLogic
                 .OrderBy(trab => trab.FechaCierre)
                 .ToList<TRABAJO>();
             //pagina el resultado de 20 en 20
-            return algoritmoPaginacion(listaTrabajos, index, 20);
+            return clsAlgoritmoPaginacion.paginar(listaTrabajos, index, 20);
         }
 
         /// <summary>
@@ -70,10 +98,10 @@ namespace MyLearnApi.BusinessLogic
         /// </summary>
         /// <param name="idTrabajo"></param>
         /// <returns></returns>
-        public VIEW_TRABAJO getSpecificTrabajo(int idTrabajo)
+        public VIEW_TRABAJO getSpecificTrabajo(int idTrabajo, string idEstudiante)
         {
-            if (View_TRABAJOExists(idTrabajo))
-                return db.VIEW_TRABAJO.Find(idTrabajo);
+            if (View_TRABAJOExists(idTrabajo,idEstudiante))
+                return db.VIEW_TRABAJO.Find(idTrabajo, idEstudiante);
             else
                 return null;       
         }
@@ -87,6 +115,8 @@ namespace MyLearnApi.BusinessLogic
         {
             //se crea como pendiente (o sea esta en estado de subasta)
             tRABAJO.Estado = "P";
+            //aun no es exitoso
+            tRABAJO.Exitoso = false;
             tRABAJO.EstrellasObtenidas = 0;
             db.TRABAJO.Add(tRABAJO);
             db.SaveChanges();
@@ -159,6 +189,94 @@ namespace MyLearnApi.BusinessLogic
             return true;
         }
 
+        /// <summary>
+        /// Termina un trabajo y le asiga estrellas
+        /// </summary>
+        /// <param name="idTrabajo"></param>
+        /// <param name="idEstudiante"></param>
+        /// <param name="estrellas"> las estrellas deben estar de cero a 5 (inclusive)</param>
+        /// <returns>true si se completa o false si hay error</returns>
+        public bool terminarTrabajo(int idTrabajo, string idEstudiante,byte estrellas,bool exitoso)
+        {
+            TRABAJO lobj_trabajo = db.TRABAJO.Find(idTrabajo);
+            if (lobj_trabajo == null)
+            {
+                return false;
+            }
+            if (estrellas<= 5 && estrellas >= 0)
+                lobj_trabajo.EstrellasObtenidas = estrellas;
+            else
+                return false;
+            lobj_trabajo.Exitoso = exitoso;
+            db.Entry(lobj_trabajo).State = EntityState.Modified;
+
+            //cambio el estado en trabajo y trabajo por estudiante a terminado
+            if (cambiarEstadoTrabajo(idTrabajo, idEstudiante, "T") == false)
+                return false;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (!TRABAJOExists(idTrabajo) || !trabajoPorEstudianteExists(idTrabajo, idEstudiante))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return true;
+        }
+        /// <summary>
+        /// agrega una tecnologia a un trabajo
+        /// </summary>
+        /// <param name="tecnologia"></param>
+        /// <returns></returns>
+        public bool addTecnologiaToTrabajo(TECNOLOGIA_POR_TRABAJO tecnologia)
+        {
+            tecnologia.Estado = "A";
+            db.TECNOLOGIA_POR_TRABAJO.Add(tecnologia);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (trabajoTecnologiaPorTrabajoExists(tecnologia.IdTecnologia,tecnologia.IdTrabajo))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return true;
+        }
+
+        public List<TRABAJO> getTabajosPorTecnologiaYNombre(string nombreTecnologia, string nombreTrabajo)
+        {
+            int numeroDeResultados = 20;
+            /*return db.FiltrarSubastasPorTecnologiaYNombre(nombreTecnologia, nombreTrabajo, numeroDeResultados)
+                //ordenar por fecha
+                .OrderByDescending(t=> t.FechaInicio)
+                .ToList<TRABAJO>();
+
+            */
+
+           return  db.TRABAJO.SqlQuery(
+                "  SELECT DISTINCT TOP(" + numeroDeResultados+") TRABAJO.ID, TRABAJO.NOMBRE, TRABAJO.Descripcion, TRABAJO.IdEmpresa, TRABAJO.FechaInicio, TRABAJO.FechaCierre,"
+                +" TRABAJO.DocumentoAdicional, TRABAJO.EstrellasObtenidas, TRABAJO.PresupuestoBase, TRABAJO.Estado, TRABAJO.Exitoso "
+                +" FROM TRABAJO INNER JOIN TECNOLOGIA_POR_TRABAJO ON TRABAJO.Id = TECNOLOGIA_POR_TRABAJO.IdTrabajo "
+                +" INNER JOIN TECNOLOGIA ON TECNOLOGIA.Id = TECNOLOGIA_POR_TRABAJO.IdTecnologia "
+                +" WHERE TECNOLOGIA.Nombre LIKE  '%"+nombreTecnologia+"%' OR TRABAJO.Nombre = '"+nombreTrabajo+"' ")
+                .ToList<TRABAJO>();
+        }
 
         /// <summary>
         /// pregunta si el trabajo existe
@@ -169,16 +287,18 @@ namespace MyLearnApi.BusinessLogic
         {
             return db.TRABAJO.Count(e => e.Id == id) > 0;
         }
-
-        private bool View_TRABAJOExists(int id)
+        private bool View_TRABAJOExists(int idTrabajo, string idEstudiante)
         {
-            return db.VIEW_TRABAJO.Count(e => e.IdTrabajo == id) > 0;
+            return db.VIEW_TRABAJO.Find(idTrabajo,idEstudiante) != null;
         }
         private bool trabajoPorEstudianteExists(int idTrabajo, string idEstudiante)
         {
             return db.TRABAJO_POR_ESTUDIANTE.Find(idTrabajo,idEstudiante) != null ;
         }
-
+        private bool trabajoTecnologiaPorTrabajoExists(int idTecnologia, int idTrabajo)
+        {
+            return db.TECNOLOGIA_POR_TRABAJO.Find(idTecnologia,idTrabajo) != null;
+        }
         public void Dispose(bool disposing)
         {
             if (disposing)
@@ -187,61 +307,6 @@ namespace MyLearnApi.BusinessLogic
             }
         }
 
-
-
-
-
-
-        /// <summary>
-        /// obtiene un rango de la lista
-        /// </summary>
-        /// <param name="lista"> lista que se quiere paginar </param>
-        /// <param name="index"> indice desde donde se quiere comenzar </param>
-        /// <returns></returns>
-        private List<TRABAJO> algoritmoPaginacion(List<TRABAJO> lista, int index, byte lby_offset )
-        {
-            List<TRABAJO> lobj_resultado = new List<TRABAJO>();
-            //obtengo el rango que se necesita
-            int li_largoLista = lista.Count;
-            //si el indice esta fuera del rango de la lista
-            if (index * lby_offset > (li_largoLista - 1))
-                return lobj_resultado;
-            //si index y el offset estan dentro del rango
-            else if ((li_largoLista > (index * lby_offset + lby_offset - 1)))
-                lobj_resultado = lista.GetRange(index * lby_offset, index * lby_offset + lby_offset);
-            //si hay un overflow en el rango devuelve del indice hasta el fin de la lista
-            else
-                lobj_resultado = lista.GetRange(index * lby_offset, li_largoLista);
-
-            return lobj_resultado;
-
-        }
-
-
-        /// <summary>
-        /// obtiene un rango de la lista
-        /// </summary>
-        /// <param name="lista"> lista que se quiere paginar </param>
-        /// <param name="index"> indice desde donde se quiere comenzar </param>
-        /// <returns></returns>
-        private List<VIEW_TRABAJO> algoritmoPaginacion(List<VIEW_TRABAJO> lista, int index, byte lby_offset)
-        {
-            List<VIEW_TRABAJO> lobj_resultado = new List<VIEW_TRABAJO>();
-            //obtengo el rango que se necesita
-            int li_largoLista = lista.Count;
-            //si el indice esta fuera del rango de la lista
-            if (index * lby_offset > (li_largoLista-1))
-                return lobj_resultado;
-            //si index y el offset estan dentro del rango
-            else if ((li_largoLista > (index * lby_offset + lby_offset -1 )))
-                lobj_resultado = lista.GetRange(index * lby_offset , index * lby_offset + lby_offset);
-            //si hay un overflow en el rango devuelve del indice hasta el fin de la lista
-            else
-                lobj_resultado = lista.GetRange(index * lby_offset , li_largoLista);
-
-            return lobj_resultado;
-
-        }
 
 
     }

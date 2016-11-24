@@ -36,6 +36,19 @@ namespace MyLearnApi.Controllers
         }
 
         /// <summary>
+        /// Get de los trabajos de un estudiante
+        /// </summary>
+        /// <param name="idEmpresa"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("MyLearnApi/Trabajos/Estudiante/{idEstudiante}")]
+        [ResponseType(typeof(List<VIEW_TRABAJO>))]
+        public List<VIEW_TRABAJO> getTrabajosActivosDeEstudiante(string idEstudiante)
+        {
+            return pobj_TrabajosLogic.getTrabajoDeEstudiante(idEstudiante);
+        }
+        /// <summary>
         ///  obtiene las ofertas no aceptadas de un trabajo especifico de una empresa especifica
         /// </summary>
         /// <param name="idEmpresa"> llave primaria de la empresa </param>
@@ -62,19 +75,39 @@ namespace MyLearnApi.Controllers
             return pobj_TrabajosLogic.getSubastasdeTrabajosActivas(idEmpresa,index);
         }
 
-
+        /// <summary>
+        /// get de un trabajo especifico
+        /// </summary>
+        /// <param name="idTrabajo"></param>
+        /// <returns></returns>
         [HttpGet]
-        [Route("MyLearnApi/Trabajos/{idTrabajo}")]
+        [Route("MyLearnApi/Trabajos/{idTrabajo}/{idEstudiante}")]
         [ResponseType(typeof(VIEW_TRABAJO))]
-        public IHttpActionResult GetTRABAJO(int idTrabajo)
+        public IHttpActionResult GetTRABAJO(int idTrabajo, string idEstudiante)
         {
-            VIEW_TRABAJO tRABAJO = pobj_TrabajosLogic.getSpecificTrabajo(idTrabajo);
+            VIEW_TRABAJO tRABAJO = pobj_TrabajosLogic.getSpecificTrabajo(idTrabajo, idEstudiante);
             if (tRABAJO == null)
             {
                 return NotFound();
             }
 
             return Ok(tRABAJO);
+        }
+
+        [HttpGet]
+        [Route("MyLearnApi/Trabajos/Tecnologias/{idTrabajo}")]
+        [ResponseType(typeof(List<TECNOLOGIA>))]
+        public IHttpActionResult GetTecnologiasTrabajo(int idTrabajo)
+        {
+            return Ok(pobj_TrabajosLogic.getTecnologiasTrabajo(idTrabajo));
+        }
+
+        [HttpGet]
+        [Route("MyLearnApi/Subastas/{NombreTecnologia}/{NombreTrabajo}")]
+        [ResponseType(typeof(List<TECNOLOGIA>))]
+        public IHttpActionResult buscarPorTecnologiaYNombreTrabajo(string  NombreTecnologia, string NombreTrabajo)
+        {
+            return Ok(pobj_TrabajosLogic.getTabajosPorTecnologiaYNombre(NombreTecnologia,NombreTrabajo));
         }
 
         /// <summary>
@@ -116,13 +149,42 @@ namespace MyLearnApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            
             tRABAJO = pobj_TrabajosLogic.insertarTrabajo(tRABAJO);
 
             return Ok(tRABAJO);
         }
 
-    
+        [HttpPost]
+        [Route("MyLearnApi/Subastas/Tecnologia")]
+        [ResponseType(typeof(TECNOLOGIA_POR_TRABAJO))]
+        public IHttpActionResult postTecnologiaAProyecto(TECNOLOGIA_POR_TRABAJO tecnologia)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            bool lbo_isValid = pobj_TrabajosLogic.addTecnologiaToTrabajo(tecnologia);
+
+            if (!lbo_isValid)
+            {
+                return Conflict();
+            }
+            return Ok(tecnologia);
+
+        }
+
+
+        [HttpPost]
+        [Route("MyLearnApi/Trabajos/Terminados/{idTrabajo}/{idEstudiante}/{estrellas}/{exitoso}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult terminartrabajo(int idTrabajo, string idEstudiante, byte estrellas, bool exitoso)
+        {
+            if (pobj_TrabajosLogic.terminarTrabajo(idTrabajo,idEstudiante,estrellas,exitoso))
+                return StatusCode(HttpStatusCode.NoContent);
+            else
+                return Conflict();
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -137,6 +199,8 @@ namespace MyLearnApi.Controllers
         [Route("MyLearnApi/Trabajos/{idTrabajo}/{idEstudiante}")]
         [Route("MyLearnApi/Subastas")]
         [Route("MyLearnApi/Trabajos")]
+        [Route("MyLearnApi/Trabajos/Terminados/{idTrabajo}/{idEstudiante}/{estrellas}/{exitoso}")]
+        [Route("MyLearnApi/Subastas/Tecnoloogia/{idTecnologia}")]
         public HttpResponseMessage Options()
         {
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };

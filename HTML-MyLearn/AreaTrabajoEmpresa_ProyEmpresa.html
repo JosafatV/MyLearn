@@ -30,87 +30,155 @@
 					<h1 class="pr1"><span class="glyphicon glyphicon-arrow-left"></span> Mi Perfil</h1>
 			</div>
 		</div><br><br>
-		<div class="row">
-			<div class="col-md-6 color1">
-				<div class="container-fluid">
-					<section class="main row">
-						<article class="col-md-6">
-							<h2>Mensaje de:</h2>
-              <h4>Hora:</h4>
-              <h4>Fecha:</h4>
-              <p>
-                Esta vara no sirve bretee mas
-              </p>
-              <a class="btn btn-tcc btn-default btn-md">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
-							<h2>Mensaje de:</h2>
-              <h4>Hora:</h4>
-              <h4>Fecha:</h4>
-              <p>
-                Esta vara no sirve bretee mas
-								<br><br>
-								<a class="btn btn-tcc btn-default btn-md">Responder</a>
-              </p>
-						</article>
-          </section>
+		<div class="container-fluid">
+			<section class="main row">
+				<article class="col-md-8">
+					<br>
+				<h2>Información general del proyecto:</h2><br>
+					<label for="Nombre">Nombre del Proyecto:</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+					<br><br>
+					<label for="Estudiante">Estudiante Encargado:</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+					<br><br>
+					<label for="Universidad">Presupuesto Asignado:</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</article>
+			<aside class="col-md-4">
+				<br>
+				<h2>Objetivos:</h2><br>
+					<label for="Estudiante">Fecha de Inicio:</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+					<br><br>
+					<label for="Universidad">Fecha de Finlización:</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</aside>
+		</section><br><br><br>
 
-				</div><br><br>
-			<div class="container-fluid">
-					<section class="main row">
-						<article class="col-md-10">
-							<h2>Escribir Mensaje:</h2>
-							<div class="container-fluid">
-									<div class="col-md-10">
-										<div class="form-group">
-											<textarea class="form-control" id="mensaje"></textarea>
-											<br><br>
-											&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md">Enviar</a>&nbsp; &nbsp;&nbsp; &nbsp;
-											<a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a>
+		</div>
+		<div id="div1" style="background-color:#252932; height: 500px;position:relative;">
+				<div id="div2" style="max-height:100%;overflow:auto;border:1px solid black;">
+						<br><br>
+						<div class="container-fluid" data-ng-repeat="msj in ls_msjs">
+								<div class="row">
+										<div class="col-md-offset-2">
+												<div class="col-md-9 color1">
+														<div class="container-fluid">
+																<section class="main row">
+																		<article class="col-md-6">
+																				<h2>Mensaje de:</h2>
+																				<h4>Fecha:</h4>
+																				<h4>Contenido:</h4>
+																				<p>
+																						<br><br>
+																						<a class="btn btn-tcc btn-default btn-md">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
+																				</p>
+																		</article>
+
+																</section>
+														</div>
+
+												</div>
+										</div><br><br><br><br><br><br><br><br><br><br><br><br>
+								</div>
+								<div class="row">
+										<div class="col-md-9 color1">
+												<div class="container-fluid">
+														<div class="col-md-offset-4">
+																<section class="main row">
+																		<div class="col-md-offset-1">
+
+																		</div>
+																		<article class="col-md-6" data-ng-repeat="resp in msj.RESPUESTA">
+																				<h2>Mensaje de:</h2>
+																				<h4>Fecha:</h4>
+																				<h4>Contenido:</h4>
+																				<p>
+																						Esta vara no sirve bretee mas<br><br>
+																						<a class="btn btn-tcc btn-default btn-md">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
+																				</p>
+																		</article>
+
+																</section>
+
+														</div>
+												</div>
 										</div>
+								</div>
+						</div><br><br>
+				</div>
+		</div> <br><br><br><br>
 
-									</div>
+
+
+
+
+				<!-- --------------------------------------------------------------No cambiaar por angular de aqui hasta abajo------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+		</div>
+		<div class="row">
+			<div class="container-fluid">
+				<div class="col-md-7">
+						<div class="col-md-offset-0">
+								<div class="container-fluid">
+										<section class="main row">
+												<article class="col-md-5">
+														<h2>Escribir Mensaje:</h2>
+														<div class="container-fluid">
+																<div class="col-md-10">
+																		<div class="form-group">
+																				<textarea class="form-control" id="mensaje"></textarea>
+																				<br><br>
+																				&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md">Enviar</a>&nbsp; &nbsp;&nbsp; &nbsp;
+																				<a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a>
+																		</div>
+
+																</div>
+														</div>
+
+								</div>
+						</div>
+					</div>
+					<div class="container-fluid">
+						<div class="col-md-4">
+							<div class="col-md-offset-3">
+								<h3>Calificación del Proyecto:</h3>
+								<div class="ec-stars-wrapper">
+									<a data-value="1" title="Valorar con 1 estrella">&#9733;</a>
+									<a data-value="2" title="Votar con 2 estrellas">&#9733;</a>
+									<a data-value="3" title="Votar con 3 estrellas">&#9733;</a>
+									<a data-value="4" title="Votar con 4 estrellas">&#9733;</a>
+									<a  data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+								</div>
+								<noscript></noscript><br><br>
+							<div class="container-fluid">
+								<div class="col-md-offset-2">
+									<a class="btn btn-danger btn-lg">Terminar Proyecto</a><br>
 								</div>
 
-				</div><br>
+							</div><br>
+							</div>
+
+							</div>
+
+
+
+
+					  </div>
 
 			</div>
-			<div class="col-md-6 color1">
-				<div class="container-fluid">
-					<section class="main row">
-						<article class="col-md-6">
-							<h2><b>Información general del proyecto:</b></h2><br>
-              <h4>Nombre del Proyecto:</h4><br>
-              <h4>Estudiante Ecargado:</h4><br>
-							<h4>Presupuesto Asigado:</h4><br>
-							<h4>Fecha de Inicio:</h4><br>
-							<h4>Fecha de Finalización:</h4>
-						</article>
-          </section>
 
-				</div><br><br>
-			<div class="container-fluid">
-					<h3>Calificación del Proyecto:</h3>
-					<div class="ec-stars-wrapper">
-						<a data-value="1" title="Valorar con 1 estrella">&#9733;</a>
-						<a data-value="2" title="Votar con 2 estrellas">&#9733;</a>
-						<a data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-						<a data-value="4" title="Votar con 4 estrellas">&#9733;</a>
-						<a  data-value="5" title="Votar con 5 estrellas">&#9733;</a>
-					</div>
-					<noscript></noscript><br><br>
-				<div class="container-fluid">
-					<div class="col-md-offset-3">
-						<a class="btn btn-danger btn-lg">Terminar Proyecto</a><br>
-					</div>
-
-				</div><br>
-
-
-				</div>
-
-			</div>
 		</div>
 
 
+
+
+
+
+
+		<br>
+
+
+</div>
 
 	</body>
 

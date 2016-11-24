@@ -35,3 +35,21 @@ header .logo {
 .btn-ttc:hover {
 	color:#f56f3a;
 }
+body{
+	background: #D8D8D8;
+	color:#252932;
+}
+.prom1{
+	background:#252932;
+	color: #fff;
+}
+
+.center-modal {
+    position: fixed;
+    top: 10%;
+    left: 18.5%;
+    z-index: 1050;
+    width: 80%;
+    height: 80%;
+    margin-left: -10%;
+}

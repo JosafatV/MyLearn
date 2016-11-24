@@ -44,7 +44,7 @@ angular.module('mod_MyLearn').factory('fct_MyLearn_API_Client', function ($resou
 
 angular.module('mod_MyLearn').factory('fct_User', function ($resource) {
 
-    var id = '20';
+    var id = '1';
     var contrasena = '';
 
     this.setId = function (str_newId) {
@@ -67,3 +67,40 @@ angular.module('mod_MyLearn').factory('fct_User', function ($resource) {
 
 });
 
+angular.module('mod_MyLearn').factory('fct_Trabajo', function ($resource) {
+
+    var js_trabajo = {};
+
+    this.set_trabajo = function (js_newTrabajo) {
+        js_trabajo = js_newTrabajo;
+    };
+
+
+    this.get_trabajo = function () {
+        return js_trabajo;
+    };
+
+
+    return this
+
+});
+
+angular.module('mod_MyLearn').factory('fct_UserJson', function ($resource) {
+
+
+    var js_user = {};
+
+    this.set_user = function (js_newUser) {
+        js_user = js_newTrabajo;
+    };
+
+
+    this.get_user = function () {
+        return js_user;
+    };
+
+
+    return this;
+
+
+});

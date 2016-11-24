@@ -3,7 +3,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="../../Scripts/Angular and Bootstrap/Bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_login.css">
+    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_CrearCE.css">
 </head>
 <header>
 		<div class="wrapper">
@@ -52,95 +52,96 @@
                     <label for="País">País:</label>
                     <select ng-options="pais.Pais1 for pais in lst_listaPaises" class="form-control" data-ng-model="paisSelected" data-ng-change="changePais()"></select>
                 </div>
+
                 <div class="form-group">
                     <label for="Dirección">Dirección:</label>
                     <input class="form-control" id="ubicación" type="text" data-ng-model="js_crearCuentaJson.Region">
                 </div>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" placeholder="Agregar Tecnologias" data-ng-model="search" />
-                        </div>
-                    </div>
-                </div>
-                <div class="container-fluid">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover table-condensed">
-                            <tr>
-                                <th>Nombre</th>
-                            </tr>
-                            <tr data-ng-repeat="tec in ls_tecnologias  | filter: search" data-ng-click="do_agregueTec()">
-                                <td>{{tec.Nombre}}</td>
-                        </table>
-                    </div>
-                </div>
-                    <div class="container">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover table-condensed">
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Borrar</th>
-                                </tr>
-                                <tr data-ng-repeat="tec in ls_tecnologiasSelect  | filter: search">
-                                    <td>{{tec.Nombre}}</td>
-                                    <td>
-                                        <button class="btn btn-danger" data-ng-click="do_Delete(branch)">Borrar</button><br><br>
-                                    </td>
-
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="option">Universidad a la que pertenece:</label>
-                        <select class="form-control" name="" id="U">
-                            <option value="">TEC</option>
-                            <option value="">UCR</option>
-                            <option value="">UNA</option>
-                            <option value="">UNED</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="carné">Carné Estudiantil:</label>
-                        <input class="form-control" id="ID" type="text" data-ng-model="js_crearCuentaJson.Carne">
-                    </div>
-                    <div class="form-group">
-                        <label for="option">Repositorios de documentos disponibles:</label>
-                        <select class="form-control" name="" id="option">
-                            <option value="">Google Drive</option>
-                            <option value="">Dropbox</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="Hoja de vida">Link a Hoja de Vida:</label>
-                        <input class="form-control" id="Hoja de vida" type="text" data-ng-model="js_crearCuentaJson.LinkHojaDeVida">
-                    </div>
-                    <div class="form-group">
-                        <label for="Repositorio">Link de repositorios de código disponibles:</label>
-                        <input class="form-control" id="Repositorios" type="text" data-ng-model="js_crearCuentaJson.RepositorioCodigo">
-                    </div>
-                    <div class="form-group">
-                        <label for="option">Seleccione las tecnologías que domina:</label>
-                        <a class="btn btn-tcc btn-default">Buscar</a>
-
-                    </div>
-                    <br>
-                    <div class="container">
-                        <div class="col-md-10">
-                            <div class="col-md-offset-1">
-                                <a class="btn btn-tcc btn-default btn-lg" data-ng-click="sendCuenta()">Crear una cuenta</a>
-                                <a class="btn btn-danger btn-lg">Cancelar</a>
-                            </div>
-                        </div>
-
-                    </div>
-
+								<div class="form-group">
+									<label for="option">Universidad a la que pertenece:</label>
+												<select class="form-control" name="" id="U">
+													<option value="">TEC</option>
+													<option value="">UCR</option>
+													<option value="">UNA</option>
+													<option value="">UNED</option>
+												</select>
+								</div>
+								<div class="form-group">
+										<label for="carné">Carné Estudiantil:</label>
+										<input class="form-control" id="ID" type="text" data-ng-model="js_crearCuentaJson.Carne">
+								</div>
+								<div class="form-group">
+										<label for="option">Repositorios de documentos disponibles:</label>
+										<select class="form-control" name="" id="option">
+												<option value="">Google Drive</option>
+												<option value="">Dropbox</option>
+										</select>
+								</div>
+								<div class="form-group">
+										<label for="Hoja de vida">Link a Hoja de Vida:</label>
+										<input class="form-control" id="Hoja de vida" type="text" data-ng-model="js_crearCuentaJson.LinkHojaDeVida">
+								</div>
+								<div class="form-group">
+										<label for="Repositorio">Link de repositorios de código disponibles:</label>
+										<input class="form-control" id="Repositorios" type="text" data-ng-model="js_crearCuentaJson.RepositorioCodigo">
+								</div>
+								<label for="tecnologías">Seleccione las tecnologías que domina:</label>
+								<div class="col-md-offset-0">
+									<table class="table table-bordered table-condensed prom1">
+											<tr>
+													<th>Nombre de la Tecnología</th>
+													<th>Agregar</th>
+											</tr>
+									<tr data-ng-repeat="tec in ls_tecnologias  | filter: search">
+													<td>{{tec.Nombre}}</td>
+													<td><a class="btn btn-success btn-md" data-ng-click="do_agregueTec(tec)">Agregar</a></td>
+											</tr>
+											<tr>
+													<td>{{tec.Nombre}}</td>
+													<td><a class="btn btn-success btn-md"data-ng-click="do_agregueTec(tec)">Agregar</a></td>
+											</tr>
+											</tr>
+											<tr>
+													<td>{{tec.Nombre}}</td>
+													<td><a class="btn btn-success btn-md"data-ng-click="do_agregueTec(tec)">Agregar</a></td>
+											</tr>
+											</tr>
+								</table>
+								<label for="tecnologías">Tecnologías agregadas:</label>
+								<div class="col-md-offset-0">
+									<table class="table table-bordered table-condensed prom1">
+											<tr>
+													<th>Nombre de la Tecnología</th>
+													<th>Borrar</th>
+											</tr>
+									  <tr data-ng-repeat="tec in ls_tecnologiasSelect  | filter: search">
+													<td>{{tec.Nombre}}</td>
+													<td><a class="btn btn-danger btn-md"data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
+											</tr>
+											<tr>
+													<td>{{tec.Nombre}}</td>
+													<td><a class="btn btn-danger btn-md"data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
+											</tr>
+											</tr>
+											<tr>
+													<td>{{tec.Nombre}}</td>
+													<td><a class="btn btn-danger btn-md"data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
+											</tr>
+											</tr>
+								</table> <br><br>
 
 
 
 
 
 </form>
+<div class="container">
+		<div class="col-md-10">
+				<div class="col-md-offset-1">
+						<a class="btn btn-tcc btn-default btn-lg" data-ng-click="sendCuenta()">Crear una cuenta</a>
+						<a class="btn btn-danger btn-lg">Cancelar</a>
+				</div>
+		</div>
 
 		</div>
 

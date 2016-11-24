@@ -14,12 +14,6 @@ namespace MyLearnApi.Models
     
     public partial class TRABAJO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TRABAJO()
-        {
-            this.TRABAJO_POR_ESTUDIANTE = new HashSet<TRABAJO_POR_ESTUDIANTE>();
-        }
-    
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
@@ -30,8 +24,6 @@ namespace MyLearnApi.Models
         public Nullable<byte> EstrellasObtenidas { get; set; }
         public string Estado { get; set; }
         public Nullable<double> PresupuestoBase { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TRABAJO_POR_ESTUDIANTE> TRABAJO_POR_ESTUDIANTE { get; set; }
+        public Nullable<bool> Exitoso { get; set; }
     }
 }

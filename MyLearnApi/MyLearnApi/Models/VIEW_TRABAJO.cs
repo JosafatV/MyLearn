@@ -30,5 +30,6 @@ namespace MyLearnApi.Models
         public Nullable<byte> EstrellasObtenidas { get; set; }
         public string EstadoTrabajo { get; set; }
         public string EstadoTrabajoPorEstudiante { get; set; }
+        public Nullable<bool> Exitoso { get; set; }
     }
 }

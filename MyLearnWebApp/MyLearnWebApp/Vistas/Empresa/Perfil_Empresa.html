@@ -3,7 +3,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="../../Scripts/Angular and Bootstrap/Bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_login.css">
+    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_PerfilE.css">
 </head>
 <header>
 		<div class="wrapper">
@@ -42,7 +42,7 @@
 							<th>Presupuesto Base</th>
 							<th>Fecha final de recepción de ofertas</th>
 					</tr>
-                <tr data-ng-repeat="subasta in ls_subastas  | filter: search">
+                <tr data-ng-repeat="subasta in ls_subastas  | filter: search" data-ng-click="do_goSubastas(subasta)">
                     <td>{{subasta.Nombre}}</td>
                     <td>{{subasta.PresupuestoBase}}</td>
                     <td>{{subasta.FechaCierre}}</td>
@@ -60,7 +60,7 @@
 								<th>Fecha de Entrega</th>
 								<th>Estado</th>
 						</tr>
-                    <tr data-ng-repeat="trabajos in ls_trabajos  | filter: search">
+                    <tr data-ng-repeat="trabajos in ls_trabajos  | filter: search" data-ng-click="do_goTrabajos(trabajos)">
                         <td>{{trabajos.Nombre}}</td>
                         <td>{{trabajos.FechaFinalizacion}}</td>
                         <td>{{trabajos.EstadoTrabajo}}</td>
@@ -73,7 +73,7 @@
 	</div>
         <button data-ng-click="get_20MoreWork()">Mas 20 trabajos</button>
         <button data-ng-disabled="num_indexTrabajos < 1" data-ng-click="get_20LessWork()">Menos 20 trabajos</button>
-        <button data-ng-click="get_20MoreSubasta()">Mas 20 subastas</button>
+        <button data-ng-click="get_20MoreSubastas()">Mas 20 subastas</button>
         <button data-ng-disabled="num_indexSubastas < 1" data-ng-click="get_20LessSubasta()">Menos 20 subastas</button>
 
 

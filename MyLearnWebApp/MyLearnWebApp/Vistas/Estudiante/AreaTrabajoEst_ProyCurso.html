@@ -1,0 +1,141 @@
+﻿|<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="../../Vistas/Estilo/js/bootstrap.min.js">
+	<link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_AreaTEC.css">
+</head>
+<header>
+		<div class="wrapper">
+			<div class="logo">Nombre curso:&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota:
+				<div class="img">
+                    <a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
+				</div>
+			</div>
+			<nav>
+				<a data-ng-click="do_goPerfilEstudiante()">Mi Perfil</a>
+                <a data-ng-click="verBadges()">Ver Badges</a>
+                <a>Cerrar Sesion</a>
+            </nav>
+
+</header>
+<br><br><br>
+<body>
+	<div class="container-fluid">
+		<br>
+		<div class="container-fluid pr2">
+			<div class="col-md-2">
+					<h1 class="pr1" data-ng-click="do_goPerfilEstudiante()"><span class="glyphicon glyphicon-arrow-left"></span> Mi Perfil</h1>
+			</div>
+		</div><br><br>
+        <!-------------------------------------------------------------------------------------------------------------------------->
+        <div id="div1" style="background-color:#b4b4b4; height: 500px;position:relative;">
+            <div id="div2" style="max-height:100%;overflow:auto;border:4px solid black;">
+
+                <div class="container-fluid" data-ng-repeat="msj in ls_msjs">
+                    <br><br>
+                    <div class="row">
+                        <div class="col-md-offset-2">
+                            <div class="col-md-9 color1">
+                                <div class="container-fluid">
+                                    <section class="main row">
+                                        <article class="col-md-6">
+                                            <h2>Mensaje de:{{msj.NombreEmisor}}</h2>
+                                            <h4>Fecha:{{msj.Fecha}}</h4>
+                                            <h4>Contenido:{{msj.Contenido}}</h4>
+                                            <p>
+                                                <br>
+                                                <a class="btn btn-tcc btn-default btn-md" data-ng-click="responder(msj)">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
+                                            </p>
+                                        </article>
+
+                                    </section>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid" data-ng-repeat="resp in msj.RESPUESTA">
+                        <br>
+                        <div class="col-md-9 color1">
+                            <div class="container-fluid">
+                                <div class="col-md-offset-5">
+                                    <section class="main row">
+                                        <div class="col-md-offset-3">
+
+                                        </div>
+
+                                        <div class="main row">
+                                            <article class="col-md-7">
+                                                <h2>Mensaje de:{{resp.NombreEmisor}}</h2>
+                                                <h4>Fecha:{{resp.Fecha}}</h4>
+                                                <h4>Contenido:{{resp.Contenido}}</h4>
+                                                <p>
+                                                    <br><br><br>
+                                                    <a class="btn btn-tcc btn-default btn-md">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
+                                                </p>
+                                            </article><br>
+                                        </div>
+                                    </section>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div><br>
+                </div><br><br>
+            </div>
+        </div> <br><br><br><br>
+
+
+
+
+
+				<!-- --------------------------------------------------------------No cambiaar por angular de aqui hasta abajo------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+		</div>
+		<div class="col-md-9">
+				<div class="col-md-offset-0">
+						<div class="container-fluid">
+								<section class="main row">
+										<article class="col-md-5">
+												<h2>Escribir Mensaje:</h2>
+												<div class="container-fluid">
+														<div class="col-md-10">
+																<div class="form-group">
+																		<textarea class="form-control" id="mensaje"  data-ng-model="js_enviarMensaje.Contenido"></textarea>
+																		<br><br>
+																		&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md"  data-ng-click="enviarMensaje()">Enviar</a>&nbsp; &nbsp;&nbsp; &nbsp;
+																		<a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a>
+																</div>
+
+														</div>
+												</div>
+
+						</div>
+				</div><br><br>
+
+		</div>
+
+
+
+
+
+		<br>
+
+
+</div>
+
+
+
+
+	</body>
+
+	<script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script
+</html>

@@ -54,8 +54,10 @@ namespace MyLearnApi.BusinessLogic
         /// <returns></returns>
         public bool doStudentInsertion(VIEW_ESTUDIANTE estudiante)
         {
-            db.SP_Insertar_Estudiante(estudiante.Id, estudiante.Contrasena, estudiante.Sal, estudiante.RepositorioArchivos, estudiante.CredencialDrive,
-                estudiante.NombreContacto, estudiante.ApellidoContacto, estudiante.Carne, estudiante.Email, estudiante.Telefono, estudiante.Pais, estudiante.Region,
+            db.SP_Insertar_Estudiante(estudiante.Id, estudiante.Contrasena, estudiante.Sal, 
+                estudiante.RepositorioArchivos, estudiante.CredencialDrive,
+                estudiante.NombreContacto, estudiante.ApellidoContacto, estudiante.Carne, 
+                estudiante.Email, estudiante.Telefono, estudiante.Pais, estudiante.Region, estudiante.IdUniversidad,
                  estudiante.RepositorioCodigo, estudiante.LinkHojaDeVida);
             try
             {
@@ -125,6 +127,7 @@ namespace MyLearnApi.BusinessLogic
         public bool addTecnologiaToEstudiante(TECNOLOGIA_POR_ESTUDIANTE tecnologia)
         {
 
+            tecnologia.Estado = "A";
             db.TECNOLOGIA_POR_ESTUDIANTE.Add(tecnologia);
             try
             {
@@ -132,7 +135,7 @@ namespace MyLearnApi.BusinessLogic
             }
             catch (DbUpdateException)
             {
-                if (TecnologiaporEstudianteExists(tecnologia.IdTecnologia, tecnologia.IdEstudiante))
+                if (!TecnologiaporEstudianteExists(tecnologia.IdTecnologia, tecnologia.IdEstudiante))
                 {
                     return false;
                 }
@@ -172,6 +175,42 @@ namespace MyLearnApi.BusinessLogic
 
             return true;
         }
+        public bool addCursoToEstudiante(ESTUDIANTE_POR_CURSO curso)
+        {
+            curso.Nota = 0;
+            curso.Estado = "A";
+            db.ESTUDIANTE_POR_CURSO.Add(curso);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (estudiantePorCursoExists(curso.IdEstudiante, curso.IdCurso))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return true;
+        }
+
+        public clsEstadisticasEstudiante getEstadisticasDeEstudiante(string idEstudiante)
+        {
+            clsEstadisticasEstudiante estadisticas = new clsEstadisticasEstudiante();
+            estadisticas.PromedioNotasProyecto = db.PromedioNotas(idEstudiante).SingleOrDefault().Value ;
+            estadisticas.numProyectosAprobados= db.NumeroCursosAprobados(idEstudiante).SingleOrDefault().Value;
+            estadisticas.numProyectosReprobados = db.reprobados(idEstudiante).SingleOrDefault().Value;
+            estadisticas.numTrabajosExitosos = db.numeroTrabajosExitosos(idEstudiante).SingleOrDefault().Value ;
+            estadisticas.numTrabajosNoExitosos= db.NumeroTrabajosNoExitosos(idEstudiante).SingleOrDefault().Value;
+
+            return estadisticas;
+        }
+
 
 
         /// <summary>
@@ -192,6 +231,10 @@ namespace MyLearnApi.BusinessLogic
         private bool IdiomaPorEstudianteExists(int idIdioma, string idestudiante)
         {
             return db.IDIOMA_POR_ESTUDIANTE.Find(idIdioma, idestudiante) != null;
+        }
+        private bool estudiantePorCursoExists(string idEstudiante, int idCurso)
+        {
+            return db.ESTUDIANTE_POR_CURSO.Find(idEstudiante,idCurso) != null;
         }
     }
 }
