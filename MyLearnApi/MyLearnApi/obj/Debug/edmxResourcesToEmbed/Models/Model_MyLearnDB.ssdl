@@ -194,6 +194,7 @@
     <Property Name="EstrellasObtenidas" Type="tinyint" />
     <Property Name="PresupuestoBase" Type="float" />
     <Property Name="Estado" Type="char" MaxLength="1" />
+    <Property Name="Exitoso" Type="bit" />
   </EntityType>
   <EntityType Name="TRABAJO_POR_ESTUDIANTE">
     <Key>
@@ -317,6 +318,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROYECTOS' does not have a prim
       <PropertyRef Name="IdProyecto" />
     </Key>
     <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="NOMBRE_EST" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="APELLIDO_EST" Type="char" MaxLength="30" Nullable="false" />
     <Property Name="IdProfesor" Type="char" MaxLength="100" Nullable="false" />
     <Property Name="IdProyecto" Type="int" Nullable="false" />
     <Property Name="NombreProyecto" Type="char" MaxLength="30" Nullable="false" />
@@ -334,6 +337,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   <EntityType Name="VIEW_TRABAJO">
     <Key>
       <PropertyRef Name="IdTrabajo" />
+      <PropertyRef Name="IdEstudiante" />
     </Key>
     <Property Name="FechaFinalizacion" Type="varchar" MaxLength="10" />
     <Property Name="Monto" Type="int" />
@@ -349,6 +353,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Property Name="FechaCierreSubasta" Type="varchar" MaxLength="10" />
     <Property Name="DocumentoAdicional" Type="char" MaxLength="100" />
     <Property Name="EstrellasObtenidas" Type="tinyint" />
+    <Property Name="Exitoso" Type="bit" />
     <Property Name="EstadoTrabajo" Type="char" MaxLength="1" />
     <Property Name="EstadoTrabajoPorEstudiante" Type="char" MaxLength="1" />
   </EntityType>
@@ -640,6 +645,19 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="FN_Get_Last_User_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="char" />
+  <Function Name="SP_Buscar_Subastas_Por_Tecnologia_Nombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Tecnologia" Type="char" Mode="In" />
+    <Parameter Name="Nombre" Type="char" Mode="In" />
+    <Parameter Name="NumResultados" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_CursosAprobados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEstudiante" Type="char" Mode="In" />
+  </Function>
+  <Function Name="SP_CursosReprobados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEstudiante" Type="char" Mode="In" />
+  </Function>
+  <Function Name="SP_Get_Last_User_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SP_Incrementar_Puntaje_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdBadge" Type="int" Mode="In" />
     <Parameter Name="IdProyecto" Type="int" Mode="In" />
@@ -685,6 +703,12 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Parameter Name="IdUniversidad" Type="int" Mode="In" />
     <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
     <Parameter Name="LinkHojaDeVida" Type="char" Mode="In" />
+  </Function>
+  <Function Name="SP_Insertar_Mensaje_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Contenido" Type="char" Mode="In" />
+    <Parameter Name="Adjunto" Type="char" Mode="In" />
+    <Parameter Name="IdProyecto" Type="int" Mode="In" />
+    <Parameter Name="NombreEmisor" Type="char" Mode="In" />
   </Function>
   <Function Name="SP_Insertar_Mensaje_Trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Contenido" Type="char" Mode="In" />
@@ -734,6 +758,9 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <Parameter Name="DocumentoAdicional" Type="char" Mode="In" />
     <Parameter Name="presupuesto" Type="float" Mode="In" />
   </Function>
+  <Function Name="SP_Promedio_Notas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEstudiante" Type="char" Mode="In" />
+  </Function>
   <Function Name="SP_Rechazar_Demas_Subastas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdSubasta" Type="int" Mode="In" />
     <Parameter Name="IdEstudiante" Type="char" Mode="In" />
@@ -741,6 +768,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   <Function Name="SP_Select_Badge_Por_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdProyecto" Type="int" Mode="In" />
     <Parameter Name="Estado" Type="char" Mode="In" />
+  </Function>
+  <Function Name="SP_Select_Badge_Por_Proyecto_No_Otorgado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdCurso" Type="int" Mode="In" />
+    <Parameter Name="IdProyecto" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_Select_Cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="int" Mode="In" />
@@ -758,6 +789,12 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   </Function>
   <Function Name="SP_TerminarCurso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdCurso" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_TrabajosExitosos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEstudiante" Type="char" Mode="In" />
+  </Function>
+  <Function Name="SP_TrabajosNoExitosos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEstudiante" Type="char" Mode="In" />
   </Function>
   <EntityContainer Name="MyLearnDBModelStoreContainer">
     <EntitySet Name="BADGE" EntityType="Self.BADGE" Schema="dbo" store:Type="Tables" />
@@ -855,6 +892,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <EntitySet Name="VIEW_PROYECTOS" EntityType="Self.VIEW_PROYECTOS" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [VIEW_PROYECTOS].[IdEstudiante] AS [IdEstudiante], 
+    [VIEW_PROYECTOS].[NOMBRE_EST] AS [NOMBRE_EST], 
+    [VIEW_PROYECTOS].[APELLIDO_EST] AS [APELLIDO_EST], 
     [VIEW_PROYECTOS].[IdProfesor] AS [IdProfesor], 
     [VIEW_PROYECTOS].[IdProyecto] AS [IdProyecto], 
     [VIEW_PROYECTOS].[NombreProyecto] AS [NombreProyecto], 
@@ -884,6 +923,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     [VIEW_TRABAJO].[FechaCierreSubasta] AS [FechaCierreSubasta], 
     [VIEW_TRABAJO].[DocumentoAdicional] AS [DocumentoAdicional], 
     [VIEW_TRABAJO].[EstrellasObtenidas] AS [EstrellasObtenidas], 
+    [VIEW_TRABAJO].[Exitoso] AS [Exitoso], 
     [VIEW_TRABAJO].[EstadoTrabajo] AS [EstadoTrabajo], 
     [VIEW_TRABAJO].[EstadoTrabajoPorEstudiante] AS [EstadoTrabajoPorEstudiante]
     FROM [dbo].[VIEW_TRABAJO] AS [VIEW_TRABAJO]</DefiningQuery>

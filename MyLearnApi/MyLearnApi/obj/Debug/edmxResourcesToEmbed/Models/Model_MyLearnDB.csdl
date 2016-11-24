@@ -301,6 +301,65 @@
       <End Role="MENSAJE" EntitySet="MENSAJE" />
       <End Role="MENSAJE_POR_PROYECTO" EntitySet="MENSAJE_POR_PROYECTO" />
     </AssociationSet>
+    <FunctionImport Name="SP_Insertar_Mensaje_Proyecto">
+      <Parameter Name="Contenido" Mode="In" Type="String" />
+      <Parameter Name="Adjunto" Mode="In" Type="String" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+      <Parameter Name="NombreEmisor" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_CursosAprobados" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_CursosReprobados" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Promedio_Notas" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_TrabajosExitosos" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_TrabajosNoExitosos" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="numeroTrabajosExitosos" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="NumeroTrabajosNoExitosos" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PromedioNotas" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="NumeroCursosAprobados" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="NumeroCursosReprobados">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="reprobados" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Buscar_Subastas_Por_Tecnologia_Nombre" ReturnType="Collection(MyLearnDBModel.SP_Buscar_Subastas_Por_Tecnologia_Nombre_Result)">
+      <Parameter Name="Tecnologia" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="NumResultados" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="FiltrarSubastasPorTecnologiaYNombre" EntitySet="TRABAJO" ReturnType="Collection(MyLearnDBModel.TRABAJO)">
+      <Parameter Name="Tecnologia" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="NumResultados" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Select_Badge_Por_Proyecto_No_Otorgado" ReturnType="Collection(MyLearnDBModel.SP_Select_Badge_Por_Proyecto_No_Otorgado_Result)">
+      <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SelectBadgePorProyectoNoOtorgado" EntitySet="BADGE" ReturnType="Collection(MyLearnDBModel.BADGE)">
+      <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Get_Last_User_Id" />
+    <FunctionImport Name="sp_GetLAstUserId" ReturnType="Collection(String)" />
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -580,6 +639,7 @@
     <Property Name="EstrellasObtenidas" Type="Byte" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="PresupuestoBase" Type="Double" />
+    <Property Name="Exitoso" Type="Boolean" />
   </EntityType>
   <Association Name="FK_TRABAJO_POR_EMPRESA">
     <End Type="MyLearnDBModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
@@ -596,6 +656,7 @@
   <EntityType Name="VIEW_TRABAJO">
     <Key>
       <PropertyRef Name="IdTrabajo" />
+      <PropertyRef Name="IdEstudiante" />
     </Key>
     <Property Name="FechaFinalizacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="Monto" Type="Int32" />
@@ -613,6 +674,7 @@
     <Property Name="EstrellasObtenidas" Type="Byte" />
     <Property Name="EstadoTrabajo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="EstadoTrabajoPorEstudiante" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Exitoso" Type="Boolean" />
   </EntityType>
   <EntityType Name="TRABAJO_POR_ESTUDIANTE">
     <Key>
@@ -912,6 +974,8 @@
     <Property Name="DocumentoAdicional" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="NotaObtenida" Type="Byte" />
     <Property Name="EstadoProyecto" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="NOMBRE_EST" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="APELLIDO_EST" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
   </EntityType>
   <EntityType Name="BADGE_POR_PROYECTO">
     <Key>
@@ -962,4 +1026,23 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="SP_Buscar_Subastas_Por_Tecnologia_Nombre_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="IdEmpresa" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FechaInicio" Nullable="true" />
+    <Property Type="DateTime" Name="FechaCierre" Nullable="false" />
+    <Property Type="String" Name="DocumentoAdicional" Nullable="true" MaxLength="100" />
+    <Property Type="Byte" Name="EstrellasObtenidas" Nullable="true" />
+    <Property Type="Double" Name="PresupuestoBase" Nullable="true" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+    <Property Type="Boolean" Name="Exitoso" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SP_Select_Badge_Por_Proyecto_No_Otorgado_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
+    <Property Type="Byte" Name="Puntaje" Nullable="true" />
+    <Property Type="Int32" Name="IdCurso" Nullable="true" />
+  </ComplexType>
 </Schema>

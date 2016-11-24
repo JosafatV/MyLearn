@@ -945,5 +945,15 @@ namespace MyLearnApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BADGE>("SP_SelectBadgePorProyectoNoOtorgado", mergeOption, idCursoParameter, idProyectoParameter);
         }
+    
+        public virtual int SP_Get_Last_User_Id()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Get_Last_User_Id");
+        }
+    
+        public virtual ObjectResult<string> sp_GetLAstUserId()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_GetLAstUserId");
+        }
     }
 }

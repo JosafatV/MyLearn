@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using MyLearnApi.Models;
+using MyLearnApi.BusinessLogic.UserAccounts;
 
 
 namespace MyLearnApi.BusinessLogic
@@ -33,8 +34,11 @@ namespace MyLearnApi.BusinessLogic
 
         public bool insertProfesor(VIEW_PROFESOR vIEW_PROFESOR)
         {
-          
-
+            //se autogenera un id
+            clsIncrementalIdGenerator lobj_generator = new clsIncrementalIdGenerator();
+            vIEW_PROFESOR.Id = lobj_generator.generateUserId();
+ 
+            //se inserta mediante un procedimiento almacenaado
             db.SP_Insertar_Profesor(vIEW_PROFESOR.Id, vIEW_PROFESOR.Contrasena, vIEW_PROFESOR.Sal, vIEW_PROFESOR.RepositorioArchivos, vIEW_PROFESOR.CredencialDrive,
                 vIEW_PROFESOR.NombreContacto, vIEW_PROFESOR.ApellidoContacto, vIEW_PROFESOR.Email, vIEW_PROFESOR.Telefono,
                 vIEW_PROFESOR.HorarioAtencion, vIEW_PROFESOR.Pais, vIEW_PROFESOR.Region, vIEW_PROFESOR.IdUniversidad);

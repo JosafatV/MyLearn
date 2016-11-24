@@ -54,6 +54,20 @@ BEGIN
 END;  
 GO
 
+
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'dbo.SP_Get_Last_User_Id')
+DROP PROCEDURE dbo.SP_Get_Last_User_Id
+
+
+CREATE PROCEDURE dbo.SP_Get_Last_User_Id
+AS         
+    SELECT dbo.FN_Get_Last_User_Id()   
+	
+GO
+
+
+
 SELECT dbo.FN_Get_Last_User_Id() 
 
 /*****************SELECTS*****************/

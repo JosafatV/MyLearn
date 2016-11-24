@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using MyLearnApi.Models;
+using MyLearnApi.BusinessLogic.UserAccounts;
 
 namespace MyLearnApi.BusinessLogic
 {
@@ -54,6 +55,10 @@ namespace MyLearnApi.BusinessLogic
         /// <returns></returns>
         public bool doStudentInsertion(VIEW_ESTUDIANTE estudiante)
         {
+            clsIncrementalIdGenerator lobj_generator = new clsIncrementalIdGenerator();
+            //genera un id autoincremental
+            estudiante.Id = lobj_generator.generateUserId();
+
             db.SP_Insertar_Estudiante(estudiante.Id, estudiante.Contrasena, estudiante.Sal, 
                 estudiante.RepositorioArchivos, estudiante.CredencialDrive,
                 estudiante.NombreContacto, estudiante.ApellidoContacto, estudiante.Carne, 
