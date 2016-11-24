@@ -1,73 +1,87 @@
 Use MyLearnDB ;
 GO
+
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Estudiante')
-DROP PROCEDURE SP_Insertar_Estudiante   
+	DROP PROCEDURE SP_Insertar_Estudiante   
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Propuesta_Subasta')
-DROP PROCEDURE SP_Insertar_Propuesta_Subasta   
+	DROP PROCEDURE SP_Insertar_Propuesta_Subasta   
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Rechazar_Demas_Subastas')
-DROP PROCEDURE SP_Rechazar_Demas_Subastas  
+	DROP PROCEDURE SP_Rechazar_Demas_Subastas  
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Mensaje_Trabajo')
-DROP PROCEDURE SP_Insertar_Mensaje_Trabajo  
+	DROP PROCEDURE SP_Insertar_Mensaje_Trabajo  
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Respuesta')
-DROP PROCEDURE SP_Insertar_Respuesta  
+	DROP PROCEDURE SP_Insertar_Respuesta  
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Curso')
-DROP PROCEDURE SP_Insertar_Curso  
+	DROP PROCEDURE SP_Insertar_Curso  
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Agregar_Al_Curso')
-DROP PROCEDURE SP_Agregar_Al_Curso
+	DROP PROCEDURE SP_Agregar_Al_Curso
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Otorgar_Badge')
-DROP PROCEDURE SP_Otorgar_Badge
+	DROP PROCEDURE SP_Otorgar_Badge
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Badge_Por_Proyecto')
-DROP PROCEDURE SP_Select_Badge_Por_Proyecto
+	DROP PROCEDURE SP_Select_Badge_Por_Proyecto
 GO
-
-
-
-
-
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Propuesta_Proyecto')
-DROP PROCEDURE SP_Insertar_Propuesta_Proyecto
-
+	DROP PROCEDURE SP_Insertar_Propuesta_Proyecto
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Empresa')
+	DROP PROCEDURE  SP_Insertar_Empresa
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_Estudiante')
+	DROP PROCEDURE SP_Select_Cursos_Estudiante
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Buscar_Subastas_Por_Tecnologia_Nombre')
+	DROP PROCEDURE SP_Buscar_Subastas_Por_Tecnologia_Nombre
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_De_Universidad')
+	DROP PROCEDURE SP_Select_Cursos_De_Universidad
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Badge_Por_Proyecto_No_Otorgado')
+	DROP PROCEDURE SP_Select_Badge_Por_Proyecto_No_Otorgado
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_CursosAprobados')
+DROP PROCEDURE SP_CursosAprobados
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_CursosReprobados')
+DROP PROCEDURE SP_CursosReprobados
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_TrabajosExitosos')
+DROP PROCEDURE SP_TrabajosExitosos
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_TrabajosNoExitosos')
+DROP PROCEDURE SP_TrabajosNoExitosos
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Promedio_Notas')
+DROP PROCEDURE SP_Promedio_Notas
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'dbo.SP_Get_Last_User_Id')
+	DROP PROCEDURE dbo.SP_Get_Last_User_Id
 
 IF OBJECT_ID (N'dbo.FN_Get_Last_User_Id', N'FN') IS NOT NULL  
     DROP FUNCTION dbo.FN_Get_Last_User_Id;  
 GO  
 
+
+	/*FUNCTIONS*/
 CREATE FUNCTION dbo.FN_Get_Last_User_Id()  
-RETURNS CHAR(100)   
-AS    
-BEGIN  
-    DECLARE @generated CHAR(100);
-    SELECT TOP 1 @generated = USUARIO.Id  
-	FROM USUARIO ORDER BY CAST ( USUARIO.Id AS INT )DESC
-    IF (@generated IS NULL)   
-        SET @generated = '0';  
-    RETURN @generated;
-END;  
+	RETURNS CHAR(100)   
+	AS    
+		BEGIN  
+			DECLARE @generated CHAR(100);
+			SELECT TOP 1 @generated = USUARIO.Id  
+			FROM USUARIO ORDER BY CAST ( USUARIO.Id AS INT )DESC
+			IF (@generated IS NULL)   
+				SET @generated = '0';
+		RETURN @generated;
+	END;  
 GO
-
-
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'dbo.SP_Get_Last_User_Id')
-DROP PROCEDURE dbo.SP_Get_Last_User_Id
-
-
-CREATE PROCEDURE dbo.SP_Get_Last_User_Id
-AS         
-    SELECT dbo.FN_Get_Last_User_Id()   
-	
-GO
-
-
-
-SELECT dbo.FN_Get_Last_User_Id() 
 
 /*****************SELECTS*****************/
 	/*Obtains the values needed to fill the Courses table in student's profile*/
@@ -87,6 +101,11 @@ CREATE PROCEDURE SP_Nota_Poyecto @UserID INT, @ProjectId INT
 		WHERE IdEstudiante=@UserID AND IdProyecto=@ProjectId AND (EstadoBadge='A' OR EstadoBadge='B')
 	GO
 
+	CREATE PROCEDURE dbo.SP_Get_Last_User_Id
+AS         
+    SELECT dbo.FN_Get_Last_User_Id()   
+	
+GO
 
 /*****************SIMPLE INSERTS*****************/
 
@@ -129,16 +148,14 @@ CREATE PROCEDURE SP_Insertar_Profesor
 		GO
 
 	/*Creates a new company*/
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Empresa')
-DROP PROCEDURE  SP_Insertar_Empresa
 CREATE PROCEDURE SP_Insertar_Empresa
 @Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 @NombreContacto CHAR(30), @ApellidoContacto CHAR(30), @NombreEmpresarial CHAR(30), @Email CHAR(50), @Telefono CHAR(15),
  @PaginaWebEmpresa CHAR(30), @Pais CHAR(30), @Region CHAR(30), @RepositorioCodigo CHAR(100), @UserName CHAR(40) 
 	AS
-		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado) 
-		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A')
+		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado, NombreDeUsuario) 
+		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A', @UserName)
 
 		INSERT INTO EMPRESA (Id, NombreContacto, ApellidoContacto, NombreEmpresarial, Email, Telefono, FechaInscripcion , 
 		PaginaWebEmpresa, Pais, Region)
@@ -149,10 +166,10 @@ CREATE PROCEDURE SP_Insertar_Empresa
 	/*Creates a new administrator - EXTRA POINTS*/
 CREATE PROCEDURE SP_Insertar_Admin
 @Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
-@Nombre CHAR(30), @ApellidoContacto CHAR(30)
+@Nombre CHAR(30), @ApellidoContacto CHAR(30), @NombreUsuario CHAR(40)
 	AS
-		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado) 
-		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A')
+		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado, NombreDeUsuario) 
+		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A', @NombreUsuario)
 
 		INSERT INTO USUARIO_XMP (Id, NombreContacto, ApellidoContacto)
 		VALUES (@Id, @Nombre, @ApellidoContacto) 
@@ -176,8 +193,7 @@ CREATE PROCEDURE SP_Insertar_Universidad @Nombre CHAR(30)
 
 
 /********** UNIVERSIDAD **********/
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_Estudiante')
-DROP PROCEDURE SP_Select_Cursos_Estudiante
+
 CREATE PROCEDURE SP_Select_Cursos_Estudiante @IdEstudiante CHAR(100) 
 	AS
 		SELECT CURSO.Id, CURSO.Nombre, CURSO.Codigo, CURSO.NotaMinima, CURSO.FechaInicio, CURSO.NumeroGrupo, CURSO.Estado
@@ -186,11 +202,6 @@ CREATE PROCEDURE SP_Select_Cursos_Estudiante @IdEstudiante CHAR(100)
 					
 	GO
 
-
-
-
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_De_Universidad')
-DROP PROCEDURE SP_Select_Cursos_De_Universidad
 CREATE PROCEDURE SP_Select_Cursos_De_Universidad ( @IdUniversidad INT , @EstadoCurso CHAR(1), @IdEstudiante CHAR(100) )
 	AS
 		SELECT DISTINCT (CURSO.Id) , CURSO.Nombre, CURSO.Codigo, CURSO.NotaMinima, CURSO.FechaInicio, CURSO.NumeroGrupo, CURSO.Estado
@@ -203,10 +214,6 @@ CREATE PROCEDURE SP_Select_Cursos_De_Universidad ( @IdUniversidad INT , @EstadoC
 				AND CURSO.Id != ESTUDIANTE_POR_CURSO.IdCurso
 	GO
 
-
-
-
-
 CREATE PROCEDURE SP_Select_Cursos_Estudiante (@IdEstudiante CHAR(100)) 
 	AS
 		SELECT CURSO.Id, CURSO.Nombre, CURSO.Codigo, CURSO.NotaMinima, CURSO.FechaInicio, CURSO.NumeroGrupo, CURSO.Estado
@@ -214,7 +221,6 @@ CREATE PROCEDURE SP_Select_Cursos_Estudiante (@IdEstudiante CHAR(100))
 		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante 
 					AND ( ESTUDIANTE_POR_CURSO.Estado = 'A' OR ESTUDIANTE_POR_CURSO.Estado = 'T' )
 	GO
-
 
 	/*Creates a new course*/
 CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30), 
@@ -237,7 +243,7 @@ CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30),
 	/*SP_Terminar_Curso*/
  
 
-CREATE PROCEDURE SP_TerminarCurso (@IdCurso INT) 
+CREATE PROCEDURE SP_TerminarCurso (@IdCurso INT)
 	AS
 		UPDATE CURSO 
 		SET CURSO.ESTADO = 'T'
@@ -246,6 +252,8 @@ CREATE PROCEDURE SP_TerminarCurso (@IdCurso INT)
 		UPDATE ESTUDIANTE_POR_CURSO 
 		SET ESTUDIANTE_POR_CURSO.ESTADO = 'T'
 		WHERE ESTUDIANTE_POR_CURSO.IdCurso = @IdCurso ;
+
+		/*Calcular nota*/
 
 	GO
 
@@ -257,7 +265,6 @@ CREATE PROCEDURE SP_Insertar_Badge (@Nombre CHAR (30), @Puntaje TINYINT, @IdCurs
 		VALUES (@Nombre, @Puntaje, @IdCurso)
 	GO
 
-/* este no lo use*/
 	/*Grants a student a badge*/
 CREATE PROCEDURE SP_Otorgar_Badge (@IdBadge INT, @IdProyecto INT , @Estado CHAR(1))
 	AS
@@ -291,8 +298,6 @@ CREATE PROCEDURE SP_Select_Badge_Por_Proyecto (@IdProyecto INT,@Estado CHAR(1))
 		WHERE BADGE_POR_PROYECTO.IdProyecto = @IdProyecto AND BADGE_POR_PROYECTO.Estado = @Estado
 	GO
 
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Badge_Por_Proyecto_No_Otorgado')
-DROP PROCEDURE SP_Select_Badge_Por_Proyecto_No_Otorgado
 	/*badges obtenidosen un p*/
 CREATE PROCEDURE SP_Select_Badge_Por_Proyecto_No_Otorgado (@IdCurso INT,@IdProyecto INT)
 	AS
@@ -302,8 +307,6 @@ CREATE PROCEDURE SP_Select_Badge_Por_Proyecto_No_Otorgado (@IdCurso INT,@IdProye
 		WHERE CURSO.Id = @IdCurso AND BADGE_POR_PROYECTO.IdProyecto = @IdProyecto 
 		AND BADGE_POR_PROYECTO.IdBadge != BADGE.Id
 	GO
-exec SP_Select_Badge_Por_Proyecto_No_Otorgado 1,1
-
 
 	/*Marks a student as attending a course*/
 CREATE PROCEDURE SP_Agregar_Al_Curso @IdEstudiante CHAR(100), @IdCurso INT
@@ -360,8 +363,6 @@ CREATE PROCEDURE SP_Aceptar_Proyecto @IdProfesor CHAR(100), @IdPropuesta INT, @I
 
 /********** COMPAÑIAS **********/
 
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Buscar_Subastas_Por_Tecnologia_Nombre')
-DROP PROCEDURE SP_Buscar_Subastas_Por_Tecnologia_Nombre
 CREATE PROCEDURE SP_Buscar_Subastas_Por_Tecnologia_Nombre (@Tecnologia CHAR(30), @Nombre CHAR(30), @NumResultados INT)
 	AS
 	SELECT DISTINCT TOP(@NumResultados) TRABAJO.ID , TRABAJO.NOMBRE, TRABAJO.Descripcion, TRABAJO.IdEmpresa, TRABAJO.FechaInicio, TRABAJO.FechaCierre,
@@ -474,9 +475,6 @@ CREATE PROCEDURE SP_Insertar_Notificacion @Contenido CHAR(500), @Fecha DATETIME,
 		VALUES (@Contenido, @Fecha, @UserId, 'A')
 	GO
 
-
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_CursosAprobados')
-DROP PROCEDURE SP_CursosAprobados
 CREATE PROCEDURE SP_CursosAprobados @IdEstudiante CHAR(100)
 	AS
 		SELECT COUNT(Distinct VIEW_CURSOS.IdCurso)
@@ -485,12 +483,7 @@ CREATE PROCEDURE SP_CursosAprobados @IdEstudiante CHAR(100)
 					AND VIEW_CURSOS.EstadoCurso = 'T'
 
 	GO
-exec SP_CursosAprobados 1
 
-
-
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_CursosReprobados')
-DROP PROCEDURE SP_CursosReprobados
 CREATE PROCEDURE SP_CursosReprobados @IdEstudiante CHAR(100)
 	AS
 		SELECT COUNT(Distinct VIEW_CURSOS.IdCurso)
@@ -499,13 +492,7 @@ CREATE PROCEDURE SP_CursosReprobados @IdEstudiante CHAR(100)
 					AND VIEW_CURSOS.EstadoCurso = 'T'
 
 GO
-exec SP_CursosAprobados 1
 
-
-
-
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_TrabajosExitosos')
-DROP PROCEDURE SP_TrabajosExitosos
 CREATE PROCEDURE SP_TrabajosExitosos @IdEstudiante CHAR(100)
 	AS
 		SELECT COUNT(Distinct VIEW_TRABAJO.IdTrabajo)
@@ -515,10 +502,6 @@ CREATE PROCEDURE SP_TrabajosExitosos @IdEstudiante CHAR(100)
 
 GO
 
-
-
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_TrabajosNoExitosos')
-DROP PROCEDURE SP_TrabajosNoExitosos
 CREATE PROCEDURE SP_TrabajosNoExitosos @IdEstudiante CHAR(100)
 	AS
 		SELECT COUNT(Distinct VIEW_TRABAJO.IdTrabajo)
@@ -529,9 +512,6 @@ CREATE PROCEDURE SP_TrabajosNoExitosos @IdEstudiante CHAR(100)
 GO
 /********** MY LEARN **********/
 
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Promedio_Notas')
-DROP PROCEDURE SP_Promedio_Notas
-
 CREATE PROCEDURE SP_Promedio_Notas @IdEstudiante CHAR(100)
 	AS
 		SELECT (SUM(NotaEstudiante) / COUNT(Distinct IdCurso) ) AS PonderadoNotas
@@ -540,7 +520,7 @@ CREATE PROCEDURE SP_Promedio_Notas @IdEstudiante CHAR(100)
 
 
 	GO
-exec SP_Promedio_Notas 2
+
 CREATE PROCEDURE SP_Promedio_de_Estrellas @IdEstudiante CHAR(100)
 	AS
 		SELECT (SUM(EstrellasObtenidas) / (COUNT(IdTrabajo) * 5)) * 0.3 AS PromedioEstrellas
