@@ -39,9 +39,12 @@ namespace MyLearnApi.BusinessLogic
             vIEW_PROFESOR.Id = lobj_generator.generateUserId();
  
             //se inserta mediante un procedimiento almacenaado
-            db.SP_Insertar_Profesor(vIEW_PROFESOR.Id, vIEW_PROFESOR.Contrasena, vIEW_PROFESOR.Sal, vIEW_PROFESOR.RepositorioArchivos, vIEW_PROFESOR.CredencialDrive,
-                vIEW_PROFESOR.NombreContacto, vIEW_PROFESOR.ApellidoContacto, vIEW_PROFESOR.Email, vIEW_PROFESOR.Telefono,
-                vIEW_PROFESOR.HorarioAtencion, vIEW_PROFESOR.Pais, vIEW_PROFESOR.Region, vIEW_PROFESOR.IdUniversidad);
+            db.SP_Insertar_Profesor(vIEW_PROFESOR.Id, vIEW_PROFESOR.Contrasena, vIEW_PROFESOR.Sal, 
+                vIEW_PROFESOR.RepositorioArchivos, vIEW_PROFESOR.CredencialDrive,
+                vIEW_PROFESOR.NombreContacto, vIEW_PROFESOR.ApellidoContacto, vIEW_PROFESOR.Email,
+                vIEW_PROFESOR.Telefono,
+                vIEW_PROFESOR.HorarioAtencion, vIEW_PROFESOR.Pais, vIEW_PROFESOR.Region, 
+                vIEW_PROFESOR.IdUniversidad, vIEW_PROFESOR.NombreDeUsuario);
 
             try
             {

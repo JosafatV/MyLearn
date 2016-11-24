@@ -48,9 +48,11 @@ namespace MyLearnApi.BusinessLogic
             //se genera un id autoincremental
             lobj_v.Id = lobj_generator.generateUserId();
 
-            db.SP_Insertar_Empresa(lobj_v.Id, lobj_v.Contrasena, lobj_v.Sal, lobj_v.RepositorioArchivos, lobj_v.CredencialDrive,
-                lobj_v.NombreContacto, lobj_v.ApellidoContacto, lobj_v.NombreEmpresarial, lobj_v.Email, lobj_v.Telefono,
-                 lobj_v.PaginaWebEmpresa, lobj_v.Pais, lobj_v.Region, lobj_v.RepositorioArchivos);
+            db.SP_Insertar_Empresa(lobj_v.Id, lobj_v.Contrasena, lobj_v.Sal, lobj_v.RepositorioArchivos, 
+                lobj_v.CredencialDrive,
+                lobj_v.NombreContacto, lobj_v.ApellidoContacto, lobj_v.NombreEmpresarial, lobj_v.Email,
+                lobj_v.Telefono, lobj_v.PaginaWebEmpresa, lobj_v.Pais, lobj_v.Region,
+                lobj_v.RepositorioArchivos, lobj_v.NombreDeUsuario);
 
             try
             {

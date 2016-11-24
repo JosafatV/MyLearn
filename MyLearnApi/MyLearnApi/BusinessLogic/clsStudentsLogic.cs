@@ -63,7 +63,7 @@ namespace MyLearnApi.BusinessLogic
                 estudiante.RepositorioArchivos, estudiante.CredencialDrive,
                 estudiante.NombreContacto, estudiante.ApellidoContacto, estudiante.Carne, 
                 estudiante.Email, estudiante.Telefono, estudiante.Pais, estudiante.Region, estudiante.IdUniversidad,
-                 estudiante.RepositorioCodigo, estudiante.LinkHojaDeVida);
+                 estudiante.RepositorioCodigo, estudiante.LinkHojaDeVida,estudiante.NombreDeUsuario);
             try
             {
                 db.SaveChanges();
