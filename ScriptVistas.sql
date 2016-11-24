@@ -4,7 +4,7 @@ GO
 
 CREATE VIEW [dbo].[VIEW_ESTUDIANTE]
 	AS
-	SELECT        dbo.ESTUDIANTE.NombreContacto, dbo.ESTUDIANTE.ApellidoContacto, dbo.ESTUDIANTE.Carne,
+	SELECT        dbo.USUARIO.NombreDeUsuario, dbo.ESTUDIANTE.NombreContacto, dbo.ESTUDIANTE.ApellidoContacto, dbo.ESTUDIANTE.Carne,
 				  dbo.ESTUDIANTE.Email, dbo.ESTUDIANTE.Telefono, dbo.ESTUDIANTE.Pais, dbo.ESTUDIANTE.Region, 
                   dbo.ESTUDIANTE.IdUniversidad,dbo.ESTUDIANTE.FechaInscripcion, dbo.ESTUDIANTE.RepositorioCodigo,
 				   dbo.ESTUDIANTE.LinkHojaDeVida, dbo.ESTUDIANTE.Id, dbo.USUARIO.Contrasena, 
@@ -18,7 +18,7 @@ CREATE VIEW [dbo].[VIEW_ESTUDIANTE]
 
 	CREATE VIEW [dbo].[VIEW_PROFESOR]
 	AS
-		SELECT        dbo.USUARIO.*, dbo.PROFESOR.NombreContacto, dbo.PROFESOR.ApellidoContacto, dbo.PROFESOR.Email, dbo.PROFESOR.Telefono, dbo.PROFESOR.Foto, dbo.PROFESOR.FechaInscripcion, 
+		SELECT         dbo.USUARIO.*, dbo.PROFESOR.NombreContacto, dbo.PROFESOR.ApellidoContacto, dbo.PROFESOR.Email, dbo.PROFESOR.Telefono, dbo.PROFESOR.Foto, dbo.PROFESOR.FechaInscripcion, 
 					      dbo.PROFESOR.Pais, dbo.PROFESOR.HorarioAtencion, dbo.PROFESOR.Region, dbo.UNIVERSIDAD.Id AS IdUniversidad, dbo.UNIVERSIDAD.Nombre as Universidad 
 		FROM          dbo.PROFESOR INNER JOIN
 						  dbo.USUARIO ON dbo.PROFESOR.Id = dbo.USUARIO.Id
@@ -30,7 +30,7 @@ CREATE VIEW [dbo].[VIEW_ESTUDIANTE]
 
 		CREATE VIEW [dbo].[VIEW_EMPRESA]
 	AS
-		SELECT        dbo.EMPRESA.*, dbo.USUARIO.Contrasena, dbo.USUARIO.Sal, dbo.USUARIO.RepositorioArchivos, dbo.USUARIO.CredencialDrive, dbo.USUARIO.Estado
+		SELECT         dbo.USUARIO.NombreDeUsuario, dbo.EMPRESA.*, dbo.USUARIO.Contrasena, dbo.USUARIO.Sal, dbo.USUARIO.RepositorioArchivos, dbo.USUARIO.CredencialDrive, dbo.USUARIO.Estado
 		FROM          dbo.EMPRESA INNER JOIN
                          dbo.USUARIO ON dbo.EMPRESA.Id = dbo.USUARIO.Id
 	GO

@@ -33,7 +33,10 @@ namespace MyLearnApi.BusinessLogic
 
         public List<CURSO> getCursosPorEstudiante(string idEstudiante)
         {
-            return db.SP_SelectCursosEstudiante(idEstudiante).ToList<CURSO>();
+            //selecciona los cursos activos, terminados y pendientes de aprobacion de propuesta
+            return db.SP_SelectCursosEstudiante(idEstudiante)
+                .Where(c=> c.Estado == "A" || c.Estado == "T" || c.Estado == "P" )
+                .ToList<CURSO>();
         }
         
         public List<CURSO> getCursosPorUniversidad(int idUniversidad,string idEstudiante)

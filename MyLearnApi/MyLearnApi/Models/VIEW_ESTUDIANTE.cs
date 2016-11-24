@@ -31,5 +31,6 @@ namespace MyLearnApi.Models
         public string CredencialDrive { get; set; }
         public string Estado { get; set; }
         public Nullable<int> IdUniversidad { get; set; }
+        public string NombreDeUsuario { get; set; }
     }
 }

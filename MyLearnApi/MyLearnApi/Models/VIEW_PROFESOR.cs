@@ -31,5 +31,6 @@ namespace MyLearnApi.Models
         public string Region { get; set; }
         public int IdUniversidad { get; set; }
         public string Universidad { get; set; }
+        public string NombreDeUsuario { get; set; }
     }
 }

@@ -231,6 +231,7 @@
           <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
           <Property Name="CredencialDrive" Type="char" MaxLength="100" />
           <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MyLearnDB.dbo.VIEW_EMPRESA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -242,6 +243,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_EMPRESA' does not have a primar
             
             
           </Key>
+          <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
           <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
           <Property Name="NombreContacto" Type="char" MaxLength="30" />
           <Property Name="ApellidoContacto" Type="char" MaxLength="30" />
@@ -271,6 +273,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a pri
             
             <PropertyRef Name="Id" />
           </Key>
+          <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
           <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
           <Property Name="ApellidoContacto" Type="char" MaxLength="30" Nullable="false" />
           <Property Name="Carne" Type="char" MaxLength="15" />
@@ -321,6 +324,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a prima
           <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
           <Property Name="CredencialDrive" Type="char" MaxLength="100" />
           <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
           <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
           <Property Name="ApellidoContacto" Type="char" MaxLength="30" Nullable="false" />
           <Property Name="Email" Type="char" MaxLength="50" />
@@ -721,6 +725,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Parameter Name="Pais" Type="char" Mode="In" />
           <Parameter Name="Region" Type="char" Mode="In" />
           <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
+          <Parameter Name="UserName" Type="char" Mode="In" />
         </Function>
         <Function Name="SP_Insertar_Estudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="char" Mode="In" />
@@ -738,6 +743,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Parameter Name="IdUniversidad" Type="int" Mode="In" />
           <Parameter Name="RepositorioCodigo" Type="char" Mode="In" />
           <Parameter Name="LinkHojaDeVida" Type="char" Mode="In" />
+          <Parameter Name="UserName" Type="char" Mode="In" />
         </Function>
         <Function Name="SP_Insertar_Mensaje_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Contenido" Type="char" Mode="In" />
@@ -765,6 +771,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Parameter Name="Pais" Type="char" Mode="In" />
           <Parameter Name="Region" Type="char" Mode="In" />
           <Parameter Name="IdUniversidad" Type="int" Mode="In" />
+          <Parameter Name="UserName" Type="char" Mode="In" />
         </Function>
         <Function Name="SP_Insertar_Propuesta_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdEstudiante" Type="char" Mode="In" />
@@ -856,6 +863,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VIEW_EMPRESA" EntityType="Self.VIEW_EMPRESA" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [VIEW_EMPRESA].[NombreDeUsuario] AS [NombreDeUsuario], 
     [VIEW_EMPRESA].[Id] AS [Id], 
     [VIEW_EMPRESA].[NombreContacto] AS [NombreContacto], 
     [VIEW_EMPRESA].[ApellidoContacto] AS [ApellidoContacto], 
@@ -876,6 +884,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           </EntitySet>
           <EntitySet Name="VIEW_ESTUDIANTE" EntityType="Self.VIEW_ESTUDIANTE" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [VIEW_ESTUDIANTE].[NombreDeUsuario] AS [NombreDeUsuario], 
     [VIEW_ESTUDIANTE].[NombreContacto] AS [NombreContacto], 
     [VIEW_ESTUDIANTE].[ApellidoContacto] AS [ApellidoContacto], 
     [VIEW_ESTUDIANTE].[Carne] AS [Carne], 
@@ -911,6 +920,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     [VIEW_PROFESOR].[RepositorioArchivos] AS [RepositorioArchivos], 
     [VIEW_PROFESOR].[CredencialDrive] AS [CredencialDrive], 
     [VIEW_PROFESOR].[Estado] AS [Estado], 
+    [VIEW_PROFESOR].[NombreDeUsuario] AS [NombreDeUsuario], 
     [VIEW_PROFESOR].[NombreContacto] AS [NombreContacto], 
     [VIEW_PROFESOR].[ApellidoContacto] AS [ApellidoContacto], 
     [VIEW_PROFESOR].[Email] AS [Email], 
@@ -1124,6 +1134,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <Parameter Name="Pais" Mode="In" Type="String" />
             <Parameter Name="Region" Mode="In" Type="String" />
             <Parameter Name="RepositorioCodigo" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="VIEW_PROFESOR" EntityType="MyLearnDBModel.VIEW_PROFESOR" />
           <FunctionImport Name="SP_Insertar_Profesor">
@@ -1140,6 +1151,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <Parameter Name="Pais" Mode="In" Type="String" />
             <Parameter Name="Region" Mode="In" Type="String" />
             <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Insertar_Estudiante">
             <Parameter Name="Id" Mode="In" Type="String" />
@@ -1157,6 +1169,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
             <Parameter Name="RepositorioCodigo" Mode="In" Type="String" />
             <Parameter Name="LinkHojaDeVida" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="PAIS" EntityType="MyLearnDBModel.PAIS" />
           <AssociationSet Name="FK_EMPRESA_PAIS" Association="MyLearnDBModel.FK_EMPRESA_PAIS">
@@ -1453,6 +1466,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Name="RepositorioArchivos" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="NombreDeUsuario" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
         </EntityType>
         <Association Name="FK_ESTUDIANTE_ID">
           <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
@@ -1537,6 +1551,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="IdUniversidad" Type="Int32" />
+          <Property Name="NombreDeUsuario" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="EMPRESA">
           <Key>
@@ -1574,6 +1589,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Name="RepositorioArchivos" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="NombreDeUsuario" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
         </EntityType>
         <Association Name="FK_EMPRESA_ID">
           <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
@@ -1608,6 +1624,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Name="Region" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
           <Property Name="IdUniversidad" Type="Int32" Nullable="false" />
           <Property Name="Universidad" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="NombreDeUsuario" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="PAIS">
           <Key>
@@ -2137,6 +2154,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySetMapping Name="USUARIO">
             <EntityTypeMapping TypeName="MyLearnDBModel.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="NombreDeUsuario" ColumnName="NombreDeUsuario" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="CredencialDrive" ColumnName="CredencialDrive" />
                 <ScalarProperty Name="RepositorioArchivos" ColumnName="RepositorioArchivos" />
@@ -2177,6 +2195,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySetMapping Name="VIEW_ESTUDIANTE">
             <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_ESTUDIANTE">
               <MappingFragment StoreEntitySet="VIEW_ESTUDIANTE">
+                <ScalarProperty Name="NombreDeUsuario" ColumnName="NombreDeUsuario" />
                 <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="CredencialDrive" ColumnName="CredencialDrive" />
@@ -2217,6 +2236,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySetMapping Name="VIEW_EMPRESA">
             <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_EMPRESA">
               <MappingFragment StoreEntitySet="VIEW_EMPRESA">
+                <ScalarProperty Name="NombreDeUsuario" ColumnName="NombreDeUsuario" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="CredencialDrive" ColumnName="CredencialDrive" />
                 <ScalarProperty Name="RepositorioArchivos" ColumnName="RepositorioArchivos" />
@@ -2240,6 +2260,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySetMapping Name="VIEW_PROFESOR">
             <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_PROFESOR">
               <MappingFragment StoreEntitySet="VIEW_PROFESOR">
+                <ScalarProperty Name="NombreDeUsuario" ColumnName="NombreDeUsuario" />
                 <ScalarProperty Name="Universidad" ColumnName="Universidad" />
                 <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
                 <ScalarProperty Name="Region" ColumnName="Region" />

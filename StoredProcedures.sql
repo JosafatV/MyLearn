@@ -27,8 +27,7 @@ GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Badge_Por_Proyecto')
 DROP PROCEDURE SP_Select_Badge_Por_Proyecto
 GO
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_Estudiante')
-DROP PROCEDURE SP_Select_Cursos_Estudiante
+
 
 
 
@@ -96,10 +95,10 @@ CREATE PROCEDURE SP_Insertar_Estudiante
 	@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 	@Nombre CHAR(30), @Apellido CHAR(30), @Carne CHAR(15), @Email CHAR(50), @Telefono CHAR(15), @Pais CHAR(30),
-	@Region CHAR(30), @IdUniversidad INT , @RepositorioCodigo CHAR(100), @LinkHojaDeVida CHAR(100)  
+	@Region CHAR(30), @IdUniversidad INT , @RepositorioCodigo CHAR(100), @LinkHojaDeVida CHAR(100) , @UserName CHAR(40) 
 	AS
-		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado) 
-		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A')
+		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado, NombreDeUsuario) 
+		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A',@UserName)
 
 		INSERT INTO ESTUDIANTE (Id,NombreContacto, ApellidoContacto, Carne, Email, Telefono, Pais, Region,
 		IdUniversidad ,FechaInscripcion, RepositorioCodigo, LinkHojaDeVida) 
@@ -108,14 +107,17 @@ CREATE PROCEDURE SP_Insertar_Estudiante
 	GO
 
 	/*Creates a new teacher*/
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Profesor')
+DROP PROCEDURE  SP_Insertar_Profesor  
+GO
 CREATE PROCEDURE SP_Insertar_Profesor
 	@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 	@NombreContacto CHAR(30), @ApellidoContacto CHAR(30), @Email CHAR(50), @Telefono CHAR(15), 
-	 @HorarioAtencion CHAR(15), @Pais CHAR(30), @Region CHAR(30), @IdUniversidad INT
+	 @HorarioAtencion CHAR(15), @Pais CHAR(30), @Region CHAR(30), @IdUniversidad INT, @UserName CHAR(40) 
 		AS
-			INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado) 
-			VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A')
+			INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado, NombreDeUsuario) 
+			VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A', @UserName)
 
 			INSERT INTO PROFESOR (Id, NombreContacto, ApellidoContacto, Email, Telefono, FechaInscripcion, HorarioAtencion, Pais,
 			Region)
@@ -127,11 +129,13 @@ CREATE PROCEDURE SP_Insertar_Profesor
 		GO
 
 	/*Creates a new company*/
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Empresa')
+DROP PROCEDURE  SP_Insertar_Empresa
 CREATE PROCEDURE SP_Insertar_Empresa
 @Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 @NombreContacto CHAR(30), @ApellidoContacto CHAR(30), @NombreEmpresarial CHAR(30), @Email CHAR(50), @Telefono CHAR(15),
- @PaginaWebEmpresa CHAR(30), @Pais CHAR(30), @Region CHAR(30), @RepositorioCodigo CHAR(100)
+ @PaginaWebEmpresa CHAR(30), @Pais CHAR(30), @Region CHAR(30), @RepositorioCodigo CHAR(100), @UserName CHAR(40) 
 	AS
 		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado) 
 		VALUES (@Id, @Contrasena, @Sal, @RepositorioArchivos, @CredencialDrive, 'A')
@@ -172,12 +176,14 @@ CREATE PROCEDURE SP_Insertar_Universidad @Nombre CHAR(30)
 
 
 /********** UNIVERSIDAD **********/
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Cursos_Estudiante')
+DROP PROCEDURE SP_Select_Cursos_Estudiante
 CREATE PROCEDURE SP_Select_Cursos_Estudiante @IdEstudiante CHAR(100) 
 	AS
 		SELECT CURSO.Id, CURSO.Nombre, CURSO.Codigo, CURSO.NotaMinima, CURSO.FechaInicio, CURSO.NumeroGrupo, CURSO.Estado
 		FROM CURSO INNER JOIN ESTUDIANTE_POR_CURSO ON CURSO.Id = ESTUDIANTE_POR_CURSO.IdCurso
 		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante 
-					AND ( ESTUDIANTE_POR_CURSO.Estado = 'A' OR ESTUDIANTE_POR_CURSO.Estado = 'T' )
+					
 	GO
 
 
