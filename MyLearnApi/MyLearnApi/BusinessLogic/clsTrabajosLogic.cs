@@ -313,7 +313,7 @@ namespace MyLearnApi.BusinessLogic
         /// <param name="nombreTecnologia"></param>
         /// <param name="nombreTrabajo"></param>
         /// <returns></returns>
-        public List<TRABAJO> getTabajosPorTecnologiaYNombre(string nombreTecnologia, string nombreTrabajo)
+        public List<TRABAJO> getTabajosPorTecnologiaYNombre(int IdTecnologia, string nombreTrabajo,string idEstudiante)
         {
             int numeroDeResultados = 20;
             /*return db.FiltrarSubastasPorTecnologiaYNombre(nombreTecnologia, nombreTrabajo, numeroDeResultados)
@@ -327,8 +327,9 @@ namespace MyLearnApi.BusinessLogic
                 "  SELECT DISTINCT TOP(" + numeroDeResultados+") TRABAJO.ID, TRABAJO.NOMBRE, TRABAJO.Descripcion, TRABAJO.IdEmpresa, TRABAJO.FechaInicio, TRABAJO.FechaCierre,"
                 +" TRABAJO.DocumentoAdicional, TRABAJO.EstrellasObtenidas, TRABAJO.PresupuestoBase, TRABAJO.Estado, TRABAJO.Exitoso "
                 +" FROM TRABAJO INNER JOIN TECNOLOGIA_POR_TRABAJO ON TRABAJO.Id = TECNOLOGIA_POR_TRABAJO.IdTrabajo "
-                +" INNER JOIN TECNOLOGIA ON TECNOLOGIA.Id = TECNOLOGIA_POR_TRABAJO.IdTecnologia "
-                +" WHERE TECNOLOGIA.Nombre LIKE  '%"+nombreTecnologia+"%' OR TRABAJO.Nombre = '"+nombreTrabajo+"' ")
+                +" INNER JOIN TECNOLOGIA ON TECNOLOGIA.Id = TECNOLOGIA_POR_TRABAJO.IdTecnologia, TRABAJO_POR_ESTUDIANTE "
+                +" WHERE ( TECNOLOGIA.Id =  '"+ IdTecnologia + "' OR TRABAJO.Nombre LIKE '%"+nombreTrabajo+"%' ) "
+                + " AND Trabajo.Estado = 'P' AND TRABAJO.Id != TRABAJO_POR_ESTUDIANTE.IdTrabajo AND TRABAJO_POR_ESTUDIANTE.IdEstudiante = '"+idEstudiante+"' ")
                 .ToList<TRABAJO>();
         }
 

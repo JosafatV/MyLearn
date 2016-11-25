@@ -121,11 +121,11 @@ namespace MyLearnApi.Controllers
         }
 
         [HttpGet]
-        [Route("MyLearnApi/Subastas/{NombreTecnologia}/{NombreTrabajo}")]
-        [ResponseType(typeof(List<TECNOLOGIA>))]
-        public IHttpActionResult buscarPorTecnologiaYNombreTrabajo(string  NombreTecnologia, string NombreTrabajo)
+        [Route("MyLearnApi/Subastas/{IdTecnologia}/{NombreTrabajo}/{idEstudiante}")]
+        [ResponseType(typeof(List<TRABAJO>))]
+        public IHttpActionResult buscarPorTecnologiaYNombreTrabajo(int IdTecnologia, string NombreTrabajo,string idEstudiante)
         {
-            return Ok(pobj_TrabajosLogic.getTabajosPorTecnologiaYNombre(NombreTecnologia,NombreTrabajo));
+            return Ok(pobj_TrabajosLogic.getTabajosPorTecnologiaYNombre(IdTecnologia, NombreTrabajo,idEstudiante));
         }
 
         /// <summary>
