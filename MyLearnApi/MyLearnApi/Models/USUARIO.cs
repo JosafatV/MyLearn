@@ -12,7 +12,7 @@ namespace MyLearnApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class USUARIO:clsJSONResource
+    public partial class USUARIO : clsJSONResource
     {
         public string Id { get; set; }
         public string Contrasena { get; set; }

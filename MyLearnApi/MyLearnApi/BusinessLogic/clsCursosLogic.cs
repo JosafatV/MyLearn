@@ -47,7 +47,7 @@ namespace MyLearnApi.BusinessLogic
 
         public VIEW_CURSOS getSpecificCurso(int idCurso)
         {
-            VIEW_CURSOS curso = db.VIEW_CURSOS.Find(idCurso);
+            VIEW_CURSOS curso = db.VIEW_CURSOS.Where(c=> c.IdCurso == idCurso).ToList<VIEW_CURSOS>().First<VIEW_CURSOS>();
             if (curso.EstadoCurso == "A")
                 curso.EstadoCurso = "En curso";
             else if (curso.EstadoCurso == "T")
