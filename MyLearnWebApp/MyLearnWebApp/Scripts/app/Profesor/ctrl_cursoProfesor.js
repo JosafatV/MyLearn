@@ -12,7 +12,8 @@ angular.module('mod_MyLearn').controller('ctrl_cursoProfesor', ['fct_Trabajo', '
             $scope.profesorActual = data;
         });
 
-        fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'Profesores', extension2:'Curso',extension3: $routeParams.IdCurso.trim() }).$promise.then(function (data) {
+        fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'Profesores', extension2: 'Curso', extension3: $routeParams.IdCurso }).$promise.then(function (data) {
+            alert(angular.toJson(data));
             $scope.ls_estudiantes = data;
         });
 

@@ -66,11 +66,11 @@
 				<div class="container-fluid">
 					<section class="main row">
 						<article class="col-md-6">
-							<h2>Información General:</h2>
+							<h2>Información General: {{js_datosSubasta.Descripcion}}</h2>
 							<p>
                                 <br>
 							</p>
-							<h2>Tecnologías a implementar:</h2>
+							<h2>Tecnologías a implementar: {{stringTecnologias}}</h2>
 							<p><br>
 							</p>
 					</article>
@@ -82,26 +82,28 @@
 					<section class="main row">
 						<article class="col-md-7">
 							<h2>Haga su propuesta aquí:</h2>
+                            <label data-ng-hide="!envioExitoso" for="nombre">Su propuesta se realizo correctamente</label>
+                            <label  data-ng-hide="!envioFallido" for="nombre">Su propuesta se realizo incorrectamente</label>
 							<div class="container-fluid">
 			          <div class="col-md-6">
 			            <form action=""class="">
 			              <div class="form-group">
 			                <br>
 			                <label for="nombre">Fecha de Entrega:</label>
-			                <input  class="form-control" id="nombre"type="date">
+			                <input  class="form-control" id="nombre"type="date" data-ng-model="js_datosOferta.FechaFinalizacion">
 			              </div>
 										<div class="form-group">
 			                <br>
 			                <label for="nombre">Monto:</label>
-			                <input  class="form-control" id="nombre"type="text">
+			                <input  class="form-control" id="nombre"type="text" data-ng-model="js_datosOferta.Monto">
 			              </div>
 									</div>
 									<div class="col-md-10">
 										<div class="form-group">
 											<label for="mensaje">Comentario</label>
-											<textarea class="form-control" id="mensaje"></textarea>
+											<textarea class="form-control" id="mensaje" data-ng-model="js_datosOferta.Comentario"></textarea>
 											<br>
-											&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md" data-ng-click="set_propuestaDeSubasta()">Ofertar</a>&nbsp; &nbsp;&nbsp; &nbsp;
+											&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md" data-ng-click="set_postSubastas()">Ofertar</a>&nbsp; &nbsp;&nbsp; &nbsp;
 											<a class="btn btn-danger btn-md">Cancelar</a>
 										</div>
 
@@ -138,3 +140,4 @@
 	<script src="js/jquery.js"></script>
   <script src="js/bootstrap.min.js"></script
 </html>
+

@@ -12,6 +12,10 @@
 
         $scope.trabajoActual = {};
 
+        fct_MyLearn_API_Client.get({ type: 'Empresas', extension1: $routeParams.IdUser }).$promise.then(function (data) {
+            $scope.userActual = data;
+        });
+
        fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
            $scope.ls_msjs = data;
        });

@@ -5,8 +5,10 @@ angular.module('mod_MyLearn').controller('ctrl_perfilProfesor', ['fct_Trabajo', 
 
         };
         $scope.ls_cursos = [];
+       
 
         $scope.indexCursos = 0;
+
 
         fct_MyLearn_API_Client.get({ type: 'Profesores', extension1: $routeParams.IdUser }).$promise.then(function (data) {
             $scope.profesorActual = data;

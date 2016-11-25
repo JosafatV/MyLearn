@@ -3,37 +3,37 @@ angular.module('mod_MyLearn').controller('ctrl_login', ['fct_User', '$q', '$scop
     function (fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
         
         var contrasena = "Contraseña"
-
-        $scope.doLogin = function () {
-            /*fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
-                $scope.ls_msjs = data;
-            });*/
-        };
+        $scope.usuario = "";
+        $scope.contrasena = "";
+        $scope.bool_errorLogin = false;
 
         fct_User.setId(str_id);
         fct_User.setContra("this");
-       /* fct_UserJson.set_user({
-            "NombreContacto": "sample string 1",
-            "ApellidoContacto": "sample string 2",
-            "Carne": "sample string 3",
-            "Email": "sample string 4",
-            "Telefono": "sample string 5",
-            "Pais": "sample string 6",
-            "Region": "sample string 7",
-            "FechaInscripcion": "2016-11-21T22:17:21.6527491-06:00",
-            "RepositorioCodigo": "sample string 9",
-            "LinkHojaDeVida": "sample string 10",
-            "Id": str_id,
-            "Contrasena": "sample string 12",
-            "Sal": "sample string 13",
-            "RepositorioArchivos": "sample string 14",
-            "CredencialDrive": "sample string 15",
-            "Estado": "sample string 16",
-            "IdUniversidad": 1
-        });*/
+
+        /*----------Estudiante:
+        Usuario: a
+        Contraseña: 1234       
+        -----------*/
+        /*----------Empresa:
+        Usuario: m
+        Contraseña: 1234       S
+        -----------*/
+        /*----------Profesor:
+        Usuario: e
+        Contraseña: 1234       
+        -----------*/
 
         $scope.login = function () {
+            fct_MyLearn_API_Client.query({  type: 'Usuario', extension1: $scope.usuario, extension2: 'Password', extension3: $scope.contrasena }).$promise.then(function (data) {
+                go_perfilUsuario(data[0].Links[0].href,data[0].Id.trim());
+            }, function(error) {
+                console.log(error);
+                $scope.bool_errorLogin = true;
+            });
+        };
 
+        function go_perfilUsuario(url, id) {
+            $location.path(url + id);
         };
 
         $scope.goCrearCuentaEstudiante = function () {

@@ -3,7 +3,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="../../Scripts/Angular and Bootstrap/Bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_login.css">
+    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_CrearSubasta.css">
 </head>
 <header>
 		<div class="wrapper">
@@ -58,14 +58,44 @@
 													<label for="mensaje">Descripción</label>
 													<textarea class="form-control" id="mensaje" data-ng-model="js_crearSubasta.Descripcion"></textarea>
 													<br>
+                                                    <label for="tecnologías">Tecnologías:</label>
 													<div class="form-group">
-														<label for="mensaje">Tecnologías a utilizar</label>
-														<textarea class="form-control" id="mensaje"></textarea>
+                                                        <div class="scrollit">
+                                                            <div class="col-md-offset-0">
+                                                                <table class="table table-bordered table-condensed prom1">
+                                                                    <tr>
+                                                                        <th>Nombre de la Tecnología</th>
+                                                                        <th>Agregar</th>
+                                                                    </tr>
+                                                                    <tr data-ng-repeat="tec in ls_tecnologias  | filter: search">
+                                                                        <td>{{tec.Nombre}}</td>
+                                                                        <td><a class="btn btn-success btn-md" data-ng-click="do_agregueTec(tec)">Agregar</a></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <label for="tecnologías">Tecnologías agregadas:</label>
+                                                        <div class="scrollit" data-ng-hide=!ls_tecnologiasSelect.length>
+                                                            <div class="col-md-offset-0">
+                                                                <div>
+                                                                    <table class="table table-bordered table-condensed prom1">
+                                                                        <tr>
+                                                                            <th>Nombre de la Tecnología</th>
+                                                                            <th>Borrar</th>
+                                                                        </tr>
+                                                                        <tr data-ng-repeat="tec in ls_tecnologiasSelect  | filter: search">
+                                                                            <td>{{tec.Nombre}}</td>
+                                                                            <td><a class="btn btn-danger btn-md" data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
+                                                                        </tr>
+                                                                    </table> <br><br>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 														<br>
 														<div class="container">
 															<div class="col-md-10">
 																<div class="col-md-offset-0">
-																	<a class="btn btn-tcc btn-default btn-lg" data-ng-click="set_newSubasta()">Crear</a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+																	<a class="btn btn-tcc btn-default btn-lg" data-ng-click="set_crearSubasta()">Crear</a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
 																	<a class="btn btn-danger btn-lg">Cancelar</a>
 																</div>
 															</div>

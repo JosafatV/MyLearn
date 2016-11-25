@@ -39,23 +39,20 @@
 										<label for="nombre" >Nombre del Curso:</label>
 										<input  class="form-control" id="nombre"type="text" data-ng-model="js_crearCurso.Nombre">
 									</div>
-									<div class="form-group">
+                                    <div class="form-group">
                                         <div class="form-group">
-                                            <label for="Universidad">Universidad:</label>
-                                            <select ng-options="universidad.Nombre for universidad in ls_listaUniversidades" class="form-control" data-ng-model="universidadSelected" data-ng-change="changeUniversidad()"></select>
+                                            <label for="fecha">Fecha de Inicio:</label>
+                                            <input class="form-control" id="fecha" type="date" data-ng-model="js_crearCurso.FechaInicio">
                                         </div>
-									<div class="form-group">
-										<label for="fecha">Fecha de Inicio:</label>
-										<input  class="form-control" id="fecha"type="date" data-ng-model="js_crearCurso.FechaInicio">
-									</div>
-									<div class="form-group">
-										<label for="nota" >Nota mínima de aprobación:</label>
-										<input  class="form-control" id="nota"type="text" data-ng-model="js_crearCurso.NotaMinima">
-									</div>
+                                        <div class="form-group">
+                                            <label for="nota">Nota mínima de aprobación:</label>
+                                            <input class="form-control" id="nota" type="text" data-ng-model="js_crearCurso.NotaMinima">
+                                        </div>
                                         <div class="form-group">
                                             <label for="grupo">Numero de grupo:</label>
                                             <input class="form-control" id="grupo" type="text" data-ng-model="js_crearCurso.NumeroGrupo">
                                         </div>
+                                    </div>
 								</form>
 
 							</div>

@@ -71,9 +71,9 @@
 
 
 	</div>
-        <button data-ng-click="get_20MoreWork()">Mas 20 trabajos</button>
+        <button data-ng-disabled="num_isNextPaginationSubastas == 0" data-ng-click="get_20MoreWork()" data-ng-disabled="">Mas 20 trabajos</button>
         <button data-ng-disabled="num_indexTrabajos < 1" data-ng-click="get_20LessWork()">Menos 20 trabajos</button>
-        <button data-ng-click="get_20MoreSubastas()">Mas 20 subastas</button>
+        <button data-ng-disabled="num_isNextPaginationTrabajos == 0" data-ng-click="get_20MoreSubastas()">Mas 20 subastas</button>
         <button data-ng-disabled="num_indexSubastas < 1" data-ng-click="get_20LessSubasta()">Menos 20 subastas</button>
 
 

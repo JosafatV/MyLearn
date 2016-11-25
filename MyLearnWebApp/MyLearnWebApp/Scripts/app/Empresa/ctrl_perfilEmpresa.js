@@ -3,6 +3,8 @@
 
         $scope.num_indexTrabajos = 0;
         $scope.num_indexSubastas = 0;
+        $scope.num_isNextPaginationSubastas = 0;
+        $scope.num_isNextPaginationTrabajos = 0;
 
         var vm = this;
 
@@ -79,6 +81,18 @@
         $scope.do_goSubastas = function (subasta) {
             //alert(angular.toJson(subasta.IdEmpresa));
             $location.path("/MyLearn/Empresa/Subasta/" + subasta.Id + "/" + subasta.IdEmpresa +  "/" + subasta.Nombre +  "/" + subasta.PresupuestoBase);
+        };
+
+        $scope.set_checkNextPaginationSubastas = function () {
+            fct_MyLearn_API_Client.query({ type: 'Subastas', extension1: 'Empresa', extension2: $routeParams.IdUser, extension3: $scope.num_indexSubastas + 1 }).$promise.then(function (data) {
+                $scope.num_isNextPaginationSubastas = data.lenght;
+            });
+        };
+
+        $scope.set_checkNextPaginationTrabajos = function () {
+            fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Empresa', extension2: $routeParams.IdUser, extension3: $scope.num_indexTrabajos + 1 }).$promise.then(function (data) {
+                $scope.num_isNextPaginationTrabajos = data.lenght;
+            });
         };
 
         vm.do_goLogin = function () {

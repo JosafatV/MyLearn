@@ -17,7 +17,8 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
             "IdUniversidad": "",
             "NotaMinima": "",
             "FechaInicio": "",
-            "NumeroGrupo": ""
+            "NumeroGrupo": "",
+            "Codigo" : "CE"
 
         };
 
@@ -39,13 +40,12 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
         });
 
         $scope.dp_crearCurso = function () {
-
-            console.log($scope.js_crearCurso);
+            $scope.js_crearCurso.IdUniversidad = $scope.profesorActual.IdUniversidad;
+            alert(angular.toJson($scope.js_crearCurso));
             fct_MyLearn_API_Client.save({ type: 'CursosPorProfesor' }, $scope.js_crearCurso).$promise.then(function (data) {
 
                 angular.forEach($scope.ls_badges, function (value, key) {
                    value.IdCurso = data.idCurso
-                    alert(angular.toJson(data));
                 });
 
                 fct_MyLearn_API_Client.save({ type: 'Cursos', extension1: 'Badges', extension2: data.IdCurso }, $scope.ls_badges).$promise.then(function (data) {
@@ -61,7 +61,8 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
                 "IdCurso": ""
             });
             $scope.sumaTotal = parseInt($scope.sumaTotal) + parseInt($scope.js_badgeActual.Puntaje);
-            console.log($scope.sumaTotal);
+            $scope.js_badgeActual.Nombre = "";
+            $scope.js_badgeActual.Puntaje = "";
         };
 
 
@@ -82,7 +83,6 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
         };
 
         $scope.do_deleteBadge = function (index) {
-            alert($scope.ls_badges[index].Puntaje);
             $scope.sumaTotal = parseInt($scope.sumaTotal) - parseInt($scope.ls_badges[index].Puntaje);
             $scope.ls_badges.splice(index,1);
             console.log($scope.sumaTotal);
