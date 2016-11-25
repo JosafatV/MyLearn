@@ -128,6 +128,7 @@ namespace MyLearnApi.Controllers
             bool lbo_isvalid = pobj_TrabajosLogic.convertirSubastaEnTrabajo(idTrabajo,idEstudiante);
             if (!lbo_isvalid)
             {
+                //put
                 return NotFound();
             }
 
@@ -153,6 +154,29 @@ namespace MyLearnApi.Controllers
             tRABAJO = pobj_TrabajosLogic.insertarTrabajo(tRABAJO);
 
             return Ok(tRABAJO);
+        }
+
+        /// <summary>
+        /// post de una oferta a una usbasta para competir
+        /// </summary>
+        /// <param name="oferta"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("MyLearnApi/Subastas/Ofertas")]
+        [ResponseType(typeof(TRABAJO_POR_ESTUDIANTE))]
+        public IHttpActionResult PostOferta(TRABAJO_POR_ESTUDIANTE oferta)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            oferta = pobj_TrabajosLogic.crearOfertaSubasta(oferta);
+            if (oferta == null)
+                return Conflict();
+
+
+            return Ok(oferta);
         }
 
         [HttpPost]

@@ -51,7 +51,7 @@ namespace MyLearnApi.Controllers
             }
 
             //si no lo encuentra retorna la lista vacia
-            return Ok(new List<USUARIO>());
+            return NotFound();
         }
 
         protected override void Dispose(bool disposing)

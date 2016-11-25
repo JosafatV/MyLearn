@@ -75,6 +75,9 @@ namespace MyLearnApi.BusinessLogic
             return listaTrabajos;
         }
 
+
+
+
         /// <summary>
         /// Retorna las subastas que no han sido aceptadas como trabajos (subastados)
         /// Son trabajos en estado de subasta
@@ -123,6 +126,34 @@ namespace MyLearnApi.BusinessLogic
             return tRABAJO;
         }
 
+        /// <summary>
+        /// crea un oferta relacionada a un trabajo y un estudiante
+        /// </summary>
+        /// <param name="oferta"></param>
+        /// <returns></returns>
+        public TRABAJO_POR_ESTUDIANTE crearOfertaSubasta(TRABAJO_POR_ESTUDIANTE oferta)
+        {
+            //comienza con estado pendiente
+            oferta.Estado = "P";
+            db.TRABAJO_POR_ESTUDIANTE.Add(oferta);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (trabajoPorEstudianteExists(oferta.IdTrabajo, oferta.IdEstudiante))
+                {
+                    return null;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return oferta;
+        }
         
         /// <summary>
         /// funcion para cambiar el estado de un trabajo y de una oferta a activos
@@ -161,7 +192,13 @@ namespace MyLearnApi.BusinessLogic
 
             return true;
         }
-
+        /// <summary>
+        /// cambia el estado de trabajo y trabajo por estudiante a activo y
+        /// rechachaza las demás sumbastas (las demas trabajo por estudiante quedan en X)
+        /// </summary>
+        /// <param name="idTrabajo"></param>
+        /// <param name="idEstudiante"></param>
+        /// <returns></returns>
         public bool convertirSubastaEnTrabajo(int idTrabajo, string idEstudiante)
         {
 
@@ -259,6 +296,12 @@ namespace MyLearnApi.BusinessLogic
             return true;
         }
 
+        /// <summary>
+        /// busca una serie de trabajos filtrados por nombre y tecnologias
+        /// </summary>
+        /// <param name="nombreTecnologia"></param>
+        /// <param name="nombreTrabajo"></param>
+        /// <returns></returns>
         public List<TRABAJO> getTabajosPorTecnologiaYNombre(string nombreTecnologia, string nombreTrabajo)
         {
             int numeroDeResultados = 20;
