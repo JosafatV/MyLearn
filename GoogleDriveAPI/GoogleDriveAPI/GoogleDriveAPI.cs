@@ -6,6 +6,11 @@ using System.Threading;
 using Google.Apis.Util.Store;
 using Google.Apis.Services;
 using File = Google.Apis.Drive.v2.Data.File;
+using Google.Apis.Auth.OAuth2.Flows;
+using Google.Apis.Auth.OAuth2.Responses;
+using Google.Apis.Auth.OAuth2.Requests;
+using Google.Apis.Util;
+using System.Net.Http;
 
 namespace GoogleDriveAPI
 {
@@ -15,34 +20,12 @@ namespace GoogleDriveAPI
         private static string ApplicationName = "MyLearn";
 
         private static string _fileName = "Drive_Test";
-        private static string _filePath = @"C:\Users\Giovanni\Desktop\incertidumbreTestPassed.png";
+        private static string _filePath = @"C:\Users\Giovanni\Desktop\vgaFuncionando1.jpg";
         private static string _contentType = "image/png";
 
-        static void Main(string[] args)
+        static  void Main(string[] args)
         {
 
-            //----------------------Test para Drive Auth
-
-            /*
-            Console.WriteLine("Create creds");
-            UserCredential credential = getUserCredential();
-
-            Console.WriteLine("Get service");
-            DriveService service = GetDriveService(credential);
-
-            Console.WriteLine("Get files");
-            IList<File> files = service.Files.List().Execute().Items;
-
-           foreach (var file in files)
-            {
-                Console.WriteLine("File tittle: {0}, id: {1}", file.Title, file.Id);
-            }
-
-            
-            Console.WriteLine("End");
-            Console.ReadLine();
-
-            */
 
             //--------------------------Test Para upload File Drive
 
@@ -56,12 +39,7 @@ namespace GoogleDriveAPI
             var response = UploadFileToDrive(service, _fileName, _filePath, _contentType);
             Console.WriteLine(response);
 
-            Console.WriteLine("End");
-            Console.ReadLine();
-
         }
-
-
 
         /**
          *  This class get the information of the user credentials for DRIVE
@@ -117,6 +95,7 @@ namespace GoogleDriveAPI
             fileMetadata.Title = fileName;
 
             FilesResource.InsertMediaUpload request;
+
 
             //----------Esto se cambia por el archivo recibido por el WebService
             
