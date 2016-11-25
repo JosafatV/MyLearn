@@ -139,6 +139,15 @@
           <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="150" />
         </EntityType>
+        <EntityType Name="PROYECTO_POR_ESTUDIANTE">
+          <Key>
+            <PropertyRef Name="IdProyecto" />
+            <PropertyRef Name="IdEstudiante" />
+          </Key>
+          <Property Name="IdProyecto" Type="int" Nullable="false" />
+          <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
         <EntityType Name="RESPUESTA">
           <Key>
             <PropertyRef Name="Id" />
@@ -528,6 +537,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE">
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+          <End Role="PROYECTO_POR_ESTUDIANTE" Type="Self.PROYECTO_POR_ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTUDIANTE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PROYECTO_POR_ESTUDIANTE">
+              <PropertyRef Name="IdEstudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE">
           <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
           <End Role="TECNOLOGIA_POR_ESTUDIANTE" Type="Self.TECNOLOGIA_POR_ESTUDIANTE" Multiplicity="*" />
@@ -852,6 +873,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySet Name="MENSAJE_POR_PROYECTO" EntityType="Self.MENSAJE_POR_PROYECTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MENSAJE_POR_TRABAJO" EntityType="Self.MENSAJE_POR_TRABAJO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROYECTO_POR_ESTUDIANTE" EntityType="Self.PROYECTO_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RESPUESTA" EntityType="Self.RESPUESTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TECNOLOGIA" EntityType="Self.TECNOLOGIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TECNOLOGIA_POR_ESTUDIANTE" EntityType="Self.TECNOLOGIA_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
@@ -1016,6 +1038,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
             <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
             <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE">
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+            <End Role="PROYECTO_POR_ESTUDIANTE" EntitySet="PROYECTO_POR_ESTUDIANTE" />
           </AssociationSet>
           <AssociationSet Name="FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE">
             <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
@@ -1437,6 +1463,11 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           </FunctionImport>
           <FunctionImport Name="SP_Get_Last_User_Id" />
           <FunctionImport Name="sp_GetLAstUserId" ReturnType="Collection(String)" />
+          <EntitySet Name="PROYECTO_POR_ESTUDIANTE" EntityType="MyLearnDBModel.PROYECTO_POR_ESTUDIANTE" />
+          <AssociationSet Name="FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE">
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+            <End Role="PROYECTO_POR_ESTUDIANTE" EntitySet="PROYECTO_POR_ESTUDIANTE" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
           <Key>
@@ -2126,6 +2157,27 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Type="Byte" Name="Puntaje" Nullable="true" />
           <Property Type="Int32" Name="IdCurso" Nullable="true" />
         </ComplexType>
+        <EntityType Name="PROYECTO_POR_ESTUDIANTE">
+          <Key>
+            <PropertyRef Name="IdProyecto" />
+            <PropertyRef Name="IdEstudiante" />
+          </Key>
+          <Property Name="IdProyecto" Type="Int32" Nullable="false" />
+          <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE">
+          <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
+          <End Type="MyLearnDBModel.PROYECTO_POR_ESTUDIANTE" Role="PROYECTO_POR_ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTUDIANTE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PROYECTO_POR_ESTUDIANTE">
+              <PropertyRef Name="IdEstudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2601,6 +2653,15 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <FunctionImportMapping FunctionImportName="SP_SelectBadgePorProyectoNoOtorgado" FunctionName="MyLearnDBModel.Store.SP_Select_Badge_Por_Proyecto_No_Otorgado" />
           <FunctionImportMapping FunctionImportName="SP_Get_Last_User_Id" FunctionName="MyLearnDBModel.Store.SP_Get_Last_User_Id" />
           <FunctionImportMapping FunctionImportName="sp_GetLAstUserId" FunctionName="MyLearnDBModel.Store.SP_Get_Last_User_Id" />
+          <EntitySetMapping Name="PROYECTO_POR_ESTUDIANTE">
+            <EntityTypeMapping TypeName="MyLearnDBModel.PROYECTO_POR_ESTUDIANTE">
+              <MappingFragment StoreEntitySet="PROYECTO_POR_ESTUDIANTE">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+                <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

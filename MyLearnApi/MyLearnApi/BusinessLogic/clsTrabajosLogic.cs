@@ -121,9 +121,20 @@ namespace MyLearnApi.BusinessLogic
             //aun no es exitoso
             tRABAJO.Exitoso = false;
             tRABAJO.EstrellasObtenidas = 0;
+            tRABAJO.FechaInicio = DateTime.Now;
             db.TRABAJO.Add(tRABAJO);
             db.SaveChanges();
             return tRABAJO;
+        }
+
+        /// <summary>
+        /// Obtiene la informacion de un trabajo ingresada por el empleador
+        /// </summary>
+        /// <param name="tRABAJO"></param>
+        /// <returns></returns>
+        public TRABAJO getInfoTrabajo(int idTrabajo)
+        {
+            return db.TRABAJO.Find(idTrabajo);
         }
 
         /// <summary>

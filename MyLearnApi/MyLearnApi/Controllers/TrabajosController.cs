@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -93,6 +89,28 @@ namespace MyLearnApi.Controllers
 
             return Ok(tRABAJO);
         }
+
+
+        /// <summary>
+        /// get de una subasta especifica
+        /// </summary>
+        /// <param name="idTrabajo"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("MyLearnApi/Subastas/{idTrabajo}")]
+        [ResponseType(typeof(TRABAJO))]
+        public IHttpActionResult GetTRABAJO(int idTrabajo)
+        {
+            TRABAJO tRABAJO = pobj_TrabajosLogic.getInfoTrabajo(idTrabajo);
+            if (tRABAJO == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(tRABAJO);
+        }
+
+
 
         [HttpGet]
         [Route("MyLearnApi/Trabajos/Tecnologias/{idTrabajo}")]
@@ -223,6 +241,8 @@ namespace MyLearnApi.Controllers
         [Route("MyLearnApi/Trabajos/{idTrabajo}/{idEstudiante}")]
         [Route("MyLearnApi/Subastas")]
         [Route("MyLearnApi/Trabajos")]
+        [Route("MyLearnApi/Subastas/Tecnologia")]
+        [Route("MyLearnApi/Subastas/Ofertas")]
         [Route("MyLearnApi/Trabajos/Terminados/{idTrabajo}/{idEstudiante}/{estrellas}/{exitoso}")]
         [Route("MyLearnApi/Subastas/Tecnoloogia/{idTecnologia}")]
         public HttpResponseMessage Options()

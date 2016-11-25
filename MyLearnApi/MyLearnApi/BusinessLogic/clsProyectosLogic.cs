@@ -127,6 +127,32 @@ namespace MyLearnApi.BusinessLogic
             return db.SP_SelectBadgePorProyectoNoOtorgado(idCurso,idProyecto).ToList<BADGE>();
         }
 
+
+
+     /*   public PRO crearOfertaSubasta(TRABAJO_POR_ESTUDIANTE oferta)
+        {
+            //comienza con estado pendiente
+            oferta.Estado = "P";
+            db.TRABAJO_POR_ESTUDIANTE.Add(oferta);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (trabajoPorEstudianteExists(oferta.IdTrabajo, oferta.IdEstudiante))
+                {
+                    return null;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return oferta;
+        }*/
+
         private bool VIEW_PROYECTOSExists(string idEstudiante, int idProyecto)
         {
             return db.VIEW_PROYECTOS.Find(idEstudiante, idProyecto) != null;

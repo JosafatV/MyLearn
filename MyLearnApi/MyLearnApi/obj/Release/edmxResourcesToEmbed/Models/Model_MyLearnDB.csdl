@@ -363,6 +363,11 @@
     </FunctionImport>
     <FunctionImport Name="SP_Get_Last_User_Id" />
     <FunctionImport Name="sp_GetLAstUserId" ReturnType="Collection(String)" />
+    <EntitySet Name="PROYECTO_POR_ESTUDIANTE" EntityType="MyLearnDBModel.PROYECTO_POR_ESTUDIANTE" />
+    <AssociationSet Name="FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE">
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="PROYECTO_POR_ESTUDIANTE" EntitySet="PROYECTO_POR_ESTUDIANTE" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -1052,4 +1057,25 @@
     <Property Type="Byte" Name="Puntaje" Nullable="true" />
     <Property Type="Int32" Name="IdCurso" Nullable="true" />
   </ComplexType>
+  <EntityType Name="PROYECTO_POR_ESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdProyecto" />
+      <PropertyRef Name="IdEstudiante" />
+    </Key>
+    <Property Name="IdProyecto" Type="Int32" Nullable="false" />
+    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="1" />
+    <End Type="MyLearnDBModel.PROYECTO_POR_ESTUDIANTE" Role="PROYECTO_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PROYECTO_POR_ESTUDIANTE">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

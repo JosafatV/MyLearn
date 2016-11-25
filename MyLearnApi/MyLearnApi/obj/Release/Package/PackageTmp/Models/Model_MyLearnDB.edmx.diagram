@@ -60,6 +60,8 @@
         <AssociationConnector Association="MyLearnDBModel.FK_IDBADGE_BADGE_POR_PROYECTO" />
         <EntityTypeShape EntityType="MyLearnDBModel.MENSAJE_POR_PROYECTO" Width="2.125" PointX="21.625" PointY="16" />
         <AssociationConnector Association="MyLearnDBModel.FK_IDMENSAJE_MENSAJE_POR_PROYECTO" />
+        <EntityTypeShape EntityType="MyLearnDBModel.PROYECTO_POR_ESTUDIANTE" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="MyLearnDBModel.FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

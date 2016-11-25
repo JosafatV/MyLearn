@@ -470,5 +470,14 @@
     <FunctionImportMapping FunctionImportName="SP_SelectBadgePorProyectoNoOtorgado" FunctionName="MyLearnDBModel.Store.SP_Select_Badge_Por_Proyecto_No_Otorgado" />
     <FunctionImportMapping FunctionImportName="SP_Get_Last_User_Id" FunctionName="MyLearnDBModel.Store.SP_Get_Last_User_Id" />
     <FunctionImportMapping FunctionImportName="sp_GetLAstUserId" FunctionName="MyLearnDBModel.Store.SP_Get_Last_User_Id" />
+    <EntitySetMapping Name="PROYECTO_POR_ESTUDIANTE">
+      <EntityTypeMapping TypeName="MyLearnDBModel.PROYECTO_POR_ESTUDIANTE">
+        <MappingFragment StoreEntitySet="PROYECTO_POR_ESTUDIANTE">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -63,7 +63,7 @@ namespace MyLearnApi.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Crea una propuesta de proyecto para un curso en estado activo (no tiene que esperar a aceptarse)
         /// </summary>
         /// <param name="proyect"></param>
         /// <returns></returns>
@@ -111,6 +111,12 @@ namespace MyLearnApi.Controllers
             
         }
 
+        /// <summary>
+        /// Obtiene todos los badges posibles para ese proyecto,
+        /// o sea los badges creados para un curso
+        /// </summary>
+        /// <param name="idProyecto"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("MyLearnApi/Proyectos/Badges/{idProyecto}")]
         [ResponseType(typeof(List<BADGE>))]
@@ -119,6 +125,12 @@ namespace MyLearnApi.Controllers
             return Ok(pobj_ProyectoLogic.getBadgesDeProyecto(idProyecto));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idCurso"></param>
+        /// <param name="idProyecto"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("MyLearnApi/Proyectos/BadgesNoOtorgados/{idCurso}/{idProyecto}")]
         [ResponseType(typeof(List<BADGE>))]
@@ -128,7 +140,7 @@ namespace MyLearnApi.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Dispose
         /// </summary>
         /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
@@ -137,7 +149,10 @@ namespace MyLearnApi.Controllers
             base.Dispose(disposing);
         }
 
-
+        /// <summary>
+        /// Método para habilitar métodos desde una aplicación web
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         [Route("MyLearnApi/Proyectos/Badge")]
         [Route("MyLearnApi/Proyectos")]
