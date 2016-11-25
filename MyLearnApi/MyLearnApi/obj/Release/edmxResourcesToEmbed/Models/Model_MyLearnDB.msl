@@ -479,5 +479,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="VIEW_CURSOS">
+      <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_CURSOS">
+        <MappingFragment StoreEntitySet="VIEW_CURSOS">
+          <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="EstadoCurso" ColumnName="EstadoCurso" />
+          <ScalarProperty Name="NotaMinima" ColumnName="NotaMinima" />
+          <ScalarProperty Name="CodigoCurso" ColumnName="CodigoCurso" />
+          <ScalarProperty Name="NombreCurso" ColumnName="NombreCurso" />
+          <ScalarProperty Name="NotaEstudiante" ColumnName="NotaEstudiante" />
+          <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="IdProfesor" ColumnName="IdProfesor" />
+          <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

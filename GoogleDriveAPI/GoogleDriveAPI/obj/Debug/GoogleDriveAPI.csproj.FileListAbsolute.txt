@@ -34,3 +34,6 @@ C:\Users\Giovanni\Documents\Visual Studio 2015\Projects\GoogleDriveAPI\GoogleDri
 C:\Users\Giovanni\Documents\Visual Studio 2015\Projects\GoogleDriveAPI\GoogleDriveAPI\obj\Debug\GoogleDriveAPI.exe
 C:\Users\Giovanni\Documents\Visual Studio 2015\Projects\GoogleDriveAPI\GoogleDriveAPI\obj\Debug\GoogleDriveAPI.pdb
 C:\Users\Giovanni\Documents\Visual Studio 2015\Projects\GoogleDriveAPI\GoogleDriveAPI\obj\Debug\GoogleDriveAPI.csprojResolveAssemblyReference.cache
+C:\Users\Sebastian\Documents\GitHub\MyLearn\GoogleDriveAPI\GoogleDriveAPI\bin\Debug\GoogleDriveAPI.exe.config
+C:\Users\Sebastian\Documents\GitHub\MyLearn\GoogleDriveAPI\GoogleDriveAPI\obj\Debug\GoogleDriveAPI.exe
+C:\Users\Sebastian\Documents\GitHub\MyLearn\GoogleDriveAPI\GoogleDriveAPI\obj\Debug\GoogleDriveAPI.pdb

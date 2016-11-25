@@ -39,10 +39,10 @@ namespace MyLearnApi.Controllers
 
         [HttpGet]
         [Route("MyLearnApi/Cursos/{idCurso}")]
-        [ResponseType(typeof(CURSO))]
+        [ResponseType(typeof(VIEW_CURSOS))]
         public IHttpActionResult getCurso(int idCurso)
         {
-            CURSO curso = pobj_cursosLogic.getSpecificCurso(idCurso);
+            VIEW_CURSOS curso = pobj_cursosLogic.getSpecificCurso(idCurso);
             if (curso == null)
             {
                 return NotFound();
