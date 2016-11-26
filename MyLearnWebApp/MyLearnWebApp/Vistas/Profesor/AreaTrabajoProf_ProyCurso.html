@@ -55,8 +55,8 @@
 		</div>
         <!-- --------------------------------------------------------------No cambiaar por angular de aqui hasta abajo------------------------------------------------------------------------------------------- -->
 
-        <div id="div1" style="background-color:#b4b4b4; height: 500px;position:relative;">
-            <div id="div2" style="max-height:100%;overflow:auto;border:4px solid black;">
+        <div id="div1" style="background-color:#b4b4b4; height: 500px;position:relative; border:4px solid black;">
+            <div id="div2" style="max-height:100%;overflow:auto;">
 
                 <div class="container-fluid" data-ng-repeat="msj in ls_msjs">
                     <br><br>
@@ -164,7 +164,7 @@
 					    </table>
 					    <div class="container-fluid">
 					      <div class="col-md-offset-5">
-					        <a class="btn btn-danger btn-lg">Terminar proyecto</a><br>
+					        <a class="btn btn-danger btn-lg" data-ng-click="do_terminarProyecto()">Terminar proyecto</a><br>
 					      </div>
 
 					    </div><br>

@@ -15,9 +15,7 @@ angular.module('mod_MyLearn').controller('ctrl_areaTrabajoEstudianteEmpresa', ['
 
         $scope.userActual = {};
 
-       fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
-            $scope.ls_msjs = data;
-       });
+        get_mensajes();
 
 
 
@@ -25,14 +23,24 @@ angular.module('mod_MyLearn').controller('ctrl_areaTrabajoEstudianteEmpresa', ['
            $scope.userActual = data;
        });
 
+       function get_mensajes() {
+           fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+               $scope.ls_msjs = data;
+           });
+       };
+
+
        $scope.enviarMensaje = function () {
            fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }, {
                Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto
                             }).$promise.then(function (data) {
-                                fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
-                                    $scope.ls_msjs = data;
-                                    $scope.js_enviarMensaje.Contenido = "";
-                                });
+                                get_mensajes();
+                                $scope.js_enviarMensaje = {
+                                    Contenido: "",
+                                    Adjunto: "",
+                                    Fecha: "",
+                                    NombreEmisor: ""
+                                };
            });
        };
 
@@ -60,9 +68,7 @@ angular.module('mod_MyLearn').controller('ctrl_areaTrabajoEstudianteEmpresa', ['
                windowClass: 'center-modal',
            });
            modal.closed.then(function () {
-               fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
-                   $scope.ls_msjs = data;
-               });
+               get_mensajes();
            });
 
        };

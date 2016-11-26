@@ -27,8 +27,6 @@
            $scope.userActual = data;
        });
 
-
-
        fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Tecnologias' ,extension2: $routeParams.IdTrabajo.trim()}).$promise.then(function (data) {
            $scope.ls_tec = data;
        });
@@ -71,10 +69,6 @@
                 modal.close();
             });
 
-        };
-
-        $scope.do_goPerfilProfesor = function () {
-            $location.path('/MyLearn/Profesor/Perfil/' + $routeParams.IdUser);
         };
 
 
@@ -131,6 +125,23 @@
                 });
             });
 
+        };
+
+        $scope.do_terminarProyecto = function () {
+            alert(angular.toJson($routeParams.IdEst));
+            alert(angular.toJson($routeParams.IdTrabajo));
+            fct_MyLearn_API_Client.save({ type: 'ProyectosTerminados', extension1: $routeParams.IdTrabajo, extension2: $routeParams.IdEst }, {}).$promise.then(function (data) {
+                $scope.do_goCurso();
+            });
+        };
+
+        $scope.do_goCurso = function () {
+            $location.path('/MyLearn/Profesor/Perfil/CursoProfesor/' + $routeParams.IdUser + '/' + $routeParams.IdCurso);
+
+        };
+
+        $scope.do_goPerfilProfesor = function () {
+            $location.path('/MyLearn/Profesor/Perfil/' + $routeParams.IdUser);
         };
 
         $scope.goSubastas = function () {
