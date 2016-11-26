@@ -1567,7 +1567,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <FunctionImport Name="NumeroTrabajosNoExitosos" ReturnType="Collection(Int32)">
           <Parameter Name="IdEstudiante" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="PromedioNotas" ReturnType="Collection(Int32)">
+          <FunctionImport Name="PromedioNotas" ReturnType="Collection(Double)">
           <Parameter Name="IdEstudiante" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="NumeroCursosAprobados" ReturnType="Collection(Int32)">

@@ -83,6 +83,20 @@ CREATE FUNCTION dbo.FN_Get_Last_User_Id()
 	END;  
 GO
 
+CREATE FUNCTION dbo.FN_Promedio(@IdEstudiante CHAR(100))  
+	RETURNS FLOAT   
+	AS    
+		BEGIN  
+			DECLARE @generated FLOAT;
+			SELECT TOP (1)  @generated = (SUM(ESTUDIANTE_POR_CURSO.Nota) / COUNT(Distinct ESTUDIANTE_POR_CURSO.IdCurso ) ) 
+			FROM ESTUDIANTE_POR_CURSO
+			WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante AND (ESTUDIANTE_POR_CURSO.Estado = 'T')
+
+			IF (@generated IS NULL)   
+				SET @generated = 0;
+		RETURN @generated;
+	END;  
+GO
 /*****************SELECTS*****************/
 	/*Obtains the values needed to fill the Courses table in student's profile*/
 CREATE PROCEDURE SP_Select_Cursos @UserId INT
@@ -209,7 +223,7 @@ CREATE PROCEDURE SP_Select_Cursos_De_Universidad ( @IdUniversidad INT , @EstadoC
 				   ESTUDIANTE_POR_CURSO 	
 
 			WHERE 
-		ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante AND  
+		/*ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante AND  */
 		CURSO_POR_UNIVERSIDAD.IdUniversidad = @IdUniversidad AND
 		CURSO.Estado = @EstadoCurso AND
 		not exists ( select * FROM ESTUDIANTE_POR_CURSO  where ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante AND ESTUDIANTE_POR_CURSO.IdCurso = CURSO.Id )  
@@ -543,15 +557,15 @@ CREATE PROCEDURE SP_TrabajosNoExitosos @IdEstudiante CHAR(100)
 GO
 /********** MY LEARN **********/
 
+
+
 CREATE PROCEDURE SP_Promedio_Notas @IdEstudiante CHAR(100)
 	AS
-		SELECT (SUM(ESTUDIANTE_POR_CURSO.Nota) / COUNT(Distinct ESTUDIANTE_POR_CURSO.IdCurso) ) AS PonderadoNotas
-		FROM ESTUDIANTE_POR_CURSO
-		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante AND (ESTUDIANTE_POR_CURSO.Estado = 'T')
+		SELECT dbo.FN_Promedio( @IdEstudiante) 
 
 
 	GO
-
+/*
 CREATE PROCEDURE SP_Promedio_de_Estrellas @IdEstudiante CHAR(100)
 	AS
 		SELECT (SUM(EstrellasObtenidas) / (COUNT(IdTrabajo) * 5)) * 0.3 AS PromedioEstrellas
@@ -580,5 +594,5 @@ CREATE PROCEDURE SP_Promedio_Cursos_Aprobados @IdEstudiante CHAR(100)
 		FROM VIEW_CURSOS
 		WHERE IdEstudiante=@IdEstudiante AND (EstadoCurso='E' OR EstadoCurso='F')
 	GO
-
+*/
 

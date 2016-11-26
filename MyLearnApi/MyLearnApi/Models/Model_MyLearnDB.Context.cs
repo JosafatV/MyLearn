@@ -835,13 +835,13 @@ namespace MyLearnApi.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("NumeroTrabajosNoExitosos", idEstudianteParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> PromedioNotas(string idEstudiante)
+        public virtual ObjectResult<Nullable<double>> PromedioNotas(string idEstudiante)
         {
             var idEstudianteParameter = idEstudiante != null ?
                 new ObjectParameter("IdEstudiante", idEstudiante) :
                 new ObjectParameter("IdEstudiante", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("PromedioNotas", idEstudianteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("PromedioNotas", idEstudianteParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> NumeroCursosAprobados(string idEstudiante)

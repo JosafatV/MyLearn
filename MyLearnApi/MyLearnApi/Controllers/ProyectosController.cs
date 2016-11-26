@@ -131,7 +131,7 @@ namespace MyLearnApi.Controllers
             if (pobj_ProyectoLogic.terminarProyecto(idProyecto,idEstudiante) == false)
             {
                 //si no lo cuentra para modificarlo
-                return NotFound();
+                return Conflict();
             }
             else
                 return StatusCode(HttpStatusCode.NoContent);
@@ -209,6 +209,7 @@ namespace MyLearnApi.Controllers
         [HttpOptions]
         [Route("MyLearnApi/Proyectos/Badge")]
         [Route("MyLearnApi/Proyectos")]
+        [Route("MyLearnApi/ProyectosTerminados/{idProyecto}/{idEstudiante}")]
         public HttpResponseMessage Options()
         {
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };

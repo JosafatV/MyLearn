@@ -331,7 +331,7 @@
     <FunctionImport Name="NumeroTrabajosNoExitosos" ReturnType="Collection(Int32)">
       <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="PromedioNotas" ReturnType="Collection(Int32)">
+    <FunctionImport Name="PromedioNotas" ReturnType="Collection(Double)">
       <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="NumeroCursosAprobados" ReturnType="Collection(Int32)">
@@ -374,6 +374,35 @@
     </FunctionImport>
     <FunctionImport Name="Sp_SelectTecnologiasDeProyecto" EntitySet="TECNOLOGIA" ReturnType="Collection(MyLearnDBModel.TECNOLOGIA)">
       <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Terminar_Proyectos_De_Un_Curso">
+      <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="PROYECTO" EntityType="MyLearnDBModel.PROYECTO" />
+    <AssociationSet Name="FK_IDPROYECTO_BADGE_POR_PROYECTO" Association="MyLearnDBModel.FK_IDPROYECTO_BADGE_POR_PROYECTO">
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="BADGE_POR_PROYECTO" EntitySet="BADGE_POR_PROYECTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ID_CURSO" Association="MyLearnDBModel.FK_ID_CURSO">
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPROYECTO_MENSAJE_POR_PROYECTO" Association="MyLearnDBModel.FK_IDPROYECTO_MENSAJE_POR_PROYECTO">
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="MENSAJE_POR_PROYECTO" EntitySet="MENSAJE_POR_PROYECTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPROYECTO_PROYECTO_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDPROYECTO_PROYECTO_POR_ESTUDIANTE">
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="PROYECTO_POR_ESTUDIANTE" EntitySet="PROYECTO_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPROYECTO_TECNOLOGIA_POR_PROYECTO" Association="MyLearnDBModel.FK_IDPROYECTO_TECNOLOGIA_POR_PROYECTO">
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="TECNOLOGIA_POR_PROYECTO" EntitySet="TECNOLOGIA_POR_PROYECTO" />
+    </AssociationSet>
+    <FunctionImport Name="SP_Terminar_Proyecto_De_Un_Estudiante">
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+      <Parameter Name="Estado" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
@@ -1104,4 +1133,79 @@
     <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
     <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
   </ComplexType>
+  <EntityType Name="PROYECTO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Problematica" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="false" />
+    <Property Name="IdCurso" Type="Int32" />
+    <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FechaFinal" Type="DateTime" Precision="0" />
+    <Property Name="DocumentoAdicional" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="NotaObtenida" Type="Byte" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_IDPROYECTO_BADGE_POR_PROYECTO">
+    <End Type="MyLearnDBModel.PROYECTO" Role="PROYECTO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.BADGE_POR_PROYECTO" Role="BADGE_POR_PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROYECTO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BADGE_POR_PROYECTO">
+        <PropertyRef Name="IdProyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ID_CURSO">
+    <End Type="MyLearnDBModel.CURSO" Role="CURSO" Multiplicity="0..1" />
+    <End Type="MyLearnDBModel.PROYECTO" Role="PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CURSO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PROYECTO">
+        <PropertyRef Name="IdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPROYECTO_MENSAJE_POR_PROYECTO">
+    <End Type="MyLearnDBModel.PROYECTO" Role="PROYECTO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.MENSAJE_POR_PROYECTO" Role="MENSAJE_POR_PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROYECTO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MENSAJE_POR_PROYECTO">
+        <PropertyRef Name="IdProyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPROYECTO_PROYECTO_POR_ESTUDIANTE">
+    <End Type="MyLearnDBModel.PROYECTO" Role="PROYECTO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.PROYECTO_POR_ESTUDIANTE" Role="PROYECTO_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROYECTO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PROYECTO_POR_ESTUDIANTE">
+        <PropertyRef Name="IdProyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPROYECTO_TECNOLOGIA_POR_PROYECTO">
+    <End Type="MyLearnDBModel.PROYECTO" Role="PROYECTO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.TECNOLOGIA_POR_PROYECTO" Role="TECNOLOGIA_POR_PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROYECTO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TECNOLOGIA_POR_PROYECTO">
+        <PropertyRef Name="IdProyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

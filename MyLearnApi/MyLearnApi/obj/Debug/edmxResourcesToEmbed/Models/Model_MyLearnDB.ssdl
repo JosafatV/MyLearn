@@ -134,6 +134,21 @@
     <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="150" />
   </EntityType>
+  <EntityType Name="PROYECTO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Problematica" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Descripcion" Type="char" MaxLength="500" Nullable="false" />
+    <Property Name="IdCurso" Type="int" />
+    <Property Name="FechaInicio" Type="date" Nullable="false" />
+    <Property Name="FechaFinal" Type="date" />
+    <Property Name="DocumentoAdicional" Type="char" MaxLength="100" />
+    <Property Name="NotaObtenida" Type="tinyint" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
   <EntityType Name="PROYECTO_POR_ESTUDIANTE">
     <Key>
       <PropertyRef Name="IdProyecto" />
@@ -458,6 +473,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ID_CURSO">
+    <End Role="CURSO" Type="Self.CURSO" Multiplicity="0..1" />
+    <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CURSO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PROYECTO">
+        <PropertyRef Name="IdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_IDBADGE_BADGE_POR_PROYECTO">
     <End Role="BADGE" Type="Self.BADGE" Multiplicity="1" />
     <End Role="BADGE_POR_PROYECTO" Type="Self.BADGE_POR_PROYECTO" Multiplicity="*" />
@@ -587,6 +614,54 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Principal>
       <Dependent Role="MENSAJE_POR_TRABAJO">
         <PropertyRef Name="IdMensaje" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPROYECTO_BADGE_POR_PROYECTO">
+    <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
+    <End Role="BADGE_POR_PROYECTO" Type="Self.BADGE_POR_PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROYECTO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BADGE_POR_PROYECTO">
+        <PropertyRef Name="IdProyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPROYECTO_MENSAJE_POR_PROYECTO">
+    <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
+    <End Role="MENSAJE_POR_PROYECTO" Type="Self.MENSAJE_POR_PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROYECTO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MENSAJE_POR_PROYECTO">
+        <PropertyRef Name="IdProyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPROYECTO_PROYECTO_POR_ESTUDIANTE">
+    <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
+    <End Role="PROYECTO_POR_ESTUDIANTE" Type="Self.PROYECTO_POR_ESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROYECTO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PROYECTO_POR_ESTUDIANTE">
+        <PropertyRef Name="IdProyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDPROYECTO_TECNOLOGIA_POR_PROYECTO">
+    <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
+    <End Role="TECNOLOGIA_POR_PROYECTO" Type="Self.TECNOLOGIA_POR_PROYECTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROYECTO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TECNOLOGIA_POR_PROYECTO">
+        <PropertyRef Name="IdProyecto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -834,6 +909,11 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   <Function Name="SP_select_tecnologias_por_trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdTrabajo" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_Terminar_Proyecto_De_Un_Estudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdProyecto" Type="int" Mode="In" />
+    <Parameter Name="IdEstudiante" Type="char" Mode="In" />
+    <Parameter Name="Estado" Type="char" Mode="In" />
+  </Function>
   <Function Name="SP_TerminarCurso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdCurso" Type="int" Mode="In" />
   </Function>
@@ -857,6 +937,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <EntitySet Name="MENSAJE_POR_PROYECTO" EntityType="Self.MENSAJE_POR_PROYECTO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MENSAJE_POR_TRABAJO" EntityType="Self.MENSAJE_POR_TRABAJO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROYECTO" EntityType="Self.PROYECTO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PROYECTO_POR_ESTUDIANTE" EntityType="Self.PROYECTO_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RESPUESTA" EntityType="Self.RESPUESTA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TECNOLOGIA" EntityType="Self.TECNOLOGIA" Schema="dbo" store:Type="Tables" />
@@ -1016,6 +1097,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       <End Role="UNIVERSIDAD" EntitySet="UNIVERSIDAD" />
       <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
+    <AssociationSet Name="FK_ID_CURSO" Association="Self.FK_ID_CURSO">
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+    </AssociationSet>
     <AssociationSet Name="FK_IDBADGE_BADGE_POR_PROYECTO" Association="Self.FK_IDBADGE_BADGE_POR_PROYECTO">
       <End Role="BADGE" EntitySet="BADGE" />
       <End Role="BADGE_POR_PROYECTO" EntitySet="BADGE_POR_PROYECTO" />
@@ -1059,6 +1144,22 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <AssociationSet Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO" Association="Self.FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
       <End Role="MENSAJE" EntitySet="MENSAJE" />
       <End Role="MENSAJE_POR_TRABAJO" EntitySet="MENSAJE_POR_TRABAJO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPROYECTO_BADGE_POR_PROYECTO" Association="Self.FK_IDPROYECTO_BADGE_POR_PROYECTO">
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="BADGE_POR_PROYECTO" EntitySet="BADGE_POR_PROYECTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPROYECTO_MENSAJE_POR_PROYECTO" Association="Self.FK_IDPROYECTO_MENSAJE_POR_PROYECTO">
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="MENSAJE_POR_PROYECTO" EntitySet="MENSAJE_POR_PROYECTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPROYECTO_PROYECTO_POR_ESTUDIANTE" Association="Self.FK_IDPROYECTO_PROYECTO_POR_ESTUDIANTE">
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="PROYECTO_POR_ESTUDIANTE" EntitySet="PROYECTO_POR_ESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDPROYECTO_TECNOLOGIA_POR_PROYECTO" Association="Self.FK_IDPROYECTO_TECNOLOGIA_POR_PROYECTO">
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="TECNOLOGIA_POR_PROYECTO" EntitySet="TECNOLOGIA_POR_PROYECTO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE" Association="Self.FK_IDTECNOLOGIA_POR_ESTUDIANTE">
       <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
