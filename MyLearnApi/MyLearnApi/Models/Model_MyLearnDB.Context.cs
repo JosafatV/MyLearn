@@ -56,6 +56,7 @@ namespace MyLearnApi.Models
         public virtual DbSet<BADGE_POR_PROYECTO> BADGE_POR_PROYECTO { get; set; }
         public virtual DbSet<MENSAJE_POR_PROYECTO> MENSAJE_POR_PROYECTO { get; set; }
         public virtual DbSet<PROYECTO_POR_ESTUDIANTE> PROYECTO_POR_ESTUDIANTE { get; set; }
+        public virtual DbSet<VIEW_CURSOS> VIEW_CURSOS { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {

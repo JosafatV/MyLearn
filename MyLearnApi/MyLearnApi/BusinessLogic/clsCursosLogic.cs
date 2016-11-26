@@ -45,13 +45,13 @@ namespace MyLearnApi.BusinessLogic
         }
 
 
-        public CURSO getSpecificCurso(int idCurso)
+        public VIEW_CURSOS getSpecificCurso(int idCurso)
         {
-            CURSO curso = db.CURSO.Find(idCurso);
-            if (curso.Estado == "A")
-                curso.Estado = "En curso";
-            else if (curso.Estado == "T")
-                curso.Estado = "Terminado";
+            VIEW_CURSOS curso = db.VIEW_CURSOS.Where(c=> c.IdCurso == idCurso).ToList<VIEW_CURSOS>().First<VIEW_CURSOS>();
+            if (curso.EstadoCurso == "A")
+                curso.EstadoCurso = "En curso";
+            else if (curso.EstadoCurso == "T")
+                curso.EstadoCurso = "Terminado";
 
             curso.FechaInicio =  DateTime.Parse(curso.FechaInicio.ToString().Replace("T00:00:00", ""));
 

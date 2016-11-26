@@ -383,6 +383,9 @@
     <Compile Include="Models\USUARIO.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VIEW_CURSOS.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VIEW_EMPRESA.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>

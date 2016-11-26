@@ -243,6 +243,28 @@
           <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'MyLearnDB.dbo.VIEW_CURSOS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VIEW_CURSOS">
+          <Key>
+            
+            
+            
+            <PropertyRef Name="IdCurso" />
+            
+          </Key>
+          <Property Name="IdUniversidad" Type="int" Nullable="false" />
+          <Property Name="IdProfesor" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="IdCurso" Type="int" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="NumeroGrupo" Type="int" />
+          <Property Name="NotaEstudiante" Type="int" />
+          <Property Name="NombreCurso" Type="char" MaxLength="30" />
+          <Property Name="CodigoCurso" Type="char" MaxLength="10" />
+          <Property Name="NotaMinima" Type="tinyint" Nullable="false" />
+          <Property Name="EstadoCurso" Type="char" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'MyLearnDB.dbo.VIEW_EMPRESA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VIEW_EMPRESA">
           <Key>
@@ -883,6 +905,21 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <EntitySet Name="TRABAJO_POR_ESTUDIANTE" EntityType="Self.TRABAJO_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UNIVERSIDAD" EntityType="Self.UNIVERSIDAD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VIEW_CURSOS" EntityType="Self.VIEW_CURSOS" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VIEW_CURSOS].[IdUniversidad] AS [IdUniversidad], 
+    [VIEW_CURSOS].[IdProfesor] AS [IdProfesor], 
+    [VIEW_CURSOS].[IdEstudiante] AS [IdEstudiante], 
+    [VIEW_CURSOS].[IdCurso] AS [IdCurso], 
+    [VIEW_CURSOS].[FechaInicio] AS [FechaInicio], 
+    [VIEW_CURSOS].[NumeroGrupo] AS [NumeroGrupo], 
+    [VIEW_CURSOS].[NotaEstudiante] AS [NotaEstudiante], 
+    [VIEW_CURSOS].[NombreCurso] AS [NombreCurso], 
+    [VIEW_CURSOS].[CodigoCurso] AS [CodigoCurso], 
+    [VIEW_CURSOS].[NotaMinima] AS [NotaMinima], 
+    [VIEW_CURSOS].[EstadoCurso] AS [EstadoCurso]
+    FROM [dbo].[VIEW_CURSOS] AS [VIEW_CURSOS]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VIEW_EMPRESA" EntityType="Self.VIEW_EMPRESA" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VIEW_EMPRESA].[NombreDeUsuario] AS [NombreDeUsuario], 
@@ -1468,6 +1505,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
             <End Role="PROYECTO_POR_ESTUDIANTE" EntitySet="PROYECTO_POR_ESTUDIANTE" />
           </AssociationSet>
+          <EntitySet Name="VIEW_CURSOS" EntityType="MyLearnDBModel.VIEW_CURSOS" />
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
           <Key>
@@ -2178,6 +2216,22 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VIEW_CURSOS">
+          <Key>
+            <PropertyRef Name="IdCurso" />
+          </Key>
+          <Property Name="IdUniversidad" Type="Int32" Nullable="false" />
+          <Property Name="IdProfesor" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="NotaEstudiante" Type="Int32" />
+          <Property Name="NombreCurso" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="CodigoCurso" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="NotaMinima" Type="Byte" Nullable="false" />
+          <Property Name="EstadoCurso" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="NumeroGrupo" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2659,6 +2713,23 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
                 <ScalarProperty Name="IdProyecto" ColumnName="IdProyecto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VIEW_CURSOS">
+            <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_CURSOS">
+              <MappingFragment StoreEntitySet="VIEW_CURSOS">
+                <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="EstadoCurso" ColumnName="EstadoCurso" />
+                <ScalarProperty Name="NotaMinima" ColumnName="NotaMinima" />
+                <ScalarProperty Name="CodigoCurso" ColumnName="CodigoCurso" />
+                <ScalarProperty Name="NombreCurso" ColumnName="NombreCurso" />
+                <ScalarProperty Name="NotaEstudiante" ColumnName="NotaEstudiante" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+                <ScalarProperty Name="IdProfesor" ColumnName="IdProfesor" />
+                <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
