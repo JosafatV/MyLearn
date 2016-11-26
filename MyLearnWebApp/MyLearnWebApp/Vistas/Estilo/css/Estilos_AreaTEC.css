@@ -7,14 +7,14 @@ header {
 
 .wrapper {
 	width:90%; /* Establecemos que el ancho sera del 90% */
-	max-width:900px; /* Aqui le decimos que el ancho máximo sera de 1000px */
+	max-width:600px; /* Aqui le decimos que el ancho máximo sera de 1000px */
 	margin:auto; /* Centramos los elementos */
 	overflow:hidden; /* Eliminamos errores de float */
 }
 
 header .logo {
 	color:#f56f3a;
-	font-size:60px;
+	font-size:30px;
 	line-height:200px;
 	float:left;
 	font-family:Broadway;

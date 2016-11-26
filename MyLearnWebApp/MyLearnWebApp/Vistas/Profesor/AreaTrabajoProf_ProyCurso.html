@@ -1,10 +1,12 @@
 ﻿|<html>
 <head>
 	<meta charset="UTF-8">
+	<title>Área de Trabajo</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="../../Vistas/Estilo/js/bootstrap.min.js">
 	<link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_AreaTPC.css">
+	<link rel="shortcut icon"type="image/x/icon" href="../../Vistas/Estilo/img/iconpage.ico">
 </head>
 <header>
 		<div class="wrapper">
@@ -14,7 +16,7 @@
 				</div>
 			</div>
 			<nav>
-				<a data-ng-click="do_goPerfilProfesor()">Mi Perfil</a> 				
+				<a data-ng-click="do_goPerfilProfesor()">Mi Perfil</a>
                 <a data-ng-click="asignarBadges()">Asignar Badges</a>
 				<a>Ayuda en Línea</a>
                 <a>Cerrar Sesion</a>
@@ -41,7 +43,7 @@
 					<label for="Estudiante">Estudiante: {{trabajoActual.NOMBRE_EST}} {{trabajoActual.APELLIDO_EST}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
 					<br><br>
 					<label for="Universidad">Tecnologías que debería implementar: <label data-ng-repeat="ls in ls_tec">{{ls.Nombre}}&nbsp;</label> </label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</article> 
+			</article>
 			<aside class="col-md-4">
 				<br>
 				<h2>Objetivos:</h2><br>

@@ -3,7 +3,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="../../Scripts/Angular and Bootstrap/Bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_login.css">
+    <link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_CrearCuentaEmpresa.css">
 </head>
 <header>
 		<div class="wrapper">
@@ -18,7 +18,7 @@
 <body>
 	<div class="container">
 		<div class="col-md-6">
-			<br/>
+			<br><br><br>
 	    <form action=""class="">
 				<div class="form-group">
 	        <label for="Nombre">Nombre Empresarial:</label>
@@ -74,8 +74,7 @@
 				<div class="container">
 					<div class="col-md-10">
 						<div class="col-md-offset-1">
-                            <h1 data-ng-hide="!publicadoExitosamente"><span class="label label-success">Se creó la cuenta exitosamente</span></h1>
-                            <h1 data-ng-hide="!publicadoErroneamente"><span class="label label-danger">No se pudo crear la cuenta</span></h1>
+                            <h1 data-ng-hide="!publicadoErroneamente"><span class="label label-danger">No se pudo crear la cuenta</span></h1><br>
 							<a class="btn btn-tcc btn-default btn-lg" data-ng-click="set_sendCuenta()">Crear una cuenta</a>
 							<a class="btn btn-danger btn-lg" data-ng-click="goCrearCuenta()">Cancelar</a>
 						</div>
