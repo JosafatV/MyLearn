@@ -81,14 +81,16 @@
 			<h3>Mis Cursos:</h3>
 			<table class="table table-bordered table-hover table-condensed prom1">
 					<tr>
-							<th>Nombre del Proyecto</th>
+							<th>Nombre del Curso</th>
 							<th>Nota Obtenida</th>
 							<th>Estado</th>
+                            <th>Realize una propuesta</th>
 					</tr>
-                <tr data-ng-repeat="curso in ls_cursos  | filter: search" data-ng-click="do_goTrabajos(trabajo)">
+                <tr data-ng-repeat="curso in ls_cursos  | filter: search" >
                     <td>{{curso.Nombre}}</td>
                     <td>{{curso.NotaMinima}}</td>
                     <td>{{curso.Estado}}</td>
+                    <td><a class="btn btn-tcc btn-warning btn-md" data-ng-click="do_goCurso(curso)" data-ng-hide= "curso.Estado != 'P'" >ProponerProyecto</a></td>
 </table>
 
 			</div>

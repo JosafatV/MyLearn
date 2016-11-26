@@ -25,7 +25,7 @@
         controller: 'ctrl_cursoProfesor'
     })
 
-    .when('/MyLearn/Estudiante/Perfil/AreaTrabajoProfesor/:IdUser/:IdTrabajo/:IdEst', {
+    .when('/MyLearn/Estudiante/Perfil/AreaTrabajoProfesor/:IdUser/:IdTrabajo/:IdEst/:IdCurso', {
         templateUrl: 'Vistas/Profesor/AreaTrabajoProf_ProyCurso.html',
         controller: 'ctrl_areaTrabajoProfesor'
     })
@@ -77,7 +77,7 @@
         templateUrl: 'Vistas/Estudiante/Ofertar_Subasta.html',
         controller: 'ctrl_ofertarSubasta'
     })
-    .when('/MyLearn/Estudiante/Perfil/ProponerProyecto', {
+    .when('/MyLearn/Estudiante/Perfil/ProponerProyecto/:IdUser/:IdCurso', {
         templateUrl: 'Vistas/Estudiante/Proponer_Proyecto.html',
         controller: 'ctrl_proponerProyecto'
     })

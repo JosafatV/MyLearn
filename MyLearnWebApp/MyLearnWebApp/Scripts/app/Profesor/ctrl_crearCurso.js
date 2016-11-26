@@ -41,7 +41,6 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
 
         $scope.dp_crearCurso = function () {
             $scope.js_crearCurso.IdUniversidad = $scope.profesorActual.IdUniversidad;
-            alert(angular.toJson($scope.js_crearCurso));
             fct_MyLearn_API_Client.save({ type: 'CursosPorProfesor' }, $scope.js_crearCurso).$promise.then(function (data) {
 
                 angular.forEach($scope.ls_badges, function (value, key) {

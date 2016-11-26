@@ -1,6 +1,8 @@
 angular.module('mod_MyLearn').controller('ctrl_cursosDisponibles', ['$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
     function ($q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
+        $scope.publicadoExitosamente = false;
+        $scope.publicadoErroneamente = false;
         $scope.js_estudianteActual = {};
         $scope.js_cursosUniversidad = {};
         $scope.js_incluirCurso =
@@ -26,7 +28,16 @@ angular.module('mod_MyLearn').controller('ctrl_cursosDisponibles', ['$q', '$scop
                 "IdEstudiante": $routeParams.IdUser,
                 "IdCurso": curso.Id,
             }).$promise.then(function (data) {
-                console.log(angular.toJson(data));
+                $scope.publicadoExitosamente = true;
+                $scope.publicadoErroneamente = false;
+            fct_MyLearn_API_Client.query({
+                type: 'Cursos', extension1: 'Universidad', extension2: $scope.js_estudianteActual.IdUniversidad,
+                                                extension3:$routeParams.IdUser}).$promise.then(function (data) {
+                $scope.js_cursosUniversidad = data;
+            });
+            }, function (error) {
+                $scope.publicadoExitosamente = false;
+                $scope.publicadoErroneamente = true;
             });
         };
 

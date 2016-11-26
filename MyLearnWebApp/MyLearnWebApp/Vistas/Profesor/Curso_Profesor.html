@@ -36,7 +36,7 @@
 				<section class="main row">
 					<article class="col-md-6">
 						<h3>Informacion General:</h3><br>
-						<label for="Nombre del Curso">Nombre del curso: {{cursoActual.Nombre}}</label><br><br>
+						<label for="Nombre del Curso">Nombre del curso: {{cursoActual.NombreCurso}}</label><br><br>
 						<label for="Fecha de inicio">Fecha de Inicio: {{cursoActual.FechaInicio}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
 						<label for="Fecha de finalización">Fecha de Finalización:</label><br><br><br>
 						<label for="Proyectos Exitosos">Nota mínima de aprobación:{{cursoActual.NotaMinima}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
@@ -71,7 +71,7 @@
 						</tr>
 						<tr data-ng-repeat="est in ls_estudiantes">
 								<td>{{est.NOMBRE_EST}}</td>
-								<td><a class="btn btn-tcc btn-default btn-md">Ver Proyecto</a></td>
+								<td><a class="btn btn-tcc btn-default btn-md" data-ng-click="go_verProyecto(est)">Ver Proyecto</a></td>
 								<td>{{est.NotaObtenida}}</td>
 						</tr>
 			</table> <br><br>

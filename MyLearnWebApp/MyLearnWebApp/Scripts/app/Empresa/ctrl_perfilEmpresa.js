@@ -79,8 +79,7 @@
         };
 
         $scope.do_goSubastas = function (subasta) {
-            //alert(angular.toJson(subasta.IdEmpresa));
-            $location.path("/MyLearn/Empresa/Subasta/" + subasta.Id + "/" + subasta.IdEmpresa +  "/" + subasta.Nombre +  "/" + subasta.PresupuestoBase);
+            $location.path("/MyLearn/Empresa/Subasta/" + subasta.Id + "/" + subasta.IdEmpresa.trim() +  "/" + subasta.Nombre.trim() +  "/" + subasta.PresupuestoBase);
         };
 
         $scope.set_checkNextPaginationSubastas = function () {

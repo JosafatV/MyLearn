@@ -13,7 +13,6 @@ angular.module('mod_MyLearn').controller('ctrl_cursoProfesor', ['fct_Trabajo', '
         });
 
         fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'Profesores', extension2: 'Curso', extension3: $routeParams.IdCurso }).$promise.then(function (data) {
-            alert(angular.toJson(data));
             $scope.ls_estudiantes = data;
         });
 
@@ -24,6 +23,11 @@ angular.module('mod_MyLearn').controller('ctrl_cursoProfesor', ['fct_Trabajo', '
         fct_MyLearn_API_Client.query({ type: 'Cursos', extension1:'Badges' , extension2: $routeParams.IdCurso }).$promise.then(function (data) {
             $scope.ls_badges = data;
         });
+
+        $scope.go_verProyecto = function (proyecto) {
+            $location.path('/MyLearn/Estudiante/Perfil/AreaTrabajoProfesor/' + $routeParams.IdUser + '/' +
+                    proyecto.IdProyecto + '/' + proyecto.IdEstudiante.trim()+ '/' + $routeParams.IdCurso);
+        };
 
         $scope.goNotificaciones = function () {
             $location.path('/MyLearn/Profesor/Perfil');

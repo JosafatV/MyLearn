@@ -5,7 +5,7 @@
 
         $scope.userActual = {};
 
-       fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+       fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
             $scope.ls_msjs = data;
        });
 
@@ -13,16 +13,17 @@
            $scope.ls_badges = data;
        }); 
 
-       fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'Badges', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+       fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'BadgesNoOtorgados', extension2:$routeParams.IdCurso ,extension3: $routeParams.IdTrabajo }).$promise.then(function (data) {
            $scope.ls_badgesSA = data;
+           alert(angular.toJson(data));
        });
 
        fct_MyLearn_API_Client.get({ type: 'Profesores', extension1: $routeParams.IdUser }).$promise.then(function (data) {
            $scope.userActual = data;
        });
 
-       fct_MyLearn_API_Client.get({ type: 'Trabajos', extension1: $routeParams.IdTrabajo.trim(), extension2: $routeParams.IdEst.trim() }).$promise.then(function (data) {
-           $scope.trabajoActual = data;
+       fct_MyLearn_API_Client.get({ type: 'Proyectos', extension1:'Curso', extension2: $routeParams.IdTrabajo.trim()}).$promise.then(function (data) {
+           $scope.trabajoActual = data;         
        });
 
        fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Tecnologias' ,extension2: $routeParams.IdTrabajo.trim()}).$promise.then(function (data) {
@@ -31,10 +32,10 @@
 
 
         $scope.enviarMensaje = function () {
-            fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }, {
+            fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }, {
                 Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto
             }).$promise.then(function (data) {
-                fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+                fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
                     $scope.ls_msjs = data;
                     $scope.js_enviarMensaje.Contenido = "";
                 });
@@ -42,7 +43,7 @@
         };
 
         $scope.enviarMensajeResp = function () {
-            fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Trabajo', extension2: 'Respuesta' }, {
+            fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: 'Respuesta' }, {
                 Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto,
                 MensajeRaiz: mensajeAGuardar.Id
             }).$promise.then(function () {
@@ -74,7 +75,7 @@
                 windowClass: 'center-modal',
             });
             modal.closed.then(function () {
-                fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+                fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
                     $scope.ls_msjs = data;
                 });
             });
@@ -88,13 +89,13 @@
             modal = uibModal.open({
                 animation: true,
                 templateUrl: 'Vistas/Estudiante/ResponderMsj.html',
-                controller: 'ctrl_areaTrabajoEstudianteProfesor',
+                controller: 'ctrl_areaTrabajoProfesor',
                 size: 'lg',
                 backdrop: true,
                 windowClass: 'center-modal',
             });
             modal.closed.then(function () {
-                fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+                fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
                     $scope.ls_msjs = data;
                 });
             });

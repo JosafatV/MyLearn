@@ -69,7 +69,9 @@
 
 			<div class="col-md-9 color1">
 					<div class="col-md-offset-4">
-						<h2>Proyectos de Cursos:</h2><br>
+						<h2>Proyectos de Cursos:</h2>
+                        <h1 data-ng-hide="!publicadoExitosamente"><span class="label label-success">Se incluyó exitosamente</span></h1>
+                        <h1 data-ng-hide="!publicadoErroneamente"><span class="label label-danger">No se pudo incluir</span></h1>
 						<table class="table table-bordered table-hover table-condensed prom1">
 								<tr>
 										<th>Nombre del Curso</th>

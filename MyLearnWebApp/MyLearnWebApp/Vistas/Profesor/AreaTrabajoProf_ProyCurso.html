@@ -8,7 +8,7 @@
 </head>
 <header>
 		<div class="wrapper">
-			<div class="logo">Nombre curso:&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota:
+			<div class="logo">Nombre curso:&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota:{{trabajoActual.NotaObtenida}}
 				<div class="img">
                     <a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
 				</div>
@@ -36,19 +36,19 @@
 				<article class="col-md-8">
 					<br>
 				<h2>Información general del proyecto:</h2><br>
-					<label for="Nombre">Nombre del Proyecto: {{trabajoActual.Nombre}}</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+					<label for="Nombre">Nombre del Proyecto: {{trabajoActual.NombreProyecto}}</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
 					<br><br>
-					<label for="Estudiante">Estudiante: {{trabajoActual.NombreContacto}} {{trabajoActual.ApellidoContacto}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+					<label for="Estudiante">Estudiante: {{trabajoActual.NOMBRE_EST}} {{trabajoActual.APELLIDO_EST}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
 					<br><br>
 					<label for="Universidad">Tecnologías que debería implementar: <label data-ng-repeat="ls in ls_tec">{{ls.Nombre}}&nbsp;</label> </label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</article>
+			</article> 
 			<aside class="col-md-4">
 				<br>
 				<h2>Objetivos:</h2><br>
 					<br><br>
-					<label for="Estudiante">Fecha de Inicio:{{trabajoActual.FechaCierreSubasta}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+					<label for="Estudiante">Fecha de Inicio:{{trabajoActual.FechaInicio}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
 					<br><br>
-					<label for="Universidad">Fecha de Finalización: {{trabajoActual.FechaFinalizacion}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<label for="Universidad">Fecha de Finalización: {{trabajoActual.FechaFinal}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</aside>
 		</section><br><br><br>
 
@@ -164,7 +164,7 @@
 					    </table>
 					    <div class="container-fluid">
 					      <div class="col-md-offset-5">
-					        <a class="btn btn-danger btn-lg">Terminar Curso</a><br>
+					        <a class="btn btn-danger btn-lg">Terminar proyecto</a><br>
 					      </div>
 
 					    </div><br>
