@@ -486,19 +486,19 @@ CREATE PROCEDURE SP_Insertar_Notificacion @Contenido CHAR(500), @Fecha DATETIME,
 
 CREATE PROCEDURE SP_CursosAprobados @IdEstudiante CHAR(100)
 	AS
-		SELECT COUNT(Distinct VIEW_CURSOS.IdCurso)
-		FROM VIEW_CURSOS
-		WHERE VIEW_CURSOS.IdEstudiante = @IdEstudiante AND (VIEW_CURSOS.NotaEstudiante >= VIEW_CURSOS.NotaMinima )
-					AND VIEW_CURSOS.EstadoCurso = 'T'
+		SELECT COUNT(Distinct ESTUDIANTE_POR_CURSO.IdCurso)
+		FROM ESTUDIANTE_POR_CURSO INNER JOIN CURSO ON ESTUDIANTE_POR_CURSO.IdCurso = CURSO.Id
+		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante AND (ESTUDIANTE_POR_CURSO.Nota >= CURSO.NotaMinima )
+					AND ESTUDIANTE_POR_CURSO.Estado = 'T'
 
 	GO
 
 CREATE PROCEDURE SP_CursosReprobados @IdEstudiante CHAR(100)
 	AS
-		SELECT COUNT(Distinct VIEW_CURSOS.IdCurso)
-		FROM VIEW_CURSOS
-		WHERE VIEW_CURSOS.IdEstudiante = @IdEstudiante AND (VIEW_CURSOS.NotaEstudiante < VIEW_CURSOS.NotaMinima )
-					AND VIEW_CURSOS.EstadoCurso = 'T'
+		SELECT COUNT(Distinct ESTUDIANTE_POR_CURSO.IdCurso)
+		FROM ESTUDIANTE_POR_CURSO INNER JOIN CURSO ON ESTUDIANTE_POR_CURSO.IdCurso = CURSO.Id
+		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante AND (ESTUDIANTE_POR_CURSO.Nota < CURSO.NotaMinima )
+					AND ESTUDIANTE_POR_CURSO.Estado = 'T'
 
 GO
 
@@ -523,9 +523,9 @@ GO
 
 CREATE PROCEDURE SP_Promedio_Notas @IdEstudiante CHAR(100)
 	AS
-		SELECT (SUM(NotaEstudiante) / COUNT(Distinct IdCurso) ) AS PonderadoNotas
-		FROM VIEW_CURSOS
-		WHERE IdEstudiante = @IdEstudiante AND (EstadoCurso = 'T')
+		SELECT (SUM(ESTUDIANTE_POR_CURSO.Nota) / COUNT(Distinct ESTUDIANTE_POR_CURSO.IdCurso) ) AS PonderadoNotas
+		FROM ESTUDIANTE_POR_CURSO
+		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante AND (ESTUDIANTE_POR_CURSO.Estado = 'T')
 
 
 	GO
