@@ -18,7 +18,7 @@
 <body>
 	<div class="container">
 		<div class="col-md-6">
-			<br/>
+			<br><br><br>
             <form action="" class="">
                 <div class="form-group">
                     <label for="Nombre">Nombre:</label>
@@ -97,9 +97,25 @@
                                 <td>{{tec.Nombre}}</td>
                                 <td><a class="btn btn-success btn-md" data-ng-click="do_agregueTec(tec)">Agregar</a></td>
                             </tr>
+														<tr data-ng-repeat="tec in ls_tecnologias  | filter: search">
+                                <td>{{tec.Nombre}}</td>
+                                <td><a class="btn btn-success btn-md" data-ng-click="do_agregueTec(tec)">Agregar</a></td>
+                            </tr>
+														<tr data-ng-repeat="tec in ls_tecnologias  | filter: search">
+                                <td>{{tec.Nombre}}</td>
+                                <td><a class="btn btn-success btn-md" data-ng-click="do_agregueTec(tec)">Agregar</a></td>
+                            </tr>
+														<tr data-ng-repeat="tec in ls_tecnologias  | filter: search">
+                                <td>{{tec.Nombre}}</td>
+                                <td><a class="btn btn-success btn-md" data-ng-click="do_agregueTec(tec)">Agregar</a></td>
+                            </tr>
+														<tr data-ng-repeat="tec in ls_tecnologias  | filter: search">
+                                <td>{{tec.Nombre}}</td>
+                                <td><a class="btn btn-success btn-md" data-ng-click="do_agregueTec(tec)">Agregar</a></td>
+                            </tr>
                         </table>
                     </div>
-                </div>
+                </div><br>
                     <label for="tecnologías">Tecnologías agregadas:</label>
                 <div class="scrollit" data-ng-hide=!ls_tecnologiasSelect.length>
                     <div class="col-md-offset-0">
@@ -113,25 +129,44 @@
                                     <td>{{tec.Nombre}}</td>
                                     <td><a class="btn btn-danger btn-md" data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
                                 </tr>
+																<tr data-ng-repeat="tec in ls_tecnologiasSelect  | filter: search">
+                                    <td>{{tec.Nombre}}</td>
+                                    <td><a class="btn btn-danger btn-md" data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
+                                </tr>
+																<tr data-ng-repeat="tec in ls_tecnologiasSelect  | filter: search">
+                                    <td>{{tec.Nombre}}</td>
+                                    <td><a class="btn btn-danger btn-md" data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
+                                </tr>
+																<tr data-ng-repeat="tec in ls_tecnologiasSelect  | filter: search">
+                                    <td>{{tec.Nombre}}</td>
+                                    <td><a class="btn btn-danger btn-md" data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
+                                </tr>
+																<tr data-ng-repeat="tec in ls_tecnologiasSelect  | filter: search">
+                                    <td>{{tec.Nombre}}</td>
+                                    <td><a class="btn btn-danger btn-md" data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
+                                </tr>
                             </table> <br><br>
                         </div>
+
                     </div>
-                </div>
+
+                </div> <br><br>
+								<div class="container">
+										<div class="col-md-10">
+												<div class="col-md-offset-0">
+														<a class="btn btn-tcc btn-default btn-lg" data-ng-click="sendCuenta()">Crear una cuenta</a>
+														<a class="btn btn-danger btn-lg" data-ng-click="goCrearCuenta()">Cancelar</a>
+												</div>
+										</div>
+
+										</div>
 
 
 
 
 
 </form>
-<div class="container">
-		<div class="col-md-10">
-				<div class="col-md-offset-1">
-						<a class="btn btn-tcc btn-default btn-lg" data-ng-click="sendCuenta()">Crear una cuenta</a>
-						<a class="btn btn-danger btn-lg" data-ng-click="goCrearCuenta()">Cancelar</a>
-				</div>
-		</div>
 
-		</div>
 
 
   </div>

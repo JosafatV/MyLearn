@@ -49,7 +49,7 @@
 					<label for="Nombre">Nombre de usuario: {{js_estudianteActual.NombreContacto}} {{js_estudianteActual.ApellidoContacto}}</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
 					<label for="Link a Hoja de vida">Link de Hoja de vida: {{js_estudianteActual.LinkHojaDeVida}}</label><br>
 					<label for="Carné Estudiantil">Carné Estudiantil: {{js_estudianteActual.Carne}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-					<label for="País">País: {{js_estudianteActual.Pais}}</label>&nbsp; &nbsp; &nbsp;<br>				
+					<label for="País">País: {{js_estudianteActual.Pais}}</label>&nbsp; &nbsp; &nbsp;<br>
 					<label for="Repositorio de código">Repositorio de Código: {{js_estudianteActual.RepositorioCodigo}}</label>
 			</article>
 
@@ -70,13 +70,13 @@
 			<div class="col-md-9 color1">
 					<div class="col-md-offset-4">
 						<h2>Proyectos de Cursos:</h2>
-                        <h1 data-ng-hide="!publicadoExitosamente"><span class="label label-success">Se incluyó exitosamente</span></h1>
-                        <h1 data-ng-hide="!publicadoErroneamente"><span class="label label-danger">No se pudo incluir</span></h1>
+                        <h2 data-ng-hide="!publicadoExitosamente"><span class="label label-success">Se incluyó exitosamente</span></h2>
+                        <h2 data-ng-hide="!publicadoErroneamente"><span class="label label-danger">No se pudo incluir</span></h2><br>
 						<table class="table table-bordered table-hover table-condensed prom1">
 								<tr>
 										<th>Nombre del Curso</th>
 										<th>Estado</th>
-								</tr>                            
+								</tr>
 								<tr data-ng-repeat="curso in js_cursosUniversidad">
 										<td>{{curso.Nombre}}</td>
 										<td><a class="btn btn-tcc btn-default btn-md" data-ng-click="do_incluirme(curso)">Incluirme</a></td>

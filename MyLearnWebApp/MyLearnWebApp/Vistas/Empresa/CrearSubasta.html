@@ -14,7 +14,6 @@
 			</div>
 			<nav>
 				<a data-ng-click="do_goPerfil()">Mi Perfil</a>
-				<a>Ayuda en Linea</a>
 				<a>Cerrar Sesión</a>
 			</nav>
 		</div>
@@ -35,7 +34,7 @@
 								<article class="col-md-7">
 									<h2><b>Aspectos Generales:</h2></b><br>
 									<div class="container-fluid">
-					          <div class="col-md-6">
+					          <div class="col-md-7">
 					            <form action=""class="">
 					              <div class="form-group">
 					                <br>
@@ -71,9 +70,25 @@
                                                                         <td>{{tec.Nombre}}</td>
                                                                         <td><a class="btn btn-success btn-md" data-ng-click="do_agregueTec(tec)">Agregar</a></td>
                                                                     </tr>
+																																		<tr data-ng-repeat="tec in ls_tecnologias  | filter: search">
+																																				<td>{{tec.Nombre}}</td>
+																																				<td><a class="btn btn-success btn-md" data-ng-click="do_agregueTec(tec)">Agregar</a></td>
+																																		</tr>
+																																		<tr data-ng-repeat="tec in ls_tecnologias  | filter: search">
+																																				<td>{{tec.Nombre}}</td>
+																																				<td><a class="btn btn-success btn-md" data-ng-click="do_agregueTec(tec)">Agregar</a></td>
+																																		</tr>
+																																		<tr data-ng-repeat="tec in ls_tecnologias  | filter: search">
+																																				<td>{{tec.Nombre}}</td>
+																																				<td><a class="btn btn-success btn-md" data-ng-click="do_agregueTec(tec)">Agregar</a></td>
+																																		</tr>
+																																		<tr data-ng-repeat="tec in ls_tecnologias  | filter: search">
+																																				<td>{{tec.Nombre}}</td>
+																																				<td><a class="btn btn-success btn-md" data-ng-click="do_agregueTec(tec)">Agregar</a></td>
+																																		</tr>
                                                                 </table>
                                                             </div>
-                                                        </div>
+                                                        </div><br>
                                                         <label for="tecnologías">Tecnologías agregadas:</label>
                                                         <div class="scrollit" data-ng-hide=!ls_tecnologiasSelect.length>
                                                             <div class="col-md-offset-0">
@@ -84,6 +99,22 @@
                                                                             <th>Borrar</th>
                                                                         </tr>
                                                                         <tr data-ng-repeat="tec in ls_tecnologiasSelect  | filter: search">
+                                                                            <td>{{tec.Nombre}}</td>
+                                                                            <td><a class="btn btn-danger btn-md" data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
+                                                                        </tr>
+																																				<tr data-ng-repeat="tec in ls_tecnologiasSelect  | filter: search">
+                                                                            <td>{{tec.Nombre}}</td>
+                                                                            <td><a class="btn btn-danger btn-md" data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
+                                                                        </tr>
+																																				<tr data-ng-repeat="tec in ls_tecnologiasSelect  | filter: search">
+                                                                            <td>{{tec.Nombre}}</td>
+                                                                            <td><a class="btn btn-danger btn-md" data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
+                                                                        </tr>
+																																				<tr data-ng-repeat="tec in ls_tecnologiasSelect  | filter: search">
+                                                                            <td>{{tec.Nombre}}</td>
+                                                                            <td><a class="btn btn-danger btn-md" data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
+                                                                        </tr>
+																																				<tr data-ng-repeat="tec in ls_tecnologiasSelect  | filter: search">
                                                                             <td>{{tec.Nombre}}</td>
                                                                             <td><a class="btn btn-danger btn-md" data-ng-click="do_doleteSelected(tec)">Borrar</a></td>
                                                                         </tr>

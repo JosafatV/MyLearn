@@ -15,7 +15,6 @@
 			</div>
 			<nav>
 				<a data-ng-click="do_goCrearCurso()">Crear Curso</a>
-				<a>Ayuda en Linea</a>
 				<a>Cerrar Sesión</a>
 			</nav>
 		</div>
@@ -66,7 +65,7 @@
                                 <td>{{curso.CURSO.Estado}}</td>
                                 <td><a class="btn btn-tcc btn-default btn-md">Ver</a></td>
                             </tr>
-					</table> 
+					</table>
                         <button data-ng-disabled="num_isNextPaginationSubastas == 0" data-ng-click="get_20MoreWork()" data-ng-disabled="">Mas 20 cursos</button>
                         <button data-ng-disabled="num_indexTrabajos < 1" data-ng-click="get_20LessWork()">Menos 20 Cursos</button>
 

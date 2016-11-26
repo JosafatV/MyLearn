@@ -45,10 +45,11 @@ body{
 }
 
 .scrollit {
-    height: 200px;
-    overflow-y: scroll;  
-    height:200px;
-    width: 100%;
+    height: 50px;
+    overflow-y: scroll;
+    height:255px;
+    width: 75%;
+		background:#252932;
 }
 
 .center-modal {

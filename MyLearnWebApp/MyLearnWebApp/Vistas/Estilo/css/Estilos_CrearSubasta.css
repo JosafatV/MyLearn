@@ -7,7 +7,7 @@ header {
 
 .wrapper {
 	width:90%; /* Establecemos que el ancho sera del 90% */
-	max-width:850px; /* Aqui le decimos que el ancho máximo sera de 1000px */
+	max-width:650px; /* Aqui le decimos que el ancho máximo sera de 1000px */
 	margin:auto; /* Centramos los elementos */
 	overflow:hidden; /* Eliminamos errores de float */
 }
@@ -21,10 +21,11 @@ header .logo {
 }
 
 .scrollit {
-    height: 200px;
-    overflow-y: scroll;  
-    height:210px;
-    width: 250%;
+    height: 100px;
+    overflow-y: scroll;
+    height:255px;
+    width: 150%;
+		background:#252932;
 }
 
 header nav {
@@ -86,8 +87,8 @@ body{
 	color: #D8D8D8;
 }
 
-body .prom1 tr:hover{
+/*body .prom1 tr:hover{
 	background:#F39F5F;
 	color: #252932;
 	cursor: pointer;
-}
+}*/
