@@ -292,6 +292,7 @@
     <Compile Include="Models\CURSO_POR_PROFESOR.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DriveIntegration\clsClientSecret.cs" />
     <Compile Include="Models\DriveIntegration\clsDriveConn.cs" />
     <Compile Include="Models\EMPRESA.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
