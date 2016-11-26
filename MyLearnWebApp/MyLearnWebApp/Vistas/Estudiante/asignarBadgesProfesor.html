@@ -10,23 +10,23 @@
             <div class="modal-content">
                 <!--Header Ventana-->
                 <div class="modal-header">
-                    <h2 class="modal-tittle">Badges Obtenidos:</h2>
+                    <h2 class="modal-tittle">Badges a otorgar:</h2>
                 </div>
                 <!--Contenido-->
                 <div class="modal-body">
-                    <div class="container-fluid" data-ng-repeat="badge in ls_badgesSA">
-                        <div class="row">
-                            <div class="col-md-3">
+                    <div class="container-fluid" >
+                            <div class="col-md-3" data-ng-repeat="badge in ls_badgesSA">
                                 <label for="NBadge">{{badge.Nombre}}</label>
                                 <img src="../../Vistas/Estilo/img/badgepeq.png" class="img-responsive img-rounded" alt="">
-                                <a class="btn btn-tcc btn-default btn-sm">Asignar</a>
-                            </div>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                        </div>
+                                <a class="btn btn-tcc btn-default btn-sm" data-ng-click="otorgarBadge(badge)">Asignar</a>
+                            </div>
                     </div>
 
                 </div>
                 <!--Footer-->
                 <div class="modal-footer">
+                    <h1 data-ng-hide="!publicadoExitosamente"><span class="label label-success">Se otorgó exitosamente</span></h1>
+                    <h1 data-ng-hide="!publicadoErroneamente"><span class="label label-danger">No se pudo otorgar</span></h1>
                 </div>
             </div>
         </div>

@@ -5,30 +5,51 @@
 
         $scope.userActual = {};
 
+        get_badgesObtenidos();
+
+        get_badgesNoOtorgados();
+
+        get_trabajoActual();
+
+        $scope.envioExitoso = false;
+
+        $scope.envioFallido = false;
+
        fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
             $scope.ls_msjs = data;
        });
 
        fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'Badges', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
-           $scope.ls_badges = data;
+           $scope.ls_badgesObtenidos = data;
        }); 
-
-       fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'BadgesNoOtorgados', extension2:$routeParams.IdCurso ,extension3: $routeParams.IdTrabajo }).$promise.then(function (data) {
-           $scope.ls_badgesSA = data;
-           alert(angular.toJson(data));
-       });
 
        fct_MyLearn_API_Client.get({ type: 'Profesores', extension1: $routeParams.IdUser }).$promise.then(function (data) {
            $scope.userActual = data;
        });
 
-       fct_MyLearn_API_Client.get({ type: 'Proyectos', extension1:'Curso', extension2: $routeParams.IdTrabajo.trim()}).$promise.then(function (data) {
-           $scope.trabajoActual = data;         
-       });
+
 
        fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Tecnologias' ,extension2: $routeParams.IdTrabajo.trim()}).$promise.then(function (data) {
            $scope.ls_tec = data;
        });
+
+       function get_trabajoActual() {
+           fct_MyLearn_API_Client.get({ type: 'Proyectos', extension1: 'Curso', extension2: $routeParams.IdTrabajo.trim() }).$promise.then(function (data) {
+               $scope.trabajoActual = data;
+           });
+       };
+
+       function get_badgesNoOtorgados() {
+           fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'BadgesNoOtorgados', extension2: $routeParams.IdCurso, extension3: $routeParams.IdTrabajo }).$promise.then(function (data) {
+               $scope.ls_badgesSA = data;
+           });
+       };
+
+       function get_badgesObtenidos() {
+           fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'Badges', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+               $scope.ls_badgesObtenidos = data;
+           });
+       };
 
 
         $scope.enviarMensaje = function () {
@@ -57,11 +78,19 @@
         };
 
 
-        /*$scope.asignarBadgeEspecifico = function () {
-            fct_MyLearn_API_Client.get({ type: 'Profesores', extension1: $routeParams.IdUser }).$promise.then(function (data) {
-                $scope.userActual = data;
+        $scope.otorgarBadge = function (badge) {
+            fct_MyLearn_API_Client.save({ type: 'Proyectos', extension1: 'Badge' }, {
+                IdBadge: badge.Id,
+                IdProyecto: $routeParams.IdTrabajo
+            }).$promise.then(function (data) {
+                $scope.publicadoExitosamente = true;
+                $scope.publicadoErroneamente = false;
+                get_badgesNoOtorgados();                
+            }, function (error) {
+                $scope.publicadoExitosamente = false;
+                $scope.publicadoErroneamente = true;
             });
-        };*/
+        };
 
         $scope.asignarBadges = function () {
             usuarioPrincipal = $scope.userActual;
@@ -75,6 +104,8 @@
                 windowClass: 'center-modal',
             });
             modal.closed.then(function () {
+                get_trabajoActual();
+                get_badgesObtenidos();
                 fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
                     $scope.ls_msjs = data;
                 });
