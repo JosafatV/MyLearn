@@ -1,0 +1,1 @@
+sqlcmd -S VARGAM-LAPTOP -E -i C:\Users\Vargam\Desktop\DiffBackup.sql
