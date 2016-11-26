@@ -69,6 +69,8 @@
         <AssociationConnector Association="MyLearnDBModel.FK_IDPROYECTO_MENSAJE_POR_PROYECTO" />
         <AssociationConnector Association="MyLearnDBModel.FK_IDPROYECTO_PROYECTO_POR_ESTUDIANTE" />
         <AssociationConnector Association="MyLearnDBModel.FK_IDPROYECTO_TECNOLOGIA_POR_PROYECTO" />
+        <EntityTypeShape EntityType="MyLearnDBModel.DriveCredentials" Width="1.5" PointX="9.875" PointY="21.5" />
+        <AssociationConnector Association="MyLearnDBModel.FK_DRIVE_CREDENTIALS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

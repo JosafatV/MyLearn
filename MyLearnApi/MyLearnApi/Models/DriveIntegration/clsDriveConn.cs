@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.IO;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v2;
@@ -13,7 +13,7 @@ namespace MyLearnApi.Models.DriveIntegration
 {
     public class clsDriveConn
     {
-        private static string[] Scopes = { DriveService.Scope.Drive };
+      
         private static string ApplicationName = "MyLearn";
         public static string UserIdentifier { get; private set; }
 
@@ -21,13 +21,13 @@ namespace MyLearnApi.Models.DriveIntegration
         /// <summary>
         /// 
         /// </summary>
-        public string getContentLink(string fileName, string contentType)
+        public string getContentLink(string fileName, string contentType, byte[] byteArray)
         {
 
             UserCredential credential = getUserCredential();
             DriveService service = GetDriveService(credential);
             //uploading file
-            string response = UploadFileToDrive(service, fileName, contentType);
+            string response = UploadFileToDrive(service, fileName, contentType, byteArray);
 
             return response;
 
@@ -50,17 +50,18 @@ namespace MyLearnApi.Models.DriveIntegration
                     ClientId = secret.client_id,
                     ClientSecret = secret.client_secret
                 },
-                Scopes = new[] { DriveService.Scope.Drive }
+                Scopes = new[] { DriveService.Scope.Drive, DriveService.Scope.DriveFile }
             });
 
             var credential = new UserCredential(flow, UserIdentifier, new TokenResponse
             {
-                AccessToken = "ya29.Ci-iA0Xe6xWpzzlIma2YzUvWRG-k1CsNxpaM-z6NBVfA2tIKsX8IRdBd8QZcuxmcAg",
-                RefreshToken = "1/ZQZjfjO4nNxnf5M--aM0T1CwkzCxb4vpi6sOnnuWqrg"
+                AccessToken = "ya29.Ci-iAz7NCKn0D0p7LF7GpBTKDSbQXWp9x9ve-Ba4_XNOhz1syOr2ddMwoA_tfMx_zA",
+                RefreshToken = "1/ZK9-tBnulXJ2c7esvhQl2dRGIT7dqBzpzciyAk6E9mst0oisBn2Lz4l3AG2p6uvE"
             });
             return credential;
         }
 
+      
         
         /**
          *  This class create the drive service with the credentials and the app name
@@ -90,22 +91,9 @@ namespace MyLearnApi.Models.DriveIntegration
          * this link will be stored into the database to retrived to the view later.
          * 
         **/
-        public static string UploadFileToDrive(DriveService service, string fileName, string contentType)
+        public static string UploadFileToDrive(DriveService service, string fileName, string contentType, byte[] byteArray)
         {
 
-            string jason = "{"
-                               + "\"installed\": {"
-                               + "\"client_id\": \"945542049910-ie4l7np3hup7qpev39stcc4o7rlti85j.apps.googleusercontent.com\","
-                               + "\"project_id\": \"basic-computing-149501\","
-                               + "\"auth_uri\": \"https://accounts.google.com/o/oauth2/auth  \",  "
-                               + "\"token_uri\": \"https://accounts.google.com/o/oauth2/token \", "
-                               + "\"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs  \","
-                               + "\"client_secret\": \"EIuppefDWrd3rOh4RyYSt-DH\","
-                               + "\"redirect_uris\": [ \"urn:ietf:wg:oauth:2.0:oob\", \"http://localhost \" ]"
-                               + "}"
-                        + "}";
-
-            byte[] byteArray = Encoding.UTF8.GetBytes(jason);
             Stream stream = new MemoryStream(byteArray);
             var fileMetadata = new File();
             fileMetadata.LastModifyingUserName = fileName;
@@ -114,7 +102,9 @@ namespace MyLearnApi.Models.DriveIntegration
             request = service.Files.Insert(fileMetadata, stream, "");
             request.Upload();
             var file = request.ResponseBody;
+
             return file.WebContentLink;
+            
 
         }
 

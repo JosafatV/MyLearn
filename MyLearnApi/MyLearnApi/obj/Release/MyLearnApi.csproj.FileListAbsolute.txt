@@ -99,4 +99,3 @@ C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\Google.Api
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\Google.Apis.PlatformServices.xml
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\log4net.xml
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\Zlib.Portable.xml
-C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\Controllers\client_secret.json

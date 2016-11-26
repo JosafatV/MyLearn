@@ -255,6 +255,7 @@
     <Compile Include="BusinessLogic\clsStudentsLogic.cs" />
     <Compile Include="BusinessLogic\clsTrabajosLogic.cs" />
     <Compile Include="BusinessLogic\UserAccounts\clsIncrementalIdGenerator.cs" />
+    <Compile Include="BusinessLogic\UserAccounts\clsRepoLogic.cs" />
     <Compile Include="BusinessLogic\UserAccounts\clsUserIdGenerator.cs" />
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
@@ -290,6 +291,9 @@
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CURSO_POR_PROFESOR.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DriveCredentials.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DriveIntegration\clsClientSecret.cs" />
@@ -462,9 +466,6 @@
     <Content Include="Models\Model_MyLearnDB.edmx.diagram">
       <DependentUpon>Model_MyLearnDB.edmx</DependentUpon>
     </Content>
-    <None Include="Controllers\client_secret.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Properties\PublishProfiles\ApiMyLearn.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

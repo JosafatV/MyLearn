@@ -7,10 +7,14 @@ namespace MyLearnApi.BusinessLogic
 {
     public class clsCuentaDeUsuario
     {
+
+
         public const byte ROL_ESTUDIANTE = 1;
         public const byte ROL_EMPRESA = 2;
         public const byte ROL_PROFESOR = 3;
 
+
+       
         public static bool login(string username, string password)
         {
             using (MyLearnDBEntities entities = new MyLearnDBEntities())
@@ -35,5 +39,8 @@ namespace MyLearnApi.BusinessLogic
                     return 0;
             }
         }
+
+    
+
     }
 }
