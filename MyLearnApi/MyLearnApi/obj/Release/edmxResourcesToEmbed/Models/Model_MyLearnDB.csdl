@@ -369,6 +369,12 @@
       <End Role="PROYECTO_POR_ESTUDIANTE" EntitySet="PROYECTO_POR_ESTUDIANTE" />
     </AssociationSet>
     <EntitySet Name="VIEW_CURSOS" EntityType="MyLearnDBModel.VIEW_CURSOS" />
+    <FunctionImport Name="SP_Select_tecnologias_De_Proyecto" ReturnType="Collection(MyLearnDBModel.SP_Select_tecnologias_De_Proyecto_Result)">
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_SelectTecnologiasDeProyecto" EntitySet="TECNOLOGIA" ReturnType="Collection(MyLearnDBModel.TECNOLOGIA)">
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -1085,9 +1091,7 @@
     </Key>
     <Property Name="IdUniversidad" Type="Int32" Nullable="false" />
     <Property Name="IdProfesor" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="IdCurso" Type="Int32" Nullable="false" />
-    <Property Name="NotaEstudiante" Type="Int32" />
     <Property Name="NombreCurso" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
     <Property Name="CodigoCurso" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="NotaMinima" Type="Byte" Nullable="false" />
@@ -1095,4 +1099,9 @@
     <Property Name="FechaInicio" Type="DateTime" Precision="0" />
     <Property Name="NumeroGrupo" Type="Int32" />
   </EntityType>
+  <ComplexType Name="SP_Select_tecnologias_De_Proyecto_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+  </ComplexType>
 </Schema>

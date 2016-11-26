@@ -4,6 +4,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using MyLearnApi.Models;
 using System;
+using System.Data.Entity;
 using System.Globalization;
 
 namespace MyLearnApi.BusinessLogic

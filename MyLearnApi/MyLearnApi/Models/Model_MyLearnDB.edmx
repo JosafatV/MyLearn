@@ -248,17 +248,14 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_CURSOS' does not have a primary
           <Key>
             
             
-            
             <PropertyRef Name="IdCurso" />
             
           </Key>
           <Property Name="IdUniversidad" Type="int" Nullable="false" />
           <Property Name="IdProfesor" Type="char" MaxLength="100" Nullable="false" />
-          <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
           <Property Name="IdCurso" Type="int" Nullable="false" />
           <Property Name="FechaInicio" Type="date" />
           <Property Name="NumeroGrupo" Type="int" />
-          <Property Name="NotaEstudiante" Type="int" />
           <Property Name="NombreCurso" Type="char" MaxLength="30" />
           <Property Name="CodigoCurso" Type="char" MaxLength="10" />
           <Property Name="NotaMinima" Type="tinyint" Nullable="false" />
@@ -869,6 +866,9 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
         <Function Name="SP_Select_Cursos_Estudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdEstudiante" Type="char" Mode="In" />
         </Function>
+        <Function Name="SP_Select_tecnologias_De_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProyecto" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_select_tecnologias_por_trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdTrabajo" Type="int" Mode="In" />
         </Function>
@@ -909,11 +909,9 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <DefiningQuery>SELECT 
     [VIEW_CURSOS].[IdUniversidad] AS [IdUniversidad], 
     [VIEW_CURSOS].[IdProfesor] AS [IdProfesor], 
-    [VIEW_CURSOS].[IdEstudiante] AS [IdEstudiante], 
     [VIEW_CURSOS].[IdCurso] AS [IdCurso], 
     [VIEW_CURSOS].[FechaInicio] AS [FechaInicio], 
     [VIEW_CURSOS].[NumeroGrupo] AS [NumeroGrupo], 
-    [VIEW_CURSOS].[NotaEstudiante] AS [NotaEstudiante], 
     [VIEW_CURSOS].[NombreCurso] AS [NombreCurso], 
     [VIEW_CURSOS].[CodigoCurso] AS [CodigoCurso], 
     [VIEW_CURSOS].[NotaMinima] AS [NotaMinima], 
@@ -1506,6 +1504,12 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
             <End Role="PROYECTO_POR_ESTUDIANTE" EntitySet="PROYECTO_POR_ESTUDIANTE" />
           </AssociationSet>
           <EntitySet Name="VIEW_CURSOS" EntityType="MyLearnDBModel.VIEW_CURSOS" />
+          <FunctionImport Name="SP_Select_tecnologias_De_Proyecto" ReturnType="Collection(MyLearnDBModel.SP_Select_tecnologias_De_Proyecto_Result)">
+            <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_SelectTecnologiasDeProyecto" EntitySet="TECNOLOGIA" ReturnType="Collection(MyLearnDBModel.TECNOLOGIA)">
+            <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
           <Key>
@@ -2222,9 +2226,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           </Key>
           <Property Name="IdUniversidad" Type="Int32" Nullable="false" />
           <Property Name="IdProfesor" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
-          <Property Name="IdEstudiante" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
           <Property Name="IdCurso" Type="Int32" Nullable="false" />
-          <Property Name="NotaEstudiante" Type="Int32" />
           <Property Name="NombreCurso" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
           <Property Name="CodigoCurso" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="NotaMinima" Type="Byte" Nullable="false" />
@@ -2232,6 +2234,11 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
           <Property Name="FechaInicio" Type="DateTime" Precision="0" />
           <Property Name="NumeroGrupo" Type="Int32" />
         </EntityType>
+        <ComplexType Name="SP_Select_tecnologias_De_Proyecto_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2725,14 +2732,22 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
                 <ScalarProperty Name="NotaMinima" ColumnName="NotaMinima" />
                 <ScalarProperty Name="CodigoCurso" ColumnName="CodigoCurso" />
                 <ScalarProperty Name="NombreCurso" ColumnName="NombreCurso" />
-                <ScalarProperty Name="NotaEstudiante" ColumnName="NotaEstudiante" />
                 <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
                 <ScalarProperty Name="IdProfesor" ColumnName="IdProfesor" />
                 <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Select_tecnologias_De_Proyecto" FunctionName="MyLearnDBModel.Store.SP_Select_tecnologias_De_Proyecto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_tecnologias_De_Proyecto_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_SelectTecnologiasDeProyecto" FunctionName="MyLearnDBModel.Store.SP_Select_tecnologias_De_Proyecto" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

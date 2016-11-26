@@ -51,7 +51,7 @@ namespace MyLearnApi.Controllers
         [HttpGet]
         [Route("MyLearnApi/Proyectos/Curso/{idProyecto}")]
         [ResponseType(typeof(VIEW_PROYECTOS))]
-        public IHttpActionResult GetProyecto(string idProyecto)
+        public IHttpActionResult GetProyecto(int idProyecto)
         {
             VIEW_PROYECTOS vIEW_PROYECTOS = pobj_ProyectoLogic.getSpecificProyecto(idProyecto);
             if (vIEW_PROYECTOS == null)
@@ -60,6 +60,36 @@ namespace MyLearnApi.Controllers
             }
 
             return Ok(vIEW_PROYECTOS);
+        }
+
+        /// <summary>
+        /// get las tecnologias de un proyecto
+        /// </summary>
+        /// <param name="idProyecto"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("MyLearnApi/Proyectos/Tecnologias/{idProyecto}")]
+        [ResponseType(typeof(List<TECNOLOGIA>))]
+        public IHttpActionResult getTecnologiasDeProyecto(int idProyecto)
+        {
+            return Ok(pobj_ProyectoLogic.getTecnologiaDeProyecto(idProyecto));
+        }
+
+        [HttpPost]
+        [Route("MyLearnApi/Proyectos/Tecnologias")]
+        [ResponseType(typeof(TECNOLOGIA_POR_PROYECTO))]
+        public IHttpActionResult postTecnologiaDeProyecto(TECNOLOGIA_POR_PROYECTO tecnologiaproyecto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (pobj_ProyectoLogic.agregarTecnologiaAProyecto(tecnologiaproyecto) == null)
+            {
+                return Conflict();
+            }
+            else
+                return Ok(tecnologiaproyecto);
         }
 
         /// <summary>

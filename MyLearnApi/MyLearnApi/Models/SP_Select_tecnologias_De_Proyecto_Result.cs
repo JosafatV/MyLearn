@@ -10,16 +10,11 @@
 namespace MyLearnApi.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class USUARIO:clsJSONResource
+    public partial class SP_Select_tecnologias_De_Proyecto_Result
     {
-        public string Id { get; set; }
-        public string Contrasena { get; set; }
-        public string Sal { get; set; }
-        public string RepositorioArchivos { get; set; }
-        public string CredencialDrive { get; set; }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
         public string Estado { get; set; }
-        public string NombreDeUsuario { get; set; }
     }
 }

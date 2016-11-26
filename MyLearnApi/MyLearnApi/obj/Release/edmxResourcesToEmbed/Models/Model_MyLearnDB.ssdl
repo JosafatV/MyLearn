@@ -245,11 +245,9 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_CURSOS' does not have a primary
     </Key>
     <Property Name="IdUniversidad" Type="int" Nullable="false" />
     <Property Name="IdProfesor" Type="char" MaxLength="100" Nullable="false" />
-    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
     <Property Name="IdCurso" Type="int" Nullable="false" />
     <Property Name="FechaInicio" Type="date" />
     <Property Name="NumeroGrupo" Type="int" />
-    <Property Name="NotaEstudiante" Type="int" />
     <Property Name="NombreCurso" Type="char" MaxLength="30" />
     <Property Name="CodigoCurso" Type="char" MaxLength="10" />
     <Property Name="NotaMinima" Type="tinyint" Nullable="false" />
@@ -830,6 +828,9 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   <Function Name="SP_Select_Cursos_Estudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdEstudiante" Type="char" Mode="In" />
   </Function>
+  <Function Name="SP_Select_tecnologias_De_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdProyecto" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_select_tecnologias_por_trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdTrabajo" Type="int" Mode="In" />
   </Function>
@@ -870,11 +871,9 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       <DefiningQuery>SELECT 
     [VIEW_CURSOS].[IdUniversidad] AS [IdUniversidad], 
     [VIEW_CURSOS].[IdProfesor] AS [IdProfesor], 
-    [VIEW_CURSOS].[IdEstudiante] AS [IdEstudiante], 
     [VIEW_CURSOS].[IdCurso] AS [IdCurso], 
     [VIEW_CURSOS].[FechaInicio] AS [FechaInicio], 
     [VIEW_CURSOS].[NumeroGrupo] AS [NumeroGrupo], 
-    [VIEW_CURSOS].[NotaEstudiante] AS [NotaEstudiante], 
     [VIEW_CURSOS].[NombreCurso] AS [NombreCurso], 
     [VIEW_CURSOS].[CodigoCurso] AS [CodigoCurso], 
     [VIEW_CURSOS].[NotaMinima] AS [NotaMinima], 

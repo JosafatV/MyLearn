@@ -38,14 +38,13 @@ CREATE VIEW [dbo].[VIEW_ESTUDIANTE]
 CREATE VIEW [dbo].[VIEW_CURSOS]
 	AS
 		SELECT        dbo.CURSO_POR_UNIVERSIDAD.IdUniversidad, dbo.CURSO_POR_PROFESOR.IdProfesor,
-						 dbo.ESTUDIANTE_POR_CURSO.IdEstudiante, dbo.CURSO.Id AS IdCurso, 
+						 dbo.CURSO.Id AS IdCurso, 
 						 dbo.CURSO.FechaInicio, dbo.CURSO.NumeroGrupo,
-                         dbo.ESTUDIANTE_POR_CURSO.Nota AS NotaEstudiante, dbo.CURSO.Nombre AS NombreCurso, 
+                         dbo.CURSO.Nombre AS NombreCurso, 
 						 dbo.CURSO.Codigo AS CodigoCurso, dbo.CURSO.NotaMinima, dbo.CURSO.Estado AS EstadoCurso
-		FROM            dbo.CURSO INNER JOIN
+		FROM             dbo.CURSO INNER JOIN
                          dbo.CURSO_POR_PROFESOR ON dbo.CURSO.Id = dbo.CURSO_POR_PROFESOR.IdCurso INNER JOIN
-                         dbo.CURSO_POR_UNIVERSIDAD ON dbo.CURSO.Id = dbo.CURSO_POR_UNIVERSIDAD.IdCurso INNER JOIN
-                         dbo.ESTUDIANTE_POR_CURSO ON dbo.CURSO.Id = dbo.ESTUDIANTE_POR_CURSO.IdCurso
+                         dbo.CURSO_POR_UNIVERSIDAD ON dbo.CURSO.Id = dbo.CURSO_POR_UNIVERSIDAD.IdCurso 
 	GO
 
 			CREATE VIEW [dbo].[VIEW_PROYECTOS]
