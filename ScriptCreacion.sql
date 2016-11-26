@@ -107,7 +107,7 @@ CREATE TABLE EMPRESA (
     Telefono CHAR(15) NOT NULL ,
     Foto CHAR(100),
     FechaInscripcion DATE NOT NULL ,
-    PaginaWebEmpresa CHAR(30),
+    PaginaWebEmpresa CHAR(50),
     Pais CHAR(30) NOT NULL ,
     Region CHAR(30),
 	

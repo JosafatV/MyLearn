@@ -167,12 +167,12 @@ EXEC SP_Asignar_Tecnologia_Proyecto '3', '19'
 
 EXEC SP_Aceptar_Proyecto '1', '1', '1'
 
-EXEC SP_Insertar_Trabajo 'Decripción de STCs', 'Gran cantidad de informacion se encuentra en este STC, es necesario decriptarlo', '20', '11/10/2016', '12/01/2016', '','3000'
-EXEC SP_Asignar_Tecnologia_Trabajo '1', '1'
-EXEC SP_Asignar_Tecnologia_Trabajo '1', '2'
-EXEC SP_Insertar_Trabajo 'DrPischel', 'Para ser más competitivo la farmacia DrPischel desea crear un sistema de atención en línea, donde los usuarios puedan pre-ordenar medicamentos para facilitar su recolección', '20', '10/17/2016', '11/26/2016', '', '5000'
-EXEC SP_Asignar_Tecnologia_Trabajo '2', '1'
-EXEC SP_Asignar_Tecnologia_Trabajo '2', '3'
+EXEC SP_Insertar_Mensaje_Proyecto'Por favor enviarme una propuesta inicial del proyecto', '', '2','Ada Lovelace'
+EXEC SP_Insertar_Respuesta '2', 'Aquí adjunto la propuesta', 'https://drive.google.com/uc?export=download&id=0B54vssG6Ahg3SHk2QmprQkdmWVE','Gabriel Angelos'
+EXEC SP_Insertar_Respuesta '2', 'Excelente', '','Ada Lovelace'
+EXEC SP_Insertar_Mensaje_Proyecto 'Necesito que me envie el perfil de la empresa', '', '2','Gabriel Angelos'
+
+EXEC SP_Otorgar_Badge '1', '1', 'O'
 
 	/*Trabajos y tecnologías*/
 EXEC SP_Insertar_Trabajo 'Decripción de STCs', 'Gran cantidad de informacion se encuentra en este STC, es necesario decriptarlo', '20', '11/10/2016', '12/01/2016', '','3000'
@@ -210,11 +210,11 @@ EXEC SP_Insertar_Propuesta_Subasta 5, '7', 73000, 'For Lupercal!', '09/18/2019'
 EXEC SP_Insertar_Propuesta_Subasta 1, '8', 25000, 'There is only the Emperor!', '09/18/2019'
 EXEC SP_Insertar_Propuesta_Subasta 4, '9', 46000, 'No pity! No remorse! No fear!', '09/18/2019'
 
-EXEC SP_Otorgar_Badge '1', '1', 'O'
+EXEC SP_Aceptar_Subasta 2, '1'
 
-EXEC SP_Insertar_Mensaje_Trabajo 'Por favor enviarme una propuesta inicial del proyecto', '', '2','emisorX'
-EXEC SP_Insertar_Respuesta '1', 'Aquí adjunto la propuesta', '','emisorX'
-EXEC SP_Insertar_Mensaje_Trabajo 'Necesito que me envie el perfil de la empresa', '', '2','emisorX'
+EXEC SP_Insertar_Mensaje_Trabajo 'Por favor enviarme una propuesta inicial del proyecto', '', '2','Ernest Rutherford'
+EXEC SP_Insertar_Respuesta '1', 'Aquí adjunto la propuesta', 'https://drive.google.com/uc?export=download&id=0B54vssG6Ahg3SHk2QmprQkdmWVE','Gabriel Angelos'
+EXEC SP_Insertar_Mensaje_Trabajo 'Necesito que me envie el perfil de la empresa', '', '2','Gabriel Angelos'
 
 EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto DrPischel', '10/17/2016', '1'
 EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto Barbarras', '10/17/2016', '1'
