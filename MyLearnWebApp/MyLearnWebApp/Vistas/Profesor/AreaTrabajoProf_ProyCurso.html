@@ -1,4 +1,4 @@
-﻿|<html>
+﻿<html>
 <head>
 	<meta charset="UTF-8">
 	<title>Área de Trabajo</title>
@@ -10,7 +10,7 @@
 </head>
 <header>
 		<div class="wrapper">
-			<div class="logo">Nombre curso:&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota:{{trabajoActual.NotaObtenida}}
+			<div class="logo">Nombre curso:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota:{{trabajoActual.NotaObtenida}}
 				<div class="img">
                     <a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
 				</div>
@@ -57,7 +57,7 @@
 		</div>
         <!-- --------------------------------------------------------------No cambiaar por angular de aqui hasta abajo------------------------------------------------------------------------------------------- -->
 
-        <div id="div1" style="background-color:#b4b4b4; height: 500px;position:relative; border:4px solid black;">
+        <div id="div1" style="background-color:#252932; height: 500px;position:relative; border:4px solid black;">
             <div id="div2" style="max-height:100%;overflow:auto;">
 
                 <div class="container-fluid" data-ng-repeat="msj in ls_msjs">
@@ -139,8 +139,8 @@
 																		<div class="form-group">
                                                                             <textarea class="form-control" id="mensaje" data-ng-model="js_enviarMensaje.Contenido"></textarea>
                                                                             <br><br>
-                                                                            &nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md" data-ng-click="enviarMensaje()">Enviar</a>&nbsp; &nbsp;&nbsp; &nbsp;
-                                                                            <a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a>
+                                                                          	<a class="btn btn-tcc btn-default btn-md" data-ng-click="enviarMensaje()">Enviar</a>
+                                                                        		<a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a>
 																		</div>
 
 																</div>
@@ -165,7 +165,7 @@
 					          </tr>
 					    </table>
 					    <div class="container-fluid">
-					      <div class="col-md-offset-5">
+					      <div class="col-md-offset-4">
 					        <a class="btn btn-danger btn-lg" data-ng-click="do_terminarProyecto()">Terminar proyecto</a><br>
 					      </div>
 
