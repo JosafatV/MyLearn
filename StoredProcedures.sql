@@ -596,3 +596,44 @@ CREATE PROCEDURE SP_Promedio_Cursos_Aprobados @IdEstudiante CHAR(100)
 	GO
 */
 
+CREATE PROCEDURE SP_MyEmployee @Top INT
+	AS
+		SELECT TOP (@Top) A.IdEstudiante, (NotaPromedio+PromedioEstrellas+(ProyectosExitosos/ProyectosTerminados)+(CursosExitosos/CursosTerminados)) AS Performance
+		FROM 
+			(SELECT IdEstudiante, (SUM(Epc.Nota) / COUNT(Epc.IdCurso)) AS NotaPromedio
+			FROM ESTUDIANTE_POR_CURSO AS Epc
+			WHERE Epc.Estado = 'T'
+			GROUP BY IdEstudiante) AS A
+		JOIN
+			(SELECT IdEstudiante, (SUM(EstrellasObtenidas) / COUNT(IdTrabajo)) AS PromedioEstrellos
+			FROM VIEW_TRABAJO
+			WHERE (EstadoTrabajo = 'E' OR EstadoTrabajo = 'F')
+			GROUP BY IdEstudiante) AS B
+		ON A.IdEstudiante=B.IdEstudiante
+		JOIN
+			(SELECT IdEstudiante, COUNT(IdProyecto) AS ProyectosExitosos
+			FROM VIEW_PROYECTOS
+			WHERE EstadoProyecto='E'
+			GROUP BY IdEstudiante) AS C
+		ON A.IdEstudiante=C.IdEstudiante
+		JOIN
+			(SELECT IdEstudiante, COUNT(IdProyecto) AS ProyectosTerminados
+			FROM VIEW_PROYECTOS
+			WHERE (EstadoProyecto='E' OR EstadoProyecto='F')
+			GROUP BY IdEstudiante) AS D
+		On A.IdEstudiante=D.IdEstudiante
+		JOIN
+			(SELECT IdEstudiante, COUNT(IdCurso) AS CursosExitosos
+			FROM VIEW_CURSOS
+			WHERE EstadoCurso='E'
+			GROUP BY IdEstudiante) AS E
+		ON A.IdEstudiante=E.IdEstudiante
+		JOIN
+			(SELECT IdEstudiante, COUNT(IdCurso) AS CursosTerminados
+			FROM VIEW_CURSOS
+			WHERE (EstadoCurso='E' OR EstadoCurso='F')
+			GROUP BY IdEstudiante) AS F
+		 ON A.IdEstudiante=F.IdEstudiante
+	GO
+
+
