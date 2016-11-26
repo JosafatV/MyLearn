@@ -6,11 +6,7 @@ using System.Threading;
 using Google.Apis.Util.Store;
 using Google.Apis.Services;
 using File = Google.Apis.Drive.v2.Data.File;
-using Google.Apis.Auth.OAuth2.Flows;
-using Google.Apis.Auth.OAuth2.Responses;
-using Google.Apis.Auth.OAuth2.Requests;
-using Google.Apis.Util;
-using System.Net.Http;
+
 
 namespace GoogleDriveAPI
 {
@@ -54,12 +50,13 @@ namespace GoogleDriveAPI
                 string creadPath = System.Environment.CurrentDirectory;//.GetFolderPath(Environment.SpecialFolder.Personal);
                 creadPath =  Path.Combine(creadPath, "DriveApiCredentials", "DriveCredentials.json");
 
-                return GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets,
-                    Scopes,
-                    "User",
-                    CancellationToken.None,
-                    new FileDataStore(creadPath, true)).Result;                    
+                return GoogleWebAuthorizationBroker.AuthorizeAsync( GoogleClientSecrets.Load(stream).Secrets,
+                    Scopes,  
+                    "User",  
+                    CancellationToken.None,  
+                    new FileDataStore(creadPath, true))
+                    
+                    .Result;                    
             }
         }
 

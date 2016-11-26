@@ -183,7 +183,7 @@ namespace MyLearnApi.BusinessLogic
         public bool addCursoToEstudiante(ESTUDIANTE_POR_CURSO curso)
         {
             curso.Nota = 0;
-            curso.Estado = "A";
+            curso.Estado = "P";
             db.ESTUDIANTE_POR_CURSO.Add(curso);
             try
             {

@@ -292,6 +292,7 @@
     <Compile Include="Models\CURSO_POR_PROFESOR.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DriveIntegration\clsDriveConn.cs" />
     <Compile Include="Models\EMPRESA.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
@@ -354,6 +355,9 @@
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_Select_Cursos_Estudiante_Result.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_Select_tecnologias_De_Proyecto_Result.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_select_tecnologias_por_trabajo_Result.cs">

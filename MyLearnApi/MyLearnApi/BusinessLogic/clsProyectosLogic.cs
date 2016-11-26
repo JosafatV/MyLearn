@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using MyLearnApi.Models;
-
+using System.Data.Entity;
 
 namespace MyLearnApi.BusinessLogic
 {
@@ -24,14 +24,52 @@ namespace MyLearnApi.BusinessLogic
         }
 
 
-        public VIEW_PROYECTOS getSpecificProyecto(string idProyecto)
+        /// <summary>
+        /// Agrega una tecnologia a un proyecto
+        /// </summary>
+        /// <param name="tecnologia"></param>
+        /// <returns></returns>
+        public TECNOLOGIA_POR_PROYECTO agregarTecnologiaAProyecto(TECNOLOGIA_POR_PROYECTO tecnologia)
         {
-            return db.VIEW_PROYECTOS.Find(idProyecto);
+            tecnologia.Estado = "A";
+            db.TECNOLOGIA_POR_PROYECTO.Add(tecnologia);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (TecnologiaPorProtectoExists(tecnologia.IdTecnologia, tecnologia.IdProyecto))
+                {
+                    return null;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return tecnologia;
         }
 
+        public VIEW_PROYECTOS getSpecificProyecto(int idProyecto)
+        {
+            return db.VIEW_PROYECTOS.Where(p=> p.IdProyecto == idProyecto).ToList<VIEW_PROYECTOS>().First<VIEW_PROYECTOS>();
+        }
+
+        /// <summary>
+        /// obtiene las tecnologias de un proyecto
+        /// </summary>
+        /// <param name="idProyecto"></param>
+        /// <returns></returns>
+        public List<TECNOLOGIA> getTecnologiaDeProyecto(int idProyecto)
+        {
+            return db.Sp_SelectTecnologiasDeProyecto(idProyecto).ToList<TECNOLOGIA>(); ;
+        }
 
         public VIEW_PROYECTOS PostVIEW_PROYECTOS(VIEW_PROYECTOS proyect)
         {
+
+            
            
             proyect.IdProyecto = db.SP_InsertarPropuestaProyecto(
                 proyect.IdEstudiante,
@@ -48,6 +86,10 @@ namespace MyLearnApi.BusinessLogic
                 0
             ).SingleOrDefault().Value;
 
+
+            ESTUDIANTE_POR_CURSO lobj_estCurso = db.ESTUDIANTE_POR_CURSO.Find(proyect.IdEstudiante, proyect.IdCurso);
+            lobj_estCurso.Estado = "A";
+            db.Entry(lobj_estCurso).State = EntityState.Modified;
             try
             {
                 db.SaveChanges();
@@ -161,6 +203,11 @@ namespace MyLearnApi.BusinessLogic
         private bool BADGE_POR_PROYECTOExists(int idBadge, int idProyecto)
         {
             return db.BADGE_POR_PROYECTO.Find(idBadge,idProyecto) != null;
+        }
+
+        private bool TecnologiaPorProtectoExists(int idTecnologia, int idProyecto)
+        {
+            return db.TECNOLOGIA_POR_PROYECTO.Find(idTecnologia, idProyecto) != null;
         }
 
 

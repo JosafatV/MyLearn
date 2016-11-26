@@ -16,9 +16,7 @@ namespace MyLearnApi.Models
     {
         public int IdUniversidad { get; set; }
         public string IdProfesor { get; set; }
-        public string IdEstudiante { get; set; }
         public int IdCurso { get; set; }
-        public Nullable<int> NotaEstudiante { get; set; }
         public string NombreCurso { get; set; }
         public string CodigoCurso { get; set; }
         public byte NotaMinima { get; set; }

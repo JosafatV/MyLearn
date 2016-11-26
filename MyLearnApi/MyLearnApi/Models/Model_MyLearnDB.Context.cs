@@ -969,5 +969,32 @@ namespace MyLearnApi.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_GetLAstUserId");
         }
+    
+        public virtual ObjectResult<SP_Select_tecnologias_De_Proyecto_Result> SP_Select_tecnologias_De_Proyecto(Nullable<int> idProyecto)
+        {
+            var idProyectoParameter = idProyecto.HasValue ?
+                new ObjectParameter("IdProyecto", idProyecto) :
+                new ObjectParameter("IdProyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Select_tecnologias_De_Proyecto_Result>("SP_Select_tecnologias_De_Proyecto", idProyectoParameter);
+        }
+    
+        public virtual ObjectResult<TECNOLOGIA> Sp_SelectTecnologiasDeProyecto(Nullable<int> idProyecto)
+        {
+            var idProyectoParameter = idProyecto.HasValue ?
+                new ObjectParameter("IdProyecto", idProyecto) :
+                new ObjectParameter("IdProyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TECNOLOGIA>("Sp_SelectTecnologiasDeProyecto", idProyectoParameter);
+        }
+    
+        public virtual ObjectResult<TECNOLOGIA> Sp_SelectTecnologiasDeProyecto(Nullable<int> idProyecto, MergeOption mergeOption)
+        {
+            var idProyectoParameter = idProyecto.HasValue ?
+                new ObjectParameter("IdProyecto", idProyecto) :
+                new ObjectParameter("IdProyecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TECNOLOGIA>("Sp_SelectTecnologiasDeProyecto", mergeOption, idProyectoParameter);
+        }
     }
 }
