@@ -12,6 +12,12 @@ using System.Threading;
 using Google.Apis.Util.Store;
 using Google.Apis.Services;
 using File = Google.Apis.Drive.v2.Data.File;
+using Newtonsoft.Json.Linq;
+using Google.Apis.Http;
+using System.Text;
+using Google.Apis.Auth.OAuth2.Flows;
+using Google.Apis.Auth.OAuth2.Responses;
+
 namespace MyLearnApi.Controllers
 {
     public class RepositoriosController : ApiController
@@ -19,11 +25,14 @@ namespace MyLearnApi.Controllers
         private static string[] Scopes = { DriveService.Scope.Drive };
         private static string ApplicationName = "MyLearn";
 
-        private static string _fileName = "Drive_Test";
-        private static string _filePath = @"C:\Users\Giovanni\Desktop\vgaFuncionando1.jpg";
-        private static string _contentType = "image/png";
+        private static string _fileName = "oh oh baby baby";
+        private static string _filePath = @"C:\Users\Sebastian\Desktop\kuhk.txt";
+        private static string _contentType = "JSON/json";
 
-        static void Main(string[] args)
+        public static string UserIdentifier { get; private set; }
+
+        [HttpGet]
+        public void Main()
         {
 
 
@@ -49,18 +58,39 @@ namespace MyLearnApi.Controllers
         private static UserCredential getUserCredential()
         {
 
-            using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
+            var flow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
             {
-                string creadPath = System.Environment.CurrentDirectory;//.GetFolderPath(Environment.SpecialFolder.Personal);
+                ClientSecrets = new ClientSecrets
+                {
+                    ClientId = "945542049910-ie4l7np3hup7qpev39stcc4o7rlti85j.apps.googleusercontent.com",
+                    ClientSecret = "EIuppefDWrd3rOh4RyYSt-DH"
+                },
+                Scopes = new[] { DriveService.Scope.Drive }
+            });
+
+            var credential = new UserCredential(flow, UserIdentifier, new TokenResponse
+            {
+                AccessToken = "ya29.CjCiA2igTRXT7GMTm-iDYTWKA85jeXH9LAljB3QqN0tUjVzsg6OazQIrDpf5xtFUhWs",
+                RefreshToken = "1/8JPtltWzwmTzEAc9r2eKVeVOCXglqCG-suuzrA65D5-8iwKCcDulbd4yXzq1EKxl"
+            });
+            return credential;
+
+           
+
+            /*string creadPath = @"C:\Users\Sebastian\Documents\";
                 creadPath = Path.Combine(creadPath, "DriveApiCredentials", "DriveCredentials.json");
 
-                return GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets,
-                    Scopes,
-                    "User",
-                    CancellationToken.None,
-                    new FileDataStore(creadPath, true)).Result;
-            }
+            FileDataStore credentialsFile = new FileDataStore(creadPath, true);
+
+
+            return GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(stream).Secrets,
+                   Scopes,
+                   "User",
+                   CancellationToken.None,
+                   new FileDataStore(creadPath, true))
+
+                   .Result;*/
+
         }
 
         /**
@@ -70,12 +100,22 @@ namespace MyLearnApi.Controllers
         **/
         private static DriveService GetDriveService(UserCredential credentials)
         {
-            return new DriveService(
+            
+            var service = new DriveService(new BaseClientService.Initializer
+            {
+                ApplicationName = ApplicationName, //ok
+                HttpClientInitializer = credentials, //ok
+                DefaultExponentialBackOffPolicy = ExponentialBackOffPolicy.Exception | ExponentialBackOffPolicy.UnsuccessfulResponse503
+            });
+
+            return service;
+
+           /* return new DriveService(
                 new BaseClientService.Initializer
                 {
-                    HttpClientInitializer = credentials,
+                    HttpClientInitializer = credentials ,
                     ApplicationName = ApplicationName
-                });
+                });*/
 
         }
 
@@ -87,8 +127,26 @@ namespace MyLearnApi.Controllers
          * this link will be stored into the database to retrived to the view later.
          * 
         **/
-        public static string UploadFileToDrive(DriveService service, string fileName, string filePath,  string contentType)
+        public static string UploadFileToDrive(DriveService service, string fileName, string filePath, string contentType)
         {
+
+            string jason = "{"
+                               + "\"installed\": {"
+                               + "\"client_id\": \"945542049910-ie4l7np3hup7qpev39stcc4o7rlti85j.apps.googleusercontent.com\","
+                               + "\"project_id\": \"basic-computing-149501\","
+                               + "\"auth_uri\": \"https://accounts.google.com/o/oauth2/auth  \",  "
+                               + "\"token_uri\": \"https://accounts.google.com/o/oauth2/token \", "
+                               + "\"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs  \","
+                               + "\"client_secret\": \"EIuppefDWrd3rOh4RyYSt-DH\","
+                               + "\"redirect_uris\": [ \"urn:ietf:wg:oauth:2.0:oob\", \"http://localhost \" ]"
+                               + "}"
+                        + "}";
+
+            byte[] byteArray = Encoding.UTF8.GetBytes(jason);
+            Stream stream = new MemoryStream(byteArray);
+
+
+
 
             var fileMetadata = new File();
             fileMetadata.LastModifyingUserName = fileName;
@@ -99,11 +157,11 @@ namespace MyLearnApi.Controllers
 
             //----------Esto se cambia por el archivo recibido por el WebService
 
-            using (var stream = new FileStream(_filePath, FileMode.Open))
-            {
+        //  using (var stream = new FileStream(_filePath, FileMode.Open))
+          //  {
                 request = service.Files.Insert(fileMetadata, stream, "");
                 request.Upload();
-            }
+            //}
 
             //-----------------------------------
 

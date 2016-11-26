@@ -461,6 +461,9 @@
     <Content Include="Models\Model_MyLearnDB.edmx.diagram">
       <DependentUpon>Model_MyLearnDB.edmx</DependentUpon>
     </Content>
+    <None Include="Controllers\client_secret.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\PublishProfiles\ApiMyLearn.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

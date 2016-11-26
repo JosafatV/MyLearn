@@ -16,8 +16,8 @@ namespace GoogleDriveAPI
         private static string ApplicationName = "MyLearn";
 
         private static string _fileName = "Drive_Test";
-        private static string _filePath = @"C:\Users\Giovanni\Desktop\vgaFuncionando1.jpg";
-        private static string _contentType = "image/png";
+        private static string _filePath = @"C:\Users\Sebastian\Desktop\kuhk.txt";
+        private static string _contentType = "Text/txt";
 
         static  void Main(string[] args)
         {
@@ -44,6 +44,8 @@ namespace GoogleDriveAPI
         **/
         private static UserCredential getUserCredential()
         {
+
+
 
             using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
             {

@@ -162,6 +162,7 @@ namespace MyLearnApi.Controllers
         [HttpOptions]
         [Route("MyLearnApi/CursosPorProfesor")]
         [Route("MyLearnApi/Cursos/Badges")]
+        [Route("MyLearnApi/Cursos/Terminado/{idCurso}")]
         public HttpResponseMessage Options()
         {
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
