@@ -1,12 +1,14 @@
 ﻿angular.module('mod_MyLearn').controller('ctrl_crearCuentaEmpresa', ['$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService',
     function ($q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService) {
 
+        $scope.publicadoExitosamente = false;
+        $scope.publicadoErroneamente = false;
 
         $scope.usuario = "";
         $scope.contrasenia = "";
 
         $scope.js_crearCuenta = {
-            Id: "",
+            NombreDeUsuario: "",
             NombreContacto: "",
             ApellidoContacto: "",
             NombreEmpresarial: "",
@@ -32,7 +34,16 @@
 
         $scope.set_sendCuenta = function () {            
             fct_MyLearn_API_Client.save({ type: 'Empresas' }, $scope.js_crearCuenta).$promise.then(function (data) {
+                $scope.publicadoExitosamente = true;
+                $scope.publicadoErroneamente = false;
+            }, function (error) {
+                $scope.publicadoExitosamente = false;
+                $scope.publicadoErroneamente = true;
             });
         }
+
+        $scope.goCrearCuenta = function () {
+            $location.path("/MyLearn/CrearCuentaComo");
+        };
 
     }]);

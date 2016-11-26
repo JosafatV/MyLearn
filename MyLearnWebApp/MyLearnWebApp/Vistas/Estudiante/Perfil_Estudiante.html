@@ -78,6 +78,8 @@
                         <td>{{proyecto.EstadoProyecto}}</td>
                     </tr>
 			</table> <br><br>
+                <button data-ng-disabled="num_isNextPaginationTrabajos == 0" data-ng-click="get_20MoreSubastas()">Mas 20 proyectos</button>
+                <button data-ng-disabled="num_indexSubastas < 1" data-ng-click="get_20LessSubasta()">Menos 20 proyectos</button>
 			<h3>Mis Cursos:</h3>
 			<table class="table table-bordered table-hover table-condensed prom1">
 					<tr>
@@ -105,6 +107,8 @@
                         <td>{{trabajos.Nombre}}</td>
                         <td>{{trabajos.EstadoTrabajo}}</td>
                 </table> <br><br>
+                <button data-ng-disabled="num_isNextPaginationTrabajos == 0" data-ng-click="get_20MoreSubastas()">Mas 20 trabajos</button>
+                <button data-ng-disabled="num_indexSubastas < 1" data-ng-click="get_20LessSubasta()">Menos 20 trabajos</button>
                 <div class="container-fluid">
                     <section class="main row">
                         <article class="col-md-6">
@@ -125,6 +129,8 @@
 
             </div>
 
+            <button data-ng-disabled="num_isNextPaginationSubastas == 0" data-ng-click="get_20MoreWork()" data-ng-disabled="">Mas 20 trabajos</button>
+            <button data-ng-disabled="num_indexTrabajos < 1" data-ng-click="get_20LessWork()">Menos 20 trabajos</button>
 
 
 	</body>

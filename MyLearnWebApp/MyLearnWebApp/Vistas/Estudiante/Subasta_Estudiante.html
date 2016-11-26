@@ -30,10 +30,6 @@
 						<h2 class="modal-tittle">Mis Notificaciones:</h2>
 					</div>
 					<!--Contenido-->
-					<div class="modal-body">
-						<label for="">Chancher es playo</label> <br>
-							<label for="">Alto,macho y guapo...mmmm</label>
-					</div>
 					<!--Footer-->
 					<div class="modal-footer">
 						<button type="button"class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -76,12 +72,12 @@
             <form action=""class="">
               <div class="form-group">
                 <br>
-                <label for="nombre" placeholder="~">Nombre de la subasta:</label>
-                <input  class="form-control" id="nombre"type="text" data-ng-model="str_nombre">
+                <label for="nombre" >Nombre de la subasta:</label>
+                <input  class="form-control" placeholder="~"  id="nombre"type="text" data-ng-model="str_nombre">
               </div>
                 <div class="form-group">
                     <label for="País">Tecnología:</label>
-                    <select ng-options="tec.Nombre for tec in ls_tecnologias" class="form-control" data-ng-model="str_tecnologia" data-ng-change="changePais()"></select> <br>
+                    <select placeholder="0" ng-options="tec.Nombre for tec in ls_tecnologias" class="form-control" data-ng-model="str_tecnologia" data-ng-change="changePais()"></select> <br>
                     <button class="btn btn-tcc btn-success btn-md"  data-ng-click="get_subastas()">Realizar Busqueda</button>
                 </div>
             </form>

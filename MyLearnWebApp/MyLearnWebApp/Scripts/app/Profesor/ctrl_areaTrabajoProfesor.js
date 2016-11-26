@@ -128,8 +128,6 @@
         };
 
         $scope.do_terminarProyecto = function () {
-            alert(angular.toJson($routeParams.IdEst));
-            alert(angular.toJson($routeParams.IdTrabajo));
             fct_MyLearn_API_Client.save({ type: 'ProyectosTerminados', extension1: $routeParams.IdTrabajo, extension2: $routeParams.IdEst }, {}).$promise.then(function (data) {
                 $scope.do_goCurso();
             });

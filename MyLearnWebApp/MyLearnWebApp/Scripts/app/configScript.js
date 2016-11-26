@@ -1,5 +1,10 @@
 ﻿angular.module('mod_MyLearn').config(['$routeProvider', function ($routeProvider) {
     $routeProvider
+
+    .when('/MyLearn/CrearCuentaComo', {
+        templateUrl: 'Vistas/Login/CrearCuenta_Como.html',
+        controller: 'ctrl_crearCuentaComo'
+    })
 /*-------------------------------------Profesor-------------------------------------------*/
     .when('/MyLearn/Profesor/CrearCuenta', {
         templateUrl: 'Vistas/Profesor/Crear_CuentaProfesor.html',

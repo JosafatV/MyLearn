@@ -72,7 +72,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', '$
         };
 
         $scope.goCrearCuenta = function () {
-            $location.path("/MyLearn/Estudiante/CrearCuenta");
+            $location.path("/MyLearn/CrearCuentaComo");
         };
 
     }]);

@@ -298,6 +298,7 @@
     <Content Include="Scripts\app\Estudiante\ctrl_proponerProyecto.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_responderMensaje.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_subastaEstudiante.js" />
+    <Content Include="Scripts\app\Login\ctrl_crearCuentaComo.js" />
     <Content Include="Scripts\app\Profesor\ctrl_areaTrabajoProfesor.js" />
     <Content Include="Scripts\app\Profesor\ctrl_crearCuentaProfesor.js" />
     <Content Include="Scripts\app\Profesor\ctrl_crearCurso.js" />
@@ -408,6 +409,7 @@
     <Content Include="Vistas\Estilo\css\Estilos_AreaTPE.css" />
     <Content Include="Vistas\Estilo\css\Estilos_CrearCE.css" />
     <Content Include="Vistas\Estilo\css\Estilos_CrearCP.css" />
+    <Content Include="Vistas\Estilo\css\Estilos_CrearCuentaComo.css" />
     <Content Include="Vistas\Estilo\css\Estilos_CrearCuentaEmpresa.css" />
     <Content Include="Vistas\Estilo\css\Estilos_CrearCurso.css" />
     <Content Include="Vistas\Estilo\css\Estilos_CrearSubasta.css" />
@@ -425,6 +427,9 @@
     <Content Include="Vistas\Estilo\img\badgepeq.png" />
     <Content Include="Vistas\Estilo\img\ball.jpg" />
     <Content Include="Vistas\Estilo\img\ball.png" />
+    <Content Include="Vistas\Estilo\img\empresa.png" />
+    <Content Include="Vistas\Estilo\img\estudiante.jpg" />
+    <Content Include="Vistas\Estilo\img\profesor.png" />
     <Content Include="Vistas\Estilo\js\bootstrap.js" />
     <Content Include="Vistas\Estilo\js\bootstrap.min.js" />
     <Content Include="Vistas\Estilo\js\jquery.js" />
@@ -440,6 +445,7 @@
     <Content Include="Vistas\Estudiante\ResponderMsj.html" />
     <Content Include="Vistas\Estudiante\Subasta_Estudiante.html" />
     <Content Include="Vistas\Estudiante\verBadgesEstudiante.html" />
+    <Content Include="Vistas\Login\CrearCuenta_Como.html" />
     <Content Include="Vistas\Login\Login.html" />
     <Content Include="Vistas\Profesor\AreaTrabajoProf_ProyCurso.html" />
     <Content Include="Vistas\Profesor\Crear_CuentaProfesor.html" />

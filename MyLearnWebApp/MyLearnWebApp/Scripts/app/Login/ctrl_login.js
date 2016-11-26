@@ -36,6 +36,10 @@ angular.module('mod_MyLearn').controller('ctrl_login', ['fct_User', '$q', '$scop
             $location.path(url + id);
         };
 
+        $scope.crearCuentaComo = function () {
+            $location.path("/MyLearn/CrearCuentaComo");
+        };
+
         $scope.goCrearCuentaEstudiante = function () {
             $location.path("/MyLearn/Estudiante/CrearCuenta");
         };
