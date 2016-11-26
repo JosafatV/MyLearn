@@ -306,8 +306,8 @@ CREATE PROCEDURE SP_Select_Badge_Por_Proyecto_No_Otorgado (@IdCurso INT,@IdProye
 		SELECT DISTINCT (BADGE.Id), BADGE.Nombre, BADGE.Puntaje, BADGE.IdCurso
 		FROM BADGE INNER JOIN CURSO ON BADGE.IdCurso= CURSO.Id , BADGE_POR_PROYECTO 
 
-		WHERE CURSO.Id = @IdCurso AND BADGE_POR_PROYECTO.IdProyecto = @IdProyecto 
-		AND BADGE_POR_PROYECTO.IdBadge != BADGE.Id
+		WHERE CURSO.Id = @IdCurso  
+				AND NOT EXISTS (SELECT * FROM BADGE_POR_PROYECTO WHERE BADGE_POR_PROYECTO.IdProyecto = @IdProyecto) 
 	GO
 
 	/*Marks a student as attending a course*/
