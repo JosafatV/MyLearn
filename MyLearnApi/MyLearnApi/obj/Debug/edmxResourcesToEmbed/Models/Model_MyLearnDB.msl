@@ -479,5 +479,30 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="VIEW_CURSOS">
+      <EntityTypeMapping TypeName="MyLearnDBModel.VIEW_CURSOS">
+        <MappingFragment StoreEntitySet="VIEW_CURSOS">
+          <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="EstadoCurso" ColumnName="EstadoCurso" />
+          <ScalarProperty Name="NotaMinima" ColumnName="NotaMinima" />
+          <ScalarProperty Name="CodigoCurso" ColumnName="CodigoCurso" />
+          <ScalarProperty Name="NombreCurso" ColumnName="NombreCurso" />
+          <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+          <ScalarProperty Name="IdProfesor" ColumnName="IdProfesor" />
+          <ScalarProperty Name="IdUniversidad" ColumnName="IdUniversidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Select_tecnologias_De_Proyecto" FunctionName="MyLearnDBModel.Store.SP_Select_tecnologias_De_Proyecto">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_tecnologias_De_Proyecto_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_SelectTecnologiasDeProyecto" FunctionName="MyLearnDBModel.Store.SP_Select_tecnologias_De_Proyecto" />
   </EntityContainerMapping>
 </Mapping>

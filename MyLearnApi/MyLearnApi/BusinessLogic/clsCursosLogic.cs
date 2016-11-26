@@ -82,13 +82,17 @@ namespace MyLearnApi.BusinessLogic
         }
 
         /// <summary>
-        /// cambia el estado de un curso a T (terminado)
+        /// cambia el estado de un curso a T (terminado) y todos los proyectos relacionados e este curso
+       
         /// </summary>
         /// <param name="idCurso"></param>
         /// <returns></returns>
         public bool terminarCurso(int idCurso)
         {
+            //pone en estado "T" (terminado) el curso con "idCurso" y "estudiante por curso" con "idcurso"
             db.SP_TerminarCurso(idCurso);
+            //pone en estado "T" (terminado)  los "proyectos" con idCurso "
+            db.SP_Terminar_Proyectos_De_Un_Curso(idCurso);
             try
             {
                 db.SaveChanges();

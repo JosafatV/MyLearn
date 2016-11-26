@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e89c74aac38c472f9e27064a310e3ebf" Name="Diagram1" ZoomLevel="82" DisplayType="true">
+      <Diagram DiagramId="e89c74aac38c472f9e27064a310e3ebf" Name="Diagram1" ZoomLevel="50" DisplayType="true">
         <EntityTypeShape EntityType="MyLearnDBModel.ESTUDIANTE" Width="2.375" PointX="2.125" PointY="0.5" />
         <EntityTypeShape EntityType="MyLearnDBModel.USUARIO" Width="1.5" PointX="7.625" PointY="2.125" />
         <AssociationConnector Association="MyLearnDBModel.FK_ESTUDIANTE_ID" />
@@ -60,9 +60,15 @@
         <AssociationConnector Association="MyLearnDBModel.FK_IDBADGE_BADGE_POR_PROYECTO" />
         <EntityTypeShape EntityType="MyLearnDBModel.MENSAJE_POR_PROYECTO" Width="2.125" PointX="21.625" PointY="16" />
         <AssociationConnector Association="MyLearnDBModel.FK_IDMENSAJE_MENSAJE_POR_PROYECTO" />
-        <EntityTypeShape EntityType="MyLearnDBModel.PROYECTO_POR_ESTUDIANTE" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="MyLearnDBModel.PROYECTO_POR_ESTUDIANTE" Width="2.125" PointX="5.25" PointY="0.75" />
         <AssociationConnector Association="MyLearnDBModel.FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE" />
         <EntityTypeShape EntityType="MyLearnDBModel.VIEW_CURSOS" Width="2.25" PointX="20.75" PointY="11.625" />
+        <EntityTypeShape EntityType="MyLearnDBModel.PROYECTO" Width="1.5" PointX="3.625" PointY="21.25" />
+        <AssociationConnector Association="MyLearnDBModel.FK_IDPROYECTO_BADGE_POR_PROYECTO" />
+        <AssociationConnector Association="MyLearnDBModel.FK_ID_CURSO" />
+        <AssociationConnector Association="MyLearnDBModel.FK_IDPROYECTO_MENSAJE_POR_PROYECTO" />
+        <AssociationConnector Association="MyLearnDBModel.FK_IDPROYECTO_PROYECTO_POR_ESTUDIANTE" />
+        <AssociationConnector Association="MyLearnDBModel.FK_IDPROYECTO_TECNOLOGIA_POR_PROYECTO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -57,6 +57,7 @@ namespace MyLearnApi.Models
         public virtual DbSet<MENSAJE_POR_PROYECTO> MENSAJE_POR_PROYECTO { get; set; }
         public virtual DbSet<PROYECTO_POR_ESTUDIANTE> PROYECTO_POR_ESTUDIANTE { get; set; }
         public virtual DbSet<VIEW_CURSOS> VIEW_CURSOS { get; set; }
+        public virtual DbSet<PROYECTO> PROYECTO { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {
@@ -995,6 +996,32 @@ namespace MyLearnApi.Models
                 new ObjectParameter("IdProyecto", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TECNOLOGIA>("Sp_SelectTecnologiasDeProyecto", mergeOption, idProyectoParameter);
+        }
+    
+        public virtual int SP_Terminar_Proyectos_De_Un_Curso(Nullable<int> idCurso)
+        {
+            var idCursoParameter = idCurso.HasValue ?
+                new ObjectParameter("IdCurso", idCurso) :
+                new ObjectParameter("IdCurso", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Terminar_Proyectos_De_Un_Curso", idCursoParameter);
+        }
+    
+        public virtual int SP_Terminar_Proyecto_De_Un_Estudiante(Nullable<int> idProyecto, string idEstudiante, string estado)
+        {
+            var idProyectoParameter = idProyecto.HasValue ?
+                new ObjectParameter("IdProyecto", idProyecto) :
+                new ObjectParameter("IdProyecto", typeof(int));
+    
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Terminar_Proyecto_De_Un_Estudiante", idProyectoParameter, idEstudianteParameter, estadoParameter);
         }
     }
 }

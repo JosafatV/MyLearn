@@ -115,6 +115,29 @@ namespace MyLearnApi.Controllers
         }
 
         /// <summary>
+        /// Post que termina un proyecto de un estudiante
+        /// </summary>
+        /// <param name="idProyecto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("MyLearnApi/ProyectosTerminados/{idProyecto}/{idEstudiante}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult TerminarProyecto(int idProyecto,string idEstudiante)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (pobj_ProyectoLogic.terminarProyecto(idProyecto,idEstudiante) == false)
+            {
+                //si no lo cuentra para modificarlo
+                return NotFound();
+            }
+            else
+                return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        /// <summary>
         /// Otorga un badge a un proyecto
         /// </summary>
         /// <param name="bADGE_POR_PROYECTO"></param>

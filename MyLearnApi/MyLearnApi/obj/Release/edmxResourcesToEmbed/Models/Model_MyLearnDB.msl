@@ -504,5 +504,22 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Sp_SelectTecnologiasDeProyecto" FunctionName="MyLearnDBModel.Store.SP_Select_tecnologias_De_Proyecto" />
+    <EntitySetMapping Name="PROYECTO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.PROYECTO">
+        <MappingFragment StoreEntitySet="PROYECTO">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="NotaObtenida" ColumnName="NotaObtenida" />
+          <ScalarProperty Name="DocumentoAdicional" ColumnName="DocumentoAdicional" />
+          <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Problematica" ColumnName="Problematica" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Terminar_Proyecto_De_Un_Estudiante" FunctionName="MyLearnDBModel.Store.SP_Terminar_Proyecto_De_Un_Estudiante" />
   </EntityContainerMapping>
 </Mapping>

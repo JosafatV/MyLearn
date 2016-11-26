@@ -258,7 +258,29 @@ CREATE PROCEDURE SP_TerminarCurso (@IdCurso INT)
 		/*Calcular nota*/
 
 	GO
+/*  termina todos los proyectos de un curso */
+DROP PROCEDURE SP_Terminar_Proyectos_De_Un_Curso
+CREATE PROCEDURE SP_Terminar_Proyectos_De_Un_Curso (@IdCurso INT)
+	AS
+	
+		UPDATE PROYECTO
+		SET ESTADO = 'T'
+		WHERE IdCurso = @IdCurso;
 
+	GO
+
+CREATE PROCEDURE SP_Terminar_Proyecto_De_Un_Estudiante (@IdProyecto INT , @IdEstudiante CHAR(100), @Estado CHAR(1))
+	AS
+	
+		UPDATE PROYECTO_POR_ESTUDIANTE
+		SET ESTADO = @Estado
+		WHERE IdProyecto = @IdProyecto  AND IdEstudiante = @IdEstudiante;
+
+		UPDATE PROYECTO
+		SET ESTADO = @Estado
+		WHERE @IdProyecto = @IdProyecto;
+
+	GO
 
 	/*Creates a badge for a course*/
 CREATE PROCEDURE SP_Insertar_Badge (@Nombre CHAR (30), @Puntaje TINYINT, @IdCurso INT) 

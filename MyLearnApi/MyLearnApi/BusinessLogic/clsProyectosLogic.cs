@@ -96,7 +96,7 @@ namespace MyLearnApi.BusinessLogic
             }
             catch (DbUpdateException)
             {
-                if (VIEW_PROYECTOSExists(proyect.IdEstudiante, proyect.IdProyecto))
+                if (ProyectoProEstudianteExists( proyect.IdProyecto,proyect.IdEstudiante))
                 {
                     return null;
                 }
@@ -108,14 +108,6 @@ namespace MyLearnApi.BusinessLogic
             return proyect;
         }
 
-        public void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-           
-        }
 
 
         /// <summary>
@@ -169,35 +161,45 @@ namespace MyLearnApi.BusinessLogic
             return db.SP_SelectBadgePorProyectoNoOtorgado(idCurso,idProyecto).ToList<BADGE>();
         }
 
-
-
-     /*   public PRO crearOfertaSubasta(TRABAJO_POR_ESTUDIANTE oferta)
+        /// <summary>
+        /// termina un proyecto y un proyecto por estudiante
+        /// </summary>
+        /// <param name="idProyecto"></param>
+        /// <returns></returns>
+        public bool terminarProyecto(int idProyecto, string idEstudiante)
         {
-            //comienza con estado pendiente
-            oferta.Estado = "P";
-            db.TRABAJO_POR_ESTUDIANTE.Add(oferta);
+            //cambia el estado de un proyecto a "T" y de un proyecto por estudiante
+            db.SP_Terminar_Proyecto_De_Un_Estudiante(idProyecto, idEstudiante, "T");
             try
             {
                 db.SaveChanges();
             }
             catch (DbUpdateException)
-            {
-                if (trabajoPorEstudianteExists(oferta.IdTrabajo, oferta.IdEstudiante))
+            { 
+                if (!ProyectoExists(idProyecto) || !ProyectoProEstudianteExists(idProyecto,idEstudiante))
                 {
-                    return null;
+                    return false;
                 }
                 else
                 {
                     throw;
                 }
             }
+            return true;
+        }
+       
+    
 
-            return oferta;
-        }*/
 
-        private bool VIEW_PROYECTOSExists(string idEstudiante, int idProyecto)
+
+        private bool ProyectoExists(int idProyecto)
         {
-            return db.VIEW_PROYECTOS.Find(idEstudiante, idProyecto) != null;
+            return db.PROYECTO.Find(idProyecto)!=null;
+        }
+
+        private bool ProyectoProEstudianteExists(int idProyecto, string idEstudiante)
+        {
+            return db.PROYECTO_POR_ESTUDIANTE.Find(idProyecto, idEstudiante) != null;
         }
 
         private bool BADGE_POR_PROYECTOExists(int idBadge, int idProyecto)
@@ -208,6 +210,16 @@ namespace MyLearnApi.BusinessLogic
         private bool TecnologiaPorProtectoExists(int idTecnologia, int idProyecto)
         {
             return db.TECNOLOGIA_POR_PROYECTO.Find(idTecnologia, idProyecto) != null;
+        }
+
+
+        public void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+
         }
 
 

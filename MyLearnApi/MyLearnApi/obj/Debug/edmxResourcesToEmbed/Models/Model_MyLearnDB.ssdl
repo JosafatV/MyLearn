@@ -238,6 +238,22 @@
     <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'MyLearnDB.dbo.VIEW_CURSOS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VIEW_CURSOS">
+    <Key>
+      <PropertyRef Name="IdCurso" />
+    </Key>
+    <Property Name="IdUniversidad" Type="int" Nullable="false" />
+    <Property Name="IdProfesor" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="IdCurso" Type="int" Nullable="false" />
+    <Property Name="FechaInicio" Type="date" />
+    <Property Name="NumeroGrupo" Type="int" />
+    <Property Name="NombreCurso" Type="char" MaxLength="30" />
+    <Property Name="CodigoCurso" Type="char" MaxLength="10" />
+    <Property Name="NotaMinima" Type="tinyint" Nullable="false" />
+    <Property Name="EstadoCurso" Type="char" MaxLength="1" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'MyLearnDB.dbo.VIEW_EMPRESA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VIEW_EMPRESA">
     <Key>
@@ -812,6 +828,9 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   <Function Name="SP_Select_Cursos_Estudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdEstudiante" Type="char" Mode="In" />
   </Function>
+  <Function Name="SP_Select_tecnologias_De_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdProyecto" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_select_tecnologias_por_trabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdTrabajo" Type="int" Mode="In" />
   </Function>
@@ -848,6 +867,19 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <EntitySet Name="TRABAJO_POR_ESTUDIANTE" EntityType="Self.TRABAJO_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UNIVERSIDAD" EntityType="Self.UNIVERSIDAD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VIEW_CURSOS" EntityType="Self.VIEW_CURSOS" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VIEW_CURSOS].[IdUniversidad] AS [IdUniversidad], 
+    [VIEW_CURSOS].[IdProfesor] AS [IdProfesor], 
+    [VIEW_CURSOS].[IdCurso] AS [IdCurso], 
+    [VIEW_CURSOS].[FechaInicio] AS [FechaInicio], 
+    [VIEW_CURSOS].[NumeroGrupo] AS [NumeroGrupo], 
+    [VIEW_CURSOS].[NombreCurso] AS [NombreCurso], 
+    [VIEW_CURSOS].[CodigoCurso] AS [CodigoCurso], 
+    [VIEW_CURSOS].[NotaMinima] AS [NotaMinima], 
+    [VIEW_CURSOS].[EstadoCurso] AS [EstadoCurso]
+    FROM [dbo].[VIEW_CURSOS] AS [VIEW_CURSOS]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="VIEW_EMPRESA" EntityType="Self.VIEW_EMPRESA" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [VIEW_EMPRESA].[NombreDeUsuario] AS [NombreDeUsuario], 

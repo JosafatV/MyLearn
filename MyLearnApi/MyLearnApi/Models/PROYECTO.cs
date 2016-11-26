@@ -12,14 +12,17 @@ namespace MyLearnApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class USUARIO
+    public partial class PROYECTO
     {
-        public string Id { get; set; }
-        public string Contrasena { get; set; }
-        public string Sal { get; set; }
-        public string RepositorioArchivos { get; set; }
-        public string CredencialDrive { get; set; }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Problematica { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<int> IdCurso { get; set; }
+        public System.DateTime FechaInicio { get; set; }
+        public Nullable<System.DateTime> FechaFinal { get; set; }
+        public string DocumentoAdicional { get; set; }
+        public Nullable<byte> NotaObtenida { get; set; }
         public string Estado { get; set; }
-        public string NombreDeUsuario { get; set; }
     }
 }

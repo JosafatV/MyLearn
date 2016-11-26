@@ -336,6 +336,9 @@
     <Compile Include="Models\PAIS.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PROYECTO.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PROYECTO_POR_ESTUDIANTE.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
