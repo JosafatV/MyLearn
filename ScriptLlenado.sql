@@ -1,6 +1,10 @@
 Use MyLearnDB;
 GO
 
+INSERT INTO USUARIO_MYEMPLOYEE (NombreUsuario,Contrasena,Sal,Estado) VALUES ('MyEmployeeUser1','qwertyui','56tyfgs5','A')
+
+
+
 INSERT INTO PAIS (Pais) VALUES('Argentina')
 INSERT INTO PAIS (Pais) VALUES('Bélgica')
 INSERT INTO PAIS (Pais) VALUES('Brasil')
