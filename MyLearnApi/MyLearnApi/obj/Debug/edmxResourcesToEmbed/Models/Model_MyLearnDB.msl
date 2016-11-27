@@ -521,5 +521,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_Terminar_Proyecto_De_Un_Estudiante" FunctionName="MyLearnDBModel.Store.SP_Terminar_Proyecto_De_Un_Estudiante" />
+    <EntitySetMapping Name="DriveCredentials">
+      <EntityTypeMapping TypeName="MyLearnDBModel.DriveCredentials">
+        <MappingFragment StoreEntitySet="DriveCredentials">
+          <ScalarProperty Name="RefreshToken" ColumnName="RefreshToken" />
+          <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

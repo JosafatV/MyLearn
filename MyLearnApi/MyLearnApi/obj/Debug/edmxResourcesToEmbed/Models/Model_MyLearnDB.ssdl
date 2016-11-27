@@ -39,6 +39,14 @@
     <Property Name="IdProfesor" Type="char" MaxLength="100" Nullable="false" />
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
+  <EntityType Name="DriveCredentials">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="AccessToken" Type="varchar" MaxLength="500" />
+    <Property Name="RefreshToken" Type="varchar" MaxLength="500" />
+  </EntityType>
   <EntityType Name="EMPRESA">
     <Key>
       <PropertyRef Name="Id" />
@@ -410,6 +418,18 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Principal>
       <Dependent Role="BADGE">
         <PropertyRef Name="IdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DRIVE_CREDENTIALS">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="DriveCredentials" Type="Self.DriveCredentials" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DriveCredentials">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -928,6 +948,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <EntitySet Name="BADGE_POR_PROYECTO" EntityType="Self.BADGE_POR_PROYECTO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CURSO" EntityType="Self.CURSO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CURSO_POR_PROFESOR" EntityType="Self.CURSO_POR_PROFESOR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DriveCredentials" EntityType="Self.DriveCredentials" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ESTUDIANTE_POR_CURSO" EntityType="Self.ESTUDIANTE_POR_CURSO" Schema="dbo" store:Type="Tables" />
@@ -1076,6 +1097,10 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     <AssociationSet Name="FK_CURSO_ID_BADGE" Association="Self.FK_CURSO_ID_BADGE">
       <End Role="CURSO" EntitySet="CURSO" />
       <End Role="BADGE" EntitySet="BADGE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DRIVE_CREDENTIALS" Association="Self.FK_DRIVE_CREDENTIALS">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="DriveCredentials" EntitySet="DriveCredentials" />
     </AssociationSet>
     <AssociationSet Name="FK_EMPRESA_ID" Association="Self.FK_EMPRESA_ID">
       <End Role="USUARIO" EntitySet="USUARIO" />

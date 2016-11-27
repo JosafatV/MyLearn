@@ -404,6 +404,11 @@
       <Parameter Name="IdEstudiante" Mode="In" Type="String" />
       <Parameter Name="Estado" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="DriveCredentials" EntityType="MyLearnDBModel.DriveCredentials" />
+    <AssociationSet Name="FK_DRIVE_CREDENTIALS" Association="MyLearnDBModel.FK_DRIVE_CREDENTIALS">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="DriveCredentials" EntitySet="DriveCredentials" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -1205,6 +1210,26 @@
       </Principal>
       <Dependent Role="TECNOLOGIA_POR_PROYECTO">
         <PropertyRef Name="IdProyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DriveCredentials">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="AccessToken" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="RefreshToken" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_DRIVE_CREDENTIALS">
+    <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.DriveCredentials" Role="DriveCredentials" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DriveCredentials">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
