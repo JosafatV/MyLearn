@@ -602,7 +602,7 @@ CREATE PROCEDURE SP_MyEmployee @Top INT
 		FROM 
 			(SELECT IdEstudiante, (SUM(Epc.Nota) / COUNT(Epc.IdCurso)) AS NotaPromedio
 			FROM ESTUDIANTE_POR_CURSO AS Epc
-			WHERE Epc.Estado = 'T'
+			WHERE Epc.Estado = 'E' OR Epc.Estado = 'F' 
 			GROUP BY IdEstudiante) AS A
 		JOIN
 			(SELECT IdEstudiante, (SUM(EstrellasObtenidas) / COUNT(IdTrabajo)) AS PromedioEstrellos
@@ -625,15 +625,13 @@ CREATE PROCEDURE SP_MyEmployee @Top INT
 		JOIN
 			(SELECT IdEstudiante, COUNT(IdCurso) AS CursosExitosos
 			FROM VIEW_CURSOS
-			WHERE EstadoCurso='E'
+			WHERE EstadoEpc='E'
 			GROUP BY IdEstudiante) AS E
 		ON A.IdEstudiante=E.IdEstudiante
 		JOIN
 			(SELECT IdEstudiante, COUNT(IdCurso) AS CursosTerminados
 			FROM VIEW_CURSOS
-			WHERE (EstadoCurso='E' OR EstadoCurso='F')
+			WHERE (EstadoEpc='E' OR EstadoEpc='F')
 			GROUP BY IdEstudiante) AS F
 		 ON A.IdEstudiante=F.IdEstudiante
 	GO
-
-
