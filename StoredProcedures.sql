@@ -624,13 +624,13 @@ CREATE PROCEDURE SP_MyEmployee @Top INT
 		On A.IdEstudiante=D.IdEstudiante
 		JOIN
 			(SELECT IdEstudiante, COUNT(IdCurso) AS CursosExitosos
-			FROM VIEW_CURSOS
+			FROM VIEW_CURSOS_MYEMPLOYEE
 			WHERE EstadoEpc='E'
 			GROUP BY IdEstudiante) AS E
 		ON A.IdEstudiante=E.IdEstudiante
 		JOIN
 			(SELECT IdEstudiante, COUNT(IdCurso) AS CursosTerminados
-			FROM VIEW_CURSOS
+			FROM VIEW_CURSOS_MYEMPLOYEE
 			WHERE (EstadoEpc='E' OR EstadoEpc='F')
 			GROUP BY IdEstudiante) AS F
 		 ON A.IdEstudiante=F.IdEstudiante
