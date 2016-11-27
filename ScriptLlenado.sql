@@ -219,3 +219,141 @@ EXEC SP_Insertar_Mensaje_Trabajo 'Necesito que me envie el perfil de la empresa'
 EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto DrPischel', '10/17/2016', '1'
 EXEC SP_Insertar_Notificacion 'Felicidades! Usted ha ganado el proyecto Barbarras', '10/17/2016', '1'
 
+
+
+/*Llenado para MyEmployee*/
+
+
+EXEC SP_Insertar_Curso '13', 'TestCourse', 'TE-4101', '1', 50, '10/17/2016', 1
+EXEC SP_Insertar_Curso '13', 'TestCourse', 'TE-3101', '1', 50, '10/17/2016', 5
+EXEC SP_Insertar_Curso '13', 'TestCourse', 'TE-0101', '1', 50, '10/17/2016', 2
+EXEC SP_Insertar_Curso '13', 'TestCourse', 'TE-0101', '1', 50, '10/17/2016', 4
+EXEC SP_Insertar_Curso '13', 'TestCourse', 'TE-2102', '1', 50, '10/17/2016', 3
+
+EXEC SP_Insertar_Badge 'BadgeMaximus', 100, 1
+EXEC SP_Insertar_Badge 'BadgeMaximus', 100, 5
+EXEC SP_Insertar_Badge 'BadgeMaximus', 100, 2
+EXEC SP_Insertar_Badge 'BadgeMaximus', 100, 4
+EXEC SP_Insertar_Badge 'BadgeMaximus', 100, 3
+
+
+INSERT INTO CURSO_POR_PROFESOR (IdCurso, IdProfesor, Estado)
+VALUES (6, 13, 'A')
+INSERT INTO CURSO_POR_PROFESOR (IdCurso, IdProfesor, Estado)
+VALUES (7, 13, 'A')
+INSERT INTO CURSO_POR_PROFESOR (IdCurso, IdProfesor, Estado)
+VALUES (8, 13, 'A')
+INSERT INTO CURSO_POR_PROFESOR (IdCurso, IdProfesor, Estado)
+VALUES (9, 13, 'A')
+INSERT INTO CURSO_POR_PROFESOR (IdCurso, IdProfesor, Estado)
+VALUES (10, 13, 'A')
+
+INSERT INTO CURSO_POR_UNIVERSIDAD (IdCurso, IdUniversidad, Estado)
+VALUES (6, 1, 'A')
+INSERT INTO CURSO_POR_UNIVERSIDAD (IdCurso, IdUniversidad, Estado)
+VALUES (7, 1, 'A')
+INSERT INTO CURSO_POR_UNIVERSIDAD (IdCurso, IdUniversidad, Estado)
+VALUES (8, 1, 'A')
+INSERT INTO CURSO_POR_UNIVERSIDAD (IdCurso, IdUniversidad, Estado)
+VALUES (9, 1, 'A')
+INSERT INTO CURSO_POR_UNIVERSIDAD (IdCurso, IdUniversidad, Estado)
+VALUES (10, 1, 'A')
+
+EXEC SP_Agregar_Al_Curso '7', '6'
+EXEC SP_Agregar_Al_Curso '7', '7'
+EXEC SP_Agregar_Al_Curso '7', '8'
+EXEC SP_Agregar_Al_Curso '7', '9'
+EXEC SP_Agregar_Al_Curso '7', '10'
+
+EXEC SP_Agregar_Al_Curso '8', '6'
+EXEC SP_Agregar_Al_Curso '8', '7'
+EXEC SP_Agregar_Al_Curso '8', '8'
+EXEC SP_Agregar_Al_Curso '8', '9'
+EXEC SP_Agregar_Al_Curso '8', '10'
+
+UPDATE ESTUDIANTE_POR_CURSO SET Nota=50, Estado='F' WHERE IdCurso=6 AND IdEstudiante=7
+UPDATE ESTUDIANTE_POR_CURSO SET Nota=80, Estado='E' WHERE IdCurso=6 AND IdEstudiante=8
+UPDATE ESTUDIANTE_POR_CURSO SET Nota=70, Estado='E' WHERE IdCurso=7
+UPDATE ESTUDIANTE_POR_CURSO SET Nota=65, Estado='F' WHERE IdCurso=8 AND IdEstudiante=7
+UPDATE ESTUDIANTE_POR_CURSO SET Nota=95, Estado='E' WHERE IdCurso=8 AND IdEstudiante=8
+UPDATE ESTUDIANTE_POR_CURSO SET Nota=48, Estado='F' WHERE IdCurso=9 AND IdEstudiante=7
+UPDATE ESTUDIANTE_POR_CURSO SET Nota=57, Estado='F' WHERE IdCurso=9 AND IdEstudiante=8
+UPDATE ESTUDIANTE_POR_CURSO SET Nota=90, Estado='E' WHERE IdCurso=10 AND IdEstudiante=7
+UPDATE ESTUDIANTE_POR_CURSO SET Nota=80, Estado='E' WHERE IdCurso=10 AND IdEstudiante=8
+
+
+
+EXEC SP_Insertar_Trabajo 'QAJobs', 'do QA on our system', '20', '2016-11-10', '2016-11-15', '', '10000'
+EXEC SP_Insertar_Trabajo 'QAJobs', 'do QA on our system', '20', '2016-11-10', '2016-11-15', '', '10000'
+EXEC SP_Insertar_Trabajo 'QAJobs', 'do QA on our system', '20', '2016-11-10', '2016-11-15', '', '10000'
+EXEC SP_Insertar_Trabajo 'QAJobs', 'do QA on our system', '20', '2016-11-10', '2016-11-15', '', '10000'
+EXEC SP_Insertar_Trabajo 'QAJobs', 'do QA on our system', '20', '2016-11-10', '2016-11-15', '', '10000'
+EXEC SP_Insertar_Trabajo 'QAJobs', 'do QA on our system', '20', '2016-11-10', '2016-11-15', '', '10000'
+
+UPDATE TRABAJO SET EstrellasObtenidas = 3, Exitoso = 0 WHERE ID=7
+UPDATE TRABAJO SET EstrellasObtenidas = 4, Exitoso = 1 WHERE ID=8
+UPDATE TRABAJO SET EstrellasObtenidas = 1, Exitoso = 0 WHERE ID=9
+UPDATE TRABAJO SET Estado = 'E' WHERE ID>6
+UPDATE TRABAJO SET EstrellasObtenidas = 4, Exitoso = 1 WHERE ID=10
+UPDATE TRABAJO SET EstrellasObtenidas = 5, Exitoso = 1 WHERE ID=11
+UPDATE TRABAJO SET EstrellasObtenidas = 4, Exitoso = 1 WHERE ID=12
+
+DELETE TRABAJO_POR_ESTUDIANTE WHERE IdTrabajo>6
+
+SELECT * FROM TRABAJO_POR_ESTUDIANTE
+
+SELEct * from TRABAJO_POR_ESTUDIANTE
+INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
+VALUES (7, 7, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
+INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
+VALUES (8, 7, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
+INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
+VALUES (9, 7, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
+INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
+VALUES (10, 8, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
+INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
+VALUES (11, 8, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
+INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
+VALUES (12, 8, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
+
+
+
+INSERT INTO PROYECTO (Nombre, Problematica, Descripcion, IdCurso, FechaInicio, FechaFinal, DocumentoAdicional, NotaObtenida, Estado)
+VALUES ('Test', 'test this program', 'tests this programs api engine', 1, '2016-10-17', '2016-11-26', '', 70, 'E')
+INSERT INTO PROYECTO (Nombre, Problematica, Descripcion, IdCurso, FechaInicio, FechaFinal, DocumentoAdicional, NotaObtenida, Estado)
+VALUES ('Test', 'test this program', 'tests this programs api engine', 1, '2016-10-17', '2016-11-26', '', 65, 'E')
+INSERT INTO PROYECTO (Nombre, Problematica, Descripcion, IdCurso, FechaInicio, FechaFinal, DocumentoAdicional, NotaObtenida, Estado)
+VALUES ('Test', 'test this program', 'tests this programs api engine', 1, '2016-10-17', '2016-11-26', '', 50, 'F')
+
+INSERT INTO PROYECTO (Nombre, Problematica, Descripcion, IdCurso, FechaInicio, FechaFinal, DocumentoAdicional, NotaObtenida, Estado)
+VALUES ('Test', 'test this program', 'tests this programs api engine', 1, '2016-10-17', '2016-11-26', '', 85, 'E')
+INSERT INTO PROYECTO (Nombre, Problematica, Descripcion, IdCurso, FechaInicio, FechaFinal, DocumentoAdicional, NotaObtenida, Estado)
+VALUES ('Test', 'test this program', 'tests this programs api engine', 1, '2016-10-17', '2016-11-26', '', 90, 'E')
+INSERT INTO PROYECTO (Nombre, Problematica, Descripcion, IdCurso, FechaInicio, FechaFinal, DocumentoAdicional, NotaObtenida, Estado)
+VALUES ('Test', 'test this program', 'tests this programs api engine', 1, '2016-10-17', '2016-11-26', '', 20, 'F')
+
+INSERT INTO PROYECTO_POR_ESTUDIANTE (IdProyecto, IdEstudiante, Estado)
+VALUES (5, 7, 'A')
+INSERT INTO PROYECTO_POR_ESTUDIANTE (IdProyecto, IdEstudiante, Estado)
+VALUES (6, 7, 'A')
+INSERT INTO PROYECTO_POR_ESTUDIANTE (IdProyecto, IdEstudiante, Estado)
+VALUES (7, 7, 'A')
+INSERT INTO PROYECTO_POR_ESTUDIANTE (IdProyecto, IdEstudiante, Estado)
+VALUES (8, 8, 'A')
+INSERT INTO PROYECTO_POR_ESTUDIANTE (IdProyecto, IdEstudiante, Estado)
+VALUES (9, 8, 'A')
+INSERT INTO PROYECTO_POR_ESTUDIANTE (IdProyecto, IdEstudiante, Estado)
+VALUES (10,8, 'A')
+
+INSERT INTO PROYECTO_POR_PROFESOR (IdProyecto, IdProfesor, Estado)
+ VALUES (5, 13, 'A')
+INSERT INTO PROYECTO_POR_PROFESOR (IdProyecto, IdProfesor, Estado)
+ VALUES (6, 13, 'A')
+INSERT INTO PROYECTO_POR_PROFESOR (IdProyecto, IdProfesor, Estado)
+ VALUES (7, 13, 'A')
+INSERT INTO PROYECTO_POR_PROFESOR (IdProyecto, IdProfesor, Estado)
+ VALUES (8, 13, 'A')
+INSERT INTO PROYECTO_POR_PROFESOR (IdProyecto, IdProfesor, Estado)
+ VALUES (9, 13, 'A')
+INSERT INTO PROYECTO_POR_PROFESOR (IdProyecto, IdProfesor, Estado)
+ VALUES (10, 13, 'A')
