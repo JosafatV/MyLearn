@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyLearnDBModelStoreContainer" CdmEntityContainer="MyLearnDBEntities">
+    <EntitySetMapping Name="USUARIO_MYEMPLOYEE">
+      <EntityTypeMapping TypeName="MyLearnDBModel.USUARIO_MYEMPLOYEE">
+        <MappingFragment StoreEntitySet="USUARIO_MYEMPLOYEE">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="Sal" ColumnName="Sal" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

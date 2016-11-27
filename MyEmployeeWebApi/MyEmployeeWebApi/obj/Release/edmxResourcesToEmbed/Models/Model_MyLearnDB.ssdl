@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyLearnDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="USUARIO_MYEMPLOYEE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreUsuario" Type="char" MaxLength="60" Nullable="false" />
+    <Property Name="Contrasena" Type="char" MaxLength="8" Nullable="false" />
+    <Property Name="Sal" Type="char" MaxLength="20" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityContainer Name="MyLearnDBModelStoreContainer">
+    <EntitySet Name="USUARIO_MYEMPLOYEE" EntityType="Self.USUARIO_MYEMPLOYEE" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
