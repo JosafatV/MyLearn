@@ -634,5 +634,9 @@ CREATE PROCEDURE SP_MyEmployee @Top INT
 			WHERE (EstadoEpc='E' OR EstadoEpc='F')
 			GROUP BY IdEstudiante) AS F
 		 ON A.IdEstudiante=F.IdEstudiante
+		 JOIN 
+			(SELECT Id, NombreContacto, Telefono, Email
+			FROM ESTUDIANTE) AS G
+		ON A.IdEstudiante=G.Id
 		 ORDER BY Performance DESC
 	GO
