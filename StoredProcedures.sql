@@ -26,7 +26,7 @@ IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Otorgar_Bad
 	DROP PROCEDURE SP_Otorgar_Badge
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Badge_Por_Proyecto')
-	DROP PROCEDURE SP_ Select_Badge_Por_Proyecto
+	DROP PROCEDURE SP_Select_Badge_Por_Proyecto
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Propuesta_Proyecto')
 	DROP PROCEDURE SP_Insertar_Propuesta_Proyecto
@@ -598,14 +598,62 @@ CREATE PROCEDURE SP_Promedio_Cursos_Aprobados @IdEstudiante CHAR(100)
 
 CREATE PROCEDURE SP_MyEmployee @Top INT
 	AS
-		SELECT TOP (@Top) A.IdEstudiante, NombreContacto, Telefono, Email, (NotaPromedio+PromedioEstrellas+(ProyectosExitosos/ProyectosTerminados)+(CursosExitosos/CursosTerminados)) AS Performance
+		SELECT TOP (20) A.IdEstudiante, NombreContacto, Telefono, Email, CAST(NotaPromedio*0.3+PromedioEstrellas*0.3+(ProyectosExitosos*100/ProyectosTerminados)*0.3+(CursosExitosos*100/CursosTerminados)*0.1 AS FLOAT) AS Performance
 		FROM 
 			(SELECT IdEstudiante, (SUM(Epc.Nota) / COUNT(Epc.IdCurso)) AS NotaPromedio
 			FROM ESTUDIANTE_POR_CURSO AS Epc
 			WHERE Epc.Estado = 'E' OR Epc.Estado = 'F' 
 			GROUP BY IdEstudiante) AS A
 		JOIN
-			(SELECT IdEstudiante, (SUM(EstrellasObtenidas) / COUNT(IdTrabajo)) AS PromedioEstrellas
+			(SELECT IdEstudiante, CAST((SUM(EstrellasObtenidas) / COUNT(IdTrabajo))*20 AS FLOAT) AS PromedioEstrellas
+			FROM VIEW_TRABAJO
+			WHERE (EstadoTrabajo = 'E' OR EstadoTrabajo = 'F')
+			GROUP BY IdEstudiante) AS B
+		ON A.IdEstudiante=B.IdEstudiante
+		JOIN
+			(SELECT IdEstudiante, COUNT(IdProyecto) AS ProyectosExitosos
+			FROM VIEW_PROYECTOS
+			WHERE EstadoProyecto='E'
+			GROUP BY IdEstudiante) AS C
+		ON A.IdEstudiante=C.IdEstudiante
+		JOIN
+			(SELECT IdEstudiante, COUNT(IdProyecto) AS ProyectosTerminados
+			FROM VIEW_PROYECTOS
+			WHERE (EstadoProyecto='E' OR EstadoProyecto='F')
+			GROUP BY IdEstudiante) AS D
+		On A.IdEstudiante=D.IdEstudiante
+		JOIN
+			(SELECT IdEstudiante, COUNT(IdCurso) AS CursosExitosos
+			FROM VIEW_CURSOS_MYEMPLOYEE
+			WHERE EstadoEpc='E'
+			GROUP BY IdEstudiante) AS E
+		ON A.IdEstudiante=E.IdEstudiante
+		JOIN
+			(SELECT IdEstudiante, COUNT(IdCurso) AS CursosTerminados
+			FROM VIEW_CURSOS_MYEMPLOYEE
+			WHERE (EstadoEpc='E' OR EstadoEpc='F')
+			GROUP BY IdEstudiante) AS F
+		 ON A.IdEstudiante=F.IdEstudiante
+		 JOIN 
+			(SELECT Id, NombreContacto, Telefono, Email
+			FROM ESTUDIANTE) AS G
+		ON A.IdEstudiante=G.Id
+		 ORDER BY Performance DESC
+	GO
+
+
+
+	
+CREATE PROCEDURE SP_MyEmployee_Custom @Top INT, @PorcentajeNotas INT, @PorcentajeEstrellas INT, @Proyectos INt, @Trabajos INT
+	AS
+		SELECT TOP (20) A.IdEstudiante, NombreContacto, Telefono, Email, CAST(NotaPromedio*@PorcentajeNotas+PromedioEstrellas*@PorcentajeEstrellas+(ProyectosExitosos*100/ProyectosTerminados)*@Proyectos+(CursosExitosos*100/CursosTerminados)*@Trabajos AS FLOAT) AS Performance
+		FROM 
+			(SELECT IdEstudiante, (SUM(Epc.Nota) / COUNT(Epc.IdCurso)) AS NotaPromedio
+			FROM ESTUDIANTE_POR_CURSO AS Epc
+			WHERE Epc.Estado = 'E' OR Epc.Estado = 'F' 
+			GROUP BY IdEstudiante) AS A
+		JOIN
+			(SELECT IdEstudiante, CAST((SUM(EstrellasObtenidas) / COUNT(IdTrabajo))*20 AS FLOAT) AS PromedioEstrellas
 			FROM VIEW_TRABAJO
 			WHERE (EstadoTrabajo = 'E' OR EstadoTrabajo = 'F')
 			GROUP BY IdEstudiante) AS B
