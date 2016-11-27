@@ -55,13 +55,13 @@ namespace MyLearnApi.Controllers
         /// para subir un archivo y obtener el link
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [ResponseType(typeof(string))]
-        [Route("MyLearnApi/File")]
-        public IHttpActionResult uploadFile()
+        [Route("MyLearnApi/File/{IdUsuario}")]
+        public IHttpActionResult uploadFile(clsFile file, string IdUsuario)
         {
-           
-            string jason = "{"
+
+            /*string jason = "{"
                                + "\"installed\": {"
                                + "\"client_id\": \"945542049910-ie4l7np3hup7qpev39stcc4o7rlti85j.apps.googleusercontent.com\","
                                + "\"project_id\": \"basic-computing-149501\","
@@ -76,7 +76,11 @@ namespace MyLearnApi.Controllers
             byte[] byteArray = Encoding.UTF8.GetBytes(jason);
 
 
-            string link = clsRepoLogic.uploadFile(byteArray ,"37" ,"perra.json", "JSON/json");
+            string link = clsRepoLogic.uploadFile(byteArray , IdUsuario ,"perra.json", "JSON/json"); */
+
+            byte[] byteArray = Encoding.UTF8.GetBytes(file.bytes);
+            string link = clsRepoLogic.uploadFile(byteArray, IdUsuario, file.name, file.contentType);
+            //returnos the web content link
             return Ok(link);
            
         }
@@ -85,6 +89,7 @@ namespace MyLearnApi.Controllers
 
         [HttpOptions]
         [Route("MyLearnApi/DriveCredentials")]
+        [Route("MyLearnApi/File/{IdUsuario}")]
         public HttpResponseMessage Options()
         {
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
