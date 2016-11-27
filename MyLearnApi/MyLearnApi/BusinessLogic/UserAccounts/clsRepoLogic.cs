@@ -2,6 +2,7 @@
 using MyLearnApi.Models;
 using MyLearnApi.Models.DriveIntegration;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 
 namespace MyLearnApi.BusinessLogic.UserAccounts
 {
@@ -43,7 +44,7 @@ namespace MyLearnApi.BusinessLogic.UserAccounts
         /// uploads the file and returns the WebContentLink
         /// </summary>
         /// <returns></returns>
-        public static  string uploadFile(byte[] byteArray,string IdUsuario, string fileName, string contentType)
+        public static  string uploadFile(Stream byteArray,string IdUsuario, string fileName, string contentType)
         {
             
             DriveCredentials cred = db.DriveCredentials.Find(IdUsuario);

@@ -6,7 +6,7 @@ using MyLearnApi.BusinessLogic.UserAccounts;
 using MyLearnApi.Models;
 using System.Text;
 using System.Net.Http;
-
+using System.Web;
 
 namespace MyLearnApi.Controllers
 {
@@ -58,35 +58,29 @@ namespace MyLearnApi.Controllers
         [HttpPost]
         [ResponseType(typeof(string))]
         [Route("MyLearnApi/File/{IdUsuario}")]
-        public IHttpActionResult uploadFile(clsFile file, string IdUsuario)
+        public IHttpActionResult uploadFile(string IdUsuario)
         {
 
-            /*string jason = "{"
-                               + "\"installed\": {"
-                               + "\"client_id\": \"945542049910-ie4l7np3hup7qpev39stcc4o7rlti85j.apps.googleusercontent.com\","
-                               + "\"project_id\": \"basic-computing-149501\","
-                               + "\"auth_uri\": \"https://accounts.google.com/o/oauth2/auth  \",  "
-                               + "\"token_uri\": \"https://accounts.google.com/o/oauth2/token \", "
-                               + "\"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs  \","
-                               + "\"client_secret\": \"EIuppefDWrd3rOh4RyYSt-DH\","
-                               + "\"redirect_uris\": [ \"urn:ietf:wg:oauth:2.0:oob\", \"http://localhost \" ]"
-                               + "}"
-                        + "}";
+            if (HttpContext.Current.Request.Files.Count == 0)
+            {
+                return Ok("No Files");
+            }
+            if (HttpContext.Current.Request.Files[0] == null)
+            {
+                return Ok("nullFile");
+            }
+          
+             byte[] byteArray = new byte[HttpContext.Current.Request.Files[0].InputStream.Length + 1];
+             HttpContext.Current.Request.Files[0].InputStream.Read(byteArray, 0, byteArray.Length);
 
-            byte[] byteArray = Encoding.UTF8.GetBytes(jason);
-
-
-            string link = clsRepoLogic.uploadFile(byteArray , IdUsuario ,"perra.json", "JSON/json"); */
-
-            byte[] byteArray = Encoding.UTF8.GetBytes(file.bytes);
-            string link = clsRepoLogic.uploadFile(byteArray, IdUsuario, file.name, file.contentType);
+            string link = clsRepoLogic.uploadFile(HttpContext.Current.Request.Files[0].InputStream, IdUsuario,
+                HttpContext.Current.Request.Files[0].FileName, HttpContext.Current.Request.Files[0].ContentType);
             //returnos the web content link
             return Ok(link);
            
         }
 
-
-
+     
         [HttpOptions]
         [Route("MyLearnApi/DriveCredentials")]
         [Route("MyLearnApi/File/{IdUsuario}")]

@@ -37,7 +37,7 @@ namespace MyLearnApi.Models.DriveIntegration
         /// <summary>
         /// 
         /// </summary>
-        public static string getContentLink(string fileName, string contentType, byte[] byteArray )
+        public static string getContentLink(string fileName, string contentType, Stream byteArray )
         {
 
             UserCredential credential = getUserCredential();
@@ -153,12 +153,12 @@ namespace MyLearnApi.Models.DriveIntegration
          * this link will be stored into the database to retrived to the view later.
          * 
         **/
-        public static string UploadFileToDrive(DriveService service, string fileName, string contentType, byte[] byteArray)
+        public static string UploadFileToDrive(DriveService service, string fileName, string contentType, Stream byteArray)
         {
            
 
             //convierte los bytes en un stream
-            Stream stream = new MemoryStream(byteArray);
+           // Stream stream = new MemoryStream(byteArray);
             //construye la metadata
             var fileMetadata = new File();
             fileMetadata.LastModifyingUserName = fileName;
@@ -166,7 +166,7 @@ namespace MyLearnApi.Models.DriveIntegration
             FilesResource.InsertMediaUpload request;
             
           
-            request = service.Files.Insert(fileMetadata, stream,contentType);
+            request = service.Files.Insert(fileMetadata, byteArray,contentType);
             request.Upload();
             var file = request.ResponseBody;
             
