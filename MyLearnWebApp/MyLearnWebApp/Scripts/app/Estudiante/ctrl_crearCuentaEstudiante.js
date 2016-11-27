@@ -18,7 +18,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', '$
             Region: "",
             RepositorioCodigo: "",
             LinkHojaDeVida: "",
-            Id: "",
+            NombreDeUsuario: "",
             Contrasena: "",
             RepositorioArchivos: "",
             CredencialDrive: "",
@@ -47,6 +47,10 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', '$
             $scope.ls_listaUniversidades = data;
         });
 
+        $scope.changeUniversidad = function () {
+            $scope.crearCuentaJson.IdUniversidad = $scope.universidadSelected.Id;
+        };
+
         $scope.alertePrueba = function () {
             alert("hola");
         };
@@ -61,6 +65,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', '$
 
         $scope.sendCuenta = function () {
             fct_MyLearn_API_Client.save({ type: 'Estudiantes' }, $scope.js_crearCuentaJson).$promise.then(function (data) {
+                set_sendCredentials(data.Id);
                 angular.forEach($scope.ls_tecnologiasSelect, function (value, key) {
                     fct_MyLearn_API_Client.save({ type: 'Estudiantes', extension1: "Tecnologia" },
                         { IdTecnologia: value.Id, IdEstudiante: data.Id }

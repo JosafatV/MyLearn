@@ -605,7 +605,7 @@ CREATE PROCEDURE SP_MyEmployee @Top INT
 			WHERE Epc.Estado = 'E' OR Epc.Estado = 'F' 
 			GROUP BY IdEstudiante) AS A
 		JOIN
-			(SELECT IdEstudiante, (SUM(EstrellasObtenidas) / COUNT(IdTrabajo)) AS PromedioEstrellos
+			(SELECT IdEstudiante, (SUM(EstrellasObtenidas) / COUNT(IdTrabajo)) AS PromedioEstrellas
 			FROM VIEW_TRABAJO
 			WHERE (EstadoTrabajo = 'E' OR EstadoTrabajo = 'F')
 			GROUP BY IdEstudiante) AS B
@@ -634,4 +634,5 @@ CREATE PROCEDURE SP_MyEmployee @Top INT
 			WHERE (EstadoEpc='E' OR EstadoEpc='F')
 			GROUP BY IdEstudiante) AS F
 		 ON A.IdEstudiante=F.IdEstudiante
+		 ORDER BY Performance DESC
 	GO
