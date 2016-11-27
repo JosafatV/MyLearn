@@ -1,6 +1,8 @@
-angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService',
-    function ($q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService) {
+angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', 'fileUpload','$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService',
+    function ($q, fileUpload,$scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService) {
 
+        $scope.csv;
+        $scope.aaa = "";
         var access_token = "";
         var refresh_token = "";
         var client_id = "";      
@@ -121,14 +123,66 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', '$
         * Esta es la funcion encargada de enviar el archivo a la base de datos
         */
 
-        function sendFile(){
+        $scope.sendFile = function(){
             var file = $scope.myFile;
-
+            var fd = new FormData();
+            fd.append('file', file);
             console.log('file is ');
-            console.dir(file);
+            console.dir(fd);
 
-            var uploadUrl = "/fileUpload";
-            fileUpload.uploadFileToUrl(file, uploadUrl);
+            fct_MyLearn_API_Client.save({ type: 'File', extension1: 1 }, {
+                name: 'B.txt',
+                contentType: 'text/plain',
+                bytes: $scope
+            }).$promise.then(function (data) {
+                alert(data);
+            });
+
+        };
+
+        $scope.onFileSelect = function() {
+            reader = new FileReader();
+            reader.onload = function() {
+                file_contents = this.result;
+                upload_file($scope.files[0],file_contents);
+            };
+            reader.readAsArrayBuffer($scope.files[0]);
+        };
+
+        $scope.fileChanged = function () {
+
+            // define reader
+            var reader = new FileReader();
+
+            // A handler for the load event (just defining it, not executing it right now)
+            reader.onload = function (e) {
+                var fd = new FormData();
+                fd.append('file', reader.result);
+                $scope.$apply(function () {
+                    $scope.csvFile = reader.result;
+                    alert(reader.result);
+                    fct_MyLearn_API_Client.saveFile({ type: 'File', extension1: 1 }, {
+                        name: fileName,
+                        contentType: fileContentType,
+                        bytes: reader.result
+                    }).$promise.then(function (data) {
+                        alert(data);
+                    });
+                });
+            };
+
+            // get <input> element and the selected file 
+            var csvFileInput = document.getElementById('fileInput');
+            var csvFile = csvFileInput.files[0];
+            var fileName = csvFileInput.files[0].name;
+            var fileContentType = csvFileInput.files[0].type;
+            alert(fileName);
+
+            // use reader to read the selected file
+            // when read operation is successfully finished the load event is triggered
+            // and handled by our reader.onload function
+            reader.readAsBinaryString(csvFile);
+            //reader.readAsArrayBuffer(csvFile)
         };
 
         $scope.getFile = function () {
@@ -147,3 +201,39 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', '$
         };
 
     }]);
+
+angular.module('mod_MyLearn').directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function () {
+                scope.$apply(function () {
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
+
+angular.module('mod_MyLearn').service('fileUpload', ['$http', function ($http) {
+    this.uploadFileToUrl = function (file, uploadUrl) {
+        var fd = new FormData();
+        fd.append('file', file);
+
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }
+        })
+
+        .success(function () {
+        })
+
+        .error(function () {
+        });
+    }
+}]);
+
+

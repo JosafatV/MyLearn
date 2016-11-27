@@ -52,7 +52,12 @@
                     <label for="País">País:</label>
                     <select ng-options="pais.Pais1 for pais in lst_listaPaises" class="form-control" data-ng-model="paisSelected" data-ng-change="changePais()"></select>
                 </div>
-
+                <div>
+                    <input ng-model="csv"
+                           onchange="angular.element(this).scope().fileChanged()"
+                           type="file"  id="fileInput" />
+                </div>
+                <button data-ng-click="sendFile()">sendFile</button>
                 <div class="form-group">
                     <label for="Dirección">Dirección:</label>
                     <input class="form-control" id="ubicación" type="text" data-ng-model="js_crearCuentaJson.Region">

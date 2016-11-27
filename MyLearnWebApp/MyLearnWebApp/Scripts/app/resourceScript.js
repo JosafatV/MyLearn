@@ -25,6 +25,13 @@ angular.module('mod_MyLearn').factory('fct_MyLearn_API_Client', function ($resou
                 'Content-Type': 'application/json; charset=utf-8'
             }            
         },
+        saveFile: {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',                
+            },
+            //transformRequest: angular.identity
+        },
         saveList: {
             method: 'POST',
             headers: {

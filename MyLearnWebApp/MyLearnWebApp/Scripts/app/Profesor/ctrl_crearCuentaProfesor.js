@@ -1,6 +1,5 @@
 ﻿angular.module('mod_MyLearn').controller('ctrl_crearCuentaProfesor', ['$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService',
     function ($q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService) {
-
         $scope.universidadSelected = "";
         $scope.ls_listaUniversidades = [];
 

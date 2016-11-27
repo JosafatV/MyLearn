@@ -284,6 +284,7 @@
     <Content Include="Scripts\Angular and Bootstrap\Bootstrap\js\bootstrap.min.js" />
     <Content Include="Scripts\Angular and Bootstrap\Bootstrap\js\npm.js" />
     <Content Include="Scripts\app\configScript.js" />
+    <Content Include="Scripts\app\directives.js" />
     <Content Include="Scripts\app\Empresa\ctrl_areaTrabajoEmpresa.js" />
     <Content Include="Scripts\app\Empresa\ctrl_crearCuentaEmpresa.js" />
     <Content Include="Scripts\app\Empresa\ctrl_crearSubasta.js" />
@@ -305,6 +306,7 @@
     <Content Include="Scripts\app\Profesor\ctrl_cursoProfesor.js" />
     <Content Include="Scripts\app\Profesor\ctrl_perfilProfesor.js" />
     <Content Include="Scripts\app\Profesor\ctrl_propuestaProyecto.js" />
+    <Content Include="Scripts\app\services.js" />
     <Content Include="Scripts\app\Twitter\fct_twitterService.js" />
     <Content Include="Scripts\app\Login\ctrl_login.js" />
     <Content Include="Scripts\app\mod_MyLearn.js" />
