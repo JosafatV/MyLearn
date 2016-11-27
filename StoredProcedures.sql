@@ -26,7 +26,7 @@ IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Otorgar_Bad
 	DROP PROCEDURE SP_Otorgar_Badge
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Select_Badge_Por_Proyecto')
-	DROP PROCEDURE SP_Select_Badge_Por_Proyecto
+	DROP PROCEDURE SP_ Select_Badge_Por_Proyecto
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Propuesta_Proyecto')
 	DROP PROCEDURE SP_Insertar_Propuesta_Proyecto
@@ -598,7 +598,7 @@ CREATE PROCEDURE SP_Promedio_Cursos_Aprobados @IdEstudiante CHAR(100)
 
 CREATE PROCEDURE SP_MyEmployee @Top INT
 	AS
-		SELECT TOP (@Top) A.IdEstudiante, (NotaPromedio+PromedioEstrellas+(ProyectosExitosos/ProyectosTerminados)+(CursosExitosos/CursosTerminados)) AS Performance
+		SELECT TOP (@Top) A.IdEstudiante, NombreContacto, Telefono, Email, (NotaPromedio+PromedioEstrellas+(ProyectosExitosos/ProyectosTerminados)+(CursosExitosos/CursosTerminados)) AS Performance
 		FROM 
 			(SELECT IdEstudiante, (SUM(Epc.Nota) / COUNT(Epc.IdCurso)) AS NotaPromedio
 			FROM ESTUDIANTE_POR_CURSO AS Epc
