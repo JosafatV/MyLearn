@@ -52,27 +52,29 @@ namespace MyLearnApi.Controllers
         }
 
         /// <summary>
-        /// para subir un archivo y obtener el link
+        /// para subir solo un archivo y obtener el link de descarga de drive
         /// </summary>
-        /// <returns></returns>
+        /// <returns> File download link </returns>
         [HttpPost]
         [ResponseType(typeof(string))]
         [Route("MyLearnApi/File/{IdUsuario}")]
         public IHttpActionResult uploadFile(string IdUsuario)
         {
-
+            //Si lalista de archivos viene vacía
             if (HttpContext.Current.Request.Files.Count == 0)
             {
                 return Ok("No Files");
             }
+            ///se revisa el primer archivo
             if (HttpContext.Current.Request.Files[0] == null)
             {
                 return Ok("nullFile");
             }
-          
+            
+            //obtiene el input Streeam
              byte[] byteArray = new byte[HttpContext.Current.Request.Files[0].InputStream.Length + 1];
              HttpContext.Current.Request.Files[0].InputStream.Read(byteArray, 0, byteArray.Length);
-
+            //envía el input stram a la capa de logica y luego a la de datos para psersistir el archivo
             string link = clsRepoLogic.uploadFile(HttpContext.Current.Request.Files[0].InputStream, IdUsuario,
                 HttpContext.Current.Request.Files[0].FileName, HttpContext.Current.Request.Files[0].ContentType);
             //returnos the web content link
