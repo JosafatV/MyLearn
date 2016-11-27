@@ -21,12 +21,11 @@
                "Email": "",
                "Telefono": "",
                "Foto": null,
-               //"FechaInscripcion": "2016-11-15T00:00:00",
                "Pais": "",
                "HorarioAtencion": "",
                "Region": "",
                "IdUniversidad": 2,
-               "Universidad": "Universidad Nacional          "
+               "Universidad": ""
            }
 
         $scope.paisSelected = "";
