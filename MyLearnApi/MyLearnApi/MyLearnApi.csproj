@@ -245,6 +245,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="BusinessLogic\clsAlgoritmoPaginacion.cs" />
     <Compile Include="BusinessLogic\clsAreaDeTrabajoLogic.cs" />
+    <Compile Include="BusinessLogic\UserAccounts\BCrypt.cs" />
+    <Compile Include="BusinessLogic\UserAccounts\clsEncriptor.cs" />
     <Compile Include="Controllers\clsBasicAuthenticationAttribute.cs.cs" />
     <Compile Include="BusinessLogic\UserAccounts\clsCuentaDeUsuario.cs" />
     <Compile Include="BusinessLogic\clsCursosLogic.cs" />

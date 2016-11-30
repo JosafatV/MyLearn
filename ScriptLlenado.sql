@@ -1,10 +1,6 @@
 Use MyLearnDB;
 GO
 
-INSERT INTO USUARIO_MYEMPLOYEE (NombreUsuario,Contrasena,Sal,Estado) VALUES ('MyEmployeeUser1','qwertyui','56tyfgs5','A')
-
-
-
 INSERT INTO PAIS (Pais) VALUES('Argentina')
 INSERT INTO PAIS (Pais) VALUES('Bélgica')
 INSERT INTO PAIS (Pais) VALUES('Brasil')
@@ -20,7 +16,6 @@ INSERT INTO PAIS (Pais) VALUES('México')
 INSERT INTO PAIS (Pais) VALUES('Panamá')
 INSERT INTO PAIS (Pais) VALUES('Portugal')
 INSERT INTO PAIS (Pais) VALUES('Suiza')
-
 
 EXEC SP_Insertar_Universidad 'Instituto Tecnologico de Costa Rica'
 EXEC SP_Insertar_Universidad 'Universidad Nacional'
@@ -76,20 +71,18 @@ EXEC SP_Insertar_Empresa '22','1234','rg38a4gr8a4r3g8a7r4g','Drive','tx586=h7s35
 EXEC SP_Insertar_Empresa '23','1234','8a7rega87hh36a47812a','Drive','7ga86=3f4gf','Leonard','Euler','Stygies Ocho','Stygies8@gmail.com',25173952,'http://warhammer40k.wikia.com/wiki/Stygies_VIII','Costa Rica','San Jose','Stygies8','Leonard'
 EXEC SP_Insertar_Empresa '24','1234','6gr788ilo34kghj83gh7','Drive','niglk=5g36f','Michael','Faraday','Graia','Graia13@gmail.com',21761576,'http://warhammer40k.wikia.com/wiki/Graia','Costa Rica','Heredia','Graia13','Michael'
 EXEC SP_Insertar_Empresa '25','1234','k8d3h4ar8697u8lo74il','Drive','niglk=5g36f','Richard','Feynman','Metalica','Metalica7@gmail.com',28247921,'http://warhammer40k.wikia.com/wiki/Metalica','Costa Rica','San Jose','Metalica7','Richard'
-EXEC SP_Insertar_Empresa '26','1234','853tx586h7s35h7ga863','Drive','3x543=45yul','Rosalind','Franklin','Ryza','Ryza30@gmail.com',27946215,'http://warhammer40k.wikia.com/wiki/Ryza','Costa Rica','San Jose','Ryza30','Rosalind'
+EXEC SP_Insertar_Empresa '26','1234','853tx586hds45h7ga863','Drive','3x543=45yul','Rosalind','Franklin','Ryza','Ryza30@gmail.com',27946215,'http://warhammer40k.wikia.com/wiki/Ryza','Costa Rica','San Jose','Ryza30','Rosalind'
 
-EXEC SP_Insertar_Admin '27','1234','45gf3l4h53jk4563kp4j', '', '', 'Joseph','Campos', 'Joseph'
-EXEC SP_Insertar_Admin '28','1234','3uiopbgny878cr6789xs', '', '', 'Sebastian','Gonzalez', 'SebastianG'
+EXEC SP_Insertar_Admin '27','1234','45gfgl4h53pk4563kp4j', '', '', 'Joseph','Campos', 'Joseph'
+EXEC SP_Insertar_Admin '28','1234','3upsdbgny878jd72j9xs', '', '', 'Sebastian','Gonzalez', 'SebastianG'
 EXEC SP_Insertar_Admin '29','1234','3re6d3k45gf3l4h53jk4', '', '','Josafat','Vargas','Josafat'
 EXEC SP_Insertar_Admin '30','1234','563kp4j3uiopbgny878c', '', '', 'Giovanni','Villalobos', 'Giovanni'
-
 
 EXEC SP_Insertar_Curso '13', 'Especificacion y Diseño de Software', 'CE-4101', '1', 68, '10/17/2016', 7
 EXEC SP_Insertar_Curso '14', 'Bases De Datos', 'CE-3101', '1', 68, '10/17/2016', 1
 EXEC SP_Insertar_Curso '14', 'Matemática General', 'MA-0101', '1', 74, '10/17/2016', 2
 EXEC SP_Insertar_Curso '15', 'Introducción a la Física', 'FI-0101', '1', 64, '10/17/2016', 4
 EXEC SP_Insertar_Curso '16', 'Estructuras de Datos 2', 'CE-2102', '1', 68, '10/17/2016', 3
-
 
 	/*Badges - Especificacion y Diseno de Software*/
 EXEC SP_Insertar_Badge 'Usabilidad', '25', '1'
@@ -170,10 +163,9 @@ EXEC SP_Asignar_Tecnologia_Proyecto '3', '16'
 EXEC SP_Asignar_Tecnologia_Proyecto '3', '19'
 
 EXEC SP_Aceptar_Proyecto '1', '1', '1'
-
 EXEC SP_Insertar_Mensaje_Proyecto'Por favor enviarme una propuesta inicial del proyecto', '', '2','Ada Lovelace'
-EXEC SP_Insertar_Respuesta '2', 'Aquí adjunto la propuesta', 'https://drive.google.com/uc?export=download&id=0B54vssG6Ahg3SHk2QmprQkdmWVE','Gabriel Angelos'
-EXEC SP_Insertar_Respuesta '2', 'Excelente', '','Ada Lovelace'
+EXEC SP_Insertar_Respuesta '1', 'Aquí adjunto la propuesta', 'https://drive.google.com/uc?export=download&id=0B54vssG6Ahg3SHk2QmprQkdmWVE','Gabriel Angelos'
+EXEC SP_Insertar_Respuesta '1', 'Excelente', '','Ada Lovelace'
 EXEC SP_Insertar_Mensaje_Proyecto 'Necesito que me envie el perfil de la empresa', '', '2','Gabriel Angelos'
 
 EXEC SP_Otorgar_Badge '1', '1', 'O'
@@ -240,7 +232,7 @@ EXEC SP_Insertar_Badge 'BadgeMaximus', 100, 2
 EXEC SP_Insertar_Badge 'BadgeMaximus', 100, 4
 EXEC SP_Insertar_Badge 'BadgeMaximus', 100, 3
 
-
+/*
 INSERT INTO CURSO_POR_PROFESOR (IdCurso, IdProfesor, Estado)
 VALUES (6, 13, 'A')
 INSERT INTO CURSO_POR_PROFESOR (IdCurso, IdProfesor, Estado)
@@ -252,6 +244,7 @@ VALUES (9, 13, 'A')
 INSERT INTO CURSO_POR_PROFESOR (IdCurso, IdProfesor, Estado)
 VALUES (10, 13, 'A')
 
+
 INSERT INTO CURSO_POR_UNIVERSIDAD (IdCurso, IdUniversidad, Estado)
 VALUES (6, 1, 'A')
 INSERT INTO CURSO_POR_UNIVERSIDAD (IdCurso, IdUniversidad, Estado)
@@ -262,13 +255,12 @@ INSERT INTO CURSO_POR_UNIVERSIDAD (IdCurso, IdUniversidad, Estado)
 VALUES (9, 1, 'A')
 INSERT INTO CURSO_POR_UNIVERSIDAD (IdCurso, IdUniversidad, Estado)
 VALUES (10, 1, 'A')
-
+*/
 EXEC SP_Agregar_Al_Curso '7', '6'
 EXEC SP_Agregar_Al_Curso '7', '7'
 EXEC SP_Agregar_Al_Curso '7', '8'
 EXEC SP_Agregar_Al_Curso '7', '9'
 EXEC SP_Agregar_Al_Curso '7', '10'
-
 EXEC SP_Agregar_Al_Curso '8', '6'
 EXEC SP_Agregar_Al_Curso '8', '7'
 EXEC SP_Agregar_Al_Curso '8', '8'
@@ -285,8 +277,6 @@ UPDATE ESTUDIANTE_POR_CURSO SET Nota=57, Estado='F' WHERE IdCurso=9 AND IdEstudi
 UPDATE ESTUDIANTE_POR_CURSO SET Nota=90, Estado='E' WHERE IdCurso=10 AND IdEstudiante=7
 UPDATE ESTUDIANTE_POR_CURSO SET Nota=80, Estado='E' WHERE IdCurso=10 AND IdEstudiante=8
 
-
-
 EXEC SP_Insertar_Trabajo 'QAJobs', 'do QA on our system', '20', '2016-11-10', '2016-11-15', '', '10000'
 EXEC SP_Insertar_Trabajo 'QAJobs', 'do QA on our system', '20', '2016-11-10', '2016-11-15', '', '10000'
 EXEC SP_Insertar_Trabajo 'QAJobs', 'do QA on our system', '20', '2016-11-10', '2016-11-15', '', '10000'
@@ -302,25 +292,18 @@ UPDATE TRABAJO SET EstrellasObtenidas = 4, Exitoso = 1 WHERE ID=10
 UPDATE TRABAJO SET EstrellasObtenidas = 5, Exitoso = 1 WHERE ID=11
 UPDATE TRABAJO SET EstrellasObtenidas = 4, Exitoso = 1 WHERE ID=12
 
-DELETE TRABAJO_POR_ESTUDIANTE WHERE IdTrabajo>6
-
-SELECT * FROM TRABAJO_POR_ESTUDIANTE
-
-SELEct * from TRABAJO_POR_ESTUDIANTE
+INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
+VALUES (6, 7, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
 INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
 VALUES (7, 7, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
 INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
 VALUES (8, 7, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
 INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
-VALUES (9, 7, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
+VALUES (9, 8, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
 INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
 VALUES (10, 8, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
 INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
 VALUES (11, 8, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
-INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
-VALUES (12, 8, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
-
-
 
 INSERT INTO PROYECTO (Nombre, Problematica, Descripcion, IdCurso, FechaInicio, FechaFinal, DocumentoAdicional, NotaObtenida, Estado)
 VALUES ('Test', 'test this program', 'tests this programs api engine', 1, '2016-10-17', '2016-11-26', '', 70, 'E')
@@ -361,3 +344,4 @@ INSERT INTO PROYECTO_POR_PROFESOR (IdProyecto, IdProfesor, Estado)
  VALUES (9, 13, 'A')
 INSERT INTO PROYECTO_POR_PROFESOR (IdProyecto, IdProfesor, Estado)
  VALUES (10, 13, 'A')
+

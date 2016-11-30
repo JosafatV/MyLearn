@@ -13,21 +13,28 @@ namespace MyLearnApi.BusinessLogic
         public const byte ROL_EMPRESA = 2;
         public const byte ROL_PROFESOR = 3;
 
+        private static MyLearnDBEntities entities = new MyLearnDBEntities();
 
-       
+
         public static bool login(string username, string password)
         {
-            using (MyLearnDBEntities entities = new MyLearnDBEntities())
+
+            USUARIO lobj_usuario = entities.USUARIO.Where(u => u.NombreDeUsuario == username).First<USUARIO>();
+            if (lobj_usuario != null)
             {
-                return entities.USUARIO.Any(user => user.NombreDeUsuario == username && user.Contrasena == password);
+                return BCrypt.CheckPassword(password, lobj_usuario.Contrasena);
             }
+            else
+            {
+                return false;
+            }
+                            
         }
 
 
         public static byte getRol(string username)
         {
-            using (MyLearnDBEntities entities = new MyLearnDBEntities())
-            {
+            
 
                 if (entities.VIEW_ESTUDIANTE.Any(u => u.NombreDeUsuario == username))
                     return ROL_ESTUDIANTE;
@@ -37,7 +44,7 @@ namespace MyLearnApi.BusinessLogic
                     return ROL_PROFESOR;
                 else
                     return 0;
-            }
+           
         }
 
     

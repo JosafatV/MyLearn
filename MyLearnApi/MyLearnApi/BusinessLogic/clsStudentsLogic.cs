@@ -55,9 +55,14 @@ namespace MyLearnApi.BusinessLogic
         /// <returns></returns>
         public bool doStudentInsertion(VIEW_ESTUDIANTE estudiante)
         {
+            
             clsIncrementalIdGenerator lobj_generator = new clsIncrementalIdGenerator();
             //genera un id autoincremental
             estudiante.Id = lobj_generator.generateUserId();
+            //generar sal
+            estudiante.Sal = BCrypt.GenerateSalt();
+            //encriptar la constraseña
+            estudiante.Contrasena = BCrypt.HashPassword(estudiante.Contrasena, estudiante.Sal);
 
             db.SP_Insertar_Estudiante(estudiante.Id, estudiante.Contrasena, estudiante.Sal, 
                 estudiante.RepositorioArchivos, estudiante.CredencialDrive,

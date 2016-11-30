@@ -135,7 +135,7 @@ CREATE PROCEDURE SP_Insertar_Estudiante
 
 		INSERT INTO ESTUDIANTE (Id,NombreContacto, ApellidoContacto, Carne, Email, Telefono, Pais, Region,
 		IdUniversidad ,FechaInscripcion, RepositorioCodigo, LinkHojaDeVida) 
-		VALUES (@Id, @Nombre, @Apellido, @Carne, @Email, @Telefono,@Pais,@Region,@IdUniversidad , GETDATE(), @RepositorioCodigo,
+		VALUES (@Id, @Nombre, @Apellido, @Carne, @Email, @Telefono,@Pais,@Region,@IdUniversidad, GETDATE(), @RepositorioCodigo,
 		 @LinkHojaDeVida)
 	GO
 
@@ -212,8 +212,7 @@ CREATE PROCEDURE SP_Select_Cursos_Estudiante @IdEstudiante CHAR(100)
 	AS
 		SELECT CURSO.Id, CURSO.Nombre, CURSO.Codigo, CURSO.NotaMinima, CURSO.FechaInicio, CURSO.NumeroGrupo, ESTUDIANTE_POR_CURSO.Estado
 		FROM CURSO INNER JOIN ESTUDIANTE_POR_CURSO ON CURSO.Id = ESTUDIANTE_POR_CURSO.IdCurso
-		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante 
-					
+		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante AND ( ESTUDIANTE_POR_CURSO.Estado = 'A' OR ESTUDIANTE_POR_CURSO.Estado = 'T')		
 	GO
 
 CREATE PROCEDURE SP_Select_Cursos_De_Universidad ( @IdUniversidad INT , @EstadoCurso CHAR(1), @IdEstudiante CHAR(100) )
@@ -227,15 +226,6 @@ CREATE PROCEDURE SP_Select_Cursos_De_Universidad ( @IdUniversidad INT , @EstadoC
 		CURSO_POR_UNIVERSIDAD.IdUniversidad = @IdUniversidad AND
 		CURSO.Estado = @EstadoCurso AND
 		not exists ( select * FROM ESTUDIANTE_POR_CURSO  where ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante AND ESTUDIANTE_POR_CURSO.IdCurso = CURSO.Id )  
-	GO
-
-	
-CREATE PROCEDURE SP_Select_Cursos_Estudiante (@IdEstudiante CHAR(100)) 
-	AS
-		SELECT CURSO.Id, CURSO.Nombre, CURSO.Codigo, CURSO.NotaMinima, CURSO.FechaInicio, CURSO.NumeroGrupo, CURSO.Estado
-		FROM CURSO INNER JOIN ESTUDIANTE_POR_CURSO ON CURSO.Id = ESTUDIANTE_POR_CURSO.IdCurso
-		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante 
-					AND ( ESTUDIANTE_POR_CURSO.Estado = 'A' OR ESTUDIANTE_POR_CURSO.Estado = 'T' )
 	GO
 
 	/*Creates a new course*/
@@ -257,8 +247,6 @@ CREATE PROCEDURE SP_Insertar_Curso @IdProfesor CHAR(100), @Nombre CHAR(30),
 	GO
 
 	/*SP_Terminar_Curso*/
- 
-
 CREATE PROCEDURE SP_TerminarCurso (@IdCurso INT)
 	AS
 		UPDATE CURSO 
@@ -272,8 +260,8 @@ CREATE PROCEDURE SP_TerminarCurso (@IdCurso INT)
 		/*Calcular nota*/
 
 	GO
+
 /*  termina todos los proyectos de un curso */
-DROP PROCEDURE SP_Terminar_Proyectos_De_Un_Curso
 CREATE PROCEDURE SP_Terminar_Proyectos_De_Un_Curso (@IdCurso INT)
 	AS
 	
@@ -427,7 +415,7 @@ CREATE PROCEDURE SP_Insertar_Trabajo @Nombre CHAR(30), @Descripcion CHAR(500), @
 		VALUES (@Nombre, @Descripcion, @IdEmpresa, @FechaInicio, @FechaCierre, @DocumentoAdicional,@presupuesto , 'P')
 	GO
 	
-CREATE PROCEDURE SP_select_tecnologias_por_trabajo @IdTrabajo INT
+CREATE PROCEDURE SP_Select_Tecnologias_Por_Trabajo @IdTrabajo INT
 	AS
 		SELECT TECNOLOGIA.Id , TECNOLOGIA.Nombre,TECNOLOGIA.Estado
 		FROM TECNOLOGIA INNER JOIN TECNOLOGIA_POR_TRABAJO ON TECNOLOGIA.Id = TECNOLOGIA_POR_TRABAJO.IdTecnologia 

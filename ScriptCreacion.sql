@@ -11,7 +11,7 @@ USE MyLearnDB;
 CREATE TABLE USUARIO (
     Id CHAR(100),
     Contrasena CHAR(8),
-	Sal CHAR(20),
+	Sal CHAR(20) UNIQUE,
 	RepositorioArchivos CHAR(100),
 	CredencialDrive CHAR(100),
 	Estado CHAR(1),
