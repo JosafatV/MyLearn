@@ -25,6 +25,10 @@
            $scope.userActual = data;
        });
 
+        /*
+        * Funcion para enviar mensajes
+        */
+
        $scope.enviarMensaje = function () {
            fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }, {
                Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto
@@ -36,6 +40,10 @@
            });
        };
 
+        /*
+        * Funcion para enviar mensajes de respuesta
+        */
+
        $scope.enviarMensajeResp = function () {           
            fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: 'Respuesta' }, {
                Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto,
@@ -45,6 +53,10 @@
            });
 
        };
+
+        /*
+        * Funcion para volver al perfil del estudiante
+        */
 
        $scope.do_goPerfilEstudiante = function () {
            $location.path('/MyLearn/Estudiante/Perfil/' + $routeParams.IdUser);
