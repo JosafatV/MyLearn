@@ -161,7 +161,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
                 $scope.$apply(function () {
                     //$scope.csvFile = reader.result;
                     //alert(reader.result);
-                    fct_MyLearn_API_Client.saveFile({ type: 'File', extension1: 37 },fd).$promise.then(function (data) {
+                    fct_MyLearn_API_Client.saveFile({ type: 'File', extension1: 33 },fd).$promise.then(function (data) {
                         alert(angular.toJson(data));
                     });
                 });
@@ -231,7 +231,7 @@ angular.module('mod_MyLearn').service('fileUpload', ['$http', function ($http) {
         var fd = new FormData();
         fd.append('file', file);
 
-        $http.post('http://172.19.13.20:8099/MyLearnApi/File/31', fd, {
+        $http.post('http://172.19.13.20:8099/MyLearnApi/File/32', fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }
         })
