@@ -1,5 +1,5 @@
-angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', 'fileUpload','$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService',
-    function ($q, fileUpload,$scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService) {
+angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fileUpload','$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService',
+    function ($q,fileUpload,$scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService) {
 
         $scope.csv;
         $scope.aaa = "";
@@ -157,16 +157,12 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', 'f
             // A handler for the load event (just defining it, not executing it right now)
             reader.onload = function (e) {
                 var fd = new FormData();
-                fd.append('file', reader.result);
+                fd.append('file', csvFile);
                 $scope.$apply(function () {
-                    $scope.csvFile = reader.result;
-                    alert(reader.result);
-                    fct_MyLearn_API_Client.saveFile({ type: 'File', extension1: 1 }, {
-                        name: fileName,
-                        contentType: fileContentType,
-                        bytes: reader.result
-                    }).$promise.then(function (data) {
-                        alert(data);
+                    //$scope.csvFile = reader.result;
+                    //alert(reader.result);
+                    fct_MyLearn_API_Client.saveFile({ type: 'File', extension1: 37 },fd).$promise.then(function (data) {
+                        alert(angular.toJson(data));
                     });
                 });
             };
@@ -180,8 +176,8 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', 'f
 
             // use reader to read the selected file
             // when read operation is successfully finished the load event is triggered
-            // and handled by our reader.onload function
-            reader.readAsBinaryString(csvFile);
+            // and handled by our reader.onload function            
+            //reader.readAsBinaryString(csvFile);
             //reader.readAsArrayBuffer(csvFile)
         };
 
@@ -200,7 +196,19 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q', 'f
             $location.path("/MyLearn/CrearCuentaComo");
         };
 
+        $scope.uploadFile = function () {
+            var file = $scope.myFile;
+
+            console.log('file is ');
+            console.dir(file);
+
+            var uploadUrl = "/fileUpload";
+            fileUpload.uploadFileToUrl(file);
+        };
+
     }]);
+
+
 
 angular.module('mod_MyLearn').directive('fileModel', ['$parse', function ($parse) {
     return {
@@ -219,21 +227,18 @@ angular.module('mod_MyLearn').directive('fileModel', ['$parse', function ($parse
 }]);
 
 angular.module('mod_MyLearn').service('fileUpload', ['$http', function ($http) {
-    this.uploadFileToUrl = function (file, uploadUrl) {
+    this.uploadFileToUrl = function (file) {
         var fd = new FormData();
         fd.append('file', file);
 
-        $http.post(uploadUrl, fd, {
+        $http.post('http://172.19.13.20:8099/MyLearnApi/File/37', fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }
         })
 
-        .success(function () {
-        })
-
-        .error(function () {
-        });
     }
 }]);
+
+
 
 

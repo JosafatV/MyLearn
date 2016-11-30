@@ -53,9 +53,8 @@
                     <select ng-options="pais.Pais1 for pais in lst_listaPaises" class="form-control" data-ng-model="paisSelected" data-ng-change="changePais()"></select>
                 </div>
                 <div>
-                    <input ng-model="csv"
-                           onchange="angular.element(this).scope().fileChanged()"
-                           type="file"  id="fileInput" />
+                    <input type="file" file-model="myFile" />
+                    <button ng-click="uploadFile()">upload me</button>
                 </div>
                 <button data-ng-click="sendFile()">sendFile</button>
                 <div class="form-group">
