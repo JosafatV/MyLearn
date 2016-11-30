@@ -140,53 +140,6 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
 
         };
 
-        $scope.onFileSelect = function() {
-            reader = new FileReader();
-            reader.onload = function() {
-                file_contents = this.result;
-                upload_file($scope.files[0],file_contents);
-            };
-            reader.readAsArrayBuffer($scope.files[0]);
-        };
-
-        $scope.fileChanged = function () {
-
-            // define reader
-            var reader = new FileReader();
-
-            // A handler for the load event (just defining it, not executing it right now)
-            reader.onload = function (e) {
-                var fd = new FormData();
-                fd.append('file', csvFile);
-                $scope.$apply(function () {
-                    //$scope.csvFile = reader.result;
-                    //alert(reader.result);
-                    fct_MyLearn_API_Client.saveFile({ type: 'File', extension1: 33 },fd).$promise.then(function (data) {
-                        alert(angular.toJson(data));
-                    });
-                });
-            };
-
-            // get <input> element and the selected file 
-            var csvFileInput = document.getElementById('fileInput');
-            var csvFile = csvFileInput.files[0];
-            var fileName = csvFileInput.files[0].name;
-            var fileContentType = csvFileInput.files[0].type;
-            alert(fileName);
-
-            // use reader to read the selected file
-            // when read operation is successfully finished the load event is triggered
-            // and handled by our reader.onload function            
-            //reader.readAsBinaryString(csvFile);
-            //reader.readAsArrayBuffer(csvFile)
-        };
-
-        $scope.getFile = function () {
-            var file = $scope.myFile;
-            console.log('file is ');
-            console.info(file);
-        };
-
         $scope.do_agregueTec = function (tec) {
             $scope.ls_tecnologiasSelect.push(tec);
             $scope.ls_tecnologias.splice($scope.ls_tecnologias.indexOf(tec), 1);
@@ -198,46 +151,12 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
 
         $scope.uploadFile = function () {
             var file = $scope.myFile;
-
-            console.log('file is ');
-            console.dir(file);
-
-            var uploadUrl = "/fileUpload";
-            fileUpload.uploadFileToUrl(file);
+            fileUpload.uploadFileToUrl(file, 32);
         };
 
     }]);
 
 
-
-angular.module('mod_MyLearn').directive('fileModel', ['$parse', function ($parse) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            var model = $parse(attrs.fileModel);
-            var modelSetter = model.assign;
-
-            element.bind('change', function () {
-                scope.$apply(function () {
-                    modelSetter(scope, element[0].files[0]);
-                });
-            });
-        }
-    };
-}]);
-
-angular.module('mod_MyLearn').service('fileUpload', ['$http', function ($http) {
-    this.uploadFileToUrl = function (file) {
-        var fd = new FormData();
-        fd.append('file', file);
-
-        $http.post('http://172.19.13.20:8099/MyLearnApi/File/32', fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
-        })
-
-    }
-}]);
 
 
 
