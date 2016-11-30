@@ -11,7 +11,7 @@
             NombreEmisor:""
         };
 
-        $scope.userActual = {};
+       $scope.userActual = {};
 
        fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
             $scope.ls_msjs = data;
@@ -29,7 +29,7 @@
            fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }, {
                Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto
                             }).$promise.then(function (data) {
-                                fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+                                fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
                                     $scope.ls_msjs = data;
                                     $scope.js_enviarMensaje.Contenido = "";
                                 });
@@ -89,5 +89,9 @@
            });
 
        };
+
+    /*
+    * Funcion para enviar mensajes usando Drive
+    */
 
  }]);
