@@ -49,20 +49,7 @@ namespace MyLearnApi.Models.DriveIntegration
 
         }
 
-/*
-        public static UserCredential refrescarTokens()
-        {
-            var flow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
-            {
 
-                ClientSecrets = new ClientSecrets
-                {
-                    ClientId = secret.client_id,
-                    ClientSecret = secret.client_secret
-                },
-                Scopes = new[] { DriveService.Scope.Drive, DriveService.Scope.DriveFile }
-            });
-        }*/
 
         /// <summary>
         /// This class get the information of the user credentials for DRIVE
