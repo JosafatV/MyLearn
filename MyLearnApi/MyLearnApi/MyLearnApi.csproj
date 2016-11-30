@@ -245,7 +245,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="BusinessLogic\clsAlgoritmoPaginacion.cs" />
     <Compile Include="BusinessLogic\clsAreaDeTrabajoLogic.cs" />
-    <Compile Include="BusinessLogic\UserAccounts\clsBasicAuthenticationAttribute.cs.cs" />
+    <Compile Include="Controllers\clsBasicAuthenticationAttribute.cs.cs" />
     <Compile Include="BusinessLogic\UserAccounts\clsCuentaDeUsuario.cs" />
     <Compile Include="BusinessLogic\clsCursosLogic.cs" />
     <Compile Include="BusinessLogic\clsDateFormater.cs" />
@@ -255,7 +255,7 @@
     <Compile Include="BusinessLogic\clsStudentsLogic.cs" />
     <Compile Include="BusinessLogic\clsTrabajosLogic.cs" />
     <Compile Include="BusinessLogic\UserAccounts\clsIncrementalIdGenerator.cs" />
-    <Compile Include="BusinessLogic\UserAccounts\clsRepoLogic.cs" />
+    <Compile Include="BusinessLogic\clsRepoLogic.cs" />
     <Compile Include="BusinessLogic\UserAccounts\clsUserIdGenerator.cs" />
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
