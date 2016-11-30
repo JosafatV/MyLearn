@@ -50,6 +50,10 @@
            $location.path('/MyLearn/Estudiante/Perfil/' + $routeParams.IdUser);
        };
 
+        /*
+        * Funcion para abrir el campo de texto para responder mensajes
+        */
+
 
        $scope.responder = function (mensaje) {
            console.log(mensaje);
@@ -70,6 +74,10 @@
            });
 
        };
+
+        /*
+        * Funcion para ver los badges del estudiante
+        */
 
        $scope.verBadges = function () {
            usuarioPrincipal = $scope.userActual;
