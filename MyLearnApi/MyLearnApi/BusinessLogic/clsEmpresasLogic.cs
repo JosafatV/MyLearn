@@ -48,6 +48,11 @@ namespace MyLearnApi.BusinessLogic
             //se genera un id autoincremental
             lobj_v.Id = lobj_generator.generateUserId();
 
+            //generar sal
+            lobj_v.Sal = BCrypt.GenerateSalt();
+            //encriptar la constraseña
+            lobj_v.Contrasena = BCrypt.HashPassword(lobj_v.Contrasena, lobj_v.Sal);
+
             db.SP_Insertar_Empresa(lobj_v.Id, lobj_v.Contrasena, lobj_v.Sal, lobj_v.RepositorioArchivos, 
                 lobj_v.CredencialDrive,
                 lobj_v.NombreContacto, lobj_v.ApellidoContacto, lobj_v.NombreEmpresarial, lobj_v.Email,

@@ -37,7 +37,12 @@ namespace MyLearnApi.BusinessLogic
             //se autogenera un id
             clsIncrementalIdGenerator lobj_generator = new clsIncrementalIdGenerator();
             vIEW_PROFESOR.Id = lobj_generator.generateUserId();
- 
+
+            //generar sal
+            vIEW_PROFESOR.Sal = BCrypt.GenerateSalt();
+            //encriptar la constraseña
+            vIEW_PROFESOR.Contrasena = BCrypt.HashPassword(vIEW_PROFESOR.Contrasena, vIEW_PROFESOR.Sal);
+
             //se inserta mediante un procedimiento almacenaado
             db.SP_Insertar_Profesor(vIEW_PROFESOR.Id, vIEW_PROFESOR.Contrasena, vIEW_PROFESOR.Sal, 
                 vIEW_PROFESOR.RepositorioArchivos, vIEW_PROFESOR.CredencialDrive,
