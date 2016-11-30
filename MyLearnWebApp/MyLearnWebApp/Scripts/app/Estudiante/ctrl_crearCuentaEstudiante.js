@@ -231,7 +231,7 @@ angular.module('mod_MyLearn').service('fileUpload', ['$http', function ($http) {
         var fd = new FormData();
         fd.append('file', file);
 
-        $http.post('http://172.19.13.20:8099/MyLearnApi/File/37', fd, {
+        $http.post('http://172.19.13.20:8099/MyLearnApi/File/31', fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }
         })
