@@ -74,7 +74,7 @@
                 "AccessToken": access_token,
                 "RefreshToken": refresh_token
             }).$promise.then(function (data) {
-
+                $location.path('/MyLearn/Empresa/Perfil/' + id);
             });
         };
 

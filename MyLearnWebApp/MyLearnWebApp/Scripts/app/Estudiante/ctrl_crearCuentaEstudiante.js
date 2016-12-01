@@ -115,7 +115,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
                 "AccessToken": access_token,
                 "RefreshToken": refresh_token
             }).$promise.then(function (data) {
-                //alert(angular.toJson(data));
+                $location.path('/MyLearn/Estudiante/Perfil/' + id);
             });
         };
 
@@ -159,7 +159,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
             console.log('file is ');
             console.dir(file);
 
-            fileUpload.uploadFileToUrl(file, 47);
+            fileUpload.uploadFileToUrl(file, 48);
         };
 
     }]);

@@ -3,6 +3,9 @@
         $scope.universidadSelected = "";
         $scope.ls_listaUniversidades = [];
 
+        OAuth.initialize('CgKcLvAzYP_vq69R1HNBPtTne_g');
+        OAuth.create('google_drive');
+
         /*
         *  Estructura del json necesario para poder crear la cuenta
         *
@@ -72,6 +75,34 @@
         };
 
         /*
+        * Esta es la funcion encargada de conectar con Drive
+        */
+
+        $scope.testDrive = function () {
+            OAuth.clearCache();
+            OAuth.popup('google_drive', { cache: false }).done(function (result) {
+                console.log(result);
+                access_token = result.access_token;
+                refresh_token = result.refresh_token;
+            })
+        };
+
+
+        /*
+        * Función encargada de enviar las credential 
+        */
+
+        function set_sendCredentials(id) {
+            fct_MyLearn_API_Client.save({ type: 'DriveCredentials' }, {
+                "UserId": id,
+                "AccessToken": access_token,
+                "RefreshToken": refresh_token
+            }).$promise.then(function (data) {
+                $location.path('/MyLearn/Profesor/Perfil/' + id);
+            });
+        };
+
+        /*
         *  Funcion encargada de movilizarse al crer cuaenta del estudiante
         *
         */
@@ -86,8 +117,9 @@
         */
 
         $scope.sendCuenta = function () {
-            fct_MyLearn_API_Client.save({ type: 'Profesores' }, $scope.crearCuentaJson);
-
+            fct_MyLearn_API_Client.save({ type: 'Profesores' }, $scope.crearCuentaJson).$promise.then(function (data) {
+                set_sendCredentials(data.Id);                
+            });            
         }
 
     }]);
