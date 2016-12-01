@@ -262,8 +262,8 @@
           <Property Name="CredencialDrive" Type="char" MaxLength="100" />
           <Property Name="Estado" Type="char" MaxLength="1" />
           <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
-          <Property Name="Contrasena" Type="varchar" MaxLength="50" />
           <Property Name="Sal" Type="varchar" MaxLength="100" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_CURSOS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2455,7 +2455,7 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
           <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="NombreDeUsuario" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
-          <Property Name="Contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Sal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           </EntityType>
         <Association Name="FK_DRIVE_CREDENTIALS">

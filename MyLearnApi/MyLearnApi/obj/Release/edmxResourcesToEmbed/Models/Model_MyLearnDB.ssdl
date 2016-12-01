@@ -257,8 +257,8 @@
     <Property Name="CredencialDrive" Type="char" MaxLength="100" />
     <Property Name="Estado" Type="char" MaxLength="1" />
     <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
-    <Property Name="Contrasena" Type="varchar" MaxLength="50" />
     <Property Name="Sal" Type="varchar" MaxLength="100" />
+    <Property Name="Contrasena" Type="varchar" MaxLength="200" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_CURSOS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
