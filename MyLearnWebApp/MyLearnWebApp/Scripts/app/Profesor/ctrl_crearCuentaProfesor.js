@@ -10,7 +10,7 @@
 
         $scope.crearCuentaJson =
            {
-               "Id": "",
+               "NombreDeUsuario": "",
                "Contrasena": "",
                "Sal": "",
                "RepositorioArchivos": "",

@@ -115,7 +115,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
                 "AccessToken": access_token,
                 "RefreshToken": refresh_token
             }).$promise.then(function (data) {
-                alert(angular.toJson(data));
+                //alert(angular.toJson(data));
             });
         };
 
@@ -149,9 +149,17 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
             $location.path("/MyLearn/CrearCuentaComo");
         };
 
-        $scope.uploadFile = function () {
+        /*
+        * Funcion para enviar mensajes usando Drive
+        */
+
+        $scope.uploadFile = function() {
             var file = $scope.myFile;
-            fileUpload.uploadFileToUrl(file, 32);
+
+            console.log('file is ');
+            console.dir(file);
+
+            fileUpload.uploadFileToUrl(file, 47);
         };
 
     }]);
