@@ -10,6 +10,18 @@
     <Property Name="Sal" Type="char" MaxLength="20" />
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
+  <Function Name="SP_MyEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Top" Type="int" Mode="In" />
+    <Parameter Name="Pais" Type="char" Mode="In" />
+  </Function>
+  <Function Name="SP_MyEmployee_Custom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Top" Type="int" Mode="In" />
+    <Parameter Name="PorcentajeNotas" Type="float" Mode="In" />
+    <Parameter Name="PorcentajeEstrellas" Type="float" Mode="In" />
+    <Parameter Name="Proyectos" Type="float" Mode="In" />
+    <Parameter Name="Trabajos" Type="float" Mode="In" />
+    <Parameter Name="Minimo" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="MyLearnDBModelStoreContainer">
     <EntitySet Name="USUARIO_MYEMPLOYEE" EntityType="Self.USUARIO_MYEMPLOYEE" Schema="dbo" store:Type="Tables" />
   </EntityContainer>

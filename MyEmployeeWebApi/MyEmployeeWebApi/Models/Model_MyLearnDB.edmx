@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MyLearnDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MyLearnDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="USUARIO_MYEMPLOYEE">
           <Key>
             <PropertyRef Name="Id" />
@@ -15,11 +15,22 @@
           <Property Name="Sal" Type="char" MaxLength="20" />
           <Property Name="Estado" Type="char" MaxLength="1" />
         </EntityType>
+        <Function Name="SP_MyEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Top" Type="int" Mode="In" />
+          <Parameter Name="Pais" Type="char" Mode="In" />
+        </Function>
+        <Function Name="SP_MyEmployee_Custom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Top" Type="int" Mode="In" />
+          <Parameter Name="PorcentajeNotas" Type="float" Mode="In" />
+          <Parameter Name="PorcentajeEstrellas" Type="float" Mode="In" />
+          <Parameter Name="Proyectos" Type="float" Mode="In" />
+          <Parameter Name="Trabajos" Type="float" Mode="In" />
+          <Parameter Name="Minimo" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="MyLearnDBModelStoreContainer">
           <EntitySet Name="USUARIO_MYEMPLOYEE" EntityType="Self.USUARIO_MYEMPLOYEE" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyLearnDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -35,7 +46,45 @@
         </EntityType>
         <EntityContainer Name="MyLearnDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="USUARIO_MYEMPLOYEE" EntityType="Self.USUARIO_MYEMPLOYEE" />
+          <FunctionImport Name="SP_MyEmployee" ReturnType="Collection(MyLearnDBModel.SP_MyEmployee_Result)">
+            <Parameter Name="Top" Mode="In" Type="Int32" />
+            <Parameter Name="Pais" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_MyEmployee_Custom" ReturnType="Collection(MyLearnDBModel.SP_MyEmployee_Custom_Result)">
+            <Parameter Name="Top" Mode="In" Type="Int32" />
+            <Parameter Name="PorcentajeNotas" Mode="In" Type="Double" />
+            <Parameter Name="PorcentajeEstrellas" Mode="In" Type="Double" />
+            <Parameter Name="Proyectos" Mode="In" Type="Double" />
+            <Parameter Name="Trabajos" Mode="In" Type="Double" />
+            <Parameter Name="Minimo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="get_Elementos_por_pais" ReturnType="Collection(MyLearnDBModel.SP_MyEmployee_Result)">
+            <Parameter Name="Top" Mode="In" Type="Int32" />
+            <Parameter Name="Pais" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="get_elementos_por_rubro" ReturnType="Collection(MyLearnDBModel.SP_MyEmployee_Custom_Result)">
+            <Parameter Name="Top" Mode="In" Type="Int32" />
+            <Parameter Name="PorcentajeNotas" Mode="In" Type="Double" />
+            <Parameter Name="PorcentajeEstrellas" Mode="In" Type="Double" />
+            <Parameter Name="Proyectos" Mode="In" Type="Double" />
+            <Parameter Name="Trabajos" Mode="In" Type="Double" />
+            <Parameter Name="Minimo" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="SP_MyEmployee_Result">
+          <Property Type="String" Name="IdEstudiante" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="NombreContacto" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Telefono" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Performance" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_MyEmployee_Custom_Result">
+          <Property Type="String" Name="IdEstudiante" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="NombreContacto" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Telefono" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Performance" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -53,6 +102,50 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_MyEmployee" FunctionName="MyLearnDBModel.Store.SP_MyEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Result">
+                <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Performance" ColumnName="Performance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_MyEmployee_Custom" FunctionName="MyLearnDBModel.Store.SP_MyEmployee_Custom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Custom_Result">
+                <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Performance" ColumnName="Performance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="get_Elementos_por_pais" FunctionName="MyLearnDBModel.Store.SP_MyEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Result">
+                <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Performance" ColumnName="Performance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="get_elementos_por_rubro" FunctionName="MyLearnDBModel.Store.SP_MyEmployee_Custom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Custom_Result">
+                <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Performance" ColumnName="Performance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
