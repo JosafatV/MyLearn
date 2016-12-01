@@ -125,7 +125,7 @@ GO
 
 	/*Creates a new student*/
 CREATE PROCEDURE SP_Insertar_Estudiante   
-	@Id CHAR(100), @Contrasena VARCHAR(50), @Sal VARCHAR(100), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
+	@Id CHAR(100), @Contrasena VARCHAR(200), @Sal VARCHAR(100), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 	@Nombre CHAR(30), @Apellido CHAR(30), @Carne CHAR(15), @Email CHAR(50), @Telefono CHAR(15), @Pais CHAR(30),
 	@Region CHAR(30), @IdUniversidad INT , @RepositorioCodigo CHAR(100), @LinkHojaDeVida CHAR(100) , @UserName CHAR(40) 
@@ -144,7 +144,7 @@ IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Pr
 DROP PROCEDURE  SP_Insertar_Profesor  
 GO
 CREATE PROCEDURE SP_Insertar_Profesor
-	@Id CHAR(100), @Contrasena VARCHAR(50), @Sal VARCHAR(100), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
+	@Id CHAR(100), @Contrasena VARCHAR(200), @Sal VARCHAR(100), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 	@NombreContacto CHAR(30), @ApellidoContacto CHAR(30), @Email CHAR(50), @Telefono CHAR(15), 
 	 @HorarioAtencion CHAR(15), @Pais CHAR(30), @Region CHAR(30), @IdUniversidad INT, @UserName CHAR(40) 
@@ -163,7 +163,7 @@ CREATE PROCEDURE SP_Insertar_Profesor
 
 	/*Creates a new company*/
 CREATE PROCEDURE SP_Insertar_Empresa
-@Id CHAR(100), @Contrasena VARCHAR(50), @Sal VARCHAR(100), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
+@Id CHAR(100), @Contrasena VARCHAR(200), @Sal VARCHAR(100), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 @NombreContacto CHAR(30), @ApellidoContacto CHAR(30), @NombreEmpresarial CHAR(30), @Email CHAR(50), @Telefono CHAR(15),
  @PaginaWebEmpresa CHAR(30), @Pais CHAR(30), @Region CHAR(30), @RepositorioCodigo CHAR(100), @UserName CHAR(40) 
@@ -179,7 +179,7 @@ CREATE PROCEDURE SP_Insertar_Empresa
 
 	/*Creates a new administrator - EXTRA POINTS*/
 CREATE PROCEDURE SP_Insertar_Admin
-@Id CHAR(100), @Contrasena VARCHAR(50), @Sal VARCHAR(100), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
+@Id CHAR(100), @Contrasena VARCHAR(200), @Sal VARCHAR(100), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 @Nombre CHAR(30), @ApellidoContacto CHAR(30), @NombreUsuario CHAR(40)
 	AS
 		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado, NombreDeUsuario) 

@@ -19,11 +19,6 @@
       <Parameter Name="RepositorioCodigo" Mode="In" Type="String" />
       <Parameter Name="LinkHojaDeVida" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="USUARIO" EntityType="MyLearnDBModel.USUARIO" />
-    <AssociationSet Name="FK_ESTUDIANTE_ID" Association="MyLearnDBModel.FK_ESTUDIANTE_ID">
-      <End Role="USUARIO" EntitySet="USUARIO" />
-      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
-    </AssociationSet>
     <EntitySet Name="IDIOMA" EntityType="MyLearnDBModel.IDIOMA" />
     <EntitySet Name="IDIOMA_POR_ESTUDIANTE" EntityType="MyLearnDBModel.IDIOMA_POR_ESTUDIANTE" />
     <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="MyLearnDBModel.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
@@ -36,66 +31,62 @@
     </AssociationSet>
     <EntitySet Name="VIEW_IDIOMA_POR_ESTUDIANTE" EntityType="MyLearnDBModel.VIEW_IDIOMA_POR_ESTUDIANTE" />
     <FunctionImport Name="SP_Select_Cursos">
-      <Parameter Name="UserId" Type="Int32" Mode="In" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="VIEW_ESTUDIANTE" EntityType="MyLearnDBModel.VIEW_ESTUDIANTE" />
     <EntitySet Name="EMPRESA" EntityType="MyLearnDBModel.EMPRESA" />
     <EntitySet Name="VIEW_EMPRESA" EntityType="MyLearnDBModel.VIEW_EMPRESA" />
-    <AssociationSet Name="FK_EMPRESA_ID" Association="MyLearnDBModel.FK_EMPRESA_ID">
-      <End Role="USUARIO" EntitySet="USUARIO" />
-      <End Role="EMPRESA" EntitySet="EMPRESA" />
-    </AssociationSet>
     <FunctionImport Name="SP_Insertar_Empresa">
-      <Parameter Name="Id" Type="String" Mode="In" />
-      <Parameter Name="Contrasena" Type="String" Mode="In" />
-      <Parameter Name="Sal" Type="String" Mode="In" />
-      <Parameter Name="RepositorioArchivos" Type="String" Mode="In" />
-      <Parameter Name="CredencialDrive" Type="String" Mode="In" />
-      <Parameter Name="NombreContacto" Type="String" Mode="In" />
-      <Parameter Name="ApellidoContacto" Type="String" Mode="In" />
-      <Parameter Name="NombreEmpresarial" Type="String" Mode="In" />
-      <Parameter Name="Email" Type="String" Mode="In" />
-      <Parameter Name="Telefono" Type="String" Mode="In" />
-      <Parameter Name="PaginaWebEmpresa" Type="String" Mode="In" />
-      <Parameter Name="Pais" Type="String" Mode="In" />
-      <Parameter Name="Region" Type="String" Mode="In" />
-      <Parameter Name="RepositorioCodigo" Type="String" Mode="In" />
-      <Parameter Name="UserName" Type="String" Mode="In" />
+      <Parameter Name="Id" Mode="In" Type="String" />
+      <Parameter Name="Contrasena" Mode="In" Type="String" />
+      <Parameter Name="Sal" Mode="In" Type="String" />
+      <Parameter Name="RepositorioArchivos" Mode="In" Type="String" />
+      <Parameter Name="CredencialDrive" Mode="In" Type="String" />
+      <Parameter Name="NombreContacto" Mode="In" Type="String" />
+      <Parameter Name="ApellidoContacto" Mode="In" Type="String" />
+      <Parameter Name="NombreEmpresarial" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+      <Parameter Name="PaginaWebEmpresa" Mode="In" Type="String" />
+      <Parameter Name="Pais" Mode="In" Type="String" />
+      <Parameter Name="Region" Mode="In" Type="String" />
+      <Parameter Name="RepositorioCodigo" Mode="In" Type="String" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="VIEW_PROFESOR" EntityType="MyLearnDBModel.VIEW_PROFESOR" />
     <FunctionImport Name="SP_Insertar_Profesor">
-      <Parameter Name="Id" Type="String" Mode="In" />
-      <Parameter Name="Contrasena" Type="String" Mode="In" />
-      <Parameter Name="Sal" Type="String" Mode="In" />
-      <Parameter Name="RepositorioArchivos" Type="String" Mode="In" />
-      <Parameter Name="CredencialDrive" Type="String" Mode="In" />
-      <Parameter Name="NombreContacto" Type="String" Mode="In" />
-      <Parameter Name="ApellidoContacto" Type="String" Mode="In" />
-      <Parameter Name="Email" Type="String" Mode="In" />
-      <Parameter Name="Telefono" Type="String" Mode="In" />
-      <Parameter Name="HorarioAtencion" Type="String" Mode="In" />
-      <Parameter Name="Pais" Type="String" Mode="In" />
-      <Parameter Name="Region" Type="String" Mode="In" />
-      <Parameter Name="IdUniversidad" Type="Int32" Mode="In" />
-      <Parameter Name="UserName" Type="String" Mode="In" />
+      <Parameter Name="Id" Mode="In" Type="String" />
+      <Parameter Name="Contrasena" Mode="In" Type="String" />
+      <Parameter Name="Sal" Mode="In" Type="String" />
+      <Parameter Name="RepositorioArchivos" Mode="In" Type="String" />
+      <Parameter Name="CredencialDrive" Mode="In" Type="String" />
+      <Parameter Name="NombreContacto" Mode="In" Type="String" />
+      <Parameter Name="ApellidoContacto" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+      <Parameter Name="HorarioAtencion" Mode="In" Type="String" />
+      <Parameter Name="Pais" Mode="In" Type="String" />
+      <Parameter Name="Region" Mode="In" Type="String" />
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_Insertar_Estudiante">
-      <Parameter Name="Id" Type="String" Mode="In" />
-      <Parameter Name="Contrasena" Type="String" Mode="In" />
-      <Parameter Name="Sal" Type="String" Mode="In" />
-      <Parameter Name="RepositorioArchivos" Type="String" Mode="In" />
-      <Parameter Name="CredencialDrive" Type="String" Mode="In" />
-      <Parameter Name="Nombre" Type="String" Mode="In" />
-      <Parameter Name="Apellido" Type="String" Mode="In" />
-      <Parameter Name="Carne" Type="String" Mode="In" />
-      <Parameter Name="Email" Type="String" Mode="In" />
-      <Parameter Name="Telefono" Type="String" Mode="In" />
-      <Parameter Name="Pais" Type="String" Mode="In" />
-      <Parameter Name="Region" Type="String" Mode="In" />
-      <Parameter Name="IdUniversidad" Type="Int32" Mode="In" />
-      <Parameter Name="RepositorioCodigo" Type="String" Mode="In" />
-      <Parameter Name="LinkHojaDeVida" Type="String" Mode="In" />
-      <Parameter Name="UserName" Type="String" Mode="In" />
+      <Parameter Name="Id" Mode="In" Type="String" />
+      <Parameter Name="Contrasena" Mode="In" Type="String" />
+      <Parameter Name="Sal" Mode="In" Type="String" />
+      <Parameter Name="RepositorioArchivos" Mode="In" Type="String" />
+      <Parameter Name="CredencialDrive" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Apellido" Mode="In" Type="String" />
+      <Parameter Name="Carne" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+      <Parameter Name="Pais" Mode="In" Type="String" />
+      <Parameter Name="Region" Mode="In" Type="String" />
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="RepositorioCodigo" Mode="In" Type="String" />
+      <Parameter Name="LinkHojaDeVida" Mode="In" Type="String" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="PAIS" EntityType="MyLearnDBModel.PAIS" />
     <AssociationSet Name="FK_EMPRESA_PAIS" Association="MyLearnDBModel.FK_EMPRESA_PAIS">
@@ -123,13 +114,13 @@
       <End Role="TRABAJO" EntitySet="TRABAJO" />
     </AssociationSet>
     <FunctionImport Name="SP_Insertar_Trabajo">
-      <Parameter Name="Nombre" Type="String" Mode="In" />
-      <Parameter Name="Descripcion" Type="String" Mode="In" />
-      <Parameter Name="IdEmpresa" Type="String" Mode="In" />
-      <Parameter Name="FechaInicio" Type="DateTime" Mode="In" />
-      <Parameter Name="FechaCierre" Type="DateTime" Mode="In" />
-      <Parameter Name="DocumentoAdicional" Type="String" Mode="In" />
-      <Parameter Name="presupuesto" Type="Double" Mode="In" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="IdEmpresa" Mode="In" Type="String" />
+      <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
+      <Parameter Name="DocumentoAdicional" Mode="In" Type="String" />
+      <Parameter Name="presupuesto" Mode="In" Type="Double" />
     </FunctionImport>
     <EntitySet Name="VIEW_TRABAJO" EntityType="MyLearnDBModel.VIEW_TRABAJO" />
     <EntitySet Name="TRABAJO_POR_ESTUDIANTE" EntityType="MyLearnDBModel.TRABAJO_POR_ESTUDIANTE" />
@@ -146,8 +137,8 @@
       <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_Rechazar_Demas_Subastas">
-      <Parameter Name="IdSubasta" Type="Int32" Mode="In" />
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdSubasta" Mode="In" Type="Int32" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="TECNOLOGIA_POR_PROYECTO" EntityType="MyLearnDBModel.TECNOLOGIA_POR_PROYECTO" />
     <AssociationSet Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO" Association="MyLearnDBModel.FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO">
@@ -183,16 +174,16 @@
       <End Role="MENSAJE_POR_TRABAJO" EntitySet="MENSAJE_POR_TRABAJO" />
     </AssociationSet>
     <FunctionImport Name="SP_Insertar_Mensaje_Trabajo">
-      <Parameter Name="Contenido" Type="String" Mode="In" />
-      <Parameter Name="Adjunto" Type="String" Mode="In" />
-      <Parameter Name="IdTrabajo" Type="Int32" Mode="In" />
-      <Parameter Name="NombreEmisor" Type="String" Mode="In" />
+      <Parameter Name="Contenido" Mode="In" Type="String" />
+      <Parameter Name="Adjunto" Mode="In" Type="String" />
+      <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
+      <Parameter Name="NombreEmisor" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_Insertar_Respuesta">
-      <Parameter Name="MensajeRaiz" Type="Int64" Mode="In" />
-      <Parameter Name="Contenido" Type="String" Mode="In" />
-      <Parameter Name="Adjunto" Type="String" Mode="In" />
-      <Parameter Name="NombreEmisor" Type="String" Mode="In" />
+      <Parameter Name="MensajeRaiz" Mode="In" Type="Int64" />
+      <Parameter Name="Contenido" Mode="In" Type="String" />
+      <Parameter Name="Adjunto" Mode="In" Type="String" />
+      <Parameter Name="NombreEmisor" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="CURSO" EntityType="MyLearnDBModel.CURSO" />
     <EntitySet Name="CURSO_POR_PROFESOR" EntityType="MyLearnDBModel.CURSO_POR_PROFESOR" />
@@ -201,13 +192,13 @@
       <End Role="CURSO_POR_PROFESOR" EntitySet="CURSO_POR_PROFESOR" />
     </AssociationSet>
     <FunctionImport Name="SP_Insertar_Curso">
-      <Parameter Name="IdProfesor" Type="String" Mode="In" />
-      <Parameter Name="Nombre" Type="String" Mode="In" />
-      <Parameter Name="Codigo" Type="String" Mode="In" />
-      <Parameter Name="IdUniversidad" Type="Int32" Mode="In" />
-      <Parameter Name="NotaMinima" Type="Byte" Mode="In" />
-      <Parameter Name="FechaInicio" Type="DateTime" Mode="In" />
-      <Parameter Name="NumeroGrupo" Type="Int32" Mode="In" />
+      <Parameter Name="IdProfesor" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Codigo" Mode="In" Type="String" />
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="NotaMinima" Mode="In" Type="Byte" />
+      <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+      <Parameter Name="NumeroGrupo" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="BADGE" EntityType="MyLearnDBModel.BADGE" />
     <AssociationSet Name="FK_CURSO_ID_BADGE" Association="MyLearnDBModel.FK_CURSO_ID_BADGE">
@@ -215,35 +206,35 @@
       <End Role="BADGE" EntitySet="BADGE" />
     </AssociationSet>
     <FunctionImport Name="Sp_InsertarCurso" ReturnType="Collection(Int32)">
-      <Parameter Name="IdProfesor" Type="String" Mode="In" />
-      <Parameter Name="Nombre" Type="String" Mode="In" />
-      <Parameter Name="Codigo" Type="String" Mode="In" />
-      <Parameter Name="IdUniversidad" Type="Int32" Mode="In" />
-      <Parameter Name="NotaMinima" Type="Byte" Mode="In" />
-      <Parameter Name="FechaInicio" Type="DateTime" Mode="In" />
-      <Parameter Name="NumeroGrupo" Type="Int32" Mode="In" />
+      <Parameter Name="IdProfesor" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Codigo" Mode="In" Type="String" />
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="NotaMinima" Mode="In" Type="Byte" />
+      <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+      <Parameter Name="NumeroGrupo" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SP_select_tecnologias_por_trabajo" ReturnType="Collection(MyLearnDBModel.SP_select_tecnologias_por_trabajo_Result)">
-      <Parameter Name="IdTrabajo" Type="Int32" Mode="In" />
+      <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SP_SelectTecnologiasPorTrabajo" EntitySet="TECNOLOGIA" ReturnType="Collection(MyLearnDBModel.TECNOLOGIA)">
-      <Parameter Name="IdTrabajo" Type="Int32" Mode="In" />
+      <Parameter Name="IdTrabajo" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SP_Select_Cursos_Estudiante" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_SelectCursosEstudiante" EntitySet="CURSO" ReturnType="Collection(MyLearnDBModel.CURSO)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_Select_Cursos_De_Universidad" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_De_Universidad_Result)">
-      <Parameter Name="IdUniversidad" Type="Int32" Mode="In" />
-      <Parameter Name="EstadoCurso" Type="String" Mode="In" />
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="EstadoCurso" Mode="In" Type="String" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_SelectCursosDeUniversidad" EntitySet="CURSO" ReturnType="Collection(MyLearnDBModel.CURSO)">
-      <Parameter Name="IdUniversidad" Type="Int32" Mode="In" />
-      <Parameter Name="EstadoCurso" Type="String" Mode="In" />
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdUniversidad" Mode="In" Type="Int32" />
+      <Parameter Name="EstadoCurso" Mode="In" Type="String" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="ESTUDIANTE_POR_CURSO" EntityType="MyLearnDBModel.ESTUDIANTE_POR_CURSO" />
     <AssociationSet Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO" Association="MyLearnDBModel.FK_IDCURSO_ESTUDIANTE_POR_CURSO">
@@ -255,32 +246,32 @@
       <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
     </AssociationSet>
     <FunctionImport Name="SP_TerminarCurso">
-      <Parameter Name="IdCurso" Type="Int32" Mode="In" />
+      <Parameter Name="IdCurso" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="VIEW_PROYECTOS" EntityType="MyLearnDBModel.VIEW_PROYECTOS" />
     <FunctionImport Name="SP_Insertar_Propuesta_Proyecto" ReturnType="Collection(Int32)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
-      <Parameter Name="Nombre" Type="String" Mode="In" />
-      <Parameter Name="Problematica" Type="String" Mode="In" />
-      <Parameter Name="Descripcion" Type="String" Mode="In" />
-      <Parameter Name="IdCurso" Type="Int32" Mode="In" />
-      <Parameter Name="FechaInicio" Type="DateTime" Mode="In" />
-      <Parameter Name="FechaFinal" Type="DateTime" Mode="In" />
-      <Parameter Name="DocumentoAdicional" Type="String" Mode="In" />
-      <Parameter Name="Estado" Type="String" Mode="In" />
-      <Parameter Name="Nota" Type="Byte" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Problematica" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+      <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="DocumentoAdicional" Mode="In" Type="String" />
+      <Parameter Name="Estado" Mode="In" Type="String" />
+      <Parameter Name="Nota" Mode="In" Type="Byte" />
     </FunctionImport>
     <FunctionImport Name="SP_InsertarPropuestaProyecto" ReturnType="Collection(Int32)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
-      <Parameter Name="Nombre" Type="String" Mode="In" />
-      <Parameter Name="Problematica" Type="String" Mode="In" />
-      <Parameter Name="Descripcion" Type="String" Mode="In" />
-      <Parameter Name="IdCurso" Type="Int32" Mode="In" />
-      <Parameter Name="FechaInicio" Type="DateTime" Mode="In" />
-      <Parameter Name="FechaFinal" Type="DateTime" Mode="In" />
-      <Parameter Name="DocumentoAdicional" Type="String" Mode="In" />
-      <Parameter Name="Estado" Type="String" Mode="In" />
-      <Parameter Name="Nota" Type="Byte" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Problematica" Mode="In" Type="String" />
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+      <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="DocumentoAdicional" Mode="In" Type="String" />
+      <Parameter Name="Estado" Mode="In" Type="String" />
+      <Parameter Name="Nota" Mode="In" Type="Byte" />
     </FunctionImport>
     <EntitySet Name="BADGE_POR_PROYECTO" EntityType="MyLearnDBModel.BADGE_POR_PROYECTO" />
     <AssociationSet Name="FK_IDBADGE_BADGE_POR_PROYECTO" Association="MyLearnDBModel.FK_IDBADGE_BADGE_POR_PROYECTO">
@@ -288,16 +279,16 @@
       <End Role="BADGE_POR_PROYECTO" EntitySet="BADGE_POR_PROYECTO" />
     </AssociationSet>
     <FunctionImport Name="SP_Select_Badge_Por_Proyecto" ReturnType="Collection(MyLearnDBModel.SP_Select_Badge_Por_Proyecto_Result)">
-      <Parameter Name="IdProyecto" Type="Int32" Mode="In" />
-      <Parameter Name="Estado" Type="String" Mode="In" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+      <Parameter Name="Estado" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_SelectBadgePorProyecto" EntitySet="BADGE" ReturnType="Collection(MyLearnDBModel.BADGE)">
-      <Parameter Name="IdProyecto" Type="Int32" Mode="In" />
-      <Parameter Name="Estado" Type="String" Mode="In" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+      <Parameter Name="Estado" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_Incrementar_Puntaje_Proyecto">
-      <Parameter Name="IdBadge" Type="Int32" Mode="In" />
-      <Parameter Name="IdProyecto" Type="Int32" Mode="In" />
+      <Parameter Name="IdBadge" Mode="In" Type="Int32" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="MENSAJE_POR_PROYECTO" EntityType="MyLearnDBModel.MENSAJE_POR_PROYECTO" />
     <AssociationSet Name="FK_IDMENSAJE_MENSAJE_POR_PROYECTO" Association="MyLearnDBModel.FK_IDMENSAJE_MENSAJE_POR_PROYECTO">
@@ -305,61 +296,61 @@
       <End Role="MENSAJE_POR_PROYECTO" EntitySet="MENSAJE_POR_PROYECTO" />
     </AssociationSet>
     <FunctionImport Name="SP_Insertar_Mensaje_Proyecto">
-      <Parameter Name="Contenido" Type="String" Mode="In" />
-      <Parameter Name="Adjunto" Type="String" Mode="In" />
-      <Parameter Name="IdProyecto" Type="Int32" Mode="In" />
-      <Parameter Name="NombreEmisor" Type="String" Mode="In" />
+      <Parameter Name="Contenido" Mode="In" Type="String" />
+      <Parameter Name="Adjunto" Mode="In" Type="String" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+      <Parameter Name="NombreEmisor" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_CursosAprobados" ReturnType="Collection(Int32)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_CursosReprobados" ReturnType="Collection(Int32)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_Promedio_Notas" ReturnType="Collection(Int32)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_TrabajosExitosos" ReturnType="Collection(Int32)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_TrabajosNoExitosos" ReturnType="Collection(Int32)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="numeroTrabajosExitosos" ReturnType="Collection(Int32)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="NumeroTrabajosNoExitosos" ReturnType="Collection(Int32)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="PromedioNotas" ReturnType="Collection(Double)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="NumeroCursosAprobados" ReturnType="Collection(Int32)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="NumeroCursosReprobados">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="reprobados" ReturnType="Collection(Int32)">
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_Buscar_Subastas_Por_Tecnologia_Nombre" ReturnType="Collection(MyLearnDBModel.SP_Buscar_Subastas_Por_Tecnologia_Nombre_Result)">
-      <Parameter Name="Tecnologia" Type="String" Mode="In" />
-      <Parameter Name="Nombre" Type="String" Mode="In" />
-      <Parameter Name="NumResultados" Type="Int32" Mode="In" />
+      <Parameter Name="Tecnologia" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="NumResultados" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="FiltrarSubastasPorTecnologiaYNombre" EntitySet="TRABAJO" ReturnType="Collection(MyLearnDBModel.TRABAJO)">
-      <Parameter Name="Tecnologia" Type="String" Mode="In" />
-      <Parameter Name="Nombre" Type="String" Mode="In" />
-      <Parameter Name="NumResultados" Type="Int32" Mode="In" />
+      <Parameter Name="Tecnologia" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="NumResultados" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SP_Select_Badge_Por_Proyecto_No_Otorgado" ReturnType="Collection(MyLearnDBModel.SP_Select_Badge_Por_Proyecto_No_Otorgado_Result)">
-      <Parameter Name="IdCurso" Type="Int32" Mode="In" />
-      <Parameter Name="IdProyecto" Type="Int32" Mode="In" />
+      <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SP_SelectBadgePorProyectoNoOtorgado" EntitySet="BADGE" ReturnType="Collection(MyLearnDBModel.BADGE)">
-      <Parameter Name="IdCurso" Type="Int32" Mode="In" />
-      <Parameter Name="IdProyecto" Type="Int32" Mode="In" />
+      <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SP_Get_Last_User_Id" />
     <FunctionImport Name="sp_GetLAstUserId" ReturnType="Collection(String)" />
@@ -370,10 +361,10 @@
     </AssociationSet>
     <EntitySet Name="VIEW_CURSOS" EntityType="MyLearnDBModel.VIEW_CURSOS" />
     <FunctionImport Name="SP_Select_tecnologias_De_Proyecto" ReturnType="Collection(MyLearnDBModel.SP_Select_tecnologias_De_Proyecto_Result)">
-      <Parameter Name="IdProyecto" Type="Int32" Mode="In" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Sp_SelectTecnologiasDeProyecto" EntitySet="TECNOLOGIA" ReturnType="Collection(MyLearnDBModel.TECNOLOGIA)">
-      <Parameter Name="IdProyecto" Type="Int32" Mode="In" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SP_Terminar_Proyectos_De_Un_Curso">
       <Parameter Name="IdCurso" Mode="In" Type="Int32" />
@@ -400,14 +391,23 @@
       <End Role="TECNOLOGIA_POR_PROYECTO" EntitySet="TECNOLOGIA_POR_PROYECTO" />
     </AssociationSet>
     <FunctionImport Name="SP_Terminar_Proyecto_De_Un_Estudiante">
-      <Parameter Name="IdProyecto" Type="Int32" Mode="In" />
-      <Parameter Name="IdEstudiante" Type="String" Mode="In" />
-      <Parameter Name="Estado" Type="String" Mode="In" />
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+      <Parameter Name="Estado" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="DriveCredentials" EntityType="MyLearnDBModel.DriveCredentials" />
+    <EntitySet Name="USUARIO" EntityType="MyLearnDBModel.USUARIO" />
     <AssociationSet Name="FK_DRIVE_CREDENTIALS" Association="MyLearnDBModel.FK_DRIVE_CREDENTIALS">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="DriveCredentials" EntitySet="DriveCredentials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EMPRESA_ID" Association="MyLearnDBModel.FK_EMPRESA_ID">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ESTUDIANTE_ID" Association="MyLearnDBModel.FK_ESTUDIANTE_ID">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
@@ -428,30 +428,6 @@
     <Property Name="LinkHojaDeVida" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="IdUniversidad" Type="Int32" />
   </EntityType>
-  <EntityType Name="USUARIO">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="Contrasena" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
-    <Property Name="Sal" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-    <Property Name="RepositorioArchivos" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-    <Property Name="NombreDeUsuario" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
-  </EntityType>
-  <Association Name="FK_ESTUDIANTE_ID">
-    <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
-    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="USUARIO">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ESTUDIANTE">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="IDIOMA">
     <Key>
       <PropertyRef Name="Id" />
@@ -537,7 +513,7 @@
     <Property Name="Telefono" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
     <Property Name="Foto" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="PaginaWebEmpresa" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="PaginaWebEmpresa" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
     <Property Name="Pais" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
     <Property Name="Region" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
   </EntityType>
@@ -553,7 +529,7 @@
     <Property Name="Telefono" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
     <Property Name="Foto" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
     <Property Name="FechaInscripcion" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="PaginaWebEmpresa" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="PaginaWebEmpresa" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
     <Property Name="Pais" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
     <Property Name="Region" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
     <Property Name="Contrasena" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
@@ -563,18 +539,6 @@
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="NombreDeUsuario" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
   </EntityType>
-  <Association Name="FK_EMPRESA_ID">
-    <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
-    <End Type="MyLearnDBModel.EMPRESA" Role="EMPRESA" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="USUARIO">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="EMPRESA">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="VIEW_PROFESOR">
     <Key>
       <PropertyRef Name="Id" />
@@ -1221,6 +1185,18 @@
     <Property Name="AccessToken" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="RefreshToken" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="RepositorioArchivos" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="CredencialDrive" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="NombreDeUsuario" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
+    <Property Name="Contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Sal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
   <Association Name="FK_DRIVE_CREDENTIALS">
     <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
     <End Type="MyLearnDBModel.DriveCredentials" Role="DriveCredentials" Multiplicity="0..1" />
@@ -1230,6 +1206,30 @@
       </Principal>
       <Dependent Role="DriveCredentials">
         <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EMPRESA_ID">
+    <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.EMPRESA" Role="EMPRESA" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EMPRESA">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ESTUDIANTE_ID">
+    <End Type="MyLearnDBModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+    <End Type="MyLearnDBModel.ESTUDIANTE" Role="ESTUDIANTE" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ESTUDIANTE">
+        <PropertyRef Name="Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

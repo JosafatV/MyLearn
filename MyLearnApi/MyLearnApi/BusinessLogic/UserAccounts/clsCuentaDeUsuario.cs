@@ -22,7 +22,7 @@ namespace MyLearnApi.BusinessLogic
             USUARIO lobj_usuario = entities.USUARIO.Where(u => u.NombreDeUsuario == username).First<USUARIO>();
             if (lobj_usuario != null)
             {
-                return BCrypt.CheckPassword(password, lobj_usuario.Contrasena);
+                return BCrypt.HashPassword(password,lobj_usuario.Sal).Equals(lobj_usuario.Contrasena);
             }
             else
             {

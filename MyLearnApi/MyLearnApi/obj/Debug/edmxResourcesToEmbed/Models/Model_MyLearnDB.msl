@@ -20,19 +20,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="USUARIO">
-      <EntityTypeMapping TypeName="MyLearnDBModel.USUARIO">
-        <MappingFragment StoreEntitySet="USUARIO">
-          <ScalarProperty Name="NombreDeUsuario" ColumnName="NombreDeUsuario" />
-          <ScalarProperty Name="Estado" ColumnName="Estado" />
-          <ScalarProperty Name="CredencialDrive" ColumnName="CredencialDrive" />
-          <ScalarProperty Name="RepositorioArchivos" ColumnName="RepositorioArchivos" />
-          <ScalarProperty Name="Sal" ColumnName="Sal" />
-          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="IDIOMA">
       <EntityTypeMapping TypeName="MyLearnDBModel.IDIOMA">
         <MappingFragment StoreEntitySet="IDIOMA">
@@ -527,6 +514,19 @@
           <ScalarProperty Name="RefreshToken" ColumnName="RefreshToken" />
           <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIO">
+      <EntityTypeMapping TypeName="MyLearnDBModel.USUARIO">
+        <MappingFragment StoreEntitySet="USUARIO">
+          <ScalarProperty Name="Sal" ColumnName="Sal" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="NombreDeUsuario" ColumnName="NombreDeUsuario" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="CredencialDrive" ColumnName="CredencialDrive" />
+          <ScalarProperty Name="RepositorioArchivos" ColumnName="RepositorioArchivos" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

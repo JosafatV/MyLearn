@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="MyLearnDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+<Schema Namespace="MyLearnDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="BADGE">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="Nombre" MaxLength="30" Type="char" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" />
     <Property Name="Puntaje" Type="tinyint" />
     <Property Name="IdCurso" Type="int" />
   </EntityType>
@@ -14,218 +14,218 @@
       <PropertyRef Name="IdBadge" />
       <PropertyRef Name="IdProyecto" />
     </Key>
-    <Property Name="IdBadge" Nullable="false" Type="int" />
-    <Property Name="IdProyecto" Nullable="false" Type="int" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="IdBadge" Type="int" Nullable="false" />
+    <Property Name="IdProyecto" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="CURSO">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="Nombre" MaxLength="30" Type="char" />
-    <Property Name="Codigo" MaxLength="10" Type="char" />
-    <Property Name="NotaMinima" Nullable="false" Type="tinyint" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" />
+    <Property Name="Codigo" Type="char" MaxLength="10" />
+    <Property Name="NotaMinima" Type="tinyint" Nullable="false" />
     <Property Name="FechaInicio" Type="date" />
     <Property Name="NumeroGrupo" Type="int" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="CURSO_POR_PROFESOR">
     <Key>
       <PropertyRef Name="IdCurso" />
       <PropertyRef Name="IdProfesor" />
     </Key>
-    <Property Name="IdCurso" Nullable="false" Type="int" />
-    <Property Name="IdProfesor" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="IdCurso" Type="int" Nullable="false" />
+    <Property Name="IdProfesor" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="DriveCredentials">
     <Key>
       <PropertyRef Name="UserId" />
     </Key>
-    <Property Name="UserId" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="AccessToken" MaxLength="500" Type="varchar" />
-    <Property Name="RefreshToken" MaxLength="500" Type="varchar" />
+    <Property Name="UserId" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="AccessToken" Type="varchar" MaxLength="500" />
+    <Property Name="RefreshToken" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="EMPRESA">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="NombreContacto" MaxLength="30" Type="char" />
-    <Property Name="ApellidoContacto" MaxLength="30" Type="char" />
-    <Property Name="NombreEmpresarial" MaxLength="30" Type="char" />
-    <Property Name="Email" Nullable="false" MaxLength="50" Type="char" />
-    <Property Name="Telefono" Nullable="false" MaxLength="15" Type="char" />
-    <Property Name="Foto" MaxLength="100" Type="char" />
-    <Property Name="FechaInscripcion" Nullable="false" Type="date" />
-    <Property Name="PaginaWebEmpresa" MaxLength="30" Type="char" />
-    <Property Name="Pais" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Region" MaxLength="30" Type="char" />
+    <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="NombreContacto" Type="char" MaxLength="30" />
+    <Property Name="ApellidoContacto" Type="char" MaxLength="30" />
+    <Property Name="NombreEmpresarial" Type="char" MaxLength="30" />
+    <Property Name="Email" Type="char" MaxLength="50" Nullable="false" />
+    <Property Name="Telefono" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Foto" Type="char" MaxLength="100" />
+    <Property Name="FechaInscripcion" Type="date" Nullable="false" />
+    <Property Name="PaginaWebEmpresa" Type="char" MaxLength="50" />
+    <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Region" Type="char" MaxLength="30" />
   </EntityType>
   <EntityType Name="ESTUDIANTE">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="NombreContacto" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="ApellidoContacto" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Carne" MaxLength="15" Type="char" />
-    <Property Name="Email" Nullable="false" MaxLength="50" Type="char" />
-    <Property Name="Telefono" Nullable="false" MaxLength="15" Type="char" />
-    <Property Name="Foto" MaxLength="30" Type="char" />
-    <Property Name="Pais" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Region" MaxLength="30" Type="char" />
+    <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="ApellidoContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Carne" Type="char" MaxLength="15" />
+    <Property Name="Email" Type="char" MaxLength="50" Nullable="false" />
+    <Property Name="Telefono" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Foto" Type="char" MaxLength="30" />
+    <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Region" Type="char" MaxLength="30" />
     <Property Name="IdUniversidad" Type="int" />
-    <Property Name="FechaInscripcion" Nullable="false" Type="date" />
-    <Property Name="RepositorioCodigo" MaxLength="100" Type="char" />
-    <Property Name="LinkHojaDeVida" MaxLength="100" Type="char" />
+    <Property Name="FechaInscripcion" Type="date" Nullable="false" />
+    <Property Name="RepositorioCodigo" Type="char" MaxLength="100" />
+    <Property Name="LinkHojaDeVida" Type="char" MaxLength="100" />
   </EntityType>
   <EntityType Name="ESTUDIANTE_POR_CURSO">
     <Key>
       <PropertyRef Name="IdEstudiante" />
       <PropertyRef Name="IdCurso" />
     </Key>
-    <Property Name="IdEstudiante" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="IdCurso" Nullable="false" Type="int" />
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="IdCurso" Type="int" Nullable="false" />
     <Property Name="Nota" Type="int" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="IDIOMA">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="Nombre" Nullable="false" MaxLength="30" Type="char" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" Nullable="false" />
   </EntityType>
   <EntityType Name="IDIOMA_POR_ESTUDIANTE">
     <Key>
       <PropertyRef Name="IdEstudiante" />
       <PropertyRef Name="IdIdioma" />
     </Key>
-    <Property Name="IdEstudiante" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="IdIdioma" Nullable="false" Type="int" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="IdIdioma" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="MENSAJE">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="bigint" />
-    <Property Name="Contenido" MaxLength="500" Type="char" />
-    <Property Name="Adjunto" MaxLength="500" Type="char" />
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Contenido" Type="char" MaxLength="500" />
+    <Property Name="Adjunto" Type="char" MaxLength="500" />
     <Property Name="Fecha" Type="datetime" />
-    <Property Name="NombreEmisor" MaxLength="30" Type="char" />
+    <Property Name="NombreEmisor" Type="char" MaxLength="30" />
   </EntityType>
   <EntityType Name="MENSAJE_POR_PROYECTO">
     <Key>
       <PropertyRef Name="IdMensaje" />
       <PropertyRef Name="IdProyecto" />
     </Key>
-    <Property Name="IdMensaje" Nullable="false" Type="bigint" />
-    <Property Name="IdProyecto" Nullable="false" Type="int" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="IdMensaje" Type="bigint" Nullable="false" />
+    <Property Name="IdProyecto" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="MENSAJE_POR_TRABAJO">
     <Key>
       <PropertyRef Name="IdMensaje" />
       <PropertyRef Name="IdTrabajo" />
     </Key>
-    <Property Name="IdMensaje" Nullable="false" Type="bigint" />
-    <Property Name="IdTrabajo" Nullable="false" Type="int" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="IdMensaje" Type="bigint" Nullable="false" />
+    <Property Name="IdTrabajo" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="PAIS">
     <Key>
       <PropertyRef Name="Pais" />
     </Key>
-    <Property Name="Pais" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Descripcion" MaxLength="150" Type="varchar" />
+    <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="PROYECTO">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="Nombre" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Problematica" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="Descripcion" Nullable="false" MaxLength="500" Type="char" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Problematica" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Descripcion" Type="char" MaxLength="500" Nullable="false" />
     <Property Name="IdCurso" Type="int" />
-    <Property Name="FechaInicio" Nullable="false" Type="date" />
+    <Property Name="FechaInicio" Type="date" Nullable="false" />
     <Property Name="FechaFinal" Type="date" />
-    <Property Name="DocumentoAdicional" MaxLength="100" Type="char" />
+    <Property Name="DocumentoAdicional" Type="char" MaxLength="100" />
     <Property Name="NotaObtenida" Type="tinyint" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="PROYECTO_POR_ESTUDIANTE">
     <Key>
       <PropertyRef Name="IdProyecto" />
       <PropertyRef Name="IdEstudiante" />
     </Key>
-    <Property Name="IdProyecto" Nullable="false" Type="int" />
-    <Property Name="IdEstudiante" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="IdProyecto" Type="int" Nullable="false" />
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="RESPUESTA">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="bigint" />
-    <Property Name="MensajeRaiz" Nullable="false" Type="bigint" />
-    <Property Name="Contenido" MaxLength="500" Type="char" />
-    <Property Name="Adjunto" MaxLength="500" Type="char" />
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MensajeRaiz" Type="bigint" Nullable="false" />
+    <Property Name="Contenido" Type="char" MaxLength="500" />
+    <Property Name="Adjunto" Type="char" MaxLength="500" />
     <Property Name="Fecha" Type="datetime" />
-    <Property Name="NombreEmisor" MaxLength="30" Type="char" />
+    <Property Name="NombreEmisor" Type="char" MaxLength="30" />
   </EntityType>
   <EntityType Name="TECNOLOGIA">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="Nombre" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="TECNOLOGIA_POR_ESTUDIANTE">
     <Key>
       <PropertyRef Name="IdTecnologia" />
       <PropertyRef Name="IdEstudiante" />
     </Key>
-    <Property Name="IdTecnologia" Nullable="false" Type="int" />
-    <Property Name="IdEstudiante" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="IdTecnologia" Type="int" Nullable="false" />
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="TECNOLOGIA_POR_PROYECTO">
     <Key>
       <PropertyRef Name="IdTecnologia" />
       <PropertyRef Name="IdProyecto" />
     </Key>
-    <Property Name="IdTecnologia" Nullable="false" Type="int" />
-    <Property Name="IdProyecto" Nullable="false" Type="int" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="IdTecnologia" Type="int" Nullable="false" />
+    <Property Name="IdProyecto" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="TECNOLOGIA_POR_TRABAJO">
     <Key>
       <PropertyRef Name="IdTecnologia" />
       <PropertyRef Name="IdTrabajo" />
     </Key>
-    <Property Name="IdTecnologia" Nullable="false" Type="int" />
-    <Property Name="IdTrabajo" Nullable="false" Type="int" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="IdTecnologia" Type="int" Nullable="false" />
+    <Property Name="IdTrabajo" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="TRABAJO">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="Nombre" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Descripcion" Nullable="false" MaxLength="500" Type="char" />
-    <Property Name="IdEmpresa" Nullable="false" MaxLength="100" Type="char" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Descripcion" Type="char" MaxLength="500" Nullable="false" />
+    <Property Name="IdEmpresa" Type="char" MaxLength="100" Nullable="false" />
     <Property Name="FechaInicio" Type="date" />
-    <Property Name="FechaCierre" Nullable="false" Type="date" />
-    <Property Name="DocumentoAdicional" MaxLength="100" Type="char" />
+    <Property Name="FechaCierre" Type="date" Nullable="false" />
+    <Property Name="DocumentoAdicional" Type="char" MaxLength="100" />
     <Property Name="EstrellasObtenidas" Type="tinyint" />
     <Property Name="PresupuestoBase" Type="float" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
     <Property Name="Exitoso" Type="bit" />
   </EntityType>
   <EntityType Name="TRABAJO_POR_ESTUDIANTE">
@@ -233,185 +233,185 @@
       <PropertyRef Name="IdTrabajo" />
       <PropertyRef Name="IdEstudiante" />
     </Key>
-    <Property Name="IdTrabajo" Nullable="false" Type="int" />
-    <Property Name="IdEstudiante" Nullable="false" MaxLength="100" Type="char" />
+    <Property Name="IdTrabajo" Type="int" Nullable="false" />
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
     <Property Name="Monto" Type="int" />
     <Property Name="FechaFinalizacion" Type="date" />
-    <Property Name="Comentario" MaxLength="300" Type="char" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="Comentario" Type="char" MaxLength="300" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="UNIVERSIDAD">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="Nombre" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="USUARIO">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="Contrasena" MaxLength="8" Type="char" />
-    <Property Name="Sal" MaxLength="20" Type="char" />
-    <Property Name="RepositorioArchivos" MaxLength="100" Type="char" />
-    <Property Name="CredencialDrive" MaxLength="100" Type="char" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
-    <Property Name="NombreDeUsuario" MaxLength="40" Type="char" />
+    <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
+    <Property Name="CredencialDrive" Type="char" MaxLength="100" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+    <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
+    <Property Name="Contrasena" Type="varchar" MaxLength="50" />
+    <Property Name="Sal" Type="varchar" MaxLength="100" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'MyLearnDB.dbo.VIEW_CURSOS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_CURSOS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VIEW_CURSOS">
     <Key>
       <PropertyRef Name="IdCurso" />
     </Key>
-    <Property Name="IdUniversidad" Nullable="false" Type="int" />
-    <Property Name="IdProfesor" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="IdCurso" Nullable="false" Type="int" />
+    <Property Name="IdUniversidad" Type="int" Nullable="false" />
+    <Property Name="IdProfesor" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="IdCurso" Type="int" Nullable="false" />
     <Property Name="FechaInicio" Type="date" />
     <Property Name="NumeroGrupo" Type="int" />
-    <Property Name="NombreCurso" MaxLength="30" Type="char" />
-    <Property Name="CodigoCurso" MaxLength="10" Type="char" />
-    <Property Name="NotaMinima" Nullable="false" Type="tinyint" />
-    <Property Name="EstadoCurso" MaxLength="1" Type="char" />
+    <Property Name="NombreCurso" Type="char" MaxLength="30" />
+    <Property Name="CodigoCurso" Type="char" MaxLength="10" />
+    <Property Name="NotaMinima" Type="tinyint" Nullable="false" />
+    <Property Name="EstadoCurso" Type="char" MaxLength="1" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'MyLearnDB.dbo.VIEW_EMPRESA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_EMPRESA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VIEW_EMPRESA">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="NombreDeUsuario" MaxLength="40" Type="char" />
-    <Property Name="Id" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="NombreContacto" MaxLength="30" Type="char" />
-    <Property Name="ApellidoContacto" MaxLength="30" Type="char" />
-    <Property Name="NombreEmpresarial" MaxLength="30" Type="char" />
-    <Property Name="Email" Nullable="false" MaxLength="50" Type="char" />
-    <Property Name="Telefono" Nullable="false" MaxLength="15" Type="char" />
-    <Property Name="Foto" MaxLength="100" Type="char" />
-    <Property Name="FechaInscripcion" Nullable="false" Type="date" />
-    <Property Name="PaginaWebEmpresa" MaxLength="30" Type="char" />
-    <Property Name="Pais" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Region" MaxLength="30" Type="char" />
-    <Property Name="Contrasena" MaxLength="8" Type="char" />
-    <Property Name="Sal" MaxLength="20" Type="char" />
-    <Property Name="RepositorioArchivos" MaxLength="100" Type="char" />
-    <Property Name="CredencialDrive" MaxLength="100" Type="char" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
+    <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="NombreContacto" Type="char" MaxLength="30" />
+    <Property Name="ApellidoContacto" Type="char" MaxLength="30" />
+    <Property Name="NombreEmpresarial" Type="char" MaxLength="30" />
+    <Property Name="Email" Type="char" MaxLength="50" Nullable="false" />
+    <Property Name="Telefono" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Foto" Type="char" MaxLength="100" />
+    <Property Name="FechaInscripcion" Type="date" Nullable="false" />
+    <Property Name="PaginaWebEmpresa" Type="char" MaxLength="50" />
+    <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Region" Type="char" MaxLength="30" />
+    <Property Name="Contrasena" Type="char" MaxLength="8" />
+    <Property Name="Sal" Type="char" MaxLength="20" />
+    <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
+    <Property Name="CredencialDrive" Type="char" MaxLength="100" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'MyLearnDB.dbo.VIEW_ESTUDIANTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_ESTUDIANTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VIEW_ESTUDIANTE">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="NombreDeUsuario" MaxLength="40" Type="char" />
-    <Property Name="NombreContacto" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="ApellidoContacto" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Carne" MaxLength="15" Type="char" />
-    <Property Name="Email" Nullable="false" MaxLength="50" Type="char" />
-    <Property Name="Telefono" Nullable="false" MaxLength="15" Type="char" />
-    <Property Name="Pais" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Region" MaxLength="30" Type="char" />
+    <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
+    <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="ApellidoContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Carne" Type="char" MaxLength="15" />
+    <Property Name="Email" Type="char" MaxLength="50" Nullable="false" />
+    <Property Name="Telefono" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Region" Type="char" MaxLength="30" />
     <Property Name="IdUniversidad" Type="int" />
-    <Property Name="FechaInscripcion" Nullable="false" Type="date" />
-    <Property Name="RepositorioCodigo" MaxLength="100" Type="char" />
-    <Property Name="LinkHojaDeVida" MaxLength="100" Type="char" />
-    <Property Name="Id" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="Contrasena" MaxLength="8" Type="char" />
-    <Property Name="Sal" MaxLength="20" Type="char" />
-    <Property Name="RepositorioArchivos" MaxLength="100" Type="char" />
-    <Property Name="CredencialDrive" MaxLength="100" Type="char" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
+    <Property Name="FechaInscripcion" Type="date" Nullable="false" />
+    <Property Name="RepositorioCodigo" Type="char" MaxLength="100" />
+    <Property Name="LinkHojaDeVida" Type="char" MaxLength="100" />
+    <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Contrasena" Type="char" MaxLength="8" />
+    <Property Name="Sal" Type="char" MaxLength="20" />
+    <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
+    <Property Name="CredencialDrive" Type="char" MaxLength="100" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'MyLearnDB.dbo.VIEW_IDIOMA_POR_ESTUDIANTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_IDIOMA_POR_ESTUDIANTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VIEW_IDIOMA_POR_ESTUDIANTE">
     <Key>
       <PropertyRef Name="IdEstudiante" />
       <PropertyRef Name="IdIdioma" />
     </Key>
-    <Property Name="IdEstudiante" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="IdIdioma" Nullable="false" Type="int" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
-    <Property Name="Idioma" Nullable="false" MaxLength="30" Type="char" />
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="IdIdioma" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+    <Property Name="Idioma" Type="char" MaxLength="30" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROFESOR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_PROFESOR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VIEW_PROFESOR">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="Contrasena" MaxLength="8" Type="char" />
-    <Property Name="Sal" MaxLength="20" Type="char" />
-    <Property Name="RepositorioArchivos" MaxLength="100" Type="char" />
-    <Property Name="CredencialDrive" MaxLength="100" Type="char" />
-    <Property Name="Estado" MaxLength="1" Type="char" />
-    <Property Name="NombreDeUsuario" MaxLength="40" Type="char" />
-    <Property Name="NombreContacto" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="ApellidoContacto" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Email" MaxLength="50" Type="char" />
-    <Property Name="Telefono" Nullable="false" MaxLength="15" Type="char" />
-    <Property Name="Foto" MaxLength="30" Type="char" />
-    <Property Name="FechaInscripcion" Nullable="false" Type="date" />
-    <Property Name="Pais" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="HorarioAtencion" MaxLength="15" Type="char" />
-    <Property Name="Region" MaxLength="30" Type="char" />
-    <Property Name="IdUniversidad" Nullable="false" Type="int" />
-    <Property Name="Universidad" Nullable="false" MaxLength="30" Type="char" />
+    <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Contrasena" Type="char" MaxLength="8" />
+    <Property Name="Sal" Type="char" MaxLength="20" />
+    <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
+    <Property Name="CredencialDrive" Type="char" MaxLength="100" />
+    <Property Name="Estado" Type="char" MaxLength="1" />
+    <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
+    <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="ApellidoContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Email" Type="char" MaxLength="50" />
+    <Property Name="Telefono" Type="char" MaxLength="15" Nullable="false" />
+    <Property Name="Foto" Type="char" MaxLength="30" />
+    <Property Name="FechaInscripcion" Type="date" Nullable="false" />
+    <Property Name="Pais" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="HorarioAtencion" Type="char" MaxLength="15" />
+    <Property Name="Region" Type="char" MaxLength="30" />
+    <Property Name="IdUniversidad" Type="int" Nullable="false" />
+    <Property Name="Universidad" Type="char" MaxLength="30" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'MyLearnDB.dbo.VIEW_PROYECTOS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_PROYECTOS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VIEW_PROYECTOS">
     <Key>
       <PropertyRef Name="IdEstudiante" />
       <PropertyRef Name="IdProyecto" />
     </Key>
-    <Property Name="IdEstudiante" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="NOMBRE_EST" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="APELLIDO_EST" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="IdProfesor" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="IdProyecto" Nullable="false" Type="int" />
-    <Property Name="NombreProyecto" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Problematica" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="Descripcion" Nullable="false" MaxLength="500" Type="char" />
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="NOMBRE_EST" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="APELLIDO_EST" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="IdProfesor" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="IdProyecto" Type="int" Nullable="false" />
+    <Property Name="NombreProyecto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Problematica" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="Descripcion" Type="char" MaxLength="500" Nullable="false" />
     <Property Name="IdCurso" Type="int" />
-    <Property Name="FechaInicio" Nullable="false" Type="date" />
+    <Property Name="FechaInicio" Type="date" Nullable="false" />
     <Property Name="FechaFinal" Type="date" />
-    <Property Name="DocumentoAdicional" MaxLength="100" Type="char" />
+    <Property Name="DocumentoAdicional" Type="char" MaxLength="100" />
     <Property Name="NotaObtenida" Type="tinyint" />
-    <Property Name="EstadoProyecto" MaxLength="1" Type="char" />
+    <Property Name="EstadoProyecto" Type="char" MaxLength="1" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VIEW_TRABAJO">
     <Key>
       <PropertyRef Name="IdTrabajo" />
       <PropertyRef Name="IdEstudiante" />
     </Key>
-    <Property Name="FechaFinalizacion" MaxLength="10" Type="varchar" />
+    <Property Name="FechaFinalizacion" Type="varchar" MaxLength="10" />
     <Property Name="Monto" Type="int" />
-    <Property Name="Comentario" MaxLength="300" Type="char" />
-    <Property Name="IdTrabajo" Nullable="false" Type="int" />
-    <Property Name="IdEstudiante" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="NombreContacto" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="ApellidoContacto" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Nombre" Nullable="false" MaxLength="30" Type="char" />
-    <Property Name="Descripcion" Nullable="false" MaxLength="500" Type="char" />
-    <Property Name="IdEmpresa" Nullable="false" MaxLength="100" Type="char" />
-    <Property Name="FechaInicioSubasta" MaxLength="10" Type="varchar" />
-    <Property Name="FechaCierreSubasta" MaxLength="10" Type="varchar" />
-    <Property Name="DocumentoAdicional" MaxLength="100" Type="char" />
+    <Property Name="Comentario" Type="char" MaxLength="300" />
+    <Property Name="IdTrabajo" Type="int" Nullable="false" />
+    <Property Name="IdEstudiante" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="ApellidoContacto" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Nombre" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="Descripcion" Type="char" MaxLength="500" Nullable="false" />
+    <Property Name="IdEmpresa" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="FechaInicioSubasta" Type="varchar" MaxLength="10" />
+    <Property Name="FechaCierreSubasta" Type="varchar" MaxLength="10" />
+    <Property Name="DocumentoAdicional" Type="char" MaxLength="100" />
     <Property Name="EstrellasObtenidas" Type="tinyint" />
     <Property Name="Exitoso" Type="bit" />
-    <Property Name="EstadoTrabajo" MaxLength="1" Type="char" />
-    <Property Name="EstadoTrabajoPorEstudiante" MaxLength="1" Type="char" />
+    <Property Name="EstadoTrabajo" Type="char" MaxLength="1" />
+    <Property Name="EstadoTrabajoPorEstudiante" Type="char" MaxLength="1" />
   </EntityType>
   <Association Name="FK_CURSO_ID_BADGE">
-    <End Type="Self.CURSO" Multiplicity="0..1" Role="CURSO" />
-    <End Type="Self.BADGE" Multiplicity="*" Role="BADGE" />
+    <End Role="CURSO" Type="Self.CURSO" Multiplicity="0..1" />
+    <End Role="BADGE" Type="Self.BADGE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CURSO">
         <PropertyRef Name="Id" />
@@ -422,8 +422,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_DRIVE_CREDENTIALS">
-    <End Type="Self.USUARIO" Multiplicity="1" Role="USUARIO" />
-    <End Type="Self.DriveCredentials" Multiplicity="0..1" Role="DriveCredentials" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="DriveCredentials" Type="Self.DriveCredentials" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="USUARIO">
         <PropertyRef Name="Id" />
@@ -434,8 +434,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_EMPRESA_ID">
-    <End Type="Self.USUARIO" Multiplicity="1" Role="USUARIO" />
-    <End Type="Self.EMPRESA" Multiplicity="0..1" Role="EMPRESA" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="USUARIO">
         <PropertyRef Name="Id" />
@@ -446,8 +446,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_EMPRESA_PAIS">
-    <End Type="Self.PAIS" Multiplicity="1" Role="PAIS" />
-    <End Type="Self.EMPRESA" Multiplicity="*" Role="EMPRESA" />
+    <End Role="PAIS" Type="Self.PAIS" Multiplicity="1" />
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PAIS">
         <PropertyRef Name="Pais" />
@@ -458,8 +458,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ESTUDIANTE_ID">
-    <End Type="Self.USUARIO" Multiplicity="1" Role="USUARIO" />
-    <End Type="Self.ESTUDIANTE" Multiplicity="0..1" Role="ESTUDIANTE" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="USUARIO">
         <PropertyRef Name="Id" />
@@ -470,8 +470,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ESTUDIANTE_PAIS">
-    <End Type="Self.PAIS" Multiplicity="1" Role="PAIS" />
-    <End Type="Self.ESTUDIANTE" Multiplicity="*" Role="ESTUDIANTE" />
+    <End Role="PAIS" Type="Self.PAIS" Multiplicity="1" />
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PAIS">
         <PropertyRef Name="Pais" />
@@ -482,8 +482,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ESTUDIANTE_UNIVERSIDAD">
-    <End Type="Self.UNIVERSIDAD" Multiplicity="0..1" Role="UNIVERSIDAD" />
-    <End Type="Self.ESTUDIANTE" Multiplicity="*" Role="ESTUDIANTE" />
+    <End Role="UNIVERSIDAD" Type="Self.UNIVERSIDAD" Multiplicity="0..1" />
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UNIVERSIDAD">
         <PropertyRef Name="Id" />
@@ -494,8 +494,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ID_CURSO">
-    <End Type="Self.CURSO" Multiplicity="0..1" Role="CURSO" />
-    <End Type="Self.PROYECTO" Multiplicity="*" Role="PROYECTO" />
+    <End Role="CURSO" Type="Self.CURSO" Multiplicity="0..1" />
+    <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CURSO">
         <PropertyRef Name="Id" />
@@ -506,8 +506,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDBADGE_BADGE_POR_PROYECTO">
-    <End Type="Self.BADGE" Multiplicity="1" Role="BADGE" />
-    <End Type="Self.BADGE_POR_PROYECTO" Multiplicity="*" Role="BADGE_POR_PROYECTO" />
+    <End Role="BADGE" Type="Self.BADGE" Multiplicity="1" />
+    <End Role="BADGE_POR_PROYECTO" Type="Self.BADGE_POR_PROYECTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="BADGE">
         <PropertyRef Name="Id" />
@@ -518,8 +518,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDCURSO_CURSO_POR_PROFESOR">
-    <End Type="Self.CURSO" Multiplicity="1" Role="CURSO" />
-    <End Type="Self.CURSO_POR_PROFESOR" Multiplicity="*" Role="CURSO_POR_PROFESOR" />
+    <End Role="CURSO" Type="Self.CURSO" Multiplicity="1" />
+    <End Role="CURSO_POR_PROFESOR" Type="Self.CURSO_POR_PROFESOR" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CURSO">
         <PropertyRef Name="Id" />
@@ -530,8 +530,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO">
-    <End Type="Self.CURSO" Multiplicity="1" Role="CURSO" />
-    <End Type="Self.ESTUDIANTE_POR_CURSO" Multiplicity="*" Role="ESTUDIANTE_POR_CURSO" />
+    <End Role="CURSO" Type="Self.CURSO" Multiplicity="1" />
+    <End Role="ESTUDIANTE_POR_CURSO" Type="Self.ESTUDIANTE_POR_CURSO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CURSO">
         <PropertyRef Name="Id" />
@@ -542,8 +542,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO">
-    <End Type="Self.ESTUDIANTE" Multiplicity="1" Role="ESTUDIANTE" />
-    <End Type="Self.ESTUDIANTE_POR_CURSO" Multiplicity="*" Role="ESTUDIANTE_POR_CURSO" />
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+    <End Role="ESTUDIANTE_POR_CURSO" Type="Self.ESTUDIANTE_POR_CURSO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ESTUDIANTE">
         <PropertyRef Name="Id" />
@@ -554,8 +554,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
-    <End Type="Self.ESTUDIANTE" Multiplicity="1" Role="ESTUDIANTE" />
-    <End Type="Self.IDIOMA_POR_ESTUDIANTE" Multiplicity="*" Role="IDIOMA_POR_ESTUDIANTE" />
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+    <End Role="IDIOMA_POR_ESTUDIANTE" Type="Self.IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ESTUDIANTE">
         <PropertyRef Name="Id" />
@@ -566,8 +566,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE">
-    <End Type="Self.ESTUDIANTE" Multiplicity="1" Role="ESTUDIANTE" />
-    <End Type="Self.PROYECTO_POR_ESTUDIANTE" Multiplicity="*" Role="PROYECTO_POR_ESTUDIANTE" />
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+    <End Role="PROYECTO_POR_ESTUDIANTE" Type="Self.PROYECTO_POR_ESTUDIANTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ESTUDIANTE">
         <PropertyRef Name="Id" />
@@ -578,8 +578,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE">
-    <End Type="Self.ESTUDIANTE" Multiplicity="1" Role="ESTUDIANTE" />
-    <End Type="Self.TECNOLOGIA_POR_ESTUDIANTE" Multiplicity="*" Role="TECNOLOGIA_POR_ESTUDIANTE" />
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+    <End Role="TECNOLOGIA_POR_ESTUDIANTE" Type="Self.TECNOLOGIA_POR_ESTUDIANTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ESTUDIANTE">
         <PropertyRef Name="Id" />
@@ -590,8 +590,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE">
-    <End Type="Self.ESTUDIANTE" Multiplicity="1" Role="ESTUDIANTE" />
-    <End Type="Self.TRABAJO_POR_ESTUDIANTE" Multiplicity="*" Role="TRABAJO_POR_ESTUDIANTE" />
+    <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="1" />
+    <End Role="TRABAJO_POR_ESTUDIANTE" Type="Self.TRABAJO_POR_ESTUDIANTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ESTUDIANTE">
         <PropertyRef Name="Id" />
@@ -602,8 +602,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
-    <End Type="Self.IDIOMA" Multiplicity="1" Role="IDIOMA" />
-    <End Type="Self.IDIOMA_POR_ESTUDIANTE" Multiplicity="*" Role="IDIOMA_POR_ESTUDIANTE" />
+    <End Role="IDIOMA" Type="Self.IDIOMA" Multiplicity="1" />
+    <End Role="IDIOMA_POR_ESTUDIANTE" Type="Self.IDIOMA_POR_ESTUDIANTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="IDIOMA">
         <PropertyRef Name="Id" />
@@ -614,8 +614,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDMENSAJE_MENSAJE_POR_PROYECTO">
-    <End Type="Self.MENSAJE" Multiplicity="1" Role="MENSAJE" />
-    <End Type="Self.MENSAJE_POR_PROYECTO" Multiplicity="*" Role="MENSAJE_POR_PROYECTO" />
+    <End Role="MENSAJE" Type="Self.MENSAJE" Multiplicity="1" />
+    <End Role="MENSAJE_POR_PROYECTO" Type="Self.MENSAJE_POR_PROYECTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MENSAJE">
         <PropertyRef Name="Id" />
@@ -626,8 +626,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
-    <End Type="Self.MENSAJE" Multiplicity="1" Role="MENSAJE" />
-    <End Type="Self.MENSAJE_POR_TRABAJO" Multiplicity="*" Role="MENSAJE_POR_TRABAJO" />
+    <End Role="MENSAJE" Type="Self.MENSAJE" Multiplicity="1" />
+    <End Role="MENSAJE_POR_TRABAJO" Type="Self.MENSAJE_POR_TRABAJO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MENSAJE">
         <PropertyRef Name="Id" />
@@ -638,8 +638,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDPROYECTO_BADGE_POR_PROYECTO">
-    <End Type="Self.PROYECTO" Multiplicity="1" Role="PROYECTO" />
-    <End Type="Self.BADGE_POR_PROYECTO" Multiplicity="*" Role="BADGE_POR_PROYECTO" />
+    <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
+    <End Role="BADGE_POR_PROYECTO" Type="Self.BADGE_POR_PROYECTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PROYECTO">
         <PropertyRef Name="Id" />
@@ -650,8 +650,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDPROYECTO_MENSAJE_POR_PROYECTO">
-    <End Type="Self.PROYECTO" Multiplicity="1" Role="PROYECTO" />
-    <End Type="Self.MENSAJE_POR_PROYECTO" Multiplicity="*" Role="MENSAJE_POR_PROYECTO" />
+    <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
+    <End Role="MENSAJE_POR_PROYECTO" Type="Self.MENSAJE_POR_PROYECTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PROYECTO">
         <PropertyRef Name="Id" />
@@ -662,8 +662,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDPROYECTO_PROYECTO_POR_ESTUDIANTE">
-    <End Type="Self.PROYECTO" Multiplicity="1" Role="PROYECTO" />
-    <End Type="Self.PROYECTO_POR_ESTUDIANTE" Multiplicity="*" Role="PROYECTO_POR_ESTUDIANTE" />
+    <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
+    <End Role="PROYECTO_POR_ESTUDIANTE" Type="Self.PROYECTO_POR_ESTUDIANTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PROYECTO">
         <PropertyRef Name="Id" />
@@ -674,8 +674,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDPROYECTO_TECNOLOGIA_POR_PROYECTO">
-    <End Type="Self.PROYECTO" Multiplicity="1" Role="PROYECTO" />
-    <End Type="Self.TECNOLOGIA_POR_PROYECTO" Multiplicity="*" Role="TECNOLOGIA_POR_PROYECTO" />
+    <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
+    <End Role="TECNOLOGIA_POR_PROYECTO" Type="Self.TECNOLOGIA_POR_PROYECTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PROYECTO">
         <PropertyRef Name="Id" />
@@ -686,8 +686,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE">
-    <End Type="Self.TECNOLOGIA" Multiplicity="1" Role="TECNOLOGIA" />
-    <End Type="Self.TECNOLOGIA_POR_ESTUDIANTE" Multiplicity="*" Role="TECNOLOGIA_POR_ESTUDIANTE" />
+    <End Role="TECNOLOGIA" Type="Self.TECNOLOGIA" Multiplicity="1" />
+    <End Role="TECNOLOGIA_POR_ESTUDIANTE" Type="Self.TECNOLOGIA_POR_ESTUDIANTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TECNOLOGIA">
         <PropertyRef Name="Id" />
@@ -698,8 +698,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO">
-    <End Type="Self.TECNOLOGIA" Multiplicity="1" Role="TECNOLOGIA" />
-    <End Type="Self.TECNOLOGIA_POR_PROYECTO" Multiplicity="*" Role="TECNOLOGIA_POR_PROYECTO" />
+    <End Role="TECNOLOGIA" Type="Self.TECNOLOGIA" Multiplicity="1" />
+    <End Role="TECNOLOGIA_POR_PROYECTO" Type="Self.TECNOLOGIA_POR_PROYECTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TECNOLOGIA">
         <PropertyRef Name="Id" />
@@ -710,8 +710,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO">
-    <End Type="Self.TECNOLOGIA" Multiplicity="1" Role="TECNOLOGIA" />
-    <End Type="Self.TECNOLOGIA_POR_TRABAJO" Multiplicity="*" Role="TECNOLOGIA_POR_TRABAJO" />
+    <End Role="TECNOLOGIA" Type="Self.TECNOLOGIA" Multiplicity="1" />
+    <End Role="TECNOLOGIA_POR_TRABAJO" Type="Self.TECNOLOGIA_POR_TRABAJO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TECNOLOGIA">
         <PropertyRef Name="Id" />
@@ -722,8 +722,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDTRABAJO_MENSAJE_POR_TRABAJO">
-    <End Type="Self.TRABAJO" Multiplicity="1" Role="TRABAJO" />
-    <End Type="Self.MENSAJE_POR_TRABAJO" Multiplicity="*" Role="MENSAJE_POR_TRABAJO" />
+    <End Role="TRABAJO" Type="Self.TRABAJO" Multiplicity="1" />
+    <End Role="MENSAJE_POR_TRABAJO" Type="Self.MENSAJE_POR_TRABAJO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TRABAJO">
         <PropertyRef Name="Id" />
@@ -734,8 +734,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO">
-    <End Type="Self.TRABAJO" Multiplicity="1" Role="TRABAJO" />
-    <End Type="Self.TECNOLOGIA_POR_TRABAJO" Multiplicity="*" Role="TECNOLOGIA_POR_TRABAJO" />
+    <End Role="TRABAJO" Type="Self.TRABAJO" Multiplicity="1" />
+    <End Role="TECNOLOGIA_POR_TRABAJO" Type="Self.TECNOLOGIA_POR_TRABAJO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TRABAJO">
         <PropertyRef Name="Id" />
@@ -746,8 +746,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE">
-    <End Type="Self.TRABAJO" Multiplicity="1" Role="TRABAJO" />
-    <End Type="Self.TRABAJO_POR_ESTUDIANTE" Multiplicity="*" Role="TRABAJO_POR_ESTUDIANTE" />
+    <End Role="TRABAJO" Type="Self.TRABAJO" Multiplicity="1" />
+    <End Role="TRABAJO_POR_ESTUDIANTE" Type="Self.TRABAJO_POR_ESTUDIANTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TRABAJO">
         <PropertyRef Name="Id" />
@@ -758,8 +758,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_RESPUESTA_RAIZ">
-    <End Type="Self.MENSAJE" Multiplicity="1" Role="MENSAJE" />
-    <End Type="Self.RESPUESTA" Multiplicity="*" Role="RESPUESTA" />
+    <End Role="MENSAJE" Type="Self.MENSAJE" Multiplicity="1" />
+    <End Role="RESPUESTA" Type="Self.RESPUESTA" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MENSAJE">
         <PropertyRef Name="Id" />
@@ -770,8 +770,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TRABAJO_POR_EMPRESA">
-    <End Type="Self.EMPRESA" Multiplicity="1" Role="EMPRESA" />
-    <End Type="Self.TRABAJO" Multiplicity="*" Role="TRABAJO" />
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+    <End Role="TRABAJO" Type="Self.TRABAJO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EMPRESA">
         <PropertyRef Name="Id" />
@@ -781,7 +781,7 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="FN_Get_Last_User_Id" ReturnType="char" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="FN_Get_Last_User_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="char" />
   <Function Name="SP_Buscar_Subastas_Por_Tecnologia_Nombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Tecnologia" Type="char" Mode="In" />
     <Parameter Name="Nombre" Type="char" Mode="In" />
@@ -809,8 +809,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   </Function>
   <Function Name="SP_Insertar_Empresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="char" Mode="In" />
-    <Parameter Name="Contrasena" Type="char" Mode="In" />
-    <Parameter Name="Sal" Type="char" Mode="In" />
+    <Parameter Name="Contrasena" Type="varchar" Mode="In" />
+    <Parameter Name="Sal" Type="varchar" Mode="In" />
     <Parameter Name="RepositorioArchivos" Type="char" Mode="In" />
     <Parameter Name="CredencialDrive" Type="char" Mode="In" />
     <Parameter Name="NombreContacto" Type="char" Mode="In" />
@@ -826,8 +826,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   </Function>
   <Function Name="SP_Insertar_Estudiante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="char" Mode="In" />
-    <Parameter Name="Contrasena" Type="char" Mode="In" />
-    <Parameter Name="Sal" Type="char" Mode="In" />
+    <Parameter Name="Contrasena" Type="varchar" Mode="In" />
+    <Parameter Name="Sal" Type="varchar" Mode="In" />
     <Parameter Name="RepositorioArchivos" Type="char" Mode="In" />
     <Parameter Name="CredencialDrive" Type="char" Mode="In" />
     <Parameter Name="Nombre" Type="char" Mode="In" />
@@ -856,8 +856,8 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
   </Function>
   <Function Name="SP_Insertar_Profesor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="char" Mode="In" />
-    <Parameter Name="Contrasena" Type="char" Mode="In" />
-    <Parameter Name="Sal" Type="char" Mode="In" />
+    <Parameter Name="Contrasena" Type="varchar" Mode="In" />
+    <Parameter Name="Sal" Type="varchar" Mode="In" />
     <Parameter Name="RepositorioArchivos" Type="char" Mode="In" />
     <Parameter Name="CredencialDrive" Type="char" Mode="In" />
     <Parameter Name="NombreContacto" Type="char" Mode="In" />
@@ -1095,128 +1095,128 @@ warning 6002: The table/view 'MyLearnDB.dbo.VIEW_TRABAJO' does not have a primar
     FROM [dbo].[VIEW_TRABAJO] AS [VIEW_TRABAJO]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_CURSO_ID_BADGE" Association="Self.FK_CURSO_ID_BADGE">
-      <End EntitySet="CURSO" Role="CURSO" />
-      <End EntitySet="BADGE" Role="BADGE" />
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="BADGE" EntitySet="BADGE" />
     </AssociationSet>
     <AssociationSet Name="FK_DRIVE_CREDENTIALS" Association="Self.FK_DRIVE_CREDENTIALS">
-      <End EntitySet="USUARIO" Role="USUARIO" />
-      <End EntitySet="DriveCredentials" Role="DriveCredentials" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="DriveCredentials" EntitySet="DriveCredentials" />
     </AssociationSet>
     <AssociationSet Name="FK_EMPRESA_ID" Association="Self.FK_EMPRESA_ID">
-      <End EntitySet="USUARIO" Role="USUARIO" />
-      <End EntitySet="EMPRESA" Role="EMPRESA" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
     </AssociationSet>
     <AssociationSet Name="FK_EMPRESA_PAIS" Association="Self.FK_EMPRESA_PAIS">
-      <End EntitySet="PAIS" Role="PAIS" />
-      <End EntitySet="EMPRESA" Role="EMPRESA" />
+      <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
     </AssociationSet>
     <AssociationSet Name="FK_ESTUDIANTE_ID" Association="Self.FK_ESTUDIANTE_ID">
-      <End EntitySet="USUARIO" Role="USUARIO" />
-      <End EntitySet="ESTUDIANTE" Role="ESTUDIANTE" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_ESTUDIANTE_PAIS" Association="Self.FK_ESTUDIANTE_PAIS">
-      <End EntitySet="PAIS" Role="PAIS" />
-      <End EntitySet="ESTUDIANTE" Role="ESTUDIANTE" />
+      <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_ESTUDIANTE_UNIVERSIDAD" Association="Self.FK_ESTUDIANTE_UNIVERSIDAD">
-      <End EntitySet="UNIVERSIDAD" Role="UNIVERSIDAD" />
-      <End EntitySet="ESTUDIANTE" Role="ESTUDIANTE" />
+      <End Role="UNIVERSIDAD" EntitySet="UNIVERSIDAD" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_ID_CURSO" Association="Self.FK_ID_CURSO">
-      <End EntitySet="CURSO" Role="CURSO" />
-      <End EntitySet="PROYECTO" Role="PROYECTO" />
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDBADGE_BADGE_POR_PROYECTO" Association="Self.FK_IDBADGE_BADGE_POR_PROYECTO">
-      <End EntitySet="BADGE" Role="BADGE" />
-      <End EntitySet="BADGE_POR_PROYECTO" Role="BADGE_POR_PROYECTO" />
+      <End Role="BADGE" EntitySet="BADGE" />
+      <End Role="BADGE_POR_PROYECTO" EntitySet="BADGE_POR_PROYECTO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDCURSO_CURSO_POR_PROFESOR" Association="Self.FK_IDCURSO_CURSO_POR_PROFESOR">
-      <End EntitySet="CURSO" Role="CURSO" />
-      <End EntitySet="CURSO_POR_PROFESOR" Role="CURSO_POR_PROFESOR" />
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="CURSO_POR_PROFESOR" EntitySet="CURSO_POR_PROFESOR" />
     </AssociationSet>
     <AssociationSet Name="FK_IDCURSO_ESTUDIANTE_POR_CURSO" Association="Self.FK_IDCURSO_ESTUDIANTE_POR_CURSO">
-      <End EntitySet="CURSO" Role="CURSO" />
-      <End EntitySet="ESTUDIANTE_POR_CURSO" Role="ESTUDIANTE_POR_CURSO" />
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO" Association="Self.FK_IDESTUDIANTE_ESTUDIANTE_POR_CURSO">
-      <End EntitySet="ESTUDIANTE" Role="ESTUDIANTE" />
-      <End EntitySet="ESTUDIANTE_POR_CURSO" Role="ESTUDIANTE_POR_CURSO" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="ESTUDIANTE_POR_CURSO" EntitySet="ESTUDIANTE_POR_CURSO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_IDIOMA_POR_ESTUDIANTE">
-      <End EntitySet="ESTUDIANTE" Role="ESTUDIANTE" />
-      <End EntitySet="IDIOMA_POR_ESTUDIANTE" Role="IDIOMA_POR_ESTUDIANTE" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_PROYECTO_POR_ESTUDIANTE">
-      <End EntitySet="ESTUDIANTE" Role="ESTUDIANTE" />
-      <End EntitySet="PROYECTO_POR_ESTUDIANTE" Role="PROYECTO_POR_ESTUDIANTE" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="PROYECTO_POR_ESTUDIANTE" EntitySet="PROYECTO_POR_ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_TECNOLOGIA_POR_ESTUDIANTE">
-      <End EntitySet="ESTUDIANTE" Role="ESTUDIANTE" />
-      <End EntitySet="TECNOLOGIA_POR_ESTUDIANTE" Role="TECNOLOGIA_POR_ESTUDIANTE" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE" Association="Self.FK_IDESTUDIANTE_TRABAJO_POR_ESTUDIANTE">
-      <End EntitySet="ESTUDIANTE" Role="ESTUDIANTE" />
-      <End EntitySet="TRABAJO_POR_ESTUDIANTE" Role="TRABAJO_POR_ESTUDIANTE" />
+      <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+      <End Role="TRABAJO_POR_ESTUDIANTE" EntitySet="TRABAJO_POR_ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE" Association="Self.FK_IDIDIOMA_IDIOMA_POR_ESTUDIANTE">
-      <End EntitySet="IDIOMA" Role="IDIOMA" />
-      <End EntitySet="IDIOMA_POR_ESTUDIANTE" Role="IDIOMA_POR_ESTUDIANTE" />
+      <End Role="IDIOMA" EntitySet="IDIOMA" />
+      <End Role="IDIOMA_POR_ESTUDIANTE" EntitySet="IDIOMA_POR_ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_IDMENSAJE_MENSAJE_POR_PROYECTO" Association="Self.FK_IDMENSAJE_MENSAJE_POR_PROYECTO">
-      <End EntitySet="MENSAJE" Role="MENSAJE" />
-      <End EntitySet="MENSAJE_POR_PROYECTO" Role="MENSAJE_POR_PROYECTO" />
+      <End Role="MENSAJE" EntitySet="MENSAJE" />
+      <End Role="MENSAJE_POR_PROYECTO" EntitySet="MENSAJE_POR_PROYECTO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDMENSAJE_MENSAJE_POR_TRABAJO" Association="Self.FK_IDMENSAJE_MENSAJE_POR_TRABAJO">
-      <End EntitySet="MENSAJE" Role="MENSAJE" />
-      <End EntitySet="MENSAJE_POR_TRABAJO" Role="MENSAJE_POR_TRABAJO" />
+      <End Role="MENSAJE" EntitySet="MENSAJE" />
+      <End Role="MENSAJE_POR_TRABAJO" EntitySet="MENSAJE_POR_TRABAJO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDPROYECTO_BADGE_POR_PROYECTO" Association="Self.FK_IDPROYECTO_BADGE_POR_PROYECTO">
-      <End EntitySet="PROYECTO" Role="PROYECTO" />
-      <End EntitySet="BADGE_POR_PROYECTO" Role="BADGE_POR_PROYECTO" />
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="BADGE_POR_PROYECTO" EntitySet="BADGE_POR_PROYECTO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDPROYECTO_MENSAJE_POR_PROYECTO" Association="Self.FK_IDPROYECTO_MENSAJE_POR_PROYECTO">
-      <End EntitySet="PROYECTO" Role="PROYECTO" />
-      <End EntitySet="MENSAJE_POR_PROYECTO" Role="MENSAJE_POR_PROYECTO" />
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="MENSAJE_POR_PROYECTO" EntitySet="MENSAJE_POR_PROYECTO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDPROYECTO_PROYECTO_POR_ESTUDIANTE" Association="Self.FK_IDPROYECTO_PROYECTO_POR_ESTUDIANTE">
-      <End EntitySet="PROYECTO" Role="PROYECTO" />
-      <End EntitySet="PROYECTO_POR_ESTUDIANTE" Role="PROYECTO_POR_ESTUDIANTE" />
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="PROYECTO_POR_ESTUDIANTE" EntitySet="PROYECTO_POR_ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_IDPROYECTO_TECNOLOGIA_POR_PROYECTO" Association="Self.FK_IDPROYECTO_TECNOLOGIA_POR_PROYECTO">
-      <End EntitySet="PROYECTO" Role="PROYECTO" />
-      <End EntitySet="TECNOLOGIA_POR_PROYECTO" Role="TECNOLOGIA_POR_PROYECTO" />
+      <End Role="PROYECTO" EntitySet="PROYECTO" />
+      <End Role="TECNOLOGIA_POR_PROYECTO" EntitySet="TECNOLOGIA_POR_PROYECTO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDTECNOLOGIA_POR_ESTUDIANTE" Association="Self.FK_IDTECNOLOGIA_POR_ESTUDIANTE">
-      <End EntitySet="TECNOLOGIA" Role="TECNOLOGIA" />
-      <End EntitySet="TECNOLOGIA_POR_ESTUDIANTE" Role="TECNOLOGIA_POR_ESTUDIANTE" />
+      <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
+      <End Role="TECNOLOGIA_POR_ESTUDIANTE" EntitySet="TECNOLOGIA_POR_ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO" Association="Self.FK_IDTECNOLOGIA_TECNOLOGIA_POR_PROYECTO">
-      <End EntitySet="TECNOLOGIA" Role="TECNOLOGIA" />
-      <End EntitySet="TECNOLOGIA_POR_PROYECTO" Role="TECNOLOGIA_POR_PROYECTO" />
+      <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
+      <End Role="TECNOLOGIA_POR_PROYECTO" EntitySet="TECNOLOGIA_POR_PROYECTO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO" Association="Self.FK_IDTECNOLOGIA_TECNOLOGIA_POR_TRABAJO">
-      <End EntitySet="TECNOLOGIA" Role="TECNOLOGIA" />
-      <End EntitySet="TECNOLOGIA_POR_TRABAJO" Role="TECNOLOGIA_POR_TRABAJO" />
+      <End Role="TECNOLOGIA" EntitySet="TECNOLOGIA" />
+      <End Role="TECNOLOGIA_POR_TRABAJO" EntitySet="TECNOLOGIA_POR_TRABAJO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDTRABAJO_MENSAJE_POR_TRABAJO" Association="Self.FK_IDTRABAJO_MENSAJE_POR_TRABAJO">
-      <End EntitySet="TRABAJO" Role="TRABAJO" />
-      <End EntitySet="MENSAJE_POR_TRABAJO" Role="MENSAJE_POR_TRABAJO" />
+      <End Role="TRABAJO" EntitySet="TRABAJO" />
+      <End Role="MENSAJE_POR_TRABAJO" EntitySet="MENSAJE_POR_TRABAJO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO" Association="Self.FK_IDTRABAJO_TECNOLOGIA_POR_TRABAJO">
-      <End EntitySet="TRABAJO" Role="TRABAJO" />
-      <End EntitySet="TECNOLOGIA_POR_TRABAJO" Role="TECNOLOGIA_POR_TRABAJO" />
+      <End Role="TRABAJO" EntitySet="TRABAJO" />
+      <End Role="TECNOLOGIA_POR_TRABAJO" EntitySet="TECNOLOGIA_POR_TRABAJO" />
     </AssociationSet>
     <AssociationSet Name="FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE" Association="Self.FK_IDTRABAJO_TRABAJO_POR_ESTUDIANTE">
-      <End EntitySet="TRABAJO" Role="TRABAJO" />
-      <End EntitySet="TRABAJO_POR_ESTUDIANTE" Role="TRABAJO_POR_ESTUDIANTE" />
+      <End Role="TRABAJO" EntitySet="TRABAJO" />
+      <End Role="TRABAJO_POR_ESTUDIANTE" EntitySet="TRABAJO_POR_ESTUDIANTE" />
     </AssociationSet>
     <AssociationSet Name="FK_RESPUESTA_RAIZ" Association="Self.FK_RESPUESTA_RAIZ">
-      <End EntitySet="MENSAJE" Role="MENSAJE" />
-      <End EntitySet="RESPUESTA" Role="RESPUESTA" />
+      <End Role="MENSAJE" EntitySet="MENSAJE" />
+      <End Role="RESPUESTA" EntitySet="RESPUESTA" />
     </AssociationSet>
     <AssociationSet Name="FK_TRABAJO_POR_EMPRESA" Association="Self.FK_TRABAJO_POR_EMPRESA">
-      <End EntitySet="EMPRESA" Role="EMPRESA" />
-      <End EntitySet="TRABAJO" Role="TRABAJO" />
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+      <End Role="TRABAJO" EntitySet="TRABAJO" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

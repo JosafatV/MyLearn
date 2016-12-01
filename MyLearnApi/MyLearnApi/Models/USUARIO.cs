@@ -15,11 +15,11 @@ namespace MyLearnApi.Models
     public partial class USUARIO:clsJSONResource
     {
         public string Id { get; set; }
-        public string Contrasena { get; set; }
-        public string Sal { get; set; }
         public string RepositorioArchivos { get; set; }
         public string CredencialDrive { get; set; }
         public string Estado { get; set; }
         public string NombreDeUsuario { get; set; }
+        public string Contrasena { get; set; }
+        public string Sal { get; set; }
     }
 }
