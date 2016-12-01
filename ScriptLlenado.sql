@@ -284,13 +284,13 @@ EXEC SP_Insertar_Trabajo 'QAJobs', 'do QA on our system', '20', '2016-11-10', '2
 EXEC SP_Insertar_Trabajo 'QAJobs', 'do QA on our system', '20', '2016-11-10', '2016-11-15', '', '10000'
 EXEC SP_Insertar_Trabajo 'QAJobs', 'do QA on our system', '20', '2016-11-10', '2016-11-15', '', '10000'
 
-UPDATE TRABAJO SET EstrellasObtenidas = 3, Exitoso = 0 WHERE ID=7
+UPDATE TRABAJO SET EstrellasObtenidas = 5, Exitoso = 0 WHERE ID=7
 UPDATE TRABAJO SET EstrellasObtenidas = 4, Exitoso = 1 WHERE ID=8
-UPDATE TRABAJO SET EstrellasObtenidas = 1, Exitoso = 0 WHERE ID=9
-UPDATE TRABAJO SET Estado = 'E' WHERE ID>6
-UPDATE TRABAJO SET EstrellasObtenidas = 4, Exitoso = 1 WHERE ID=10
-UPDATE TRABAJO SET EstrellasObtenidas = 5, Exitoso = 1 WHERE ID=11
-UPDATE TRABAJO SET EstrellasObtenidas = 4, Exitoso = 1 WHERE ID=12
+UPDATE TRABAJO SET EstrellasObtenidas = 4, Exitoso = 0 WHERE ID=9
+UPDATE TRABAJO SET Estado = 'E' WHERE ID>5
+UPDATE TRABAJO SET EstrellasObtenidas = 3, Exitoso = 1 WHERE ID=10
+UPDATE TRABAJO SET EstrellasObtenidas = 1, Exitoso = 1 WHERE ID=11
+UPDATE TRABAJO SET EstrellasObtenidas = 3, Exitoso = 1 WHERE ID=12
 
 INSERT INTO TRABAJO_POR_ESTUDIANTE (IdTrabajo, IdEstudiante, Monto, FechaFinalizacion, Comentario, Estado)
 VALUES (6, 7, 10000, '2016-11-17', 'The Emperor Protects!', 'A')
