@@ -10,17 +10,16 @@ USE MyLearnDB;
 
 CREATE TABLE USUARIO (
     Id CHAR(100),
-    Contrasena CHAR(8),
-	Sal CHAR(20) UNIQUE,
+    Contrasena VARCHAR(50) NOT NULL,
+	Sal VARCHAR(100) NOT NULL UNIQUE,
 	RepositorioArchivos CHAR(100),
 	CredencialDrive CHAR(100),
+	NombreDeUsuario CHAR(40) NOT NULL UNIQUE,
 	Estado CHAR(1),
 
     CONSTRAINT PK_USUARIO
 		PRIMARY KEY (Id),
 );
-ALTER TABLE USUARIO ADD NombreDeUsuario CHAR(40)  NULL
-ALTER TABLE USUARIO ADD CONSTRAINT UNIQUE_USER_NAME UNIQUE(NombreDeUsuario) 
 
 CREATE TABLE DriveCredentials (
 	 UserId CHAR(100),

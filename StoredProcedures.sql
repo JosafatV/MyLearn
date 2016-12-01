@@ -125,7 +125,7 @@ GO
 
 	/*Creates a new student*/
 CREATE PROCEDURE SP_Insertar_Estudiante   
-	@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
+	@Id CHAR(100), @Contrasena VARCHAR(50), @Sal VARCHAR(100), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 	@Nombre CHAR(30), @Apellido CHAR(30), @Carne CHAR(15), @Email CHAR(50), @Telefono CHAR(15), @Pais CHAR(30),
 	@Region CHAR(30), @IdUniversidad INT , @RepositorioCodigo CHAR(100), @LinkHojaDeVida CHAR(100) , @UserName CHAR(40) 
@@ -144,7 +144,7 @@ IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_Insertar_Pr
 DROP PROCEDURE  SP_Insertar_Profesor  
 GO
 CREATE PROCEDURE SP_Insertar_Profesor
-	@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
+	@Id CHAR(100), @Contrasena VARCHAR(50), @Sal VARCHAR(100), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 	@NombreContacto CHAR(30), @ApellidoContacto CHAR(30), @Email CHAR(50), @Telefono CHAR(15), 
 	 @HorarioAtencion CHAR(15), @Pais CHAR(30), @Region CHAR(30), @IdUniversidad INT, @UserName CHAR(40) 
@@ -163,7 +163,7 @@ CREATE PROCEDURE SP_Insertar_Profesor
 
 	/*Creates a new company*/
 CREATE PROCEDURE SP_Insertar_Empresa
-@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
+@Id CHAR(100), @Contrasena VARCHAR(50), @Sal VARCHAR(100), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 
 @NombreContacto CHAR(30), @ApellidoContacto CHAR(30), @NombreEmpresarial CHAR(30), @Email CHAR(50), @Telefono CHAR(15),
  @PaginaWebEmpresa CHAR(30), @Pais CHAR(30), @Region CHAR(30), @RepositorioCodigo CHAR(100), @UserName CHAR(40) 
@@ -179,7 +179,7 @@ CREATE PROCEDURE SP_Insertar_Empresa
 
 	/*Creates a new administrator - EXTRA POINTS*/
 CREATE PROCEDURE SP_Insertar_Admin
-@Id CHAR(100), @Contrasena CHAR(8), @Sal CHAR(20), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
+@Id CHAR(100), @Contrasena VARCHAR(50), @Sal VARCHAR(100), @RepositorioArchivos CHAR(100), @CredencialDrive CHAR(100),
 @Nombre CHAR(30), @ApellidoContacto CHAR(30), @NombreUsuario CHAR(40)
 	AS
 		INSERT INTO USUARIO (Id,Contrasena, Sal, RepositorioArchivos, CredencialDrive, Estado, NombreDeUsuario) 
@@ -584,7 +584,7 @@ CREATE PROCEDURE SP_Promedio_Cursos_Aprobados @IdEstudiante CHAR(100)
 	GO
 */
 
-CREATE PROCEDURE SP_MyEmployee @Top INT
+CREATE PROCEDURE SP_MyEmployee @Top INT, @Pais Char(30)
 	AS
 		SELECT TOP (20) A.IdEstudiante, NombreContacto, Telefono, Email, CAST(NotaPromedio*0.3+PromedioEstrellas*0.3+(ProyectosExitosos*100/ProyectosTerminados)*0.3+(CursosExitosos*100/CursosTerminados)*0.1 AS FLOAT) AS Performance
 		FROM 
@@ -623,10 +623,11 @@ CREATE PROCEDURE SP_MyEmployee @Top INT
 			GROUP BY IdEstudiante) AS F
 		 ON A.IdEstudiante=F.IdEstudiante
 		 JOIN 
-			(SELECT Id, NombreContacto, Telefono, Email
+			(SELECT Id, NombreContacto, Telefono, Email, Pais
 			FROM ESTUDIANTE) AS G
 		ON A.IdEstudiante=G.Id
-		 ORDER BY Performance DESC
+		WHERE Pais=@Pais
+		ORDER BY Performance DESC
 	GO
 
 
@@ -674,5 +675,5 @@ CREATE PROCEDURE SP_MyEmployee_Custom @Top INT, @PorcentajeNotas INT, @Porcentaj
 			(SELECT Id, NombreContacto, Telefono, Email
 			FROM ESTUDIANTE) AS G
 		ON A.IdEstudiante=G.Id
-		 ORDER BY Performance DESC
+		ORDER BY Performance DESC
 	GO
