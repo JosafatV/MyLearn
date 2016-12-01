@@ -7,13 +7,15 @@ using MyLearnApi.Models;
 using System.Text;
 using System.Net.Http;
 using System.Web;
+using Tweetinvi;
+
 
 namespace MyLearnApi.Controllers
 {
     public class RepositoriosController : ApiController
     {
         private clsRepoLogic pobj_repoLogic = new clsRepoLogic();
-
+        
         /// <summary>
         /// obtiene el client secre json
         /// </summary>
@@ -63,7 +65,7 @@ namespace MyLearnApi.Controllers
             //Si lalista de archivos viene vacía
             if (HttpContext.Current.Request.Files.Count == 0)
             {
-                return Ok("No Files");
+                return Ok("{ \"link\": \"\" }");
             }
             ///se revisa el primer archivo
             if (HttpContext.Current.Request.Files[0] == null)
@@ -78,11 +80,33 @@ namespace MyLearnApi.Controllers
             string link = clsRepoLogic.uploadFile(HttpContext.Current.Request.Files[0].InputStream, IdUsuario,
                 HttpContext.Current.Request.Files[0].FileName, HttpContext.Current.Request.Files[0].ContentType);
             //returnos the web content link
-            return Ok(link);
+            return Ok("{ \"link\": \"" + link + " \" }"  );
            
         }
 
-     
+
+
+
+        /// <summary>
+        /// para subir solo un archivo y obtener el link de descarga de drive
+        /// </summary>
+        /// <returns> File download link </returns>
+        [HttpPost]
+        [ResponseType(typeof(string))]
+        [Route("MyLearnApi/Twitt/{IdUsuario}")]
+        public IHttpActionResult twitt(string IdUsuario)
+        {
+            Auth.SetUserCredentials("jUV15h3RmCiiTlewmoSICNdx2", "EDugd5Ph71tuvmZmEfKXeaUQw5DDLJh1bjUSkhYuDd4p4p4TJn",
+                "940379875-jiedKvLwZFqCLTvQ7cX7fNzUTkh6djKt610xLm8d", "wtvlmiiovHuG4xm4Wcp5FXl5gwDe19nQr6gAa2l3NaBvq");
+            var user = Tweetinvi.User.GetAuthenticatedUser();
+
+            var tweet = Tweet.PublishTweet("Twitter REST API -prueba");
+
+            return Ok("{  }");
+
+        }
+
+
         [HttpOptions]
         [Route("MyLearnApi/DriveCredentials")]
         [Route("MyLearnApi/File/{IdUsuario}")]
