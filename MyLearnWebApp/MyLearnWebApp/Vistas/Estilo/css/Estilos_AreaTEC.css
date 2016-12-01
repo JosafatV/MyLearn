@@ -99,3 +99,24 @@ body .prom1 tr:hover{
     height: 80%;
     margin-left: -10%;
 }
+div.upload {
+width: 150px;
+height: 150px;
+background: url('../img/prueba1.png') no-repeat;
+overflow: hidden;
+position:relative;
+top: -60px;
+left: 100px;
+}
+
+div.upload input {
+display: block ;
+width: 100px ;
+height: 100px ;
+opacity: 0 ;
+overflow: hidden ;
+position:relative;
+top: 5px;
+left: 4px;
+margin-bottom: 0px;
+}
