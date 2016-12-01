@@ -159,7 +159,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
             console.log('file is ');
             console.dir(file);
 
-            fileUpload.uploadFileToUrl(file, 48);
+            fileUpload.uploadFileToUrl(file, 58);
         };
 
     }]);

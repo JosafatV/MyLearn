@@ -1,5 +1,5 @@
-﻿angular.module('mod_MyLearn').controller('ctrl_areaTrabajoEstudianteProfesor', ['fct_UserJson', 'fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function (fct_UserJson,fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+﻿angular.module('mod_MyLearn').controller('ctrl_areaTrabajoEstudianteProfesor', ['fileUpload', 'fct_UserJson', 'fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (fileUpload, fct_UserJson, fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.ls_msjs = [];
         $scope.ls_badges = [];
@@ -30,13 +30,17 @@
         */
 
        $scope.enviarMensaje = function () {
+           var file = $scope.myFile;
            fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }, {
                Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto
-                            }).$promise.then(function (data) {
-                                fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
-                                    $scope.ls_msjs = data;
-                                    $scope.js_enviarMensaje.Contenido = "";
-                                });
+           }).$promise.then(function (data) {
+               fileUpload.uploadFileToUrl(file, $routeParams.IdUser).then(function (data) {
+                   fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+                       $scope.ls_msjs = data;
+                       $scope.js_enviarMensaje.Contenido = "";
+                   });
+               });
+
            });
        };
 
@@ -114,7 +118,7 @@
     * Funcion para enviar mensajes usando Drive
     */
 
-       function uploadFile(){
+       function uploadFile(id){
            var file = $scope.myFile;
 
            console.log('file is ');

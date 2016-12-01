@@ -96,10 +96,6 @@
 
 				<!-- --------------------------------------------------------------No cambiaar por angular de aqui hasta abajo------------------------------------------------------------------------------------------- -->
 
-
-
-
-
 		</div>
 		<div class="col-md-9">
 				<div class="col-md-offset-0">
@@ -113,7 +109,10 @@
 																		<textarea class="form-control" id="mensaje"  data-ng-model="js_enviarMensaje.Contenido"></textarea>
 																		<br><br>
 																		&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md"  data-ng-click="enviarMensaje()">Enviar</a>&nbsp; &nbsp;&nbsp; &nbsp;
-																		<a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a>
+                                                                        <div>   
+                                                                                <input type="file" file-model="myFile" />
+                                                                        </div
+																		<!-- <a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a> --> 
 																</div>
 
 														</div>
