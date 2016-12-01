@@ -114,13 +114,4 @@
     * Funcion para enviar mensajes usando Drive
     */
 
-       $scope.uploadFile = function () {
-           var file = $scope.myFile;
-
-           console.log('file is ');
-           console.dir(file);
-         
-           fileUpload.uploadFileToUrl(file, 32);
-       };
-
  }]);
