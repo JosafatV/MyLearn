@@ -6,10 +6,15 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
         };
 
         $scope.indexCursos = 0;
-
+        $scope.sumaTotal = 0;
         $scope.ls_badges = [];
         $scope.ls_cursos = [];
         $scope.ls_listaUniversidades = [];
+
+        /*
+        *  Estructura del json necesario para crear una nueva cuenta
+        *
+        */
 
         $scope.js_crearCurso = {
             "IdProfesor": $routeParams.IdUser,
@@ -22,18 +27,33 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
 
         };
 
+        /*
+        *  Estructura del json necesaria para crear un nuevo badge
+        *
+        */
+
         $scope.js_badgeActual = {
             "Nombre": "",
             "Puntaje": "",
             "IdCurso": ""
         };
 
-        $scope.sumaTotal = 0;
+        /*
+        *  Solicitud a la base de datos para obtener las universidades 
+        *  Necesaria para 
+        *
+        */
+
 
         fct_MyLearn_API_Client.query({ type: 'Universidades' }).$promise.then(function (data) {
             $scope.ls_listaUniversidades = data;
         });
 
+        /*
+        *  Solicitud a la base de datos para obtener la informacion del 
+        * profesor que está realizando la solicitud
+        *
+        */
 
         fct_MyLearn_API_Client.get({ type: 'Profesores', extension1: $routeParams.IdUser }).$promise.then(function (data) {
             $scope.profesorActual = data;
