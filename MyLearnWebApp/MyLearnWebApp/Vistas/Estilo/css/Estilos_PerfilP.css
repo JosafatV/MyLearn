@@ -89,3 +89,8 @@ body .prom1 tr:hover{
 	color: #fff;
 	cursor: pointer;
 }
+body .nav1 li:hover{
+	background:#252932;
+	color: #fff;
+	cursor: pointer;
+}
