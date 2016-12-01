@@ -47,7 +47,18 @@
                     <td>{{subasta.FechaCierre}}</td>
                 </tr>
 
-		</table> <br><br>
+		</table>
+		<div class="col-md-5">
+				<nav class="nav1">
+						<ul class="pager">
+								<li class="previous prev"data-ng-disabled="num_indexSubastas < 1" data-ng-click="get_20LessSubasta()"><a>&larr; Anterior</a></li>
+								<li class="next" data-ng-disabled="num_isNextPaginationTrabajos == 0" data-ng-click="get_20MoreSubastas()" data-ng-disabled=""><a>Siguiente &rarr; </a></li>
+
+						</ul>
+				</nav>
+
+		</div>
+
 
 
 </div>
@@ -66,14 +77,24 @@
 
                     </tr>
 
-			</table> <br><br>
+			</table>
+			<div class="col-md-5">
+					<nav class="nav1">
+							<ul class="pager">
+									<li class="previous prev" data-ng-disabled="num_indexTrabajos < 1" data-ng-click="get_20LessWork()"><a>&larr; Anterior</a></li>
+									<li class="next""num_isNextPaginationSubastas == 0" data-ng-click="get_20MoreWork()" data-ng-disabled=""><a>Siguiente &rarr; </a></li>
+
+							</ul>
+					</nav>
+
+			</div>
 
 
 	</div>
-        <button data-ng-disabled="num_isNextPaginationSubastas == 0" data-ng-click="get_20MoreWork()" data-ng-disabled="">Mas 20 trabajos</button>
+        <!--<button data-ng-disabled="num_isNextPaginationSubastas == 0" data-ng-click="get_20MoreWork()" data-ng-disabled="">Mas 20 trabajos</button>
         <button data-ng-disabled="num_indexTrabajos < 1" data-ng-click="get_20LessWork()">Menos 20 trabajos</button>
         <button data-ng-disabled="num_isNextPaginationTrabajos == 0" data-ng-click="get_20MoreSubastas()">Mas 20 subastas</button>
-        <button data-ng-disabled="num_indexSubastas < 1" data-ng-click="get_20LessSubasta()">Menos 20 subastas</button>
+        <button data-ng-disabled="num_indexSubastas < 1" data-ng-click="get_20LessSubasta()">Menos 20 subastas</button>-->
 
 
 	</body>
