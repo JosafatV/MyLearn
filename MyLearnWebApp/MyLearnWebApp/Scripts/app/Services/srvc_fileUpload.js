@@ -6,8 +6,9 @@
         $http.post(urlGeneric + ':8099/MyLearnApi/File/' + id, fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }
-        }).success(function (data) {         
+        }).success(function (data) {
             deferred.resolve(data);
+        }).error(function (data) {
         });
      return deferred.promise;
     }

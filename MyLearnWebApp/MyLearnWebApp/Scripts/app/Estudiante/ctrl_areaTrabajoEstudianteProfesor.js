@@ -3,7 +3,7 @@
 
         $scope.ls_msjs = [];
         $scope.ls_badges = [];
-
+        $scope.enviandoMensaje = false;
         $scope.js_enviarMensaje = {
             Contenido: "",
             Adjunto: "",
@@ -13,9 +13,7 @@
 
        $scope.userActual = {};
 
-       fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
-            $scope.ls_msjs = data;
-       });
+       get_messages();
 
        fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'Badges', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
            $scope.ls_badges = data;
@@ -26,23 +24,37 @@
        });
 
         /*
+        *  Funciones para llamar los mensajes totales del proyecto
+        *
+        */
+
+       function get_messages() {
+           fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+               $scope.ls_msjs = data;
+           });
+       };
+
+        /*
         * Funcion para enviar mensajes
         */
 
        $scope.enviarMensaje = function () {
            var file = $scope.myFile;
-
+           $scope.enviandoMensaje = true;
            fileUpload.uploadFileToUrl(file, $routeParams.IdUser).then(function (data) {
                var test = angular.fromJson(data);
                fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }, {
                    Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto,
                    NombreEmisor: $scope.userActual.NombreContacto, Adjunto: test.link
                }).$promise.then(function (data) {
-                   fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
-                       $scope.ls_msjs = data;
-                       $scope.js_enviarMensaje.Contenido = "";
-                   });
-
+                   get_messages();
+                   $scope.enviandoMensaje = false;
+                   $scope.js_enviarMensaje = {
+                       Contenido: "",
+                       Adjunto: "",
+                       Fecha: "",
+                       NombreEmisor: ""
+                   };
                });
            });
        };
@@ -51,12 +63,20 @@
         * Funcion para enviar mensajes de respuesta
         */
 
-       $scope.enviarMensajeResp = function () {           
-           fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: 'Respuesta' }, {
-               Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto,
-               MensajeRaiz: mensajeAGuardar.Id
-           }).$promise.then(function () {
-               modal.close();
+       $scope.enviarMensajeResp = function () {
+           var fileResp = $scope.myFileResp;
+           $scope.enviandoMensaje = true;
+           fileUpload.uploadFileToUrl(fileResp, $routeParams.IdUser).then(function (data) {
+               var test2 = angular.fromJson(data);
+               console.log(test2);
+               console.log(test2);
+               fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: 'Respuesta' }, {
+                   Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: test2.link, NombreEmisor: $scope.userActual.NombreContacto,
+                   MensajeRaiz: mensajeAGuardar.Id
+               }).$promise.then(function () {
+                   $scope.enviandoMensaje = false;
+                   modal.close();
+               });
            });
 
        };

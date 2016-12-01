@@ -14,7 +14,12 @@
             <textarea class="form-control" id="mensaje" data-ng-model="js_enviarMensaje.Contenido"></textarea>
             <br><br>
                 <a class="btn btn-tcc btn-default btn-md" data-ng-click="enviarMensajeResp()">Enviar</a>
-                <a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a>
+            <div>
+                <input type="file" file-model="myFileResp" />
+            </div>
+            <h4>
+                <span data-ng-hide="!enviandoMensaje" class="label label-info">Cargando</span>
+            </h4>
             </div>
         </div>
     </div>
