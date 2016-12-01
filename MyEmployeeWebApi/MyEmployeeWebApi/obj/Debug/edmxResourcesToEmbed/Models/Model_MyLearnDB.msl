@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyLearnDBModelStoreContainer" CdmEntityContainer="MyLearnDBEntities">
+    <EntitySetMapping Name="USUARIO_MYEMPLOYEE">
+      <EntityTypeMapping TypeName="MyLearnDBModel.USUARIO_MYEMPLOYEE">
+        <MappingFragment StoreEntitySet="USUARIO_MYEMPLOYEE">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="Sal" ColumnName="Sal" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_MyEmployee" FunctionName="MyLearnDBModel.Store.SP_MyEmployee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Result">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_MyEmployee_Custom" FunctionName="MyLearnDBModel.Store.SP_MyEmployee_Custom">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Custom_Result">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="get_Elementos_por_pais" FunctionName="MyLearnDBModel.Store.SP_MyEmployee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Result">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="get_elementos_por_rubro" FunctionName="MyLearnDBModel.Store.SP_MyEmployee_Custom">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Custom_Result">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

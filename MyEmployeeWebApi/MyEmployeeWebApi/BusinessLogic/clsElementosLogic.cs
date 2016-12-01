@@ -39,31 +39,53 @@ namespace MyEmployeeWebApi.BusinessLogic
         /// <returns></returns>
         public List<SP_MyEmployee_Custom_Result> getElementosPorRubro(int? top, string rubro, double? porcentaje)
         {
+            List<SP_MyEmployee_Custom_Result> result = new List<SP_MyEmployee_Custom_Result>();
             double? tasa = porcentaje / 100;
             switch (rubro)
             {
                 case "Promedio_notas_de_cursos":
-
-                    return db.get_elementos_por_rubro(top, porcentaje,0,0, 0,0).ToList<SP_MyEmployee_Custom_Result>();
+                    result = db.get_elementos_por_rubro(top, porcentaje, 0, 0, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    break;
 
                 case "Promedio_calificacion_trabajos":
-
-                    return db.get_elementos_por_rubro(top, 0, porcentaje, 0, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    result = db.get_elementos_por_rubro(top, 0, porcentaje, 0, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    break;
 
                 case "Tasa_de_Trabajos_Existosos":
-
-                    return db.get_elementos_por_rubro(top,0, 0, 0, porcentaje, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    result = db.get_elementos_por_rubro(top, 0, 0, 0, porcentaje, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    break;
 
                 case "Tasa_de aprobacion_de_cursos":
-
-                    return db.get_elementos_por_rubro(top,0, 0, porcentaje, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    result = db.get_elementos_por_rubro(top, 0, 0, porcentaje, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    break;
 
                 default:
-                    return null;
-                    
+                    return result;
+
             }
-          
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i].NombreContacto = RemoveWhitespace(result[i].NombreContacto);
+                result[i].NombreContacto = result[i].NombreContacto.Replace('-', ' ');
+            }
+
+            return result;
+
+
         }
+        /// <summary>
+        /// remove withe spaces
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public string RemoveWhitespace( string input)
+        {
+            return new string(input.ToCharArray()
+                .Where(c => !Char.IsWhiteSpace(c))
+                .ToArray());
+        }
+
     }
+    
 
 }

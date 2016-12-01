@@ -587,7 +587,7 @@ CREATE PROCEDURE SP_Promedio_Cursos_Aprobados @IdEstudiante CHAR(100)
 
 CREATE PROCEDURE SP_MyEmployee @Top INT, @Pais Char(30)
 	AS
-		SELECT TOP (@Top) A.IdEstudiante, (NombreContacto+' '+ G.ApellidoContacto) as NombreContacto, Telefono, Email, CAST(NotaPromedio*0.3+PromedioEstrellas*0.3+(ProyectosExitosos*100/ProyectosTerminados)*0.3+(CursosExitosos*100/CursosTerminados)*0.1 AS FLOAT) AS Performance
+		SELECT TOP (@Top) A.IdEstudiante, (NombreContacto+'-'+ G.ApellidoContacto) as NombreContacto, Telefono, Email, CAST(NotaPromedio*0.3+PromedioEstrellas*0.3+(ProyectosExitosos*100/ProyectosTerminados)*0.3+(CursosExitosos*100/CursosTerminados)*0.1 AS FLOAT) AS Performance
 		FROM 
 			(SELECT IdEstudiante, (SUM(Epc.Nota) / COUNT(Epc.IdCurso)) AS NotaPromedio
 			FROM ESTUDIANTE_POR_CURSO AS Epc
@@ -637,10 +637,10 @@ CREATE PROCEDURE SP_MyEmployee @Top INT, @Pais Char(30)
 	UPDATE ESTUDIANTE SET Pais='Costa Rica' WHERE Id=7
 	EXEC SP_MyEmployee 20, 'Costa Rica'
 	*/
-	
+
 CREATE PROCEDURE SP_MyEmployee_Custom @Top INT, @PorcentajeNotas FLOAT, @PorcentajeEstrellas FLOAT, @Proyectos FLOAT, @Trabajos FLOAT, @Minimo INT
 	AS
-		SELECT TOP (@Top) A.IdEstudiante, (NombreContacto+' '+ G.ApellidoContacto) as NombreContacto, Telefono, Email, CAST(NotaPromedio*@PorcentajeNotas+PromedioEstrellas*@PorcentajeEstrellas+((ProyectosExitosos*100)/ProyectosTerminados)*@Proyectos+((CursosExitosos*100)/CursosTerminados)*@Trabajos AS FLOAT) AS Performance
+		SELECT TOP (@Top) A.IdEstudiante, (NombreContacto+'-'+ G.ApellidoContacto) as NombreContacto, Telefono, Email, CAST(NotaPromedio*@PorcentajeNotas+PromedioEstrellas*@PorcentajeEstrellas+((ProyectosExitosos*100)/ProyectosTerminados)*@Proyectos+((CursosExitosos*100)/CursosTerminados)*@Trabajos AS FLOAT) AS Performance
 		FROM 
 			(SELECT IdEstudiante, (SUM(Epc.Nota) / COUNT(Epc.IdCurso)) AS NotaPromedio
 			FROM ESTUDIANTE_POR_CURSO AS Epc
