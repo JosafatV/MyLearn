@@ -57,6 +57,13 @@
                     <select ng-options="pais.Pais1 for pais in ls_listaPaises" class="form-control" data-ng-model="paisSelected" data-ng-change="changePais()"></select>
 	      </div>
 				<div class="form-group">
+					<label for="option">Repositorios de documentos disponibles:</label><br>
+					<a class="btn btn-tcc btn-default btn-md"data-ng-click="testDrive()">Drive</a>
+					<a class="btn btn-tcc btn-default btn-md">Dropbox</a>
+
+
+				</div>
+				<div class="form-group">
 	        <label for="dirección">Dirección:</label>
 	        <input  class="form-control" id="ubicación"type="text" data-ng-model="js_crearCuenta.Region">
 	      </div>
@@ -64,15 +71,8 @@
 	        <label for="dirección">Link del sitio web de la empresa:</label>
 	        <input  class="form-control" id="ubicación"type="text" data-ng-model="js_crearCuenta.PaginaWebEmpresa">
 	      </div>
-				<div class="form-group">
-	        <label for="option">Repositorios de documentos disponibles:</label>
-	              <select class="form-control" name="" id="option">
-	                <option value="">Google Drive</option>
-	                <option value="">Dropbox</option>
-	              </select>
-                   
-	      </div>
-            <button data-ng-click="testDrive()">Drive</button>
+
+            <!--<button data-ng-click="testDrive()">Drive</button>-->
 				<div class="container">
 					<div class="col-md-10">
 						<div class="col-md-offset-1">
