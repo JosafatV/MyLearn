@@ -31,16 +31,19 @@
 
        $scope.enviarMensaje = function () {
            var file = $scope.myFile;
-           fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }, {
-               Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto
-           }).$promise.then(function (data) {
-               fileUpload.uploadFileToUrl(file, $routeParams.IdUser).then(function (data) {
+
+           fileUpload.uploadFileToUrl(file, $routeParams.IdUser).then(function (data) {
+               var test = angular.fromJson(data);
+               fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }, {
+                   Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto,
+                   NombreEmisor: $scope.userActual.NombreContacto, Adjunto: test.link
+               }).$promise.then(function (data) {
                    fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
                        $scope.ls_msjs = data;
                        $scope.js_enviarMensaje.Contenido = "";
                    });
-               });
 
+               });
            });
        };
 

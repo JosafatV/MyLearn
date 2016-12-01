@@ -44,6 +44,7 @@
                                             <h2>Mensaje de:{{msj.NombreEmisor}}</h2>
                                             <h4>Fecha:{{msj.Fecha}}</h4>
                                             <h4>Contenido:{{msj.Contenido}}</h4>
+                                            <a href="{{msj.Adjunto}}" target="_blank" data-ng-hide="msj.Adjunto == '' ">Ver adjunto</a> 
                                             <p>
                                                 <br>
                                                 <a class="btn btn-tcc btn-default btn-md" data-ng-click="responder(msj)">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
