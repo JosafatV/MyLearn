@@ -67,6 +67,8 @@ namespace MyEmployeeWebApi.BusinessLogic
             {
                 result[i].NombreContacto = RemoveWhitespace(result[i].NombreContacto);
                 result[i].NombreContacto = result[i].NombreContacto.Replace('-', ' ');
+                result[i].Email = RemoveWhitespace(result[i].Email);
+                result[i].Telefono = RemoveWhitespace(result[i].Telefono);
             }
 
             return result;
