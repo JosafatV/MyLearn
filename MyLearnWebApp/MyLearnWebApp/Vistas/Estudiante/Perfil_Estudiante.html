@@ -76,11 +76,19 @@
                         <td>{{proyecto.NombreProyecto}}</td>
                         <td>{{proyecto.EstadoProyecto}}</td>
                     </tr>
-			</table> <br><br>
-                <button data-ng-disabled="num_isNextPaginationTrabajos == 0" data-ng-click="get_20MoreSubastas()">Mas 20 proyectos</button>
-                <button data-ng-disabled="num_indexSubastas < 1" data-ng-click="get_20LessSubasta()">Menos 20 proyectos</button>
+			</table>
+			<div class="col-md-5">
+					<nav class="nav1">
+							<ul class="pager">
+									<li class="previous prev"><a>&larr; Anterior</a></li>
+									<li class="next"><a>Siguiente &rarr; </a></li>
+
+							</ul>
+					</nav>
+
+			</div><br><br><br><br><br>
 			<h3>Mis Cursos:</h3>
-			<table class="table table-bordered table-hover table-condensed prom1">
+			<table class="table table-bordered table-condensed prom2">
 					<tr>
 							<th>Nombre del Curso</th>
 							<th>Nota Obtenida</th>
@@ -92,7 +100,14 @@
                     <td>{{curso.NotaMinima}}</td>
                     <td>{{curso.Estado}}</td>
                     <td><a class="btn btn-success" data-ng-click="do_goCurso(curso)" data-ng-hide= "curso.Estado != 'P'" >Proponer Proyecto</a></td>
-</table>
+				</table>
+				<nav class="nav1">
+						<ul class="pager">
+								<li class="previous prev"><a>&larr; Anterior</a></li>
+								<li class="next"><a>Siguiente &rarr; </a></li>
+
+						</ul>
+				</nav>
 
 			</div>
             <div class="col-md-6">
@@ -105,9 +120,14 @@
                     <tr data-ng-repeat="trabajos in ls_trabajos  | filter: search" data-ng-click="do_goTrabajo(trabajos)">
                         <td>{{trabajos.Nombre}}</td>
                         <td>{{trabajos.EstadoTrabajo}}</td>
-                </table> <br><br>
-                <button data-ng-disabled="num_isNextPaginationTrabajos == 0" data-ng-click="get_20MoreSubastas()">Mas 20 trabajos</button>
-                <button data-ng-disabled="num_indexSubastas < 1" data-ng-click="get_20LessSubasta()">Menos 20 trabajos</button>
+                </table>
+								<nav class="nav1">
+										<ul class="pager">
+												<li class="previous prev"><a>&larr; Anterior</a></li>
+												<li class="next"><a>Siguiente &rarr; </a></li>
+											</ul>
+								</nav>
+								<br><br>
                 <div class="container-fluid">
                     <section class="main row">
                         <article class="col-md-6">
@@ -128,8 +148,7 @@
 
             </div>
 
-            <button data-ng-disabled="num_isNextPaginationSubastas == 0" data-ng-click="get_20MoreWork()" data-ng-disabled="">Mas 20 trabajos</button>
-            <button data-ng-disabled="num_indexTrabajos < 1" data-ng-click="get_20LessWork()">Menos 20 trabajos</button>
+
 
 
 	</body>

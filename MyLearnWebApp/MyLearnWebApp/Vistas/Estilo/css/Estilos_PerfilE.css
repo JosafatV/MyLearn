@@ -72,9 +72,19 @@ body{
 	background:#252932;
 	color: #D8D8D8;
 }
+.prom2{
+	background:#252932;
+	color: #D8D8D8;
+}
+
 
 body .prom1 tr:hover{
 	background:#F39F5F;
 	color: #252932;
+	cursor: pointer;
+}
+body .nav1 li:hover{
+	background:#252932;
+	color: #fff;
 	cursor: pointer;
 }
