@@ -169,7 +169,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/09/2016 14:45:16</publishTime>
     </File>
     <File Include="bin/MyLearnApi.dll">
-      <publishTime>12/02/2016 12:57:09</publishTime>
+      <publishTime>12/02/2016 14:20:11</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>12/01/2016 15:11:30</publishTime>
@@ -271,7 +271,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/24/2016 23:29:47</publishTime>
     </File>
     <File Include="ClassDiagram1.cd">
-      <publishTime>12/02/2016 12:09:02</publishTime>
+      <publishTime>12/02/2016 13:03:00</publishTime>
     </File>
     <File Include="ClassDiagram2.cd">
       <publishTime>12/02/2016 10:51:57</publishTime>
