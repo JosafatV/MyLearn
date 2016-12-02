@@ -15,7 +15,9 @@ angular.module('mod_MyLearn').controller('ctrl_subastaEstudiante', ['$q', '$scop
         });
 
         $scope.get_subastas = function () {
+            alert('asdas');
             fct_MyLearn_API_Client.query({ type: 'Subastas', extension1: $scope.str_tecnologia.Id, extension2: $scope.str_nombre, extension3: $routeParams.IdUser }).$promise.then(function (data) {
+                alert(angular.toJson(data));
                 $scope.ls_resultadoBusqueda = data;
             });            
         };

@@ -4,6 +4,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
         $scope.profesorActual = {
 
         };
+        $scope.creadoExitosamente = false;
 
         $scope.indexCursos = 0;
         $scope.sumaTotal = 0;
@@ -62,7 +63,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
         $scope.dp_crearCurso = function () {
             $scope.js_crearCurso.IdUniversidad = $scope.profesorActual.IdUniversidad;
             fct_MyLearn_API_Client.save({ type: 'CursosPorProfesor' }, $scope.js_crearCurso).$promise.then(function (data) {
-
+                $scope.creadoExitosamente = true;
                 angular.forEach($scope.ls_badges, function (value, key) {
                    value.IdCurso = data.idCurso
                 });

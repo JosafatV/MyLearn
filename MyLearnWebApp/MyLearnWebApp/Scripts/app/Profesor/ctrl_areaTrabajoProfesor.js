@@ -1,5 +1,5 @@
-﻿angular.module('mod_MyLearn').controller('ctrl_areaTrabajoProfesor', ['fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function (fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+﻿angular.module('mod_MyLearn').controller('ctrl_areaTrabajoProfesor', ['fct_Trabajo', 'fileUpload', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (fct_Trabajo, fileUpload, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.ls_msjs = [];
 
@@ -26,6 +26,13 @@
 
         get_trabajoActual();
 
+        /*
+        *  Se llaman la funcion para obtener los mensajes
+        *
+        */
+
+        get_messages()
+
         $scope.envioExitoso = false;
 
         $scope.envioFallido = false;
@@ -45,6 +52,18 @@
        fct_MyLearn_API_Client.query({ type: 'Trabajos', extension1: 'Tecnologias' ,extension2: $routeParams.IdTrabajo.trim()}).$promise.then(function (data) {
            $scope.ls_tec = data;
        });
+
+        /*
+        *  Funcion para obtener los mensajes de la lista
+        *
+        */
+
+       function get_messages() {
+           fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+               $scope.ls_msjs = data;
+           });
+       };
+
 
         /*
         *   Esta es la funcion que se encarga de solicitar el trabajo actual al API 
@@ -85,31 +104,49 @@
         *
         */
 
-        $scope.enviarMensaje = function () {
-            fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }, {
-                Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto
-            }).$promise.then(function (data) {
-                fct_MyLearn_API_Client.query({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
-                    $scope.ls_msjs = data;
-                    $scope.js_enviarMensaje.Contenido = "";
-                });
-            });
-        };
+       $scope.enviarMensaje = function () {
+           var file = $scope.myFile;
+           $scope.enviandoMensaje = true;
+           fileUpload.uploadFileToUrl(file, $routeParams.IdUser).then(function (data) {
+               var test = angular.fromJson(data);
+               fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: $routeParams.IdTrabajo }, {
+                   Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto,
+                   NombreEmisor: $scope.userActual.NombreContacto, Adjunto: test.link
+               }).$promise.then(function (data) {
+                   get_messages();
+                   $scope.enviandoMensaje = false;
+                   $scope.js_enviarMensaje = {
+                       Contenido: "",
+                       Adjunto: "",
+                       Fecha: "",
+                       NombreEmisor: ""
+                   };
+               });
+           });
+       };
 
         /*
         * Esta es la funcion encargada de enviar la respuesta de un mensaje al API para almacenarlo
         *
         */
 
-        $scope.enviarMensajeResp = function () {
-            fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: 'Respuesta' }, {
-                Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto,
-                MensajeRaiz: mensajeAGuardar.Id
-            }).$promise.then(function () {
-                modal.close();
-            });
+       $scope.enviarMensajeResp = function () {
+           var fileResp = $scope.myFileResp;
+           $scope.enviandoMensaje = true;
+           fileUpload.uploadFileToUrl(fileResp, $routeParams.IdUser).then(function (data) {
+               var test2 = angular.fromJson(data);
+               console.log(test2);
+               console.log(test2);
+               fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: 'Respuesta' }, {
+                   Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: test2.link, NombreEmisor: $scope.userActual.NombreContacto,
+                   MensajeRaiz: mensajeAGuardar.Id
+               }).$promise.then(function () {
+                   $scope.enviandoMensaje = false;
+                   modal.close();
+               });
+           });
 
-        };
+       };
 
         /*
         *  Esta es la funcion encargada mostrar los badges que pueden ser asignados al estudiante por parte del profesor
