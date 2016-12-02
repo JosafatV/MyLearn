@@ -75,6 +75,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
         */
 
         $scope.sendCuenta = function () {
+            console.log($scope.js_crearCuentaJson);
             fct_MyLearn_API_Client.save({ type: 'Estudiantes' }, $scope.js_crearCuentaJson).$promise.then(function (data) {
                 set_sendCredentials(data.Id);
                 set_sendCredentialsTwitter(data.Id);
@@ -120,6 +121,8 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
         */
 
         function set_sendCredentials(id) {
+            console.log(access_token);
+            console.log(refresh_token);
             fct_MyLearn_API_Client.save({ type: 'DriveCredentials' }, {
                 "UserId": id,
                 "AccessToken": access_token,
