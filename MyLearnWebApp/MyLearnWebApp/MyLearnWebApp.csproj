@@ -308,6 +308,7 @@
     <Content Include="Scripts\app\Profesor\ctrl_perfilProfesor.js" />
     <Content Include="Scripts\app\Profesor\ctrl_propuestaProyecto.js" />
     <Content Include="Scripts\app\services.js" />
+    <Content Include="Scripts\app\Services\srcv_cerrarSesion.js" />
     <Content Include="Scripts\app\Services\srvc_fileUpload.js" />
     <Content Include="Scripts\app\Twitter\fct_twitterService.js" />
     <Content Include="Scripts\app\Login\ctrl_login.js" />
