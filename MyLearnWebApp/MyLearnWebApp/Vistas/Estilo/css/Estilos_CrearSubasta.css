@@ -87,8 +87,6 @@ body{
 	color: #D8D8D8;
 }
 
-/*body .prom1 tr:hover{
-	background:#F39F5F;
-	color: #252932;
+.img1:hover{
 	cursor: pointer;
-}*/
+}
