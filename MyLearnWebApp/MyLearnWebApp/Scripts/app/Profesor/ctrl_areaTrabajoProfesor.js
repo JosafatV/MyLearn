@@ -113,6 +113,7 @@
                    Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto,
                    NombreEmisor: $scope.userActual.NombreContacto, Adjunto: test.link
                }).$promise.then(function (data) {
+                   $scope.myFile = null;
                    get_messages();
                    $scope.enviandoMensaje = false;
                    $scope.js_enviarMensaje = {

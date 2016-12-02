@@ -47,6 +47,7 @@
                    Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto,
                    NombreEmisor: $scope.userActual.NombreContacto, Adjunto: test.link
                }).$promise.then(function (data) {
+                   $scope.myFile = null;
                    get_messages();
                    $scope.enviandoMensaje = false;
                    $scope.js_enviarMensaje = {
@@ -68,8 +69,6 @@
            $scope.enviandoMensaje = true;
            fileUpload.uploadFileToUrl(fileResp, $routeParams.IdUser).then(function (data) {
                var test2 = angular.fromJson(data);
-               console.log(test2);
-               console.log(test2);
                fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Proyecto', extension2: 'Respuesta' }, {
                    Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: test2.link, NombreEmisor: $scope.userActual.NombreContacto,
                    MensajeRaiz: mensajeAGuardar.Id

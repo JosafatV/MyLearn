@@ -41,10 +41,11 @@
 																				<h2>Mensaje de:{{msj.NombreEmisor}}</h2>
 																				<h4>Fecha:{{msj.Fecha}}</h4>
 																				<h4>Contenido:{{msj.Contenido}}</h4>
-																				<p>
-																						<br>
-																						<a class="btn btn-tcc btn-default btn-md" data-ng-click="responder(msj)">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
-																				</p>
+                                                                                <a href="{{msj.Adjunto}}" target="_blank" data-ng-hide="msj.Adjunto.trim() == '' ">Ver adjunto</a>
+                                                                                <p>
+                                                                                    <br>
+                                                                                    <a class="btn btn-tcc btn-default btn-md" data-ng-click="responder(msj)">Responder</a>&nbsp; &nbsp;&nbsp; &nbsp;
+                                                                                </p>
 																		</article>
 
 																</section>
@@ -68,6 +69,7 @@
                                                             <h2>Mensaje de:{{resp.NombreEmisor}}</h2>
                                                             <h4>Fecha:{{resp.Fecha}}</h4>
                                                             <h4>Contenido:{{resp.Contenido}}</h4>
+                                                            <a href="{{resp.Adjunto}}" target="_blank" data-ng-hide="resp.Adjunto.trim() == '' ">Ver adjunto</a>
                                                             <p>
                                                                 <br><br><br>
                                                                 
@@ -107,7 +109,12 @@
 																		<textarea class="form-control" id="mensaje" data-ng-model="js_enviarMensaje.Contenido"></textarea>
 																		<br><br>
 																		&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md" data-ng-click="enviarMensaje()">Enviar</a>&nbsp; &nbsp;&nbsp; &nbsp;
-																		<a class="btn btn-tcc btn-default btn-md">Adjuntar Archivo</a>
+                                                                        <div class="upload">
+                                                                            <input type="file" name="archivo2" id="archivo2" file-model="myFile" />
+                                                                        </div>
+                                                                        <h4>
+                                                                            <span data-ng-hide="!enviandoMensaje" class="label label-info">Cargando</span>
+                                                                        </h4>
 																</div>
 
 														</div>

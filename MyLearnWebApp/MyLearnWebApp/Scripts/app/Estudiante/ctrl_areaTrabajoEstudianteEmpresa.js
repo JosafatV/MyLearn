@@ -1,6 +1,6 @@
 ﻿var modal = "";
-angular.module('mod_MyLearn').controller('ctrl_areaTrabajoEstudianteEmpresa', ['fct_UserJson', 'fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function (fct_UserJson,fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+angular.module('mod_MyLearn').controller('ctrl_areaTrabajoEstudianteEmpresa', ['fileUpload', 'fct_UserJson', 'fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (fileUpload, fct_UserJson,fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.ls_msjs = [];
 
@@ -28,29 +28,53 @@ angular.module('mod_MyLearn').controller('ctrl_areaTrabajoEstudianteEmpresa', ['
                $scope.ls_msjs = data;
            });
        };
-
+        /*
+        * Funcion para enviar mensajes
+        *
+        */
 
        $scope.enviarMensaje = function () {
-           fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }, {
-               Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto
-                            }).$promise.then(function (data) {
-                                get_mensajes();
-                                $scope.js_enviarMensaje = {
-                                    Contenido: "",
-                                    Adjunto: "",
-                                    Fecha: "",
-                                    NombreEmisor: ""
-                                };
+           var file = $scope.myFile;
+           $scope.enviandoMensaje = true;
+           fileUpload.uploadFileToUrl(file, $routeParams.IdUser).then(function (data) {
+               var test = angular.fromJson(data);
+               fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Trabajo', extension2: $routeParams.IdTrabajo }, {
+                   Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: test.link,
+                   NombreEmisor: $scope.userActual.NombreContacto
+               }).$promise.then(function (data) {
+                   $scope.myFile = null;
+                   $scope.enviandoMensaje = false;
+                   get_mensajes();
+                   $scope.js_enviarMensaje = {
+                       Contenido: "",
+                       Adjunto: "",
+                       Fecha: "",
+                       NombreEmisor: ""
+                   };
+               });
            });
+
        };
 
-       $scope.enviarMensajeResp = function () {           
-           fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Trabajo', extension2: 'Respuesta' }, {
-               Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: $scope.js_enviarMensaje.Adjunto, NombreEmisor: $scope.userActual.NombreContacto,
-               MensajeRaiz: mensajeAGuardar.Id
-           }).$promise.then(function () {
-               modal.close();
+        /*
+        * Funcion para enviar mensajes de respuesta
+        */
+
+       $scope.enviarMensajeResp = function () {
+           var fileResp = $scope.myFileResp;
+           $scope.enviandoMensaje = true;
+           fileUpload.uploadFileToUrl(fileResp, $routeParams.IdUser).then(function (data) {
+               var test2 = angular.fromJson(data);
+               fct_MyLearn_API_Client.save({ type: 'Mensajes', extension1: 'Trabajo', extension2: 'Respuesta' }, {
+                   Contenido: $scope.js_enviarMensaje.Contenido, Adjunto: test2.link,
+                   NombreEmisor: $scope.userActual.NombreContacto,
+                   MensajeRaiz: mensajeAGuardar.Id
+               }).$promise.then(function () {
+                   modal.close();
+               });
+
            });
+
 
        };
 
