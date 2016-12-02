@@ -1,5 +1,5 @@
-﻿angular.module('mod_MyLearn').service('cerrarSesion', ['$http', '$q', function ($http, $q) {
-    this.cerrarSesion = function () {
-        $location.path('/MyLearn/Empresa/CerrarSesion');
+﻿angular.module('mod_MyLearn').service('cerrarSesion', ['$location','$http', '$q', function ($location,$http, $q) {
+    this.cerrarEstaSesion = function () {
+        $location.path('/MyLearn/CerrarSesion');
     }
 }]);
