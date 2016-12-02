@@ -5,6 +5,8 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
         $scope.aaa = "";
         var access_token = "";
         var refresh_token = "";
+        var twitter_access_token = "";
+        var twitter_secret_token = "";
         var client_id = "";      
         $scope.universidadSelected = "";
         $scope.str_paisSelected = "";
@@ -137,6 +139,22 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
             }).$promise.then(function (data) {
                 alert(data);
             });
+
+        };
+
+        /*
+        * Funcion encargada de guardar las credenciales de Twitter
+        *
+        */
+
+        $scope.get_twitter = function () {
+            OAuth.popup("twitter", {
+            }).done(function (result) {
+                twitter_access_token = result.oauth_token;
+                twitter_secret_token = result.oauth_token_secret;
+                //twitter_access_token = result.oauth
+                console.log(angular.toJson(result));          
+            })
 
         };
 
