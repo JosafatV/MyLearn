@@ -119,3 +119,5 @@ C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\System.Net
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\Twitterizer2.xml
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\Twitterizer2.Asynchronous.xml
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Debug\MyLearnApi.csproj.App.config
+C:\Users\Vargam\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Debug\MyLearnApi.dll
+C:\Users\Vargam\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Debug\MyLearnApi.pdb
