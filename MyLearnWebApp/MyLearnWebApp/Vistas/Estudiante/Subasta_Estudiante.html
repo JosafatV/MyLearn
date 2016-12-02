@@ -14,8 +14,8 @@
 				</div>
 			</div>
 			<nav>
-				<a>Mi Perfil</a>
-				<a>Cursos Disponibles</a>
+                <a data-ng-click="do_goPerfil()">Mi Perfil</a>
+                <a data-ng-click="goCursosDisponibles()">Cursos Disponibles</a>
 				<a href="#ventana1"data-toggle="modal">Notificaciones</a>
 				<a>Cerrar Sesión</a>
 			</nav>
@@ -56,7 +56,7 @@
 		<br><br><br>
 		<div class="container-fluid pr2">
 			<div class="col-md-2">
-					<h1 class="pr1"><span class="glyphicon glyphicon-arrow-left"></span> Mi Perfil</h1>
+					<h1 class="pr1"data-ng-click="do_goPerfil()"><span class="glyphicon glyphicon-arrow-left"></span> Mi Perfil</h1>
       </div>
     </div>
     <div class="col-md-offset-2">

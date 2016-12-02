@@ -53,7 +53,7 @@ angular.module('mod_MyLearn').controller('ctrl_perfilEstudiante', ['fct_Trabajo'
         };
 
         $scope.goLogin = function () {
-            $location.path('/MyLearn/Estudiante/Perfil/Login');
+            $location.path('/MyLearn/Estudiante/Login');
         };
 
     }]);

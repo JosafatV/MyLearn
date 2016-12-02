@@ -44,6 +44,9 @@ angular.module('mod_MyLearn').controller('ctrl_cursosDisponibles', ['$q', '$scop
         $scope.do_goPerfil = function () {
             $location.path('/MyLearn/Estudiante/Perfil/' + $routeParams.IdUser);
         };
+         $scope.goSubastas = function () {
+            $location.path('/MyLearn/Estudiante/Perfil/'+$routeParams.IdUser+'/SubastaEstudiante');
+        };
 
 
 
