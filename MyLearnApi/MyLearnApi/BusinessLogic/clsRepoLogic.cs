@@ -74,8 +74,8 @@ namespace MyLearnApi.BusinessLogic.UserAccounts
             if (cred != null)
             {
                 //defaut application tokens
-                pobj_twittConn.setConsumerKey("jUV15h3RmCiiTlewmoSICNdx2");
-                pobj_twittConn.setConsumerSecret("EDugd5Ph71tuvmZmEfKXeaUQw5DDLJh1bjUSkhYuDd4p4p4TJn");
+                pobj_twittConn.setConsumerKey("BsJg0w7pVCPWUMO6LJ4KGlAGu");
+                pobj_twittConn.setConsumerSecret("JD2DPyEq3gnroWOa1Iu4UtpxgzImEZ1lMi6Y0SiDgk9fHpC5ml");
                 //set user tokens
                 pobj_twittConn.setUserAccessToken(cred.AccessToken);
                 pobj_twittConn.setUserAccessSecret(cred.AccessTokenSecret);
