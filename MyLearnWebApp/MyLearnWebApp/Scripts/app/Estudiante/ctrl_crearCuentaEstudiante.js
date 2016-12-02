@@ -68,9 +68,15 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
             $scope.js_crearCuentaJson.IdUniversidad = $scope.universidadSelected.Id;
         };
 
+        /*
+        *  Funcion que se usa para crear la nueva cuenta del estudiante
+        *
+        */
+
         $scope.sendCuenta = function () {
             fct_MyLearn_API_Client.save({ type: 'Estudiantes' }, $scope.js_crearCuentaJson).$promise.then(function (data) {
                 set_sendCredentials(data.Id);
+                set_sendCredentialsTwitter(data.Id);
                 angular.forEach($scope.ls_tecnologiasSelect, function (value, key) {
                     fct_MyLearn_API_Client.save({ type: 'Estudiantes', extension1: "Tecnologia" },
                         { IdTecnologia: value.Id, IdEstudiante: data.Id }
@@ -120,6 +126,18 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
             }).$promise.then(function (data) {
                 $location.path('/MyLearn/Estudiante/Perfil/' + id);
             });
+        };
+
+        /*
+        * Función encargada de enviar las credentiales de Twitter 
+        */
+
+        function set_sendCredentialsTwitter(id) {
+            fct_MyLearn_API_Client.save({ type: 'TwitterCredentials' }, {
+                "UserId": id,
+                "AccessToken": twitter_access_token,
+                "AccessTokenSecret": twitter_secret_token
+            })
         };
 
         /*
