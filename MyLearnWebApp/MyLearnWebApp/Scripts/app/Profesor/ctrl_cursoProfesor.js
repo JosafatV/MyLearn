@@ -19,7 +19,6 @@ angular.module('mod_MyLearn').controller('ctrl_cursoProfesor', ['srcv_cerrarSesi
 
         fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'Profesores', extension2: 'Curso', extension3: $routeParams.IdCurso }).$promise.then(function (data) {
             $scope.ls_estudiantes = data;
-            alert(angular.toJson(data));
         });
 
         fct_MyLearn_API_Client.get({ type: 'Cursos', extension1: $routeParams.IdCurso }).$promise.then(function (data) {
@@ -55,6 +54,9 @@ angular.module('mod_MyLearn').controller('ctrl_cursoProfesor', ['srcv_cerrarSesi
 
         $scope.goLogin = function () {
             $location.path('/MyLearn/Estudiante/Perfil/Login');
+        };
+        $scope.do_goCrearCurso = function () {
+            $location.path('/MyLearn/Profesor/Perfil/CrearCurso/' + $routeParams.IdUser);
         };
 
     }]);

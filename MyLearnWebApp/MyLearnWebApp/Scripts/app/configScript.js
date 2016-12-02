@@ -98,12 +98,17 @@
         templateUrl: 'Vistas/Estudiante/AreaTrabajoEst_ProyCurso.html',
         controller: 'ctrl_areaTrabajoEstudianteProfesor'
     })
+    .when('/MyLearn/AyudaenLinea', {
+        templateUrl: 'Vistas/Login/Ayuda_enLinea.html',
+        controller: 'ctrl_ayudaEnLinea'
+    })
 
 /*-------------------------------------Default--------------------------------------------*/
     .otherwise({
         templateUrl: 'Vistas/Login/Login.html',
         controller: 'ctrl_login'
     })
+
 }]);
 
 angular.module('mod_MyLearn').config(function ($httpProvider) {

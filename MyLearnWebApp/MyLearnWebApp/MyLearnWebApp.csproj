@@ -300,6 +300,7 @@
     <Content Include="Scripts\app\Estudiante\ctrl_proponerProyecto.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_responderMensaje.js" />
     <Content Include="Scripts\app\Estudiante\ctrl_subastaEstudiante.js" />
+    <Content Include="Scripts\app\Login\ctrl_ayudaEnLinea.js" />
     <Content Include="Scripts\app\Login\ctrl_crearCuentaComo.js" />
     <Content Include="Scripts\app\Profesor\ctrl_areaTrabajoProfesor.js" />
     <Content Include="Scripts\app\Profesor\ctrl_crearCuentaProfesor.js" />
@@ -450,6 +451,7 @@
     <Content Include="Vistas\Estudiante\ResponderMsj.html" />
     <Content Include="Vistas\Estudiante\Subasta_Estudiante.html" />
     <Content Include="Vistas\Estudiante\verBadgesEstudiante.html" />
+    <Content Include="Vistas\Login\Ayuda_enLinea.html" />
     <Content Include="Vistas\Login\CrearCuenta_Como.html" />
     <Content Include="Vistas\Login\Login.html" />
     <Content Include="Vistas\Profesor\AreaTrabajoProf_ProyCurso.html" />

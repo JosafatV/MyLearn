@@ -71,6 +71,9 @@ angular.module('mod_MyLearn').controller('ctrl_login', ['fct_User', '$q', '$scop
         $scope.goAreaTrabajoProfesor = function () {
             $location.path('/MyLearn/Estudiante/Perfil/AreaTrabajoProfesor/' + 13 + '/' + 2 +'/'+ 1);
         };
+        $scope.do_goAyudaenLinea = function () {
+            $location.path('/MyLearn/AyudaenLinea');
+        };
 
         $scope.testModal = function () {
             uibModal.open({

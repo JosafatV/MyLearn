@@ -166,6 +166,11 @@
            exitoso = false;
         };
 
+        $scope.do_goCrearSubasta = function () {
+            $location.path('/MyLearn/Empresa/CrearSubasta/' + $routeParams.IdUser);
+
+        };
+
 
         $scope.sendCalificacion = function () {
             fct_MyLearn_API_Client.save({

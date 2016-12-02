@@ -7,14 +7,14 @@
 </head>
 <header>
 		<div class="wrapper">
-			<div class="logo">Curso:
+			<div class="logo">Curso:                          {{cursoActual.NombreCurso}}
 				<div class="img">
-                    <a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
+                    <a data-ng-click="do_goPerfil()"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded img1" alt=""></a>
 				</div>
 			</div>
 			<nav>
 				<a data-ng-click="do_goPerfil()">Mi Perfil</a>
-				<a>Crear Curso</a>
+				<a data-ng-click="do_goCrearCurso()">Crear Curso</a>
                 <a data-ng-click="cerrarSesionService.cerrarEstaSesion()">Cerrar Sesion</a>
 			</nav>
 		</div>
@@ -59,6 +59,7 @@
 		</table>
 
 			</div>
+
 			<div class="col-md-6">
 				<h3>Miembros del Curso:</h3>
 				<table class="table table-bordered table-condensed prom2">

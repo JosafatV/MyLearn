@@ -15,7 +15,7 @@
         };
 
         $scope.do_goCrearSubasta = function () {
-            $location.path('/MyLearn/Empresa/CrearSubasta');
+            $location.path('/MyLearn/Empresa/CrearSubasta/' + $routeParams.idEmp);
 
         };
 
@@ -37,6 +37,7 @@
             });
 
         };
+      
 
 
 

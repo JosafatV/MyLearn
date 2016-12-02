@@ -128,3 +128,6 @@ body .prom1 tr:hover{
     height: 80%;
     margin-left: -10%;
 }
+.img1:hover{
+	cursor: pointer;
+}
