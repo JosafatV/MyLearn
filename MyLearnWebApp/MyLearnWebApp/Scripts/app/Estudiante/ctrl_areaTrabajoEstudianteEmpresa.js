@@ -1,10 +1,13 @@
 ﻿var modal = "";
-angular.module('mod_MyLearn').controller('ctrl_areaTrabajoEstudianteEmpresa', ['fileUpload', 'fct_UserJson', 'fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function (fileUpload, fct_UserJson,fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+angular.module('mod_MyLearn').controller('ctrl_areaTrabajoEstudianteEmpresa', ['srcv_cerrarSesion', 'fileUpload', 'fct_UserJson', 'fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (srcv_cerrarSesion,fileUpload, fct_UserJson, fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.ls_msjs = [];
 
-        
+        /*
+        * Service necesario para cerrar sesion
+        */
+        $scope.cerrarSesionService = srcv_cerrarSesion;
 
         $scope.js_enviarMensaje = {
             Contenido: "",

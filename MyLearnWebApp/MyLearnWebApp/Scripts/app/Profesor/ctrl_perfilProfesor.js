@@ -1,7 +1,12 @@
-angular.module('mod_MyLearn').controller('ctrl_perfilProfesor', ['fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function (fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+angular.module('mod_MyLearn').controller('ctrl_perfilProfesor', ['srcv_cerrarSesion', 'fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (srcv_cerrarSesion,fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.num_isNextPaginationTrabajos = 0;
+
+        /*
+        * Service necesario para cerrar sesion
+        */
+        $scope.cerrarSesionService = srcv_cerrarSesion;
 
         $scope.profesorActual = {
 

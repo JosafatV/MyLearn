@@ -1,5 +1,5 @@
-﻿angular.module('mod_MyLearn').controller('ctrl_crearSubasta', ['fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function (fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+﻿angular.module('mod_MyLearn').controller('ctrl_crearSubasta', ['srcv_cerrarSesion', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (srcv_cerrarSesion,fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.ls_tecnologias = [];
         $scope.ls_tecnologiasSelect = [];
@@ -11,6 +11,11 @@
             "FechaCierre": "",
             "PresupuestoBase": ""
         }
+
+        /*
+        * Service necesario para cerrar sesion
+        */
+        $scope.cerrarSesionService = srcv_cerrarSesion;
 
         fct_MyLearn_API_Client.query({ type: 'Tecnologias' }).$promise.then(function (data) {
             $scope.ls_tecnologias = data;

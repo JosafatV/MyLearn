@@ -1,5 +1,5 @@
-﻿angular.module('mod_MyLearn').controller('ctrl_responderMensaje', ['fct_UserJson', 'fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function (fct_UserJson, fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+﻿angular.module('mod_MyLearn').controller('ctrl_responderMensaje', ['srcv_cerrarSesion', 'fct_UserJson', 'fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (srcv_cerrarSesion,fct_UserJson, fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.ls_msjs = [];
 

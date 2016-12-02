@@ -1,5 +1,5 @@
-angular.module('mod_MyLearn').controller('ctrl_ofertarSubasta', ['$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function ($q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+angular.module('mod_MyLearn').controller('ctrl_ofertarSubasta', ['srcv_cerrarSesion', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (srcv_cerrarSesion,$q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
 
         $scope.envioExitoso = false;
@@ -16,6 +16,11 @@ angular.module('mod_MyLearn').controller('ctrl_ofertarSubasta', ['$q', '$scope',
             "Comentario": "",
         };
         var ls_tecnologias = [];
+
+        /*
+        * Service necesario para cerrar sesion
+        */
+        $scope.cerrarSesionService = srcv_cerrarSesion;
 
         fct_MyLearn_API_Client.get({ type: 'Estudiantes', extension1: $routeParams.IdUser }).$promise.then(function (data) {
             $scope.js_datosEstudiante = data;

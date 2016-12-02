@@ -1,9 +1,14 @@
-﻿angular.module('mod_MyLearn').controller('ctrl_subasta', ['fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function (fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+﻿angular.module('mod_MyLearn').controller('ctrl_subasta', ['srcv_cerrarSesion', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (srcv_cerrarSesion,fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.nombreProyecto = $routeParams.nombre;
         $scope.presupuestoBasex = $routeParams.presupuesto;
         get_listaSubastas();
+
+        /*
+        * Service necesario para cerrar sesion
+        */
+        $scope.cerrarSesionService = srcv_cerrarSesion;
 
         $scope.do_goPerfil = function () {
             $location.path('/MyLearn/Empresa/Perfil/' + $routeParams.idEmp.trim());

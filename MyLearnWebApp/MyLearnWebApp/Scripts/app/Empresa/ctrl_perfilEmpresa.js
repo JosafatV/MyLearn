@@ -1,5 +1,5 @@
-﻿angular.module('mod_MyLearn').controller('ctrl_perfilEmpresa', ['fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService',
-    function (fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService) {
+﻿angular.module('mod_MyLearn').controller('ctrl_perfilEmpresa', ['srcv_cerrarSesion', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService',
+    function (srcv_cerrarSesion,fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService) {
 
         $scope.num_indexTrabajos = 0;
         $scope.num_indexSubastas = 0;
@@ -7,6 +7,11 @@
         $scope.num_isNextPaginationTrabajos = 0;
 
         var vm = this;
+
+        /*
+        * Service necesario para cerrar sesion
+        */
+        $scope.cerrarSesionService = srcv_cerrarSesion;
 
         fct_MyLearn_API_Client.get({ type: 'Empresas', extension1: $routeParams.IdUser }).$promise.then(function (data) {
             $scope.js_datosEmpresa = data;

@@ -1,10 +1,15 @@
-angular.module('mod_MyLearn').controller('ctrl_proponerProyecto', ['$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function ($q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+angular.module('mod_MyLearn').controller('ctrl_proponerProyecto', ['srcv_cerrarSesion', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (srcv_cerrarSesion,$q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.js_datosEstudiante = {};
         $scope.js_datosCurso = {};
         $scope.publicadoExitosamente = false;
         $scope.publicadoErroneamente = false;
+
+        /*
+        * Service necesario para cerrar sesion
+        */
+        $scope.cerrarSesionService = srcv_cerrarSesion;
 
         $scope.js_proponerProyecto = {
             "IdEstudiante": $routeParams.IdUser,

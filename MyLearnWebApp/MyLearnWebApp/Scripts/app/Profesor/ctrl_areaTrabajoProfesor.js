@@ -1,7 +1,15 @@
-﻿angular.module('mod_MyLearn').controller('ctrl_areaTrabajoProfesor', ['fct_Trabajo', 'fileUpload', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function (fct_Trabajo, fileUpload, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+﻿angular.module('mod_MyLearn').controller('ctrl_areaTrabajoProfesor', ['srcv_cerrarSesion','fct_Trabajo', 'fileUpload', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (srcv_cerrarSesion,fct_Trabajo, fileUpload, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.ls_msjs = [];
+        /*
+        * Service necesario para cerrar sesion
+        */
+        $scope.cerrarSesionService = srcv_cerrarSesion;
+
+        /*
+        *  Json del usuario actual
+        */
 
         $scope.userActual = {};
 

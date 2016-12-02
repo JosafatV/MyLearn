@@ -1,5 +1,5 @@
-angular.module('mod_MyLearn').controller('ctrl_cursoProfesor', ['fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function (fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+angular.module('mod_MyLearn').controller('ctrl_cursoProfesor', ['srcv_cerrarSesion', 'fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (srcv_cerrarSesion,fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.profesorActual = {};
         $scope.cursoActual = {};
@@ -8,12 +8,18 @@ angular.module('mod_MyLearn').controller('ctrl_cursoProfesor', ['fct_Trabajo', '
 
         $scope.indexCursos = 0;
 
+        /*
+        * Service necesario para cerrar sesion
+        */
+        $scope.cerrarSesionService = srcv_cerrarSesion;
+
         fct_MyLearn_API_Client.get({ type: 'Profesores', extension1: $routeParams.IdUser }).$promise.then(function (data) {
             $scope.profesorActual = data;
         });
 
         fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'Profesores', extension2: 'Curso', extension3: $routeParams.IdCurso }).$promise.then(function (data) {
             $scope.ls_estudiantes = data;
+            alert(angular.toJson(data));
         });
 
         fct_MyLearn_API_Client.get({ type: 'Cursos', extension1: $routeParams.IdCurso }).$promise.then(function (data) {

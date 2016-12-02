@@ -1,5 +1,5 @@
-angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function (fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['srcv_cerrarSesion', 'fct_Trabajo', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (srcv_cerrarSesion,fct_Trabajo, fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.profesorActual = {
 
@@ -11,6 +11,11 @@ angular.module('mod_MyLearn').controller('ctrl_crearCurso', ['fct_Trabajo', 'fct
         $scope.ls_badges = [];
         $scope.ls_cursos = [];
         $scope.ls_listaUniversidades = [];
+
+        /*
+        * Service necesario para cerrar sesion
+        */
+        $scope.cerrarSesionService = srcv_cerrarSesion;
 
         /*
         *  Estructura del json necesario para crear una nueva cuenta

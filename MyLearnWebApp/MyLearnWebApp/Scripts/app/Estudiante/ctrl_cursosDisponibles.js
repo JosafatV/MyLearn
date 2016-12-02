@@ -1,5 +1,5 @@
-angular.module('mod_MyLearn').controller('ctrl_cursosDisponibles', ['$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
-    function ($q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
+angular.module('mod_MyLearn').controller('ctrl_cursosDisponibles', ['srcv_cerrarSesion','$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
+    function (srcv_cerrarSesion,$q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
         $scope.publicadoExitosamente = false;
         $scope.publicadoErroneamente = false;
@@ -10,6 +10,11 @@ angular.module('mod_MyLearn').controller('ctrl_cursosDisponibles', ['$q', '$scop
             "IdEstudiante": "",
             "IdCurso": "",
         };
+
+        /*
+        * Service necesario para cerrar sesion
+        */
+        $scope.cerrarSesionService = srcv_cerrarSesion;
 
         fct_MyLearn_API_Client.get({ type: 'Estudiantes', extension1: $routeParams.IdUser}).$promise.then(function (data) {
             $scope.js_estudianteActual = data;
