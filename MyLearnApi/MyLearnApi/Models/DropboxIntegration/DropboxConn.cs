@@ -36,12 +36,8 @@ namespace MyLearnApi.Models.DropboxIntegration
         public static string getContentLink(string fileName, string contentType, Stream byteArray)
         {
 
-            UserCredential credential = getUserCredential();
-            DriveService service = GetDriveService(credential);
-            //uploading file
-            string response = UploadFileToDrive(service, fileName, contentType, byteArray);
 
-            return response;
+            return fileName;
 
         }
 
@@ -89,7 +85,7 @@ namespace MyLearnApi.Models.DropboxIntegration
          * 
         **/
 
-        private static DriveService GetDriveService(UserCredential credentials)
+        private static string GetDropboxService(UserCredential credentials)
         {
 
             var service = new DriveService(new BaseClientService.Initializer
@@ -99,7 +95,7 @@ namespace MyLearnApi.Models.DropboxIntegration
                 DefaultExponentialBackOffPolicy = ExponentialBackOffPolicy.Exception | ExponentialBackOffPolicy.UnsuccessfulResponse503
             });
 
-            return service;
+            return service.ToString();
 
         }
         /// <summary>
@@ -111,7 +107,7 @@ namespace MyLearnApi.Models.DropboxIntegration
         /// <param name="type"> el tipo de permiso  </param>
         /// <param name="role"> el rol del permiso </param>
         /// <returns></returns>
-        public static Permission InsertPermission(DriveService service, String fileId, String value,
+        public static Permission InsertPermission(string service, String fileId, String value,
                                                                                      String type, String role)
         {
             Permission newPermission = new Permission();
@@ -120,7 +116,7 @@ namespace MyLearnApi.Models.DropboxIntegration
             newPermission.Role = role;
             try
             {
-                return service.Permissions.Insert(newPermission, fileId).Execute();
+                return null;
             }
             catch (Exception e)
             {
@@ -136,7 +132,7 @@ namespace MyLearnApi.Models.DropboxIntegration
          * this link will be stored into the database to retrived to the view later.
          * 
         **/
-        public static string UploadFileToDrive(DriveService service, string fileName, string contentType, Stream byteArray)
+        public static string UploadFileToDropbox(DriveService service, string fileName, string contentType, Stream byteArray)
         {
 
 
@@ -157,7 +153,7 @@ namespace MyLearnApi.Models.DropboxIntegration
             if (file != null)
             {
                 //le da permisos de lectura a cualquier usuario
-                InsertPermission(service, file.Id, "", "anyone", "reader");
+               
                 return file.WebContentLink;
             }
 
