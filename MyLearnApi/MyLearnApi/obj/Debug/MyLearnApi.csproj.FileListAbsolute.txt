@@ -72,7 +72,6 @@ C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\Microsoft.
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\System.Web.Http.Owin.xml
-C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Debug\MyLearnApi.csprojResolveAssemblyReference.cache
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Debug\MyLearnApi.dll
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Debug\MyLearnApi.pdb
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\BouncyCastle.Crypto.dll
