@@ -22,31 +22,31 @@
             <form action="" class="">
                 <div class="form-group">
                     <label for="Nombre">Nombre:</label>
-                    <input class="form-control" id="nombre_deUsuario" type="text" data-ng-model="js_crearCuentaJson.NombreContacto">
+                    <input class="form-control" id="nombre_deUsuario" type="text" maxlength="30" required data-ng-model="js_crearCuentaJson.NombreContacto">
                 </div>
                 <div class="form-group">
                     <label for="Apellido">Primer Apellido:</label>
-                    <input class="form-control" id="nombre_deUsuario" type="text" data-ng-model="js_crearCuentaJson.ApellidoContacto">
+                    <input class="form-control" id="nombre_deUsuario" type="text" maxlength="30" required data-ng-model="js_crearCuentaJson.ApellidoContacto">
                 </div>
                 <div class="form-group">
                     <label for="Email">Correo Electrónico:</label>
-                    <input class="form-control" id="nombre_deUsuario" type="text" data-ng-model="js_crearCuentaJson.Email">
+                    <input class="form-control" id="nombre_deUsuario" type="email" maxlength="50" required data-ng-model="js_crearCuentaJson.Email">
                 </div>
                 <div class="form-group">
                     <label for="telefono">Teléfono:</label>
-                    <input class="form-control" id="nombre_deUsuario" type="text" data-ng-model="js_crearCuentaJson.Telefono">
+                    <input class="form-control" id="nombre_deUsuario" min="10000000" max="99999999" type="text" data-ng-model="js_crearCuentaJson.Telefono">
                 </div>
                 <div class="form-group">
                     <label for="NombreU">Nombre de usuario:</label>
-                    <input class="form-control" id="nombre_deUsuario" type="text" data-ng-model="js_crearCuentaJson.NombreDeUsuario">
+                    <input class="form-control" id="nombre_deUsuario" type="text" maxlength="40" required data-ng-model="js_crearCuentaJson.NombreDeUsuario">
                 </div>
                 <div class="form-group">
                     <label for="Contraseña">Contraseña:</label>
-                    <input class="form-control" id="contraseña" type="password" data-ng-model="js_crearCuentaJson.Contrasena">
+                    <input class="form-control" id="contraseña" type="password" maxlength="40" required data-ng-model="js_crearCuentaJson.Contrasena">
                 </div>
                 <div class="form-group">
                     <label for="Confirmación">Confirmación de contraseña:</label>
-                    <input class="form-control" id="confirmacion" type="password">
+                    <input class="form-control" id="confirmacion" type="password" maxlength="40" required>
                 </div>
                 <div class="form-group">
                     <label for="País">País:</label>
