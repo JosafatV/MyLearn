@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLearnApi", "MyLearnApi\MyLearnApi.csproj", "{62F2D187-FD19-4765-84BE-65C6906959E9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLearnApiTests", "MyLearnApiTests\MyLearnApiTests.csproj", "{4A5F5BD5-E0B5-48AD-B6D8-242E60831C55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{62F2D187-FD19-4765-84BE-65C6906959E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62F2D187-FD19-4765-84BE-65C6906959E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62F2D187-FD19-4765-84BE-65C6906959E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A5F5BD5-E0B5-48AD-B6D8-242E60831C55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A5F5BD5-E0B5-48AD-B6D8-242E60831C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A5F5BD5-E0B5-48AD-B6D8-242E60831C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A5F5BD5-E0B5-48AD-B6D8-242E60831C55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

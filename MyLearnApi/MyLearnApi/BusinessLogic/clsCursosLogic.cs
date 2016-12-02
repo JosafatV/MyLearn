@@ -25,11 +25,19 @@ namespace MyLearnApi.BusinessLogic
         /// <returns></returns>
         public List<CURSO_POR_PROFESOR> getCursosDeProfesor(string idProfesor, int index)
         {
-            List<CURSO_POR_PROFESOR> lobj_list = db.CURSO_POR_PROFESOR.
+            List<Object> lobj_list = db.CURSO_POR_PROFESOR.
                 Where(curso => curso.IdProfesor == idProfesor && (curso.CURSO.Estado== "A" || curso.CURSO.Estado == "T"))
                 .OrderByDescending(curso=> curso.CURSO.FechaInicio)
-                .ToList<CURSO_POR_PROFESOR>();
-            return clsAlgoritmoPaginacion.paginar(lobj_list, index, 20);
+                .ToList<Object>();
+            //pagina el resultado de 20 en 20
+            List<Object> obj = clsAlgoritmoPaginacion.paginar(lobj_list, index, 20);
+            //castear el resultado en otra lista
+            List<CURSO_POR_PROFESOR> result = new List<CURSO_POR_PROFESOR>();
+            for (int i = 0; i < obj.Count; i++)
+            {
+                result.Add((CURSO_POR_PROFESOR)obj[i]);
+            }
+            return result;
         }
 
         public List<CURSO> getCursosPorEstudiante(string idEstudiante)

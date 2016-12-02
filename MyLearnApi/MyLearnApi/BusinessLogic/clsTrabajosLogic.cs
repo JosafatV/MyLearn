@@ -23,12 +23,19 @@ namespace MyLearnApi.BusinessLogic
         public List<VIEW_TRABAJO> getTrabajoActivos(string idEmpresa, int index)
         {
             //retorna los proyectos activos
-            List<VIEW_TRABAJO> listaTrabajos = db.VIEW_TRABAJO
+            List<Object> listaTrabajos = db.VIEW_TRABAJO
                 .Where(trab => trab.EstadoTrabajo == "A" && trab.IdEmpresa == idEmpresa && trab.EstadoTrabajoPorEstudiante =="A" )
                 .OrderBy(trab => trab.FechaFinalizacion)
-                .ToList<VIEW_TRABAJO>();
+                .ToList<Object>();
             //pagina el resultado de 20 en 20
-            return clsAlgoritmoPaginacion.paginar(listaTrabajos, index, 20);
+            List<Object> obj = clsAlgoritmoPaginacion.paginar(listaTrabajos, index, 20);
+            //castear el resultado en otra lista
+            List<VIEW_TRABAJO> result = new List<VIEW_TRABAJO>();
+            for (int i = 0; i < obj.Count; i++)
+            {
+                result.Add((VIEW_TRABAJO)obj[i]);
+            }
+            return result;
         }
 
         /// <summary>
@@ -88,12 +95,19 @@ namespace MyLearnApi.BusinessLogic
         {
             //estado "P" de trabajo pendiente, o sea es una subasta
 
-            List<TRABAJO> listaTrabajos = db.TRABAJO
+            List<Object> listaTrabajos = db.TRABAJO
                 .Where(trab => trab.Estado == "P" && trab.IdEmpresa == idEmpresa)
                 .OrderBy(trab => trab.FechaCierre)
-                .ToList<TRABAJO>();
+                .ToList<Object>();
             //pagina el resultado de 20 en 20
-            return clsAlgoritmoPaginacion.paginar(listaTrabajos, index, 20);
+            List<Object> obj = clsAlgoritmoPaginacion.paginar(listaTrabajos, index, 20);
+            //castear el resultado en otra lista
+            List<TRABAJO> result = new List<TRABAJO>();
+            for (int i = 0; i < obj.Count; i++)
+            {
+                result.Add((TRABAJO)obj[i]);
+            }
+            return result;
         }
 
         /// <summary>

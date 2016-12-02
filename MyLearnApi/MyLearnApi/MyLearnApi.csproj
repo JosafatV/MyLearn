@@ -515,7 +515,6 @@
     <Content Include="Models\Model_MyLearnDB.edmx.diagram">
       <DependentUpon>Model_MyLearnDB.edmx</DependentUpon>
     </Content>
-    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\PublishProfiles\ApiMyLearn.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
