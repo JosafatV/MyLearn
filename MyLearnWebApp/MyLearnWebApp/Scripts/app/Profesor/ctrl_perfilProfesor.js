@@ -64,5 +64,8 @@ angular.module('mod_MyLearn').controller('ctrl_perfilProfesor', ['fct_Trabajo', 
         $scope.goLogin = function () {
             $location.path('/MyLearn/Estudiante/Perfil/Login');
         };
+        $scope.do_goPerfilEmpresa = function () {
+            $location.path('/MyLearn/Profesor/Perfil/' + $routeParams.IdUser);
+        };
 
     }]);

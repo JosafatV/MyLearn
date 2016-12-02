@@ -329,7 +329,8 @@ namespace MyLearnApi.BusinessLogic
                 +" FROM TRABAJO INNER JOIN TECNOLOGIA_POR_TRABAJO ON TRABAJO.Id = TECNOLOGIA_POR_TRABAJO.IdTrabajo "
                 +" INNER JOIN TECNOLOGIA ON TECNOLOGIA.Id = TECNOLOGIA_POR_TRABAJO.IdTecnologia, TRABAJO_POR_ESTUDIANTE "
                 +" WHERE ( TECNOLOGIA.Id =  '"+ IdTecnologia + "' OR TRABAJO.Nombre LIKE '%"+nombreTrabajo+"%' ) "
-                + " AND Trabajo.Estado = 'P' AND TRABAJO.Id != TRABAJO_POR_ESTUDIANTE.IdTrabajo AND TRABAJO_POR_ESTUDIANTE.IdEstudiante = '"+idEstudiante+"' ")
+                +" AND Trabajo.Estado = 'P' AND NOT EXISTS"
+                +" ( SELECT * FROM TRABAJO_POR_ESTUDIANTE WHERE TRABAJO.Id = TRABAJO_POR_ESTUDIANTE.IdTrabajo AND TRABAJO_POR_ESTUDIANTE.IdEstudiante = '"+idEstudiante+"') ")
                 .ToList<TRABAJO>();
         }
 

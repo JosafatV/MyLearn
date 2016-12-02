@@ -169,10 +169,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/09/2016 14:45:16</publishTime>
     </File>
     <File Include="bin/MyLearnApi.dll">
-      <publishTime>12/01/2016 14:53:05</publishTime>
+      <publishTime>12/01/2016 18:26:51</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>12/01/2016 14:37:46</publishTime>
+      <publishTime>12/01/2016 15:11:30</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>11/09/2016 14:45:31</publishTime>
@@ -301,19 +301,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/09/2016 14:44:59</publishTime>
     </File>
     <File Include="GettingStarted.txt">
-      <publishTime>12/01/2016 14:26:05</publishTime>
+      <publishTime>12/01/2016 15:11:30</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>11/09/2016 14:44:36</publishTime>
     </File>
     <File Include="Json.NET.license.txt">
-      <publishTime>12/01/2016 14:26:05</publishTime>
+      <publishTime>12/01/2016 15:11:30</publishTime>
     </File>
     <File Include="Models/Model_MyLearnDB.edmx.diagram">
-      <publishTime>11/30/2016 17:38:55</publishTime>
+      <publishTime>12/01/2016 15:23:20</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>12/01/2016 14:43:51</publishTime>
+      <publishTime>12/01/2016 15:11:30</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>11/09/2016 14:44:59</publishTime>
@@ -370,7 +370,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/09/2016 14:44:36</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/01/2016 14:53:08</publishTime>
+      <publishTime>12/01/2016 15:11:30</publishTime>
     </File>
   </ItemGroup>
 </Project>

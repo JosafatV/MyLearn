@@ -88,3 +88,6 @@ body .prom1 tr:hover{
 	background:#252932;
 	color: #fff;
 }
+.img1:hover{
+	cursor: pointer;
+}

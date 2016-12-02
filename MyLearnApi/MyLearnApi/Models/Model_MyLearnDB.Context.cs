@@ -59,6 +59,7 @@ namespace MyLearnApi.Models
         public virtual DbSet<PROYECTO> PROYECTO { get; set; }
         public virtual DbSet<DriveCredentials> DriveCredentials { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
+        public virtual DbSet<TWITTER_CREDENTIALS> TWITTER_CREDENTIALS { get; set; }
     
         public virtual int sp_insert_estudiante(string id, string contrasena, string sal, string repositorioArchivos, string credencialDrive, string nombre, string apellido, string carne, string email, string telefono, string pais, string region, Nullable<System.DateTime> fechaInscripcion, string repositorioCodigo, string linkHojaDeVida)
         {

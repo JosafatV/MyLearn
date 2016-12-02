@@ -432,6 +432,10 @@
     <Compile Include="Models\TRABAJO_POR_ESTUDIANTE.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TwitterIntegration\clsTwitterConn.cs" />
+    <Compile Include="Models\TWITTER_CREDENTIALS.cs">
+      <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UNIVERSIDAD.cs">
       <DependentUpon>Model_MyLearnDB.tt</DependentUpon>
     </Compile>
@@ -511,6 +515,7 @@
     <Content Include="Models\Model_MyLearnDB.edmx.diagram">
       <DependentUpon>Model_MyLearnDB.edmx</DependentUpon>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\PublishProfiles\ApiMyLearn.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
