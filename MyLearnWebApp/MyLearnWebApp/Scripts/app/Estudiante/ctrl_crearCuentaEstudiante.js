@@ -1,13 +1,14 @@
 angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fileUpload','$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService',
     function ($q,fileUpload,$scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService) {
 
-        $scope.csv;
-        $scope.aaa = "";
+
         var access_token = "";
         var refresh_token = "";
         var twitter_access_token = "";
         var twitter_secret_token = "";
-        var client_id = "";      
+        var client_id = "";
+        $scope.csv;
+        $scope.aaa = "";
         $scope.universidadSelected = "";
         $scope.str_paisSelected = "";
         $scope.ls_tecnologiasSelect = [];
@@ -151,9 +152,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
             OAuth.popup("twitter", {
             }).done(function (result) {
                 twitter_access_token = result.oauth_token;
-                twitter_secret_token = result.oauth_token_secret;
-                //twitter_access_token = result.oauth
-                console.log(angular.toJson(result));          
+                twitter_secret_token = result.oauth_token_secret;                
             })
 
         };
