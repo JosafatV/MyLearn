@@ -240,6 +240,14 @@
     <Property Name="Comentario" Type="char" MaxLength="300" />
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
+  <EntityType Name="TWITTER_CREDENTIALS">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="AccessToken" Type="varchar" MaxLength="500" />
+    <Property Name="AccessTokenSecret" Type="varchar" MaxLength="500" />
+  </EntityType>
   <EntityType Name="UNIVERSIDAD">
     <Key>
       <PropertyRef Name="Id" />
@@ -344,12 +352,12 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_PROFESOR' does not have a prim
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="char" MaxLength="100" Nullable="false" />
-    <Property Name="Contrasena" Type="char" MaxLength="8" />
-    <Property Name="Sal" Type="char" MaxLength="20" />
     <Property Name="RepositorioArchivos" Type="char" MaxLength="100" />
     <Property Name="CredencialDrive" Type="char" MaxLength="100" />
     <Property Name="Estado" Type="char" MaxLength="1" />
     <Property Name="NombreDeUsuario" Type="char" MaxLength="40" />
+    <Property Name="Sal" Type="varchar" MaxLength="100" />
+    <Property Name="Contrasena" Type="varchar" MaxLength="200" />
     <Property Name="NombreContacto" Type="char" MaxLength="30" Nullable="false" />
     <Property Name="ApellidoContacto" Type="char" MaxLength="30" Nullable="false" />
     <Property Name="Email" Type="char" MaxLength="50" />
@@ -781,6 +789,18 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TWITTER_CREDENTIALS">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="TWITTER_CREDENTIALS" Type="Self.TWITTER_CREDENTIALS" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TWITTER_CREDENTIALS">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="FN_Get_Last_User_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="char" />
   <Function Name="SP_Buscar_Subastas_Por_Tecnologia_Nombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Tecnologia" Type="char" Mode="In" />
@@ -967,6 +987,7 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
     <EntitySet Name="TECNOLOGIA_POR_TRABAJO" EntityType="Self.TECNOLOGIA_POR_TRABAJO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TRABAJO" EntityType="Self.TRABAJO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TRABAJO_POR_ESTUDIANTE" EntityType="Self.TRABAJO_POR_ESTUDIANTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TWITTER_CREDENTIALS" EntityType="Self.TWITTER_CREDENTIALS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UNIVERSIDAD" EntityType="Self.UNIVERSIDAD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VIEW_CURSOS" EntityType="Self.VIEW_CURSOS" store:Type="Views" store:Schema="dbo">
@@ -1036,12 +1057,12 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
     <EntitySet Name="VIEW_PROFESOR" EntityType="Self.VIEW_PROFESOR" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [VIEW_PROFESOR].[Id] AS [Id], 
-    [VIEW_PROFESOR].[Contrasena] AS [Contrasena], 
-    [VIEW_PROFESOR].[Sal] AS [Sal], 
     [VIEW_PROFESOR].[RepositorioArchivos] AS [RepositorioArchivos], 
     [VIEW_PROFESOR].[CredencialDrive] AS [CredencialDrive], 
     [VIEW_PROFESOR].[Estado] AS [Estado], 
     [VIEW_PROFESOR].[NombreDeUsuario] AS [NombreDeUsuario], 
+    [VIEW_PROFESOR].[Sal] AS [Sal], 
+    [VIEW_PROFESOR].[Contrasena] AS [Contrasena], 
     [VIEW_PROFESOR].[NombreContacto] AS [NombreContacto], 
     [VIEW_PROFESOR].[ApellidoContacto] AS [ApellidoContacto], 
     [VIEW_PROFESOR].[Email] AS [Email], 
@@ -1217,6 +1238,10 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
     <AssociationSet Name="FK_TRABAJO_POR_EMPRESA" Association="Self.FK_TRABAJO_POR_EMPRESA">
       <End Role="EMPRESA" EntitySet="EMPRESA" />
       <End Role="TRABAJO" EntitySet="TRABAJO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TWITTER_CREDENTIALS" Association="Self.FK_TWITTER_CREDENTIALS">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="TWITTER_CREDENTIALS" EntitySet="TWITTER_CREDENTIALS" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

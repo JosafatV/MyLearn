@@ -7,7 +7,7 @@ using MyLearnApi.Models;
 using System.Text;
 using System.Net.Http;
 using System.Web;
-using Tweetinvi;
+
 
 
 namespace MyLearnApi.Controllers
@@ -45,7 +45,7 @@ namespace MyLearnApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            cred = clsRepoLogic.createNewCredentials(cred);
+            cred = clsRepoLogic.createNewDriveCredentials(cred);
             if (cred == null)
                 return Conflict();
 
@@ -93,23 +93,52 @@ namespace MyLearnApi.Controllers
         /// <returns> File download link </returns>
         [HttpPost]
         [ResponseType(typeof(string))]
-        [Route("MyLearnApi/Twitt/{IdUsuario}")]
-        public IHttpActionResult twitt(string IdUsuario)
+        [Route("MyLearnApi/Twitt/Alardeo/{IdUsuario}/{nombreEstudiante}/{nombreBadge}/{nombreCurso}")]
+        public IHttpActionResult twittBadge(string idUsuario, string nombreEstudiante, string nombreBadge, string nombreCurso)
         {
-            Auth.SetUserCredentials("jUV15h3RmCiiTlewmoSICNdx2", "EDugd5Ph71tuvmZmEfKXeaUQw5DDLJh1bjUSkhYuDd4p4p4TJn",
-                "940379875-jiedKvLwZFqCLTvQ7cX7fNzUTkh6djKt610xLm8d", "wtvlmiiovHuG4xm4Wcp5FXl5gwDe19nQr6gAa2l3NaBvq");
-            var user = Tweetinvi.User.GetAuthenticatedUser();
-
-            var tweet = Tweet.PublishTweet("Twitter REST API -prueba");
-
-            return Ok("{  }");
+            //ccrear
+            string lstr_twitt = pobj_repoLogic.twittBadge(idUsuario, nombreEstudiante, nombreBadge, nombreCurso);
+            
+            return Ok(lstr_twitt);
 
         }
 
+        [HttpPost]
+        [ResponseType(typeof(string))]
+        [Route("MyLearnApi/Twitt/Subasta/{nombreTrabajo}")]
+        public IHttpActionResult twittSubasta(string nombreTrabajo)
+        {
+            //crear
+            string lstr_twitt = pobj_repoLogic.twittSubasta( nombreTrabajo);
+
+            return Ok(lstr_twitt);
+
+        }
+
+        [HttpPost]
+        [ResponseType(typeof(TWITTER_CREDENTIALS))]
+        [Route("MyLearnApi/TwitterCredentials")]
+        public IHttpActionResult addTwitterCredentials(TWITTER_CREDENTIALS cred)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            cred = clsRepoLogic.createNewTwitterCredentials(cred);
+            if (cred == null)
+                return Conflict();
+
+            return Ok(cred);
+
+        }
 
         [HttpOptions]
+        [Route("MyLearnApi/TwitterCredentials")]
         [Route("MyLearnApi/DriveCredentials")]
         [Route("MyLearnApi/File/{IdUsuario}")]
+        [Route("MyLearnApi/Twitt/Alardeo/{IdUsuario}/{nombreEstudiante}/{nombreBadge}/{nombreCurso}")]
+        [Route("MyLearnApi/Twitt/Subasta/{IdUsuario}/{nombreTrabajo}")]
         public HttpResponseMessage Options()
         {
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };

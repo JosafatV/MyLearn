@@ -530,5 +530,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TWITTER_CREDENTIALS">
+      <EntityTypeMapping TypeName="MyLearnDBModel.TWITTER_CREDENTIALS">
+        <MappingFragment StoreEntitySet="TWITTER_CREDENTIALS">
+          <ScalarProperty Name="AccessTokenSecret" ColumnName="AccessTokenSecret" />
+          <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
