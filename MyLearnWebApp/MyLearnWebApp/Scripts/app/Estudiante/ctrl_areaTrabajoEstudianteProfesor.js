@@ -10,6 +10,7 @@
             Fecha: "" ,
             NombreEmisor:""
         };
+        
 
        $scope.userActual = {};
 
@@ -22,6 +23,7 @@
        fct_MyLearn_API_Client.get({ type: 'Estudiantes', extension1: $routeParams.IdUser }).$promise.then(function (data) {
            $scope.userActual = data;
        });
+
 
         /*
         *  Funciones para llamar los mensajes totales del proyecto
@@ -136,9 +138,23 @@
 
        };
 
-    /*
-    * Funcion para enviar mensajes usando Drive
-    */
+        /*
+        * Funcion usada para alardear Twits
+        *
+        */
+
+       $scope.alardear = function (badge) {
+           fct_MyLearn_API_Client.save({
+               type: 'Twitt', extension1: 'Alardeo', extension2: $routeParams.IdUser,
+               extension3: $scope.userActual.NombreContacto.trim(), extension4: badge.Nombre.trim(), extension5: badge.IdCurso
+           }, {}).$promise.then(function (data) {
+               alert(angular.toJson(data));
+           });
+       };
+
+        /*
+        * Funcion para enviar mensajes usando Drive
+        */
 
        function uploadFile(id){
            var file = $scope.myFile;

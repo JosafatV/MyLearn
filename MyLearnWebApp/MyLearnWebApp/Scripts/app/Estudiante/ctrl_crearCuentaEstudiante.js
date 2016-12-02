@@ -31,8 +31,9 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
         }
 
         getClientId();
-
+        
         OAuth.initialize('CgKcLvAzYP_vq69R1HNBPtTne_g');
+        OAuth.clearCache();
         OAuth.create('google_drive');
 
         $scope.js_crearTecnologia = {
