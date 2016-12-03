@@ -1,0 +1,118 @@
+﻿|<html>
+<head>
+	<title>Área de Trabajo</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="../../Vistas/Estilo/js/bootstrap.min.js">
+	<link rel="stylesheet" href="../../Vistas/Estilo/css/Estilos_AreaTEELectura.css">
+	<link rel="shortcut icon"type="image/x/icon" href="../../Vistas/Estilo/img/iconpage.ico">
+</head>
+<header>
+		<div class="wrapper">
+			<div class="logo">Nombre de Proyecto:
+				<div class="img">
+                    <a><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded img1" alt=""></a>
+				</div>
+			</div>
+			<nav>
+				<a><strike>Mi Perfil</stike></a>
+				<a><strike>Crear Subasta</strike></a>
+                <a data-ng-click="cerrarSesionService.cerrarEstaSesion()">Cerrar Sesion</a>
+			</nav>
+		</div>
+</header>
+<br><br><br>
+<body>
+	<div class="container-fluid">
+		<br>
+		<div class="container-fluid pr2">
+		</div><br><br>
+		<div class="container-fluid">
+			<section class="main row">
+				<article class="col-md-8">
+					<br>
+				<h2>Información general del proyecto:</h2><br>
+					<label for="Nombre">Nombre del Proyecto: {{trabajoActual.Nombre}}</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+					<br><br>
+					<label for="Estudiante">Estudiante Encargado:{{trabajoActual.NombreContacto}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+					<br><br>
+					<label for="Universidad">Presupuesto Asignado:{{trabajoActual.Monto}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</article>
+			<aside class="col-md-4">
+				<br>
+				<h2>Objetivos:</h2><br>
+					<label for="Estudiante">Fecha de Inicio: {{trabajoActual.FechaCierreSubasta}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+					<br><br>
+					<label for="Universidad">Fecha de Finlización: {{trabajoActual.FechaFinalizacion}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</aside>
+		</section><br><br><br>
+
+		</div>
+        <div id="div1" style="background-color:#252932; height: 500px;position:relative; border:4px solid #f56f3a;">
+            <div id="div2" style="max-height:100%;overflow:auto;">
+
+                <div class="container-fluid" data-ng-repeat="msj in ls_msjs">
+                    <br><br>
+                    <div class="row">
+                        <div class="col-md-offset-2">
+                            <div class="col-md-9 color1">
+                                <div class="container-fluid">
+                                    <section class="main row">
+                                        <article class="col-md-6">
+                                            <h2>Mensaje de:{{msj.NombreEmisor}}</h2>
+                                            <h4>Fecha:{{msj.Fecha}}</h4>
+                                            <h4>Contenido:{{msj.Contenido}}</h4>
+                                        </article>
+
+                                    </section>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid" data-ng-repeat="resp in msj.RESPUESTA">
+                        <br>
+                        <div class="col-md-9 color1">
+                            <div class="container-fluid">
+                                <div class="col-md-offset-5">
+                                    <section class="main row">
+                                        <div class="col-md-offset-3">
+
+                                        </div>
+
+                                        <div class="main row">
+                                            <article class="col-md-7">
+                                                <h2>Mensaje de:{{resp.NombreEmisor}}</h2>
+                                                <h4>Fecha:{{resp.Fecha}}</h4>
+                                                <h4>Contenido:{{resp.Contenido}}</h4>
+
+                                        </div>
+                                    </section>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div><br>
+                </div><br><br>
+            </div>
+        </div> <br><br><br><br>
+
+
+
+
+
+				<!-- --------------------------------------------------------------No cambiaar por angular de aqui hasta abajo------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+	</body>
+
+	<script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script
+</html>
