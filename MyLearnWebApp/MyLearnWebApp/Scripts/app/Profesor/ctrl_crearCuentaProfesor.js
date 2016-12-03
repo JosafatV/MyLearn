@@ -3,7 +3,8 @@
         $scope.universidadSelected = "";
         $scope.ls_listaUniversidades = [];
 
-
+        var access_token = "";
+        var refresh_token = "";
 
         OAuth.initialize('CgKcLvAzYP_vq69R1HNBPtTne_g');
         OAuth.create('google_drive');
@@ -30,7 +31,6 @@
                "HorarioAtencion": "",
                "Region": "",
                "IdUniversidad": 2,
-               "Universidad": ""
            }
 
         $scope.paisSelected = "";
@@ -119,6 +119,7 @@
         */
 
         $scope.sendCuenta = function () {
+            console.log($scope.crearCuentaJson);
             fct_MyLearn_API_Client.save({ type: 'Profesores' }, $scope.crearCuentaJson).$promise.then(function (data) {
                 set_sendCredentials(data.Id);                
             });            
