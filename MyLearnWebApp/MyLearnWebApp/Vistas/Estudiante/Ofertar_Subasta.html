@@ -122,12 +122,13 @@
 								<th>Usurio</th>
 								<th>Monto</th>
 								<th>Fecha</th>
+                                <th>Comentario</th>
 						</tr>
 						<tr data-ng-repeat="subastas in ls_otrasSubastas">
-								<td>{{subastas.NombreUsuario}}</td>
+								<td>{{subastas.NombreContacto}}</td>
 								<td>{{subastas.Monto}}</td>
                                 <td>{{subastas.FechaFinalizacion}}</td>
-								<td></td>
+                                <td>{{subastas.Comentario}}</td>
 						</tr>
 			</table> <br><br>
 

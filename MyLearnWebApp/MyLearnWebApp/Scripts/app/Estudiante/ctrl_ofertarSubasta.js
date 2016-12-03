@@ -28,6 +28,12 @@ angular.module('mod_MyLearn').controller('ctrl_ofertarSubasta', ['srcv_cerrarSes
 
         fct_MyLearn_API_Client.get({ type: 'Subastas', extension1: $routeParams.IdSub }).$promise.then(function (data) {
             $scope.js_datosSubasta = data;
+            fct_MyLearn_API_Client.query({
+                type: 'Subastas', extension1: 'Ofertas', extension2: data.IdEmpresa.trim()
+                            , extension3: $routeParams.IdSub
+            }).$promise.then(function (data) {
+                $scope.ls_otrasSubastas = data;
+            });
         });
 
         fct_MyLearn_API_Client.query({ type: 'Trabajos',extension1:'Tecnologias' ,extension2: $routeParams.IdSub }).$promise.then(function (data) {
@@ -35,17 +41,14 @@ angular.module('mod_MyLearn').controller('ctrl_ofertarSubasta', ['srcv_cerrarSes
             armarString(ls_tecnologias);
         });
 
+
         function armarString(lista) {            
             angular.forEach(ls_tecnologias, function (value, key) {               
                 $scope.stringTecnologias = $scope.stringTecnologias + ' '+ value.Nombre;
             });
         };
 
-        fct_MyLearn_API_Client.query({
-            type: 'Subastas', extension1: 'Ofertas', extension2: $routeParams.IdUser
-                        , extension3: $routeParams.IdSub}).$promise.then(function (data) {
-            $scope.ls_otrasSubastas = data; 
-                        });
+
 
         $scope.set_postSubastas = function () {
             fct_MyLearn_API_Client.save({ type: 'Subastas', extension1: 'Ofertas' }, $scope.js_datosOferta).$promise.then(function (data) {
