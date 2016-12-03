@@ -55,19 +55,19 @@ namespace MyEmployeeWebApi.BusinessLogic
             switch (rubro)
             {
                 case "Promedio_notas_de_cursos":
-                    result = db.GetElementosPorRubro(top, porcentaje, 0, 0, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    result = db.GetEstudiantesPorPromedio(top, porcentaje).ToList<SP_MyEmployee_Custom_Result>();
                     break;
 
                 case "Promedio_calificacion_trabajos":
-                    result = db.GetElementosPorRubro(top, 0, porcentaje, 0, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    result = db.GetPorPorcentajeEstrellas(top, porcentaje).ToList<SP_MyEmployee_Custom_Result>();
                     break;
 
                 case "Tasa_de_Trabajos_Existosos":
-                    result = db.GetElementosPorRubro(top, 0, 0, 0, porcentaje, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    result = db.GetTalentosPorTasaProyectosExitosos(top, tasa).ToList<SP_MyEmployee_Custom_Result>();
                     break;
 
                 case "Tasa_de aprobacion_de_cursos":
-                    result = db.GetElementosPorRubro(top, 0, 0, porcentaje, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    result = db.GetElementosPorTasaAprobacionDeCursos(top, tasa).ToList<SP_MyEmployee_Custom_Result>();
                     break;
 
                 default:

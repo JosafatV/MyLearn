@@ -10,6 +10,22 @@
     <Property Name="Sal" Type="char" MaxLength="20" />
     <Property Name="Estado" Type="char" MaxLength="1" />
   </EntityType>
+  <Function Name="Sp_get_por_calificacion_trabajos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Top" Type="int" Mode="In" />
+    <Parameter Name="CalificacionTrabajos" Type="float" Mode="In" />
+  </Function>
+  <Function Name="Sp_get_por_promedio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Top" Type="int" Mode="In" />
+    <Parameter Name="PromedioNotas" Type="float" Mode="In" />
+  </Function>
+  <Function Name="Sp_get_por_tasa_aprobacion_de_cursos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Top" Type="int" Mode="In" />
+    <Parameter Name="tasa" Type="float" Mode="In" />
+  </Function>
+  <Function Name="Sp_get_por_tasa_trabajos_exitosos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Top" Type="int" Mode="In" />
+    <Parameter Name="tasa" Type="float" Mode="In" />
+  </Function>
   <Function Name="SP_MyEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Top" Type="int" Mode="In" />
     <Parameter Name="Pais" Type="char" Mode="In" />

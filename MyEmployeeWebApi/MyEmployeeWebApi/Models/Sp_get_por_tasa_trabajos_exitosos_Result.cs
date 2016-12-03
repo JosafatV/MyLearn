@@ -11,7 +11,7 @@ namespace MyEmployeeWebApi.Models
 {
     using System;
     
-    public partial class SP_MyEmployee_Custom_Result
+    public partial class Sp_get_por_tasa_trabajos_exitosos_Result
     {
         public string IdEstudiante { get; set; }
         public string NombreContacto { get; set; }

@@ -78,5 +78,93 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_get_por_promedio" FunctionName="MyLearnDBModel.Store.Sp_get_por_promedio">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.Sp_get_por_promedio_Result">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEstudiantesPorPromedio" FunctionName="MyLearnDBModel.Store.Sp_get_por_promedio">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Custom_Result">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_get_por_calificacion_trabajos" FunctionName="MyLearnDBModel.Store.Sp_get_por_calificacion_trabajos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.Sp_get_por_calificacion_trabajos_Result">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetPorPorcentajeEstrellas" FunctionName="MyLearnDBModel.Store.Sp_get_por_calificacion_trabajos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Custom_Result">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_get_por_tasa_trabajos_exitosos" FunctionName="MyLearnDBModel.Store.Sp_get_por_tasa_trabajos_exitosos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.Sp_get_por_tasa_trabajos_exitosos_Result">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetTalentosPorTasaProyectosExitosos" FunctionName="MyLearnDBModel.Store.Sp_get_por_tasa_trabajos_exitosos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Custom_Result">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_get_por_tasa_aprobacion_de_cursos" FunctionName="MyLearnDBModel.Store.Sp_get_por_tasa_aprobacion_de_cursos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.Sp_get_por_tasa_aprobacion_de_cursos_Result">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetElementosPorTasaAprobacionDeCursos" FunctionName="MyLearnDBModel.Store.Sp_get_por_tasa_aprobacion_de_cursos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Custom_Result">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Performance" ColumnName="Performance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

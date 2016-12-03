@@ -154,5 +154,109 @@ namespace MyEmployeeWebApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_MyEmployee_Custom_Result>("GetElementosPorRubro", topParameter, porcentajeNotasParameter, porcentajeEstrellasParameter, proyectosParameter, trabajosParameter, minimoParameter);
         }
+    
+        public virtual ObjectResult<Sp_get_por_promedio_Result> Sp_get_por_promedio(Nullable<int> top, Nullable<double> promedioNotas)
+        {
+            var topParameter = top.HasValue ?
+                new ObjectParameter("Top", top) :
+                new ObjectParameter("Top", typeof(int));
+    
+            var promedioNotasParameter = promedioNotas.HasValue ?
+                new ObjectParameter("PromedioNotas", promedioNotas) :
+                new ObjectParameter("PromedioNotas", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_get_por_promedio_Result>("Sp_get_por_promedio", topParameter, promedioNotasParameter);
+        }
+    
+        public virtual ObjectResult<SP_MyEmployee_Custom_Result> GetEstudiantesPorPromedio(Nullable<int> top, Nullable<double> promedioNotas)
+        {
+            var topParameter = top.HasValue ?
+                new ObjectParameter("Top", top) :
+                new ObjectParameter("Top", typeof(int));
+    
+            var promedioNotasParameter = promedioNotas.HasValue ?
+                new ObjectParameter("PromedioNotas", promedioNotas) :
+                new ObjectParameter("PromedioNotas", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_MyEmployee_Custom_Result>("GetEstudiantesPorPromedio", topParameter, promedioNotasParameter);
+        }
+    
+        public virtual ObjectResult<Sp_get_por_calificacion_trabajos_Result> Sp_get_por_calificacion_trabajos(Nullable<int> top, Nullable<double> calificacionTrabajos)
+        {
+            var topParameter = top.HasValue ?
+                new ObjectParameter("Top", top) :
+                new ObjectParameter("Top", typeof(int));
+    
+            var calificacionTrabajosParameter = calificacionTrabajos.HasValue ?
+                new ObjectParameter("CalificacionTrabajos", calificacionTrabajos) :
+                new ObjectParameter("CalificacionTrabajos", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_get_por_calificacion_trabajos_Result>("Sp_get_por_calificacion_trabajos", topParameter, calificacionTrabajosParameter);
+        }
+    
+        public virtual ObjectResult<SP_MyEmployee_Custom_Result> GetPorPorcentajeEstrellas(Nullable<int> top, Nullable<double> calificacionTrabajos)
+        {
+            var topParameter = top.HasValue ?
+                new ObjectParameter("Top", top) :
+                new ObjectParameter("Top", typeof(int));
+    
+            var calificacionTrabajosParameter = calificacionTrabajos.HasValue ?
+                new ObjectParameter("CalificacionTrabajos", calificacionTrabajos) :
+                new ObjectParameter("CalificacionTrabajos", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_MyEmployee_Custom_Result>("GetPorPorcentajeEstrellas", topParameter, calificacionTrabajosParameter);
+        }
+    
+        public virtual ObjectResult<Sp_get_por_tasa_trabajos_exitosos_Result> Sp_get_por_tasa_trabajos_exitosos(Nullable<int> top, Nullable<double> tasa)
+        {
+            var topParameter = top.HasValue ?
+                new ObjectParameter("Top", top) :
+                new ObjectParameter("Top", typeof(int));
+    
+            var tasaParameter = tasa.HasValue ?
+                new ObjectParameter("tasa", tasa) :
+                new ObjectParameter("tasa", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_get_por_tasa_trabajos_exitosos_Result>("Sp_get_por_tasa_trabajos_exitosos", topParameter, tasaParameter);
+        }
+    
+        public virtual ObjectResult<SP_MyEmployee_Custom_Result> GetTalentosPorTasaProyectosExitosos(Nullable<int> top, Nullable<double> tasa)
+        {
+            var topParameter = top.HasValue ?
+                new ObjectParameter("Top", top) :
+                new ObjectParameter("Top", typeof(int));
+    
+            var tasaParameter = tasa.HasValue ?
+                new ObjectParameter("tasa", tasa) :
+                new ObjectParameter("tasa", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_MyEmployee_Custom_Result>("GetTalentosPorTasaProyectosExitosos", topParameter, tasaParameter);
+        }
+    
+        public virtual ObjectResult<Sp_get_por_tasa_aprobacion_de_cursos_Result> Sp_get_por_tasa_aprobacion_de_cursos(Nullable<int> top, Nullable<double> tasa)
+        {
+            var topParameter = top.HasValue ?
+                new ObjectParameter("Top", top) :
+                new ObjectParameter("Top", typeof(int));
+    
+            var tasaParameter = tasa.HasValue ?
+                new ObjectParameter("tasa", tasa) :
+                new ObjectParameter("tasa", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_get_por_tasa_aprobacion_de_cursos_Result>("Sp_get_por_tasa_aprobacion_de_cursos", topParameter, tasaParameter);
+        }
+    
+        public virtual ObjectResult<SP_MyEmployee_Custom_Result> GetElementosPorTasaAprobacionDeCursos(Nullable<int> top, Nullable<double> tasa)
+        {
+            var topParameter = top.HasValue ?
+                new ObjectParameter("Top", top) :
+                new ObjectParameter("Top", typeof(int));
+    
+            var tasaParameter = tasa.HasValue ?
+                new ObjectParameter("tasa", tasa) :
+                new ObjectParameter("tasa", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_MyEmployee_Custom_Result>("GetElementosPorTasaAprobacionDeCursos", topParameter, tasaParameter);
+        }
     }
 }

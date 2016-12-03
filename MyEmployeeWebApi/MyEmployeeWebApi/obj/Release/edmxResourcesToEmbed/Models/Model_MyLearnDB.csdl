@@ -48,6 +48,38 @@
       <Parameter Name="Trabajos" Mode="In" Type="Double" />
       <Parameter Name="Minimo" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="Sp_get_por_promedio" ReturnType="Collection(MyLearnDBModel.Sp_get_por_promedio_Result)">
+      <Parameter Name="Top" Mode="In" Type="Int32" />
+      <Parameter Name="PromedioNotas" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="GetEstudiantesPorPromedio" ReturnType="Collection(MyLearnDBModel.SP_MyEmployee_Custom_Result)">
+      <Parameter Name="Top" Mode="In" Type="Int32" />
+      <Parameter Name="PromedioNotas" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_get_por_calificacion_trabajos" ReturnType="Collection(MyLearnDBModel.Sp_get_por_calificacion_trabajos_Result)">
+      <Parameter Name="Top" Mode="In" Type="Int32" />
+      <Parameter Name="CalificacionTrabajos" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="GetPorPorcentajeEstrellas" ReturnType="Collection(MyLearnDBModel.SP_MyEmployee_Custom_Result)">
+      <Parameter Name="Top" Mode="In" Type="Int32" />
+      <Parameter Name="CalificacionTrabajos" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_get_por_tasa_trabajos_exitosos" ReturnType="Collection(MyLearnDBModel.Sp_get_por_tasa_trabajos_exitosos_Result)">
+      <Parameter Name="Top" Mode="In" Type="Int32" />
+      <Parameter Name="tasa" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="GetTalentosPorTasaProyectosExitosos" ReturnType="Collection(MyLearnDBModel.SP_MyEmployee_Custom_Result)">
+      <Parameter Name="Top" Mode="In" Type="Int32" />
+      <Parameter Name="tasa" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_get_por_tasa_aprobacion_de_cursos" ReturnType="Collection(MyLearnDBModel.Sp_get_por_tasa_aprobacion_de_cursos_Result)">
+      <Parameter Name="Top" Mode="In" Type="Int32" />
+      <Parameter Name="tasa" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="GetElementosPorTasaAprobacionDeCursos" ReturnType="Collection(MyLearnDBModel.SP_MyEmployee_Custom_Result)">
+      <Parameter Name="Top" Mode="In" Type="Int32" />
+      <Parameter Name="tasa" Mode="In" Type="Double" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="SP_MyEmployee_Result">
     <Property Type="String" Name="IdEstudiante" Nullable="false" MaxLength="100" />
@@ -61,6 +93,34 @@
     <Property Type="String" Name="NombreContacto" Nullable="true" MaxLength="61" />
     <Property Type="String" Name="Telefono" Nullable="true" MaxLength="15" />
     <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="Double" Name="Performance" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Sp_get_por_promedio_Result">
+    <Property Type="String" Name="IdEstudiante" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="NombreContacto" Nullable="false" MaxLength="61" />
+    <Property Type="String" Name="Telefono" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="Double" Name="Performance" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Sp_get_por_calificacion_trabajos_Result">
+    <Property Type="String" Name="IdEstudiante" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="NombreContacto" Nullable="false" MaxLength="61" />
+    <Property Type="String" Name="Telefono" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="Double" Name="Performance" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Sp_get_por_tasa_trabajos_exitosos_Result">
+    <Property Type="String" Name="IdEstudiante" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="NombreContacto" Nullable="false" MaxLength="61" />
+    <Property Type="String" Name="Telefono" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="Double" Name="Performance" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Sp_get_por_tasa_aprobacion_de_cursos_Result">
+    <Property Type="String" Name="IdEstudiante" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="NombreContacto" Nullable="false" MaxLength="61" />
+    <Property Type="String" Name="Telefono" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
     <Property Type="Double" Name="Performance" Nullable="true" />
   </ComplexType>
 </Schema>
