@@ -78,15 +78,15 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
             console.log($scope.js_crearCuentaJson);
             fct_MyLearn_API_Client.save({ type: 'Estudiantes' }, $scope.js_crearCuentaJson).$promise.then(function (data) {
                 $scope.idActual = data.Id;
-                alert(angular.toJson(data.Id));
-                alert(angular.toJson(access_token));
-                alert(angular.toJson(refresh_token));
+                //alert(angular.toJson(data.Id));
+                //alert(angular.toJson(access_token));
+                //alert(angular.toJson(refresh_token));
                 fct_MyLearn_API_Client.save({ type: 'DriveCredentials' }, {
                     "UserId": data.Id,
                     "AccessToken": access_token,
                     "RefreshToken": refresh_token
                 }).$promise.then(function (data) {
-                    alert(angular.toJson($scope.idActual));
+                    //alert(angular.toJson($scope.idActual));
                     fct_MyLearn_API_Client.save({ type: 'TwitterCredentials' }, {
                         "UserId": $scope.idActual,
                         "AccessToken": twitter_access_token,
