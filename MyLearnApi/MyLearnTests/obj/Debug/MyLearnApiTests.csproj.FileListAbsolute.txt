@@ -24,7 +24,6 @@ C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnTests\bin\Debug\Mi
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnTests\bin\Debug\Owin.dll
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnTests\bin\Debug\System.Web.Http.dll
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnTests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
-C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnTests\bin\Debug\EntityFramework.dll
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnTests\bin\Debug\Tweetinvi.dll
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnTests\bin\Debug\Google.Apis.Auth.dll
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnTests\bin\Debug\Google.Apis.Drive.v2.dll
