@@ -67,6 +67,10 @@
         templateUrl: 'Vistas/Empresa/AreaTrabajoEmpresa_ProyEmpresa.html',
         controller: 'ctrl_areaTrabajoEmpresa'
     })
+    .when('/MyLearn/Empresa/Perfil/AreaDeTrabajoLectura/:IdUser/:IdTrabajo/:IdEst', {
+        templateUrl: 'Vistas/Empresa/AreaTrabajoEmpresa_ProyEmpresaLectura.html',
+        controller: 'ctrl_areaTrabajoEmpresa'
+    })
 
 
 /*-------------------------------------Estudiante----------------------------------------*/
@@ -97,6 +101,10 @@
     })
     .when('/MyLearn/Estudiante/Perfil/AreaTrabajo/:IdUser/:IdTrabajo', {
         templateUrl: 'Vistas/Estudiante/AreaTrabajoEst_ProyEmpresa.html',
+        controller: 'ctrl_areaTrabajoEstudianteEmpresa'
+    })
+    .when('/MyLearn/Estudiante/Perfil/AreaTrabajoLectura/:IdUser/:IdTrabajo', {
+        templateUrl: 'Vistas/Estudiante/AreaTrabajoEst_ProyEmpresaLectura.html',
         controller: 'ctrl_areaTrabajoEstudianteEmpresa'
     })
     .when('/MyLearn/Estudiante/Perfil/AreaTrabajoEstudianteProfesor/:IdUser/:IdTrabajo', {

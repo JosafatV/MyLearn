@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<nav>
-				<a><strike>Mi Perfil</stike></a>
+                <a data-ng-click="do_goPerfilEmpresa()">Mi Perfil</a>
 				<a><strike>Crear Subasta</strike></a>
                 <a data-ng-click="cerrarSesionService.cerrarEstaSesion()">Cerrar Sesion</a>
 			</nav>
@@ -37,7 +37,7 @@
 					<br><br>
 					<label for="Estudiante">Estudiante Encargado:{{trabajoActual.NombreContacto}}</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
 					<br><br>
-					<label for="Universidad">Presupuesto Asignado:{{trabajoActual.Monto}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<label for="Universidad">Presupuesto Asignado:${{trabajoActual.Monto}}</label>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</article>
 			<aside class="col-md-4">
 				<br>
@@ -63,6 +63,7 @@
                                             <h2>Mensaje de:{{msj.NombreEmisor}}</h2>
                                             <h4>Fecha:{{msj.Fecha}}</h4>
                                             <h4>Contenido:{{msj.Contenido}}</h4>
+                                            <a href="{{msj.Adjunto}}" target="_blank" data-ng-hide="msj.Adjunto.trim() == '' ">Ver adjunto</a>
                                         </article>
 
                                     </section>
@@ -86,7 +87,7 @@
                                                 <h2>Mensaje de:{{resp.NombreEmisor}}</h2>
                                                 <h4>Fecha:{{resp.Fecha}}</h4>
                                                 <h4>Contenido:{{resp.Contenido}}</h4>
-
+                                                <a href="{{resp.Adjunto}}" target="_blank" data-ng-hide="resp.Adjunto.trim() == '' ">Ver adjunto</a>
                                         </div>
                                     </section>
                                 </div>

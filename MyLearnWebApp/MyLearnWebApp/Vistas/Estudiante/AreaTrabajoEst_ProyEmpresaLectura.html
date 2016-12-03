@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<nav>
-				<a><strike>Mi Perfil</strike></a>
+                <a data-ng-click="do_goPerfilEstudiante()">Mi Perfil</a>
                 <a data-ng-click="cerrarSesionService.cerrarEstaSesion()">Cerrar Sesion</a>
 			</nav>
 		</div>
@@ -38,7 +38,7 @@
 																				<h2>Mensaje de:{{msj.NombreEmisor}}</h2>
 																				<h4>Fecha:{{msj.Fecha}}</h4>
 																				<h4>Contenido:{{msj.Contenido}}</h4>
-
+                                                                            <a href="{{msj.Adjunto}}" target="_blank" data-ng-hide="msj.Adjunto.trim() == '' ">Ver adjunto</a>
 
 																</section>
 														</div>
@@ -61,6 +61,7 @@
                                                             <h2>Mensaje de:{{resp.NombreEmisor}}</h2>
                                                             <h4>Fecha:{{resp.Fecha}}</h4>
                                                             <h4>Contenido:{{resp.Contenido}}</h4>
+                                                            <a href="{{resp.Adjunto}}" target="_blank" data-ng-hide="resp.Adjunto.trim() == '' ">Ver adjunto</a>
 
                                                             <p>
                                                                 <br><br><br>

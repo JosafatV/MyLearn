@@ -38,7 +38,7 @@
 			<table class="table table-bordered table-hover table-condensed prom1">
 					<tr>
 							<th>Nombre</th>
-							<th>Presupuesto Base</th>
+							<th>Presupuesto Base ($)</th>
 							<th>Fecha final de recepción de ofertas</th>
 					</tr>
                 <tr data-ng-repeat="subasta in ls_subastas  | filter: search" data-ng-click="do_goSubastas(subasta)">
@@ -70,11 +70,17 @@
 								<th>Fecha de Entrega</th>
 								<th>Estado</th>
 						</tr>
-                    <tr data-ng-repeat="trabajos in ls_trabajos  | filter: search" data-ng-click="do_goTrabajos(trabajos)">
+                    <tr data-ng-repeat="trabajos in ls_trabajos  | filter: search" data-ng-click="do_goTrabajos(trabajos)" 
+                            data-ng-hide="trabajos.EstadoTrabajo != 'A'">
                         <td>{{trabajos.Nombre}}</td>
                         <td>{{trabajos.FechaFinalizacion}}</td>
-                        <td>{{trabajos.EstadoTrabajo}}</td>
-
+                        <td>Activa</td>
+                    </tr>
+                    <tr data-ng-repeat="trabajos in ls_trabajos  | filter: search" data-ng-click="do_goTrabajosLectura(trabajos)"
+                            data-ng-hide="trabajos.EstadoTrabajo != 'T'">
+                        <td>{{trabajos.Nombre}}</td>
+                        <td>{{trabajos.FechaFinalizacion}}</td>
+                        <td>Terminado</td>
                     </tr>
 
 			</table>

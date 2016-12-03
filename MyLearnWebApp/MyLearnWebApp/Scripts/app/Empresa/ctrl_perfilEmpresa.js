@@ -106,6 +106,11 @@
         $scope.do_goTrabajos = function (trabajo) {
             $location.path('/MyLearn/Empresa/Perfil/AreaDeTrabajo/' + $routeParams.IdUser +"/"+ trabajo.IdTrabajo + "/" + trabajo.IdEstudiante);
         };
+
+        $scope.do_goTrabajosLectura = function (trabajo) {
+            $location.path('/MyLearn/Empresa/Perfil/AreaDeTrabajoLectura/' + $routeParams.IdUser + "/" + trabajo.IdTrabajo + "/" + trabajo.IdEstudiante);
+        };
+
          $scope.do_goPerfil = function () {
             $location.path('/MyLearn/Empresa/Perfil/' + $routeParams.IdUser);
         };

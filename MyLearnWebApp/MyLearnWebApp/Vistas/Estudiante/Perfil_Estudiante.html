@@ -74,11 +74,11 @@
 						</tr>
                     <tr data-ng-repeat="proyecto in ls_proyectos  | filter: search" data-ng-hide="proyecto.EstadoProyecto != 'A'" data-ng-click="do_goProyecto(proyecto)">
                         <td>{{proyecto.NombreProyecto}}</td>
-                        <td>{{proyecto.EstadoProyecto}}</td>
+                        <td>Activo</td>
                     </tr>
                     <tr data-ng-repeat="proyecto in ls_proyectos  | filter: search" data-ng-hide="proyecto.EstadoProyecto != 'T'" data-ng-click="do_goProyectoLectura(proyecto)">
                         <td>{{proyecto.NombreProyecto}}</td>
-                        <td>{{proyecto.EstadoProyecto}}</td>
+                        <td>Terminado</td>
                     </tr>
 			</table>
 			<div class="col-md-5">
@@ -99,11 +99,24 @@
 							<th>Estado</th>
               <th>Realize una propuesta</th>
 					</tr>
-                <tr data-ng-repeat="curso in ls_cursos  | filter: search" >
+                <tr data-ng-repeat="curso in ls_cursos  | filter: search" data-ng-hide="curso.Estado != 'P'">
                     <td>{{curso.Nombre}}</td>
-                    <td>{{curso.NotaMinima}}</td>
+                    <td>{{curso.Nota}}</td>
+                    <td>Pendiente</td>
+                    <td><a class="btn btn-success" data-ng-click="do_goCurso(curso)" data-ng-hide="curso.Estado != 'P'">Proponer Proyecto</a></td>
+                </tr>
+                <tr data-ng-repeat="curso in ls_cursos  | filter: search" data-ng-hide="curso.Estado != 'A'">
+                    <td>{{curso.Nombre}}</td>
+                    <td>{{curso.Nota}}</td>
+                    <td>Activo</td>
+                    <td><a class="btn btn-success" data-ng-click="do_goCurso(curso)" data-ng-hide="curso.Estado != 'P'">Proponer Proyecto</a></td>
+                </tr>
+                <tr data-ng-repeat="curso in ls_cursos  | filter: search" data-ng-hide="curso.Estado != 'T'">
+                    <td>{{curso.Nombre}}</td>
+                    <td>{{curso.Nota}}</td>
                     <td>{{curso.Estado}}</td>
-                    <td><a class="btn btn-success" data-ng-click="do_goCurso(curso)" data-ng-hide= "curso.Estado != 'P'" >Proponer Proyecto</a></td>
+                    <td><a class="btn btn-success" data-ng-click="do_goCurso(curso)" data-ng-hide="curso.Estado != 'P'">Proponer Proyecto</a></td>
+                </tr>
 				</table>
 				<nav class="nav1">
 						<ul class="pager">
@@ -121,9 +134,16 @@
                         <th>Nombre del Proyecto</th>
                         <th>Estado</th>
                     </tr>
-                    <tr data-ng-repeat="trabajos in ls_trabajos  | filter: search" data-ng-click="do_goTrabajo(trabajos)">
+                    <tr data-ng-repeat="trabajos in ls_trabajos  | filter: search" data-ng-click="do_goTrabajo(trabajos)" 
+                                    data-ng-hide="trabajos.EstadoTrabajo != 'A'">
                         <td>{{trabajos.Nombre}}</td>
-                        <td>{{trabajos.EstadoTrabajo}}</td>
+                        <td>Activo</td>
+                    </tr>
+                    <tr data-ng-repeat="trabajos in ls_trabajos  | filter: search" data-ng-click="do_goTrabajoLectura(trabajos)"
+                                data-ng-hide="trabajos.EstadoTrabajo != 'T'">
+                        <td>{{trabajos.Nombre}}</td>
+                        <td>Terminado</td>
+                    </tr>
                 </table>
 								<nav class="nav1">
 										<ul class="pager">
