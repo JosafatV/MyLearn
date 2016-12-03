@@ -152,7 +152,7 @@
                type: 'Twitt', extension1: 'Alardeo', extension2: $routeParams.IdUser,
                extension3: $scope.userActual.NombreContacto.trim(), extension4: badge.Nombre.trim(), extension5: badge.IdCurso
            }, {}).$promise.then(function (data) {
-               alert(angular.toJson(data));
+
            });
        };
 

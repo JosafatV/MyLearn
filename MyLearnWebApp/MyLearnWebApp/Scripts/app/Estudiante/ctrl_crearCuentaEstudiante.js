@@ -128,7 +128,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
                 "AccessToken": access_token,
                 "RefreshToken": refresh_token
             }).$promise.then(function (data) {
-                $location.path('/MyLearn/Estudiante/Perfil/' + id);
+                //$location.path('/MyLearn/Estudiante/Perfil/' + id);
             });
         };
 
@@ -174,7 +174,9 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
             OAuth.popup("twitter", {
             }).done(function (result) {
                 twitter_access_token = result.oauth_token;
-                twitter_secret_token = result.oauth_token_secret;                
+                twitter_secret_token = result.oauth_token_secret;
+                console.log(twitter_access_token);
+                console.log(twitter_secret_token);
             })
 
         };
