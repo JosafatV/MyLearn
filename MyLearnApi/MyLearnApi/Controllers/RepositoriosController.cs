@@ -93,11 +93,11 @@ namespace MyLearnApi.Controllers
         /// <returns> File download link </returns>
         [HttpPost]
         [ResponseType(typeof(string))]
-        [Route("MyLearnApi/Twitt/Alardeo/{IdUsuario}/{nombreEstudiante}/{nombreBadge}/{nombreCurso}")]
-        public IHttpActionResult twittBadge(string idUsuario, string nombreEstudiante, string nombreBadge, string nombreCurso)
+        [Route("MyLearnApi/Twitt/Alardeo/{IdUsuario}/{nombreEstudiante}/{nombreBadge}/{idCurso}")]
+        public IHttpActionResult twittBadge(string idUsuario, string nombreEstudiante, string nombreBadge, int idCurso)
         {
             //ccrear
-            string lstr_twitt = pobj_repoLogic.twittBadge(idUsuario, nombreEstudiante, nombreBadge, nombreCurso);
+            string lstr_twitt = pobj_repoLogic.twittBadge(idUsuario, nombreEstudiante, nombreBadge, idCurso);
             
             return Ok(lstr_twitt);
 

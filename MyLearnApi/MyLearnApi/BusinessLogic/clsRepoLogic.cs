@@ -67,9 +67,10 @@ namespace MyLearnApi.BusinessLogic.UserAccounts
         }
 
 
-        public string twittBadge(string idUsuario,string nombreEstudiante, string nombreBadge, string nombreCurso)
+        public string twittBadge(string idUsuario,string nombreEstudiante, string nombreBadge, int idCurso)
         {
             TWITTER_CREDENTIALS cred = db.TWITTER_CREDENTIALS.Find(idUsuario);
+            CURSO curso = db.CURSO.Find(idCurso);//id
             //get tokens of the database
             if (cred != null)
             {
@@ -79,8 +80,10 @@ namespace MyLearnApi.BusinessLogic.UserAccounts
                 //set user tokens
                 pobj_twittConn.setUserAccessToken(cred.AccessToken);
                 pobj_twittConn.setUserAccessSecret(cred.AccessTokenSecret);
+                // pobj_twittConn.setUserAccessToken("1327984718-gkh5tjiC5sFvOm8Ui4Eefwd2tiLuVFge07RXdzK");
+                //pobj_twittConn.setUserAccessSecret("Y0EBtEWitIz0XUmIXn0KE7Narf2boTfnDJ88jfQHlMk0X");
                 //sends twitt and return the twitt
-                string twitt = nombreEstudiante +" ganó "+nombreBadge+" en "+nombreCurso;
+                string twitt = nombreEstudiante + " ganó " + nombreBadge + " en " +curso.Nombre;
                 return pobj_twittConn.twitt(twitt);
             }
             //error no credentials
