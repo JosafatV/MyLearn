@@ -4,6 +4,10 @@ using MyLearnApi.Models.DriveIntegration;
 using System.Data.Entity.Infrastructure;
 using System.IO;
 using MyLearnApi.Models.TwitterIntegration;
+using System.Data.Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MyLearnApi.BusinessLogic.UserAccounts
 {
@@ -66,9 +70,32 @@ namespace MyLearnApi.BusinessLogic.UserAccounts
             return cred;
         }
 
-
-        public string twittBadge(string idUsuario,string nombreEstudiante, string nombreBadge, int idCurso)
+        /// <summary>
+        /// twitea un badge y le cambia el estado aalardeado "R"
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <param name="nombreEstudiante"></param>
+        /// <param name="idBadge"></param>
+        /// <param name="idCurso"></param>
+        /// <param name="idProyecto"></param>
+        /// <returns></returns>
+        public string twittBadge(string idUsuario,string nombreEstudiante, int idBadge, int idCurso, int idProyecto)
         {
+
+            BADGE lobj_badge = db.BADGE.Find(idBadge);
+            BADGE_POR_PROYECTO bpp = db.BADGE_POR_PROYECTO.Find(idBadge,idProyecto);
+            bpp.Estado = "R";
+            db.Entry(bpp).State = EntityState.Modified;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {                
+               throw;   
+            }
+
+
             TWITTER_CREDENTIALS cred = db.TWITTER_CREDENTIALS.Find(idUsuario);
             CURSO curso = db.CURSO.Find(idCurso);//id
             //get tokens of the database
@@ -83,7 +110,7 @@ namespace MyLearnApi.BusinessLogic.UserAccounts
                 // pobj_twittConn.setUserAccessToken("1327984718-gkh5tjiC5sFvOm8Ui4Eefwd2tiLuVFge07RXdzK");
                 //pobj_twittConn.setUserAccessSecret("Y0EBtEWitIz0XUmIXn0KE7Narf2boTfnDJ88jfQHlMk0X");
                 //sends twitt and return the twitt
-                string twitt = nombreEstudiante + " ganó " + nombreBadge + " en " +curso.Nombre;
+                string twitt = nombreEstudiante + " ganó " + RemoveWhitespace(lobj_badge.Nombre) + " en " +curso.Nombre;
                 return pobj_twittConn.twitt(twitt);
             }
             //error no credentials
@@ -108,12 +135,24 @@ namespace MyLearnApi.BusinessLogic.UserAccounts
             pobj_twittConn.setUserAccessSecret("V8s9IYvvfdI1HX2moYsIu27V62VVbNtm0h79RqCZuicK4");
             //sends twitt and return the twitt
             string twitt = "Hay un nuevo proyecto: " + nombreTrabajo;
+
+
             return pobj_twittConn.twitt(twitt);
            
 
         }
+        /// <summary>
+        /// remove withe spaces
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public string RemoveWhitespace(string input)
+        {
+            return new string(input.ToCharArray()
+                .Where(c => !Char.IsWhiteSpace(c))
+                .ToArray());
+        }
 
-    
 
         /// <summary>
         /// uploads the file and returns the WebContentLink

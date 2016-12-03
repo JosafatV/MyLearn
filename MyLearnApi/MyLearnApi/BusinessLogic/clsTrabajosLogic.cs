@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using MyLearnApi.Models;
+using MyLearnApi.BusinessLogic.UserAccounts;
 
 namespace MyLearnApi.BusinessLogic
 {
@@ -139,6 +140,10 @@ namespace MyLearnApi.BusinessLogic
             tRABAJO.FechaInicio = DateTime.Now;
             db.TRABAJO.Add(tRABAJO);
             db.SaveChanges();
+            //se publica en twitter
+            clsRepoLogic pobj_repoLogic = new clsRepoLogic();
+            pobj_repoLogic.twittSubasta(tRABAJO.Nombre);
+
             return tRABAJO;
         }
 

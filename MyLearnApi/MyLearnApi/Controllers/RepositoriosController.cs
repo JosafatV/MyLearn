@@ -93,11 +93,11 @@ namespace MyLearnApi.Controllers
         /// <returns> File download link </returns>
         [HttpPost]
         [ResponseType(typeof(string))]
-        [Route("MyLearnApi/Twitt/Alardeo/{IdUsuario}/{nombreEstudiante}/{nombreBadge}/{idCurso}")]
-        public IHttpActionResult twittBadge(string idUsuario, string nombreEstudiante, string nombreBadge, int idCurso)
+        [Route("MyLearnApi/Twitt/Alardeo/{IdUsuario}/{nombreEstudiante}/{idBadge}/{idCurso}/{idProyecto}")]
+        public IHttpActionResult twittBadge(string idUsuario, string nombreEstudiante, int idBadge, int idCurso, int idProyecto)
         {
             //ccrear
-            string lstr_twitt = pobj_repoLogic.twittBadge(idUsuario, nombreEstudiante, nombreBadge, idCurso);
+            string lstr_twitt = pobj_repoLogic.twittBadge(idUsuario, nombreEstudiante, idBadge, idCurso,idProyecto);
             
             return Ok(lstr_twitt);
 
@@ -137,12 +137,13 @@ namespace MyLearnApi.Controllers
         [Route("MyLearnApi/TwitterCredentials")]
         [Route("MyLearnApi/DriveCredentials")]
         [Route("MyLearnApi/File/{IdUsuario}")]
-        [Route("MyLearnApi/Twitt/Alardeo/{IdUsuario}/{nombreEstudiante}/{nombreBadge}/{nombreCurso}")]
+        [Route("MyLearnApi/Twitt/Alardeo/{IdUsuario}/{nombreEstudiante}/{idBadge}/{idCurso}/{idProyecto}")]
         [Route("MyLearnApi/Twitt/Subasta/{IdUsuario}/{nombreTrabajo}")]
         public HttpResponseMessage Options()
         {
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK };
         }
+       
 
 
     }
