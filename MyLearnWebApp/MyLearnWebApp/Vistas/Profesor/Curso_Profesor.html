@@ -72,7 +72,7 @@
 						<tr data-ng-repeat="est in ls_estudiantes">
 								<td>{{est.NOMBRE_EST}}</td>
 								<td><a data-ng-hide="est.EstadoProyecto != 'A'" class="btn btn-tcc btn-default btn-md" data-ng-click="go_verProyecto(est)">Ver Proyecto</a>
-                                    <a data-ng-hide="est.EstadoProyecto != 'T'" class="btn btn-tcc btn-default btn-md" data-ng-click="go_verProyecto(est)">Ver Proyecto Terminado</a>
+                                    <a data-ng-hide="est.EstadoProyecto != 'T'" class="btn btn-tcc btn-default btn-md" data-ng-click="go_verProyectoTerminado(est)">Ver Proyecto Terminado</a>
                                 </td>
 								<td>{{est.NotaObtenida}}</td>
 						</tr>

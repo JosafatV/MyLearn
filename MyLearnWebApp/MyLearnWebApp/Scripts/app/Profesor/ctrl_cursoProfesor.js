@@ -40,6 +40,11 @@ angular.module('mod_MyLearn').controller('ctrl_cursoProfesor', ['srcv_cerrarSesi
                     proyecto.IdProyecto + '/' + proyecto.IdEstudiante.trim()+ '/' + $routeParams.IdCurso);
         };
 
+        $scope.go_verProyectoTerminado = function (proyecto) {
+            $location.path('/MyLearn/Estudiante/Perfil/AreaTrabajoProfesorLectura/' + $routeParams.IdUser + '/' +
+                    proyecto.IdProyecto + '/' + proyecto.IdEstudiante.trim() + '/' + $routeParams.IdCurso);
+        };
+
         $scope.goNotificaciones = function () {
             $location.path('/MyLearn/Profesor/Perfil');
         };

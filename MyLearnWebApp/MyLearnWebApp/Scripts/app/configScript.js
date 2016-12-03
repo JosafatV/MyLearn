@@ -35,6 +35,11 @@
         controller: 'ctrl_areaTrabajoProfesor'
     })
 
+    .when('/MyLearn/Estudiante/Perfil/AreaTrabajoProfesorLectura/:IdUser/:IdTrabajo/:IdEst/:IdCurso', {
+        templateUrl: 'Vistas/Profesor/AreaTrabajoProf_ProyCursoLectura.html',
+        controller: 'ctrl_areaTrabajoProfesor'
+    })
+
 /*-------------------------------------Empresa-------------------------------------------*/
 
 
