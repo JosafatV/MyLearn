@@ -1,6 +1,7 @@
 ﻿angular.module('mod_MyLearn').controller('ctrl_crearSubasta', ['srcv_cerrarSesion', 'fct_User', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
     function (srcv_cerrarSesion,fct_User, $q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
+        $scope.bool_subastacreada = false;
         $scope.ls_tecnologias = [];
         $scope.ls_tecnologiasSelect = [];
 
@@ -30,6 +31,7 @@
                 $scope.js_crearSubasta = {};
                 angular.forEach($scope.ls_tecnologiasSelect, function (value, key) {
                     fct_MyLearn_API_Client.save({ type: 'Subastas', extension1: 'Tecnologia' }, { IdTecnologia: value.Id, IdTrabajo: data.Id}).$promise.then(function (data) {
+                        $scope.bool_subastacreada = true;
                     }, function (error) {
                         alert('Error al publicar las tecnologias')
                     });
