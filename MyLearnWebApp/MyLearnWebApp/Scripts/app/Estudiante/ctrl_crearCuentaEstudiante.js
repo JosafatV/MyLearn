@@ -34,7 +34,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
         
         OAuth.initialize('CgKcLvAzYP_vq69R1HNBPtTne_g');
         OAuth.clearCache();
-        OAuth.create('google_drive');
+        //OAuth.create('google_drive');
 
         $scope.js_crearTecnologia = {
             IdTecnologia: "",
@@ -77,8 +77,29 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
         $scope.sendCuenta = function () {
             console.log($scope.js_crearCuentaJson);
             fct_MyLearn_API_Client.save({ type: 'Estudiantes' }, $scope.js_crearCuentaJson).$promise.then(function (data) {
-                set_sendCredentials(data.Id);
-                set_sendCredentialsTwitter(data.Id);
+                $scope.idActual = data.Id;
+                alert(angular.toJson(data.Id));
+                alert(angular.toJson(access_token));
+                alert(angular.toJson(refresh_token));
+                fct_MyLearn_API_Client.save({ type: 'DriveCredentials' }, {
+                    "UserId": data.Id,
+                    "AccessToken": access_token,
+                    "RefreshToken": refresh_token
+                }).$promise.then(function (data) {
+                    alert(angular.toJson($scope.idActual));
+                    fct_MyLearn_API_Client.save({ type: 'TwitterCredentials' }, {
+                        "UserId": $scope.idActual,
+                        "AccessToken": twitter_access_token,
+                        "AccessTokenSecret": twitter_secret_token
+                    }).$promise.then(function (data) {
+                        angular.forEach($scope.ls_tecnologiasSelect, function (value, key) {
+                            fct_MyLearn_API_Client.save({ type: 'Estudiantes', extension1: "Tecnologia" },
+                                { IdTecnologia: value.Id, IdEstudiante: $scope.idActual }
+                                );
+                        });
+
+                    });
+                });
                 /*angular.forEach($scope.ls_tecnologiasSelect, function (value, key) {
                     fct_MyLearn_API_Client.save({ type: 'Estudiantes', extension1: "Tecnologia" },
                         { IdTecnologia: value.Id, IdEstudiante: data.Id }
