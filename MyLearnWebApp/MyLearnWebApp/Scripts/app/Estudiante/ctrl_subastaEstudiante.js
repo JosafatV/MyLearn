@@ -1,7 +1,7 @@
 angular.module('mod_MyLearn').controller('ctrl_subastaEstudiante', ['srcv_cerrarSesion', '$q', '$scope', '$routeParams', '$location', 'ModalService', 'fct_MyLearn_API_Client', 'twitterService', '$uibModal',
     function (srcv_cerrarSesion,$q, $scope, $routeParams, $location, ModalService, fct_MyLearn_API_Client, twitterService, uibModal) {
 
-        $scope.str_tecnologia = { Id: ' ' };
+        $scope.str_tecnologia = { Id: '2222' };
         $scope.str_nombre = 'Nombre';
         $scope.ls_tecnologias = '';
         $scope.ls_resultadoBusqueda = '';
