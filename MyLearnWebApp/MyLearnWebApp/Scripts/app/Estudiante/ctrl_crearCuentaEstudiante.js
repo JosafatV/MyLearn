@@ -7,6 +7,7 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
         var twitter_access_token = "";
         var twitter_secret_token = "";
         var client_id = "";
+        $scope.bool_showLabel = true;
         $scope.csv;
         $scope.aaa = "";
         $scope.universidadSelected = "";
@@ -95,7 +96,9 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
                         angular.forEach($scope.ls_tecnologiasSelect, function (value, key) {
                             fct_MyLearn_API_Client.save({ type: 'Estudiantes', extension1: "Tecnologia" },
                                 { IdTecnologia: value.Id, IdEstudiante: $scope.idActual }
-                                );
+                                ).$promise.then(function (data) {
+                                    $scope.bool_showLabel = false;
+                                });
                         });
 
                     });
