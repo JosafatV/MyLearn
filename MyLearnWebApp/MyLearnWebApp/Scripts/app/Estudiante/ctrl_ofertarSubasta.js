@@ -59,6 +59,9 @@ angular.module('mod_MyLearn').controller('ctrl_ofertarSubasta', ['srcv_cerrarSes
         $scope.do_goPerfilEstudiante = function () {
             $location.path('/MyLearn/Estudiante/Perfil/' + $routeParams.IdUser);
         };
+        $scope.goCursosDisponibles = function () {
+            $location.path('/MyLearn/Estudiante/Perfil/' + $routeParams.IdUser + '/CursosDisponibles');
+        };
 
         $scope.set_propuestaDeSubasta = function () {
             alert('Si sirvio');

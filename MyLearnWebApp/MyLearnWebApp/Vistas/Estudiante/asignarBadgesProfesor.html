@@ -19,14 +19,15 @@
                                 <label for="NBadge">{{badge.Nombre}}</label>
                                 <img src="../../Vistas/Estilo/img/badgepeq.png" class="img-responsive img-rounded" alt="">
                                 <a class="btn btn-tcc btn-default btn-sm" data-ng-click="otorgarBadge(badge)">Asignar</a>
+                                <h3 data-ng-hide="!publicadoExitosamente"><span class="label label-success">Se otorgó exitosamente</span></h3 >
+                                <h3 data-ng-hide="!publicadoErroneamente"><span class="label label-danger">No se pudo otorgar</span></h3>
                             </div>
                     </div>
 
                 </div>
                 <!--Footer-->
                 <div class="modal-footer">
-                    <h1 data-ng-hide="!publicadoExitosamente"><span class="label label-success">Se otorgó exitosamente</span></h1>
-                    <h1 data-ng-hide="!publicadoErroneamente"><span class="label label-danger">No se pudo otorgar</span></h1>
+
                 </div>
             </div>
         </div>

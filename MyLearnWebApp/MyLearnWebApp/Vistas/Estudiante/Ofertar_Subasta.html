@@ -9,13 +9,13 @@
 		<div class="wrapper">
 			<div class="logo"> Subastas de Empleo
 				<div class="img">
-					<a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
+					<a data-ng-click="do_goPerfilEstudiante()"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded img1" alt=""></a>
 
 				</div>
 			</div>
 			<nav>
 				<a  data-ng-click="do_goPerfilEstudiante()">Mi Perfil</a>
-				<a>Cursos Disponibles</a>
+				<a data-ng-click="goCursosDisponibles()">Cursos Disponibles</a>
 				<a href="#ventana1"data-toggle="modal">Notificaciones</a>
                 <a data-ng-click="cerrarSesionService.cerrarEstaSesion()">Cerrar Sesion</a>
 			</nav>
@@ -86,7 +86,7 @@
                             <h2 data-ng-hide="!envioExitoso" for="nombre"><span class="label label-success">Su propuesta se realizo correctamente</span></h2>
                             <h2 data-ng-hide="!envioFallido" for="nombre"><span class="label label-danger">Su propuesta se realizo correctamente</span></h2>
 							<div class="container-fluid">
-			          <div class="col-md-6">
+			          <div class="col-md-8">
 			            <form action=""class="">
 			              <div class="form-group">
 			                <br>
@@ -105,7 +105,7 @@
 											<textarea class="form-control" id="mensaje" data-ng-model="js_datosOferta.Comentario"></textarea>
 											<br>
 											&nbsp; &nbsp;&nbsp; &nbsp;<a class="btn btn-tcc btn-default btn-md" data-ng-click="set_postSubastas()">Ofertar</a>&nbsp; &nbsp;&nbsp; &nbsp;
-											<a class="btn btn-danger btn-md">Cancelar</a>
+											<a class="btn btn-danger btn-md"  data-ng-click="do_goPerfilEstudiante()">Cancelar</a>
 										</div>
 
 									</div>
