@@ -335,16 +335,10 @@ namespace MyLearnApi.BusinessLogic
         /// <returns></returns>
         public List<TRABAJO> getTabajosPorTecnologiaYNombre(int IdTecnologia, string nombreTrabajo,string idEstudiante)
         {
-            int numeroDeResultados = 20;
-            /*return db.FiltrarSubastasPorTecnologiaYNombre(nombreTecnologia, nombreTrabajo, numeroDeResultados)
-                //ordenar por fecha
-                .OrderByDescending(t=> t.FechaInicio)
-                .ToList<TRABAJO>();
 
-            */
-
+            /*
            return  db.TRABAJO.SqlQuery(
-                "  SELECT DISTINCT TOP(" + numeroDeResultados+") TRABAJO.ID, TRABAJO.NOMBRE, TRABAJO.Descripcion, TRABAJO.IdEmpresa, TRABAJO.FechaInicio, TRABAJO.FechaCierre,"
+                "  SELECT DISTINCT (TRABAJO.ID), TRABAJO.NOMBRE, TRABAJO.Descripcion, TRABAJO.IdEmpresa, TRABAJO.FechaInicio, TRABAJO.FechaCierre,"
                 +" TRABAJO.DocumentoAdicional, TRABAJO.EstrellasObtenidas, TRABAJO.PresupuestoBase, TRABAJO.Estado, TRABAJO.Exitoso "
                 +" FROM TRABAJO INNER JOIN TECNOLOGIA_POR_TRABAJO ON TRABAJO.Id = TECNOLOGIA_POR_TRABAJO.IdTrabajo "
                 +" INNER JOIN TECNOLOGIA ON TECNOLOGIA.Id = TECNOLOGIA_POR_TRABAJO.IdTecnologia, TRABAJO_POR_ESTUDIANTE "
@@ -352,6 +346,9 @@ namespace MyLearnApi.BusinessLogic
                 +" AND Trabajo.Estado = 'P' AND NOT EXISTS"
                 +" ( SELECT * FROM TRABAJO_POR_ESTUDIANTE WHERE TRABAJO.Id = TRABAJO_POR_ESTUDIANTE.IdTrabajo AND TRABAJO_POR_ESTUDIANTE.IdEstudiante = '"+idEstudiante+"') ")
                 .ToList<TRABAJO>();
+                */
+            string Estado = "P";
+            return db.filtrarSubastasPorNombreYTecnologia(IdTecnologia, nombreTrabajo, idEstudiante, Estado).ToList<TRABAJO>();
         }
 
         /// <summary>
