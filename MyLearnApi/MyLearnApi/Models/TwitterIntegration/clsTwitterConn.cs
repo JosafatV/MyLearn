@@ -11,10 +11,10 @@ namespace MyLearnApi.Models.TwitterIntegration
     /// </summary>
     public class clsTwitterConn
     {
-        private string consumerKey { get; set; }
-        private string consumenSecret { get; set; }
-        private string userAccessToken { get; set; }
-        private string userAccessSecret { get; set; }
+        private string consumerKey="";
+        private string consumenSecret = "";
+        private string userAccessToken = "";
+        private string userAccessSecret = "";
 
        
 
