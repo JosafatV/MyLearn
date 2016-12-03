@@ -70,19 +70,31 @@
             <Parameter Name="Trabajos" Mode="In" Type="Double" />
             <Parameter Name="Minimo" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetElementosPorPais" ReturnType="Collection(MyLearnDBModel.SP_MyEmployee_Result)">
+            <Parameter Name="Top" Mode="In" Type="Int32" />
+            <Parameter Name="Pais" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetElementosPorRubro" ReturnType="Collection(MyLearnDBModel.SP_MyEmployee_Custom_Result)">
+            <Parameter Name="Top" Mode="In" Type="Int32" />
+            <Parameter Name="PorcentajeNotas" Mode="In" Type="Double" />
+            <Parameter Name="PorcentajeEstrellas" Mode="In" Type="Double" />
+            <Parameter Name="Proyectos" Mode="In" Type="Double" />
+            <Parameter Name="Trabajos" Mode="In" Type="Double" />
+            <Parameter Name="Minimo" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_MyEmployee_Result">
           <Property Type="String" Name="IdEstudiante" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="NombreContacto" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="NombreContacto" Nullable="false" MaxLength="61" />
           <Property Type="String" Name="Telefono" Nullable="false" MaxLength="15" />
           <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
           <Property Type="Double" Name="Performance" Nullable="true" />
         </ComplexType>
         <ComplexType Name="SP_MyEmployee_Custom_Result">
-          <Property Type="String" Name="IdEstudiante" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="NombreContacto" Nullable="false" MaxLength="30" />
-          <Property Type="String" Name="Telefono" Nullable="false" MaxLength="15" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="IdEstudiante" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NombreContacto" Nullable="true" MaxLength="61" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
           <Property Type="Double" Name="Performance" Nullable="true" />
         </ComplexType>
       </Schema>
@@ -136,6 +148,28 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="get_elementos_por_rubro" FunctionName="MyLearnDBModel.Store.SP_MyEmployee_Custom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Custom_Result">
+                <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Performance" ColumnName="Performance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetElementosPorPais" FunctionName="MyLearnDBModel.Store.SP_MyEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Result">
+                <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Performance" ColumnName="Performance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetElementosPorRubro" FunctionName="MyLearnDBModel.Store.SP_MyEmployee_Custom">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MyLearnDBModel.SP_MyEmployee_Custom_Result">
                 <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />

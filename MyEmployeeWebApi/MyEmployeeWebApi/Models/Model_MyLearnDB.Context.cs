@@ -112,5 +112,47 @@ namespace MyEmployeeWebApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_MyEmployee_Custom_Result>("get_elementos_por_rubro", topParameter, porcentajeNotasParameter, porcentajeEstrellasParameter, proyectosParameter, trabajosParameter, minimoParameter);
         }
+    
+        public virtual ObjectResult<SP_MyEmployee_Result> GetElementosPorPais(Nullable<int> top, string pais)
+        {
+            var topParameter = top.HasValue ?
+                new ObjectParameter("Top", top) :
+                new ObjectParameter("Top", typeof(int));
+    
+            var paisParameter = pais != null ?
+                new ObjectParameter("Pais", pais) :
+                new ObjectParameter("Pais", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_MyEmployee_Result>("GetElementosPorPais", topParameter, paisParameter);
+        }
+    
+        public virtual ObjectResult<SP_MyEmployee_Custom_Result> GetElementosPorRubro(Nullable<int> top, Nullable<double> porcentajeNotas, Nullable<double> porcentajeEstrellas, Nullable<double> proyectos, Nullable<double> trabajos, Nullable<int> minimo)
+        {
+            var topParameter = top.HasValue ?
+                new ObjectParameter("Top", top) :
+                new ObjectParameter("Top", typeof(int));
+    
+            var porcentajeNotasParameter = porcentajeNotas.HasValue ?
+                new ObjectParameter("PorcentajeNotas", porcentajeNotas) :
+                new ObjectParameter("PorcentajeNotas", typeof(double));
+    
+            var porcentajeEstrellasParameter = porcentajeEstrellas.HasValue ?
+                new ObjectParameter("PorcentajeEstrellas", porcentajeEstrellas) :
+                new ObjectParameter("PorcentajeEstrellas", typeof(double));
+    
+            var proyectosParameter = proyectos.HasValue ?
+                new ObjectParameter("Proyectos", proyectos) :
+                new ObjectParameter("Proyectos", typeof(double));
+    
+            var trabajosParameter = trabajos.HasValue ?
+                new ObjectParameter("Trabajos", trabajos) :
+                new ObjectParameter("Trabajos", typeof(double));
+    
+            var minimoParameter = minimo.HasValue ?
+                new ObjectParameter("Minimo", minimo) :
+                new ObjectParameter("Minimo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_MyEmployee_Custom_Result>("GetElementosPorRubro", topParameter, porcentajeNotasParameter, porcentajeEstrellasParameter, proyectosParameter, trabajosParameter, minimoParameter);
+        }
     }
 }

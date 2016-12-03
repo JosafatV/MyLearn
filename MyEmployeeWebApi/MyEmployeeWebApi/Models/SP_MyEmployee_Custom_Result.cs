@@ -10,7 +10,6 @@
 namespace MyEmployeeWebApi.Models
 {
     using System;
-    using System.ComponentModel.DataAnnotations.Schema;
     using System.Runtime.Serialization;
     public partial class SP_MyEmployee_Custom_Result
     {

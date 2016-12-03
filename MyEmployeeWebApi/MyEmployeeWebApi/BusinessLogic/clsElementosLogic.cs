@@ -24,7 +24,18 @@ namespace MyEmployeeWebApi.BusinessLogic
         public List<SP_MyEmployee_Result> getElementosPorPais(int top, string pais)
         {
             //obtiene los mejores elemnentos buscando pais y top
-            return db.get_Elementos_por_pais(top, pais).ToList<SP_MyEmployee_Result>();
+            List<SP_MyEmployee_Result> result = db.GetElementosPorPais(top, pais).ToList<SP_MyEmployee_Result>();
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i].NombreContacto = RemoveWhitespace(result[i].NombreContacto);
+                result[i].NombreContacto = result[i].NombreContacto.Replace('-', ' ');
+                result[i].Email = RemoveWhitespace(result[i].Email);
+                result[i].Telefono = RemoveWhitespace(result[i].Telefono);
+            }
+
+            return result;
+
+        
         }
 
         /// <summary>
@@ -44,19 +55,19 @@ namespace MyEmployeeWebApi.BusinessLogic
             switch (rubro)
             {
                 case "Promedio_notas_de_cursos":
-                    result = db.get_elementos_por_rubro(top, porcentaje, 0, 0, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    result = db.GetElementosPorRubro(top, porcentaje, 0, 0, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
                     break;
 
                 case "Promedio_calificacion_trabajos":
-                    result = db.get_elementos_por_rubro(top, 0, porcentaje, 0, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    result = db.GetElementosPorRubro(top, 0, porcentaje, 0, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
                     break;
 
                 case "Tasa_de_Trabajos_Existosos":
-                    result = db.get_elementos_por_rubro(top, 0, 0, 0, porcentaje, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    result = db.GetElementosPorRubro(top, 0, 0, 0, porcentaje, 0).ToList<SP_MyEmployee_Custom_Result>();
                     break;
 
                 case "Tasa_de aprobacion_de_cursos":
-                    result = db.get_elementos_por_rubro(top, 0, 0, porcentaje, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
+                    result = db.GetElementosPorRubro(top, 0, 0, porcentaje, 0, 0).ToList<SP_MyEmployee_Custom_Result>();
                     break;
 
                 default:
