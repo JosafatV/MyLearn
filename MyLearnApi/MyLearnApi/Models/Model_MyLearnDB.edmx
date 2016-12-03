@@ -1700,6 +1700,12 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="TWITTER_CREDENTIALS" EntitySet="TWITTER_CREDENTIALS" />
           </AssociationSet>
+          <FunctionImport Name="select_cursos_of_student" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+          <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getcursos_de_un_estudiante" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+            <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
           <Key>
@@ -2217,10 +2223,10 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="Codigo" Nullable="true" MaxLength="10" />
-          <Property Type="Byte" Name="NotaMinima" Nullable="false" />
           <Property Type="DateTime" Name="FechaInicio" Nullable="true" />
           <Property Type="Int32" Name="NumeroGrupo" Nullable="true" />
           <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="Nota" Nullable="true" />
         </ComplexType>
         <ComplexType Name="SP_Select_Cursos_De_Universidad_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2878,7 +2884,6 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="NotaMinima" ColumnName="NotaMinima" />
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
@@ -3088,6 +3093,31 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="select_cursos_of_student" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_Estudiante">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_Cursos_Estudiante_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getcursos_de_un_estudiante" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_Estudiante">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_Cursos_Estudiante_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

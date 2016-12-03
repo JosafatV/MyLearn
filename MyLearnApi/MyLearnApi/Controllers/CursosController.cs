@@ -23,8 +23,8 @@ namespace MyLearnApi.Controllers
 
         [HttpGet]
         [Route("MyLearnApi/Cursos/Estudiante/{idEstudiante}")]
-        [ResponseType(typeof(List<CURSO>))]
-        public List<CURSO> getCursosDeEstudiante(string idEstudiante)
+        [ResponseType(typeof(List<SP_Select_Cursos_Estudiante_Result>))]
+        public List<SP_Select_Cursos_Estudiante_Result> getCursosDeEstudiante(string idEstudiante)
         {
             return pobj_cursosLogic.getCursosPorEstudiante(idEstudiante);
         }

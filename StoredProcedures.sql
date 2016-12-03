@@ -210,7 +210,7 @@ CREATE PROCEDURE SP_Insertar_Universidad @Nombre CHAR(30)
 
 CREATE PROCEDURE SP_Select_Cursos_Estudiante @IdEstudiante CHAR(100) 
 	AS
-		SELECT CURSO.Id, CURSO.Nombre, CURSO.Codigo, CURSO.NotaMinima, CURSO.FechaInicio, CURSO.NumeroGrupo, ESTUDIANTE_POR_CURSO.Estado
+		SELECT CURSO.Id, CURSO.Nombre, CURSO.Codigo, ESTUDIANTE_POR_CURSO.Nota, CURSO.FechaInicio, CURSO.NumeroGrupo, ESTUDIANTE_POR_CURSO.Estado
 		FROM CURSO INNER JOIN ESTUDIANTE_POR_CURSO ON CURSO.Id = ESTUDIANTE_POR_CURSO.IdCurso
 		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante 
 		AND ( ESTUDIANTE_POR_CURSO.Estado = 'A' OR ESTUDIANTE_POR_CURSO.Estado = 'T' OR ESTUDIANTE_POR_CURSO.Estado = 'P')		
@@ -281,7 +281,7 @@ CREATE PROCEDURE SP_Terminar_Proyecto_De_Un_Estudiante (@IdProyecto INT , @IdEst
 
 		UPDATE PROYECTO
 		SET ESTADO = @Estado
-		WHERE @IdProyecto = @IdProyecto;
+		WHERE PROYECTO.Id = @IdProyecto;
 
 	GO
 

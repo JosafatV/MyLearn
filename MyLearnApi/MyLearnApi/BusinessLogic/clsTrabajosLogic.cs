@@ -24,7 +24,8 @@ namespace MyLearnApi.BusinessLogic
         {
             //retorna los proyectos activos
             List<Object> listaTrabajos = db.VIEW_TRABAJO
-                .Where(trab => trab.EstadoTrabajo == "A" && trab.IdEmpresa == idEmpresa && trab.EstadoTrabajoPorEstudiante =="A" )
+                .Where(trab => (trab.EstadoTrabajo == "A" || trab.EstadoTrabajo == "T") &&
+                    trab.IdEmpresa == idEmpresa && (trab.EstadoTrabajoPorEstudiante =="A"  || trab.EstadoTrabajoPorEstudiante == "T"))
                 .OrderBy(trab => trab.FechaFinalizacion)
                 .ToList<Object>();
             //pagina el resultado de 20 en 20
@@ -50,7 +51,7 @@ namespace MyLearnApi.BusinessLogic
                 //si es activo "A" o terminado "T"
                 .Where(trab => (trab.EstadoTrabajo == "A"  || trab.EstadoTrabajo == "T" )&&
                 trab.IdEstudiante == idEstudiante &&
-                trab.EstadoTrabajoPorEstudiante == "A")
+                 (trab.EstadoTrabajoPorEstudiante == "A" || trab.EstadoTrabajoPorEstudiante == "T"))
                 .OrderBy(trab => trab.Nombre)
                 .ToList<VIEW_TRABAJO>();
             //pagina el resultado de 20 en 20
