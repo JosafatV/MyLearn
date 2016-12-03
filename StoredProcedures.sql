@@ -565,8 +565,6 @@ GO
 CREATE PROCEDURE SP_Promedio_Notas @IdEstudiante CHAR(100)
 	AS
 		SELECT dbo.FN_Promedio( @IdEstudiante) 
-
-
 	GO
 /*
 CREATE PROCEDURE SP_Promedio_de_Estrellas @IdEstudiante CHAR(100)
@@ -605,36 +603,36 @@ CREATE PROCEDURE SP_MyEmployee @Top INT, @Pais Char(30)
 		FROM 
 			(SELECT IdEstudiante, (SUM(Epc.Nota) / COUNT(Epc.IdCurso)) AS NotaPromedio
 			FROM ESTUDIANTE_POR_CURSO AS Epc
-			WHERE Epc.Estado = 'E' OR Epc.Estado = 'F' 
+			WHERE Epc.Estado = 'T'
 			GROUP BY IdEstudiante) AS A
 		JOIN
 			(SELECT IdEstudiante, CAST((SUM(EstrellasObtenidas) / COUNT(IdTrabajo))*20 AS FLOAT) AS PromedioEstrellas
 			FROM VIEW_TRABAJO
-			WHERE (EstadoTrabajo = 'E' OR EstadoTrabajo = 'F')
+			WHERE (EstadoTrabajo = 'T')
 			GROUP BY IdEstudiante) AS B
 		ON A.IdEstudiante=B.IdEstudiante
 		JOIN
-			(SELECT IdEstudiante, COUNT(IdProyecto) AS ProyectosExitosos
-			FROM VIEW_PROYECTOS
-			WHERE EstadoProyecto='E'
+			(SELECT IdEstudiante, COUNT(Distinct VIEW_TRABAJO.IdTrabajo) AS ProyectosExitosos
+			FROM VIEW_TRABAJO
+			WHERE VIEW_TRABAJO.Exitoso = 1 AND VIEW_TRABAJO.EstadoTrabajo = 'T'
 			GROUP BY IdEstudiante) AS C
 		ON A.IdEstudiante=C.IdEstudiante
 		JOIN
-			(SELECT IdEstudiante, COUNT(IdProyecto) AS ProyectosTerminados
-			FROM VIEW_PROYECTOS
-			WHERE (EstadoProyecto='E' OR EstadoProyecto='F')
+			(SELECT IdEstudiante, COUNT(Distinct VIEW_TRABAJO.IdTrabajo) AS ProyectosExitosos
+			FROM VIEW_TRABAJO
+			WHERE VIEW_TRABAJO.EstadoTrabajo = 'T'
 			GROUP BY IdEstudiante) AS D
 		On A.IdEstudiante=D.IdEstudiante
 		JOIN
-			(SELECT IdEstudiante, COUNT(IdCurso) AS CursosExitosos
-			FROM VIEW_CURSOS_MYEMPLOYEE
-			WHERE EstadoEpc='E'
+			(SELECT IdEstudiante, COUNT(Distinct ESTUDIANTE_POR_CURSO.IdCurso) AS CursosAprobados
+			FROM ESTUDIANTE_POR_CURSO INNER JOIN CURSO ON ESTUDIANTE_POR_CURSO.IdCurso = CURSO.Id
+			WHERE (ESTUDIANTE_POR_CURSO.Nota >= CURSO.NotaMinima ) AND ESTUDIANTE_POR_CURSO.Estado = 'T'
 			GROUP BY IdEstudiante) AS E
 		ON A.IdEstudiante=E.IdEstudiante
 		JOIN
-			(SELECT IdEstudiante, COUNT(IdCurso) AS CursosTerminados
-			FROM VIEW_CURSOS_MYEMPLOYEE
-			WHERE (EstadoEpc='E' OR EstadoEpc='F')
+			(SELECT IdEstudiante, COUNT(Distinct ESTUDIANTE_POR_CURSO.IdCurso) AS CursosReprobados
+			FROM ESTUDIANTE_POR_CURSO INNER JOIN CURSO ON ESTUDIANTE_POR_CURSO.IdCurso = CURSO.Id
+			WHERE ESTUDIANTE_POR_CURSO.Estado = 'T'
 			GROUP BY IdEstudiante) AS F
 		 ON A.IdEstudiante=F.IdEstudiante
 		 JOIN 
@@ -658,40 +656,40 @@ CREATE PROCEDURE SP_MyEmployee_Custom @Top INT, @PorcentajeNotas FLOAT, @Porcent
 		FROM 
 			(SELECT IdEstudiante, (SUM(Epc.Nota) / COUNT(Epc.IdCurso)) AS NotaPromedio
 			FROM ESTUDIANTE_POR_CURSO AS Epc
-			WHERE Epc.Estado = 'E' OR Epc.Estado = 'F' 
+			WHERE Epc.Estado = 'T'
 			GROUP BY IdEstudiante) AS A
 		JOIN
 			(SELECT IdEstudiante, CAST((SUM(EstrellasObtenidas) / COUNT(IdTrabajo))*20 AS FLOAT) AS PromedioEstrellas
 			FROM VIEW_TRABAJO
-			WHERE (EstadoTrabajo = 'E' OR EstadoTrabajo = 'F')
+			WHERE (EstadoTrabajo = 'T')
 			GROUP BY IdEstudiante) AS B
 		ON A.IdEstudiante=B.IdEstudiante
 		JOIN
-			(SELECT IdEstudiante, COUNT(IdProyecto) AS ProyectosExitosos
-			FROM VIEW_PROYECTOS
-			WHERE EstadoProyecto='E'
+			(SELECT IdEstudiante, COUNT(Distinct VIEW_TRABAJO.IdTrabajo) AS ProyectosExitosos
+			FROM VIEW_TRABAJO
+			WHERE VIEW_TRABAJO.Exitoso = 1 AND VIEW_TRABAJO.EstadoTrabajo = 'T'
 			GROUP BY IdEstudiante) AS C
 		ON A.IdEstudiante=C.IdEstudiante
 		JOIN
-			(SELECT IdEstudiante, COUNT(IdProyecto) AS ProyectosTerminados
-			FROM VIEW_PROYECTOS
-			WHERE (EstadoProyecto='E' OR EstadoProyecto='F')
+			(SELECT IdEstudiante, COUNT(Distinct VIEW_TRABAJO.IdTrabajo) AS ProyectosTerminados
+			FROM VIEW_TRABAJO
+			WHERE VIEW_TRABAJO.EstadoTrabajo = 'T'
 			GROUP BY IdEstudiante) AS D
 		On A.IdEstudiante=D.IdEstudiante
 		JOIN
-			(SELECT IdEstudiante, COUNT(IdCurso) AS CursosExitosos
-			FROM VIEW_CURSOS_MYEMPLOYEE
-			WHERE EstadoEpc='E'
+			(SELECT IdEstudiante, COUNT(Distinct ESTUDIANTE_POR_CURSO.IdCurso) AS CursosExitosos
+			FROM ESTUDIANTE_POR_CURSO INNER JOIN CURSO ON ESTUDIANTE_POR_CURSO.IdCurso = CURSO.Id
+			WHERE (ESTUDIANTE_POR_CURSO.Nota >= CURSO.NotaMinima ) AND ESTUDIANTE_POR_CURSO.Estado = 'T'
 			GROUP BY IdEstudiante) AS E
 		ON A.IdEstudiante=E.IdEstudiante
 		JOIN
-			(SELECT IdEstudiante, COUNT(IdCurso) AS CursosTerminados
-			FROM VIEW_CURSOS_MYEMPLOYEE
-			WHERE (EstadoEpc='E' OR EstadoEpc='F')
+			(SELECT IdEstudiante, COUNT(Distinct ESTUDIANTE_POR_CURSO.IdCurso) AS CursosTerminados
+			FROM ESTUDIANTE_POR_CURSO INNER JOIN CURSO ON ESTUDIANTE_POR_CURSO.IdCurso = CURSO.Id
+			WHERE ESTUDIANTE_POR_CURSO.Estado = 'T'
 			GROUP BY IdEstudiante) AS F
 		 ON A.IdEstudiante=F.IdEstudiante
 		 JOIN 
-			(SELECT Id, NombreContacto, Telefono, Email, ApellidoContacto
+			(SELECT Id, NombreContacto, Telefono, Email, Pais, ApellidoContacto
 			FROM ESTUDIANTE) AS G
 		ON A.IdEstudiante=G.Id
 		/*SQL does not compute this again since it´s made in the select*/
