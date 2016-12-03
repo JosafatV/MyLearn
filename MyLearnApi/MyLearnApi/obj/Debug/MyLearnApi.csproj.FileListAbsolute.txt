@@ -120,3 +120,4 @@ C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\bin\Twitterize
 C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Debug\MyLearnApi.csproj.App.config
 C:\Users\Vargam\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Debug\MyLearnApi.dll
 C:\Users\Vargam\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Debug\MyLearnApi.pdb
+C:\Users\Sebastian\Documents\GitHub\MyLearn\MyLearnApi\MyLearnApi\obj\Debug\MyLearnApi.csprojResolveAssemblyReference.cache

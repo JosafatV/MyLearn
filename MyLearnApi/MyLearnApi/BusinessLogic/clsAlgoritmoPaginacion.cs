@@ -22,10 +22,10 @@ namespace MyLearnApi.BusinessLogic
                 return lobj_resultado;
             //si index y el offset estan dentro del rango
             else if ((li_largoLista > (index * lby_offset + lby_offset - 1)))
-                lobj_resultado = lista.GetRange(index * lby_offset, index * lby_offset + lby_offset);
+                lobj_resultado = lista.GetRange(index * lby_offset, lby_offset);
             //si hay un overflow en el rango devuelve del indice hasta el fin de la lista
             else
-                lobj_resultado = lista.GetRange(index * lby_offset, li_largoLista);
+                lobj_resultado = lista.GetRange(index * lby_offset, li_largoLista-index * lby_offset);
 
             return lobj_resultado;
 
