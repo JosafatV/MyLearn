@@ -72,20 +72,13 @@
 								<th>Nombre del Proyecto</th>
 								<th>Estado</th>
 						</tr>
-                    <tr data-ng-repeat="proyecto in ls_proyectos  | filter: search" data-ng-hide="proyecto.EstadoProyecto != 'A'">
+                    <tr data-ng-repeat="proyecto in ls_proyectos  | filter: search" data-ng-hide="proyecto.EstadoProyecto != 'A'" data-ng-click="do_goProyecto(proyecto)">
                         <td>{{proyecto.NombreProyecto}}</td>
                         <td>{{proyecto.EstadoProyecto}}</td>
-                        <td>
-                            <a data-ng-hide="proyecto.EstadoProyecto != 'A'" class="btn btn-tcc btn-default btn-md" data-ng-click="do_goProyecto(proyecto)">Ver Proyecto</a>
-                            <a data-ng-hide="proyecto.EstadoProyecto != 'T'" class="btn btn-tcc btn-default btn-md" data-ng-click="do_goProyecto(proyecto)">Ver Proyecto Terminado</a>
-                        </td>
-                    <tr data-ng-repeat="proyecto in ls_proyectos  | filter: search" data-ng-hide="proyecto.EstadoProyecto != 'T'">
+                    </tr>
+                    <tr data-ng-repeat="proyecto in ls_proyectos  | filter: search" data-ng-hide="proyecto.EstadoProyecto != 'T'" data-ng-click="do_goProyectoLectura(proyecto)">
                         <td>{{proyecto.NombreProyecto}}</td>
                         <td>{{proyecto.EstadoProyecto}}</td>
-                        <td>
-                            <a data-ng-hide="proyecto.EstadoProyecto != 'A'" class="btn btn-tcc btn-default btn-md" data-ng-click="do_goProyecto(proyecto)">Ver Proyecto</a>
-                            <a data-ng-hide="proyecto.EstadoProyecto != 'T'" class="btn btn-tcc btn-default btn-md" data-ng-click="do_goProyecto(proyecto)">Ver Proyecto Terminado</a>
-                        </td>
                     </tr>
 			</table>
 			<div class="col-md-5">

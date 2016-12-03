@@ -102,3 +102,24 @@ body .prom1 tr:hover{
 .img1:hover{
 	cursor: pointer;
 }
+div.upload {
+width: 175px;
+height: 150px;
+background: url('../img/prueba1.png') no-repeat;
+overflow: hidden;
+position:relative;
+top: -35px;
+left: 100px;
+}
+
+div.upload input {
+display: block ;
+width: 160px ;
+height: 30px ;
+opacity: 0 ;
+overflow: hidden ;
+position:relative;
+top: 5px;
+left: 4px;
+margin-bottom: 0px;
+}

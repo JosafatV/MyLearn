@@ -44,6 +44,10 @@ angular.module('mod_MyLearn').controller('ctrl_perfilEstudiante', ['srcv_cerrarS
             $location.path('/MyLearn/Estudiante/Perfil/AreaTrabajoEstudianteProfesor/' + $routeParams.IdUser + '/' + proyecto.IdProyecto);
         };
 
+        $scope.do_goProyectoLectura = function (proyecto) {
+            $location.path('/MyLearn/Estudiante/Perfil/AreaTrabajoEstudianteProfesorLectura/' + $routeParams.IdUser + '/' + proyecto.IdProyecto);
+        };
+        
         $scope.goCursosDisponibles = function () {
             $location.path('/MyLearn/Estudiante/Perfil/' + $routeParams.IdUser + '/CursosDisponibles');
         };
