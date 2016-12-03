@@ -1706,6 +1706,12 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
           <FunctionImport Name="getcursos_de_un_estudiante" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
             <Parameter Name="IdEstudiante" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="prueba" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+            <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pruebas" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+            <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
           <Key>
@@ -3106,6 +3112,32 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="getcursos_de_un_estudiante" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_Estudiante">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_Cursos_Estudiante_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prueba" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_Estudiante">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_Cursos_Estudiante_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pruebas" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_Estudiante">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_Cursos_Estudiante_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />

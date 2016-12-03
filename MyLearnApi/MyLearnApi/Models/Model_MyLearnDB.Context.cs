@@ -1043,5 +1043,23 @@ namespace MyLearnApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Select_Cursos_Estudiante_Result>("getcursos_de_un_estudiante", idEstudianteParameter);
         }
+    
+        public virtual ObjectResult<SP_Select_Cursos_Estudiante_Result> prueba(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Select_Cursos_Estudiante_Result>("prueba", idEstudianteParameter);
+        }
+    
+        public virtual ObjectResult<SP_Select_Cursos_Estudiante_Result> pruebas(string idEstudiante)
+        {
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("IdEstudiante", idEstudiante) :
+                new ObjectParameter("IdEstudiante", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Select_Cursos_Estudiante_Result>("pruebas", idEstudianteParameter);
+        }
     }
 }

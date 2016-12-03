@@ -44,7 +44,7 @@ angular.module('mod_MyLearn').controller('ctrl_ofertarSubasta', ['srcv_cerrarSes
         fct_MyLearn_API_Client.query({
             type: 'Subastas', extension1: 'Ofertas', extension2: $routeParams.IdUser
                         , extension3: $routeParams.IdSub}).$promise.then(function (data) {
-            $scope.ls_otrasSubastas = data;
+            $scope.ls_otrasSubastas = data; 
                         });
 
         $scope.set_postSubastas = function () {

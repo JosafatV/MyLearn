@@ -420,6 +420,12 @@
     <FunctionImport Name="getcursos_de_un_estudiante" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
       <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="prueba" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="pruebas" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
