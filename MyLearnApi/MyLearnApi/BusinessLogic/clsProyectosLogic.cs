@@ -123,6 +123,7 @@ namespace MyLearnApi.BusinessLogic
             db.BADGE_POR_PROYECTO.Add(badge);
             //se incrementa la nota del proyecto con el puntaje del badge insertardo
             db.SP_Incrementar_Puntaje_Proyecto(badge.IdBadge, badge.IdProyecto);
+            
             try
             {
                 db.SaveChanges();

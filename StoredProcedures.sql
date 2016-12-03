@@ -210,7 +210,7 @@ CREATE PROCEDURE SP_Insertar_Universidad @Nombre CHAR(30)
 
 CREATE PROCEDURE SP_Select_Cursos_Estudiante @IdEstudiante CHAR(100) 
 	AS
-		SELECT CURSO.Id, CURSO.Nombre, CURSO.Codigo, ESTUDIANTE_POR_CURSO.Nota, CURSO.FechaInicio, CURSO.NumeroGrupo, ESTUDIANTE_POR_CURSO.Estado
+		SELECT distinct(CURSO.Id), CURSO.Nombre, CURSO.Codigo, ESTUDIANTE_POR_CURSO.Nota, CURSO.FechaInicio, CURSO.NumeroGrupo, ESTUDIANTE_POR_CURSO.Estado
 		FROM CURSO INNER JOIN ESTUDIANTE_POR_CURSO ON CURSO.Id = ESTUDIANTE_POR_CURSO.IdCurso
 		WHERE ESTUDIANTE_POR_CURSO.IdEstudiante = @IdEstudiante 
 		AND ( ESTUDIANTE_POR_CURSO.Estado = 'A' OR ESTUDIANTE_POR_CURSO.Estado = 'T' OR ESTUDIANTE_POR_CURSO.Estado = 'P')		
@@ -315,6 +315,18 @@ CREATE PROCEDURE SP_Incrementar_Puntaje_Proyecto (@IdBadge INT, @IdProyecto INT)
 		SET NotaObtenida = (@PuntajeActual + @Puntaje)
 		WHERE PROYECTO.Id = @IdProyecto
 
+		DECLARE @idCurso int
+		DECLARE @idEst CHAR(100)
+
+		SELECT  @idEst = PROYECTO_POR_ESTUDIANTE.IdEstudiante FROM PROYECTO_POR_ESTUDIANTE
+		WHERE IdProyecto = @IdProyecto
+
+		SELECT @idCurso= IdCurso FROM PROYECTO WHERE Id = @IdProyecto
+
+		Update ESTUDIANTE_POR_CURSO
+		SET Nota = (@PuntajeActual + @Puntaje)
+		WHERE ESTUDIANTE_POR_CURSO.IdCurso = @idCurso and ESTUDIANTE_POR_CURSO.IdEstudiante = @idEst
+
 	GO
 
 	/*badges obtenidosen un p*/
@@ -332,7 +344,9 @@ CREATE PROCEDURE SP_Select_Badge_Por_Proyecto_No_Otorgado (@IdCurso INT,@IdProye
 		FROM BADGE INNER JOIN CURSO ON BADGE.IdCurso= CURSO.Id , BADGE_POR_PROYECTO 
 
 		WHERE CURSO.Id = @IdCurso  
-				AND NOT EXISTS (SELECT * FROM BADGE_POR_PROYECTO WHERE BADGE_POR_PROYECTO.IdProyecto = @IdProyecto) 
+				AND NOT EXISTS 
+				(SELECT * FROM BADGE_POR_PROYECTO 
+				 WHERE BADGE_POR_PROYECTO.IdProyecto = @IdProyecto AND BADGE_POR_PROYECTO.IdBadge = BADGE.Id) 
 	GO
 
 	/*Marks a student as attending a course*/

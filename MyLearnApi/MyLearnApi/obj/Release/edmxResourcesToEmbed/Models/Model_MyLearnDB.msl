@@ -563,5 +563,31 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prueba" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_Estudiante">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_Cursos_Estudiante_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Nota" ColumnName="Nota" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="pruebas" FunctionName="MyLearnDBModel.Store.SP_Select_Cursos_Estudiante">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.SP_Select_Cursos_Estudiante_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="NumeroGrupo" ColumnName="NumeroGrupo" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Nota" ColumnName="Nota" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

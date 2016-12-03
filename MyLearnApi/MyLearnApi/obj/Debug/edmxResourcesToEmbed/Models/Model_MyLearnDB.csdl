@@ -414,6 +414,18 @@
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="TWITTER_CREDENTIALS" EntitySet="TWITTER_CREDENTIALS" />
     </AssociationSet>
+    <FunctionImport Name="select_cursos_of_student" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getcursos_de_un_estudiante" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="prueba" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="pruebas" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
+      <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -931,10 +943,10 @@
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
     <Property Type="String" Name="Codigo" Nullable="true" MaxLength="10" />
-    <Property Type="Byte" Name="NotaMinima" Nullable="false" />
     <Property Type="DateTime" Name="FechaInicio" Nullable="true" />
     <Property Type="Int32" Name="NumeroGrupo" Nullable="true" />
     <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+    <Property Type="Int32" Name="Nota" Nullable="true" />
   </ComplexType>
   <ComplexType Name="SP_Select_Cursos_De_Universidad_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
