@@ -13,15 +13,15 @@
                     <h2 class="modal-tittle">Badges Obtenidos:</h2>
                 </div>
                 <!--Contenido-->
+
                 <div class="modal-body">
-                    <div class="container-fluid" data-ng-repeat="badge in ls_badges">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label for="NBadge">{{badge.Nombre}}</label>
-                                <img src="../../Vistas/Estilo/img/badgepeq.png" class="img-responsive img-rounded" alt="">
-                                <a class="btn btn-tcc btn-default btn-sm" data-ng-click="alardear(badge)">Alardear</a>
-                            </div>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                        </div>  
+                    <div class="container-fluid">
+                        <div class="col-md-3" data-ng-repeat="badge in ls_badges">
+                            <label for="NBadge">{{badge.Nombre}}</label>
+                            <img src="../../Vistas/Estilo/img/badgepeq.png" class="img-responsive img-rounded" alt="">
+                            <a class="btn btn-tcc btn-default btn-sm" data-ng-hide="badge.Estado == 'R'" data-ng-click="alardear(badge)">Alardear</a>
+
+                        </div>
                     </div>
 
                 </div>
