@@ -618,7 +618,7 @@ CREATE PROCEDURE SP_MyEmployee @Top INT, @Pais Char(30)
 			GROUP BY IdEstudiante) AS C
 		ON A.IdEstudiante=C.IdEstudiante
 		JOIN
-			(SELECT IdEstudiante, COUNT(Distinct VIEW_TRABAJO.IdTrabajo) AS ProyectosExitosos
+			(SELECT IdEstudiante, COUNT(Distinct VIEW_TRABAJO.IdTrabajo) AS ProyectosTerminados
 			FROM VIEW_TRABAJO
 			WHERE VIEW_TRABAJO.EstadoTrabajo = 'T'
 			GROUP BY IdEstudiante) AS D
@@ -630,7 +630,7 @@ CREATE PROCEDURE SP_MyEmployee @Top INT, @Pais Char(30)
 			GROUP BY IdEstudiante) AS E
 		ON A.IdEstudiante=E.IdEstudiante
 		JOIN
-			(SELECT IdEstudiante, COUNT(Distinct ESTUDIANTE_POR_CURSO.IdCurso) AS CursosReprobados
+			(SELECT IdEstudiante, COUNT(Distinct ESTUDIANTE_POR_CURSO.IdCurso) AS CursosTerminados
 			FROM ESTUDIANTE_POR_CURSO INNER JOIN CURSO ON ESTUDIANTE_POR_CURSO.IdCurso = CURSO.Id
 			WHERE ESTUDIANTE_POR_CURSO.Estado = 'T'
 			GROUP BY IdEstudiante) AS F
@@ -650,7 +650,7 @@ CREATE PROCEDURE SP_MyEmployee @Top INT, @Pais Char(30)
 	EXEC SP_MyEmployee 20, 'Costa Rica'
 	*/
 
-CREATE PROCEDURE SP_MyEmployee_Custom @Top INT, @PorcentajeNotas FLOAT, @PorcentajeEstrellas FLOAT, @Proyectos FLOAT, @Trabajos FLOAT, @Minimo INT
+CREATE PROCEDURE SP_MyEmployee2_Custom @Top INT, @PorcentajeNotas FLOAT, @PorcentajeEstrellas FLOAT, @Proyectos FLOAT, @Trabajos FLOAT, @Minimo INT
 	AS
 		SELECT TOP (@Top) A.IdEstudiante, (NombreContacto+'-'+ G.ApellidoContacto) as NombreContacto, Telefono, Email, CAST(NotaPromedio*@PorcentajeNotas+PromedioEstrellas*@PorcentajeEstrellas+((ProyectosExitosos*100)/ProyectosTerminados)*@Proyectos+((CursosExitosos*100)/CursosTerminados)*@Trabajos AS FLOAT) AS Performance
 		FROM 
@@ -697,7 +697,7 @@ CREATE PROCEDURE SP_MyEmployee_Custom @Top INT, @PorcentajeNotas FLOAT, @Porcent
 		ORDER BY Performance DESC
 	GO
 
-/* TEST
+/* TESTS
 	EXEC SP_MyEmployee_Custom 20, 1, 0, 0, 0, 0
 	EXEC SP_MyEmployee_Custom 20, 0, 1, 0, 0, 0
 	EXEC SP_MyEmployee_Custom 20, 0, 0, 1, 0, 0
