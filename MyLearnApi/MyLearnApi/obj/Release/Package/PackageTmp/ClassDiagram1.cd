@@ -1,2 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MyLearnApi.BusinessLogic.clsBasicAuthenticationAttribute" Collapsed="true">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\clsBasicAuthenticationAttribute.cs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.EmpresasController">
+    <Position X="8.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAZAEAA=</HashCode>
+      <FileName>Controllers\EmpresasController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.HomeController" Collapsed="true">
+    <Position X="2" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.IdiomasController" Collapsed="true">
+    <Position X="3.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAICAQAAAAAAAAAAAAAAAAgAAAAAAAAABAAAA=</HashCode>
+      <FileName>Controllers\IdiomasController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.MensajePorProyectoController">
+    <Position X="5" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAIAGAAAABAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Controllers\MensajePorProyectoController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.MensajePorTrabajoController" Collapsed="true">
+    <Position X="7.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAACAQAABAAAAAAAAAAAAAAAAgAAAAAABAAAA=</HashCode>
+      <FileName>Controllers\MensajePorTrabajoController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.PaisController" Collapsed="true">
+    <Position X="2" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAAAAAAAAAAAEAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\PaisController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.ProfesoresController" Collapsed="true">
+    <Position X="3.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAACAAAAAAAAAAAAIAAAAAAAAAABBAAA=</HashCode>
+      <FileName>Controllers\ProfesoresController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.ProyectosController" Collapsed="true">
+    <Position X="5.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAAAAIAAAAUABFAAAEAAAABCAAABAACA=</HashCode>
+      <FileName>Controllers\ProyectosController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.RepositoriosController" Collapsed="true">
+    <Position X="7.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAQAAAAACAAACAIAAAACAAAAAACAAAAAABAAAA=</HashCode>
+      <FileName>Controllers\RepositoriosController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.TecnologiasController" Collapsed="true">
+    <Position X="2" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAYAAAAAgAAAAAAAAAAAAAAAACAAABAAAA=</HashCode>
+      <FileName>Controllers\TecnologiasController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.TrabajosController">
+    <Position X="3.75" Y="3.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAQCAACBAAAAAQAgAABAAAAACAAAQBAAAAABAhAg=</HashCode>
+      <FileName>Controllers\TrabajosController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.UniversidadesController" Collapsed="true">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAAAAAAAAAAAAAAAAACAAAAAAAABAAgg=</HashCode>
+      <FileName>Controllers\UniversidadesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyLearnApi.Controllers.UsuarioController">
+    <Position X="7.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Controllers\UsuarioController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
