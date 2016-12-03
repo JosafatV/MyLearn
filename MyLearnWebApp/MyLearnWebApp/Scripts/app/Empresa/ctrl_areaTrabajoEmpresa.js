@@ -178,7 +178,8 @@
                 extension3: $routeParams.IdEst.trim(), extension4: totStars, extension5: exitoso
             },{}).$promise.then(function (data) {
                 $scope.ls_msjs = data;
-                $scope.do_goPerfilEmpresa();
+                modal.close();
+                $scope.do_goPerfilEmpresa();                
             });
         };
 
