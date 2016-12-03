@@ -169,7 +169,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/09/2016 14:45:16</publishTime>
     </File>
     <File Include="bin/MyLearnApi.dll">
-      <publishTime>12/03/2016 05:16:29</publishTime>
+      <publishTime>12/03/2016 16:06:04</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>12/01/2016 15:11:30</publishTime>
@@ -271,7 +271,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/24/2016 23:29:47</publishTime>
     </File>
     <File Include="ClassDiagram1.cd">
-      <publishTime>12/03/2016 08:53:32</publishTime>
+      <publishTime>12/03/2016 11:58:50</publishTime>
     </File>
     <File Include="ClassDiagram2.cd">
       <publishTime>12/02/2016 10:51:57</publishTime>
@@ -316,7 +316,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/01/2016 15:11:30</publishTime>
     </File>
     <File Include="Models/Model_MyLearnDB.edmx.diagram">
-      <publishTime>12/01/2016 15:23:20</publishTime>
+      <publishTime>12/03/2016 16:02:23</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>12/01/2016 15:11:30</publishTime>

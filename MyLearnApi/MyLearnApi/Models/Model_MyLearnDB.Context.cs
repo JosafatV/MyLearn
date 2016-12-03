@@ -1061,5 +1061,68 @@ namespace MyLearnApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Select_Cursos_Estudiante_Result>("pruebas", idEstudianteParameter);
         }
+    
+        public virtual ObjectResult<Sp_Filtrar_Subastas_Result> Sp_Filtrar_Subastas(Nullable<int> idTecnologia, string nombre, string idEstudiante, string estado)
+        {
+            var idTecnologiaParameter = idTecnologia.HasValue ?
+                new ObjectParameter("idTecnologia", idTecnologia) :
+                new ObjectParameter("idTecnologia", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("idEstudiante", idEstudiante) :
+                new ObjectParameter("idEstudiante", typeof(string));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_Filtrar_Subastas_Result>("Sp_Filtrar_Subastas", idTecnologiaParameter, nombreParameter, idEstudianteParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<TRABAJO> filtrarSubastasPorNombreYTecnologia(Nullable<int> idTecnologia, string nombre, string idEstudiante, string estado)
+        {
+            var idTecnologiaParameter = idTecnologia.HasValue ?
+                new ObjectParameter("idTecnologia", idTecnologia) :
+                new ObjectParameter("idTecnologia", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("idEstudiante", idEstudiante) :
+                new ObjectParameter("idEstudiante", typeof(string));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TRABAJO>("filtrarSubastasPorNombreYTecnologia", idTecnologiaParameter, nombreParameter, idEstudianteParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<TRABAJO> filtrarSubastasPorNombreYTecnologia(Nullable<int> idTecnologia, string nombre, string idEstudiante, string estado, MergeOption mergeOption)
+        {
+            var idTecnologiaParameter = idTecnologia.HasValue ?
+                new ObjectParameter("idTecnologia", idTecnologia) :
+                new ObjectParameter("idTecnologia", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var idEstudianteParameter = idEstudiante != null ?
+                new ObjectParameter("idEstudiante", idEstudiante) :
+                new ObjectParameter("idEstudiante", typeof(string));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TRABAJO>("filtrarSubastasPorNombreYTecnologia", mergeOption, idTecnologiaParameter, nombreParameter, idEstudianteParameter, estadoParameter);
+        }
     }
 }

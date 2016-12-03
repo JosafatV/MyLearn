@@ -851,6 +851,12 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
         <Function Name="SP_CursosReprobados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdEstudiante" Type="char" Mode="In" />
         </Function>
+        <Function Name="Sp_Filtrar_Subastas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTecnologia" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="idEstudiante" Type="char" Mode="In" />
+          <Parameter Name="Estado" Type="char" Mode="In" />
+        </Function>
         <Function Name="SP_Get_Last_User_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_Incrementar_Puntaje_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdBadge" Type="int" Mode="In" />
@@ -1704,13 +1710,25 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
           <Parameter Name="IdEstudiante" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="getcursos_de_un_estudiante" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
-            <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+          <Parameter Name="IdEstudiante" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="prueba" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
-            <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+          <Parameter Name="IdEstudiante" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pruebas" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
-            <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+          <Parameter Name="IdEstudiante" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Filtrar_Subastas" ReturnType="Collection(MyLearnDBModel.Sp_Filtrar_Subastas_Result)">
+            <Parameter Name="idTecnologia" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="idEstudiante" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="filtrarSubastasPorNombreYTecnologia" EntitySet="TRABAJO" ReturnType="Collection(MyLearnDBModel.TRABAJO)">
+            <Parameter Name="idTecnologia" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="idEstudiante" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="ESTUDIANTE">
@@ -2556,6 +2574,19 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="Sp_Filtrar_Subastas_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="IdEmpresa" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaInicio" Nullable="true" />
+          <Property Type="DateTime" Name="FechaCierre" Nullable="false" />
+          <Property Type="String" Name="DocumentoAdicional" Nullable="true" MaxLength="100" />
+          <Property Type="Byte" Name="EstrellasObtenidas" Nullable="true" />
+          <Property Type="Double" Name="PresupuestoBase" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+          <Property Type="Boolean" Name="Exitoso" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3150,6 +3181,24 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_Filtrar_Subastas" FunctionName="MyLearnDBModel.Store.Sp_Filtrar_Subastas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyLearnDBModel.Sp_Filtrar_Subastas_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+                <ScalarProperty Name="DocumentoAdicional" ColumnName="DocumentoAdicional" />
+                <ScalarProperty Name="EstrellasObtenidas" ColumnName="EstrellasObtenidas" />
+                <ScalarProperty Name="PresupuestoBase" ColumnName="PresupuestoBase" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Exitoso" ColumnName="Exitoso" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="filtrarSubastasPorNombreYTecnologia" FunctionName="MyLearnDBModel.Store.Sp_Filtrar_Subastas" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

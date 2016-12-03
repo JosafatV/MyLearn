@@ -426,6 +426,18 @@
     <FunctionImport Name="pruebas" ReturnType="Collection(MyLearnDBModel.SP_Select_Cursos_Estudiante_Result)">
       <Parameter Name="IdEstudiante" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="Sp_Filtrar_Subastas" ReturnType="Collection(MyLearnDBModel.Sp_Filtrar_Subastas_Result)">
+      <Parameter Name="idTecnologia" Mode="In" Type="Int32" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="idEstudiante" Mode="In" Type="String" />
+      <Parameter Name="Estado" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="filtrarSubastasPorNombreYTecnologia" EntitySet="TRABAJO" ReturnType="Collection(MyLearnDBModel.TRABAJO)">
+      <Parameter Name="idTecnologia" Mode="In" Type="Int32" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="idEstudiante" Mode="In" Type="String" />
+      <Parameter Name="Estado" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
     <Key>
@@ -1270,4 +1282,17 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="Sp_Filtrar_Subastas_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="IdEmpresa" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FechaInicio" Nullable="true" />
+    <Property Type="DateTime" Name="FechaCierre" Nullable="false" />
+    <Property Type="String" Name="DocumentoAdicional" Nullable="true" MaxLength="100" />
+    <Property Type="Byte" Name="EstrellasObtenidas" Nullable="true" />
+    <Property Type="Double" Name="PresupuestoBase" Nullable="true" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
+    <Property Type="Boolean" Name="Exitoso" Nullable="true" />
+  </ComplexType>
 </Schema>

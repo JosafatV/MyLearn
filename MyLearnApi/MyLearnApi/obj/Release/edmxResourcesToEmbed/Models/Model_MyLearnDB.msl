@@ -589,5 +589,23 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_Filtrar_Subastas" FunctionName="MyLearnDBModel.Store.Sp_Filtrar_Subastas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyLearnDBModel.Sp_Filtrar_Subastas_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+          <ScalarProperty Name="DocumentoAdicional" ColumnName="DocumentoAdicional" />
+          <ScalarProperty Name="EstrellasObtenidas" ColumnName="EstrellasObtenidas" />
+          <ScalarProperty Name="PresupuestoBase" ColumnName="PresupuestoBase" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Exitoso" ColumnName="Exitoso" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="filtrarSubastasPorNombreYTecnologia" FunctionName="MyLearnDBModel.Store.Sp_Filtrar_Subastas" />
   </EntityContainerMapping>
 </Mapping>

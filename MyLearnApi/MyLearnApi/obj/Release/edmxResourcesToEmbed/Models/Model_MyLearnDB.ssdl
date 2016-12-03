@@ -813,6 +813,12 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
   <Function Name="SP_CursosReprobados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdEstudiante" Type="char" Mode="In" />
   </Function>
+  <Function Name="Sp_Filtrar_Subastas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idTecnologia" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="idEstudiante" Type="char" Mode="In" />
+    <Parameter Name="Estado" Type="char" Mode="In" />
+  </Function>
   <Function Name="SP_Get_Last_User_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SP_Incrementar_Puntaje_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdBadge" Type="int" Mode="In" />

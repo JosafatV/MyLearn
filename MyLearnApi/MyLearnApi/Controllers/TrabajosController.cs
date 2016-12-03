@@ -120,6 +120,13 @@ namespace MyLearnApi.Controllers
             return Ok(pobj_TrabajosLogic.getTecnologiasTrabajo(idTrabajo));
         }
 
+        /// <summary>
+        /// filtra las subastas por nombre y tecnologia. Puede buscar por ambos o un parámetro
+        /// </summary>
+        /// <param name="IdTecnologia"></param>
+        /// <param name="NombreTrabajo"></param>
+        /// <param name="idEstudiante"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("MyLearnApi/Subastas/{IdTecnologia}/{NombreTrabajo}/{idEstudiante}")]
         [ResponseType(typeof(List<TRABAJO>))]

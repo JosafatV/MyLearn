@@ -59,41 +59,7 @@ namespace MyLearnApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        /*
-              // PUT: api/Cursos/5
-              [ResponseType(typeof(void))]
-              public IHttpActionResult PutCURSO_POR_PROFESOR(int id, CURSO_POR_PROFESOR cURSO_POR_PROFESOR)
-              {
-                  if (!ModelState.IsValid)
-                  {
-                      return BadRequest(ModelState);
-                  }
-
-                  if (id != cURSO_POR_PROFESOR.IdCurso)
-                  {
-                      return BadRequest();
-                  }
-
-                  db.Entry(cURSO_POR_PROFESOR).State = EntityState.Modified;
-
-                  try
-                  {
-                      db.SaveChanges();
-                  }
-                  catch (DbUpdateConcurrencyException)
-                  {
-                      if (!CURSO_POR_PROFESORExists(id))
-                      {
-                          return NotFound();
-                      }
-                      else
-                      {
-                          throw;
-                      }
-                  }
-
-                  return StatusCode(HttpStatusCode.NoContent);
-              }*/
+    
 
         /// <summary>
         /// Post de un curso

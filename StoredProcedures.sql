@@ -328,13 +328,13 @@ CREATE PROCEDURE SP_Incrementar_Puntaje_Proyecto (@IdBadge INT, @IdProyecto INT)
 		WHERE ESTUDIANTE_POR_CURSO.IdCurso = @idCurso and ESTUDIANTE_POR_CURSO.IdEstudiante = @idEst
 
 	GO
-
+	
 	/*badges obtenidosen un p*/
-CREATE PROCEDURE SP_Select_Badge_Por_Proyecto (@IdProyecto INT,@Estado CHAR(1))
+CREATE PROCEDURE SP_Select_Badge_Por_Proyecto (@IdProyecto INT)
 	AS
 		SELECT BADGE.Id, BADGE.Nombre, BADGE.Puntaje, BADGE.IdCurso
 		FROM BADGE JOIN BADGE_POR_PROYECTO ON BADGE.Id = BADGE_POR_PROYECTO.IdBadge
-		WHERE BADGE_POR_PROYECTO.IdProyecto = @IdProyecto AND BADGE_POR_PROYECTO.Estado = @Estado
+		WHERE BADGE_POR_PROYECTO.IdProyecto = @IdProyecto 
 	GO
 
 	/*badges obtenidosen un p*/
@@ -410,6 +410,20 @@ CREATE PROCEDURE SP_Select_tecnologias_De_Proyecto( @IdProyecto INT)
 
 
 /********** COMPAÑIAS **********/
+
+CREATE PROCEDURE Sp_Filtrar_Subastas (@idTecnologia INT , @Nombre VARCHAR(20), @idEstudiante CHAR(100), @Estado CHAR(1) )
+AS
+      SELECT DISTINCT (TRABAJO.ID), TRABAJO.NOMBRE, TRABAJO.Descripcion, TRABAJO.IdEmpresa, TRABAJO.FechaInicio, TRABAJO.FechaCierre,
+                 TRABAJO.DocumentoAdicional, TRABAJO.EstrellasObtenidas, TRABAJO.PresupuestoBase, TRABAJO.Estado, TRABAJO.Exitoso 
+                FROM TRABAJO INNER JOIN TECNOLOGIA_POR_TRABAJO ON TRABAJO.Id = TECNOLOGIA_POR_TRABAJO.IdTrabajo 
+                INNER JOIN TECNOLOGIA ON TECNOLOGIA.Id = TECNOLOGIA_POR_TRABAJO.IdTecnologia, TRABAJO_POR_ESTUDIANTE 
+                WHERE ( TECNOLOGIA.Id =  @idTecnologia OR TRABAJO.Nombre LIKE '%'+ @Nombre + '%' ) 
+                 AND Trabajo.Estado =  @Estado AND NOT EXISTS
+            ( SELECT * FROM TRABAJO_POR_ESTUDIANTE WHERE TRABAJO.Id = TRABAJO_POR_ESTUDIANTE.IdTrabajo 
+					AND TRABAJO_POR_ESTUDIANTE.IdEstudiante = @idEstudiante ) 
+
+
+Go
 
 CREATE PROCEDURE SP_Buscar_Subastas_Por_Tecnologia_Nombre (@Tecnologia CHAR(30), @Nombre CHAR(30), @NumResultados INT)
 	AS
