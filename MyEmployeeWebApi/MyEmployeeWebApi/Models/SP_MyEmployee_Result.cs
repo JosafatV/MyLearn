@@ -10,9 +10,10 @@
 namespace MyEmployeeWebApi.Models
 {
     using System;
-    
+    using System.Runtime.Serialization;
     public partial class SP_MyEmployee_Result
     {
+        [IgnoreDataMember]
         public string IdEstudiante { get; set; }
         public string NombreContacto { get; set; }
         public string Telefono { get; set; }

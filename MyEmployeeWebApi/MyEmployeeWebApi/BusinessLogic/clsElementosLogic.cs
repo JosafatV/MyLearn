@@ -48,10 +48,10 @@ namespace MyEmployeeWebApi.BusinessLogic
         /// <param name="rubro"></param>
         /// <param name="porcentaje"></param>
         /// <returns></returns>
-        public List<SP_MyEmployee_Custom_Result> getElementosPorRubro(int? top, string rubro, double? porcentaje)
+        public List<SP_MyEmployee_Custom_Result> getElementosPorRubro(int? top, string rubro, float? porcentaje)
         {
             List<SP_MyEmployee_Custom_Result> result = new List<SP_MyEmployee_Custom_Result>();
-            double? tasa = porcentaje / 100;
+            float? tasa = (porcentaje / 100);
             switch (rubro)
             {
                 case "Promedio_notas_de_cursos":
