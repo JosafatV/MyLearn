@@ -103,6 +103,10 @@
         templateUrl: 'Vistas/Estudiante/AreaTrabajoEst_ProyCurso.html',
         controller: 'ctrl_areaTrabajoEstudianteProfesor'
     })
+    .when('/MyLearn/Estudiante/Perfil/AreaTrabajoEstudianteProfesorLectura/:IdUser/:IdTrabajo', {
+        templateUrl: 'Vistas/Estudiante/AreaTrabajoEst_ProyCursoLectura.html',
+        controller: 'ctrl_areaTrabajoEstudianteProfesor'
+    })
     .when('/MyLearn/AyudaenLinea', {
         templateUrl: 'Vistas/Login/Ayuda_enLinea.html',
         controller: 'ctrl_ayudaEnLinea'
