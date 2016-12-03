@@ -150,9 +150,11 @@
        $scope.alardear = function (badge) {
            fct_MyLearn_API_Client.save({
                type: 'Twitt', extension1: 'Alardeo', extension2: $routeParams.IdUser,
-               extension3: $scope.userActual.NombreContacto.trim(), extension4: badge.Nombre.trim(), extension5: badge.IdCurso
+               extension3: $scope.userActual.NombreContacto.trim(), extension4: badge.Id, extension5: badge.IdCurso, extension6: $routeParams.IdTrabajo
            }, {}).$promise.then(function (data) {
-
+               fct_MyLearn_API_Client.query({ type: 'Proyectos', extension1: 'Badges', extension2: $routeParams.IdTrabajo }).$promise.then(function (data) {
+                   $scope.ls_badges = data;
+               });
            });
        };
 
