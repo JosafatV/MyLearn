@@ -46,4 +46,13 @@ angular.module('mod_MyLearn').controller('ctrl_proponerProyecto', ['srcv_cerrarS
         $scope.do_goPerfil = function () {
             $location.path('/MyLearn/Estudiante/Perfil/' + $routeParams.IdUser);
         };
+        $scope.do_goPerfil = function () {
+            $location.path('/MyLearn/Estudiante/Perfil/' + $routeParams.IdUser);
+        };
+        $scope.goCursosDisponibles = function () {
+            $location.path('/MyLearn/Estudiante/Perfil/' + $routeParams.IdUser + '/CursosDisponibles');
+        };
+        $scope.goSubastas = function () {
+            $location.path('/MyLearn/Estudiante/Perfil/' + $routeParams.IdUser + '/SubastaEstudiante');
+        };
     }]);

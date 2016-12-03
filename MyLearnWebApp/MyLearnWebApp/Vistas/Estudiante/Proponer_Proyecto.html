@@ -9,13 +9,13 @@
 		<div class="wrapper">
 			<div class="logo"> Propuesta de Proyecto
 				<div class="img">
-                    <a href="#"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded" alt=""></a>
+                    <a data-ng-click="do_goPerfil()"><img src="../../Vistas/Estilo/img/ball.png" class="img-responsive img-rounded img1" alt=""></a>
 				</div>
 			</div>
 			<nav>
-				<a>Mi Perfil</a>
-				<a>Cursos Disponibles</a>
-				<a>Subastas</a>
+				<a data-ng-click="do_goPerfil()">Mi Perfil</a>
+				<a data-ng-click="goCursosDisponibles()">Cursos Disponibles</a>
+				<a data-ng-click="goSubastas()">Subastas</a>
 				<a href="#ventana1"data-toggle="modal">Notificaciones</a>
                 <a data-ng-click="cerrarSesionService.cerrarEstaSesion()">Cerrar Sesion</a>
 			</nav>
