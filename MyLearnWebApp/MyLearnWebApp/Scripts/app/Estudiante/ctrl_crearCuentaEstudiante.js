@@ -79,11 +79,11 @@ angular.module('mod_MyLearn').controller('ctrl_crearCuentaEstudiante', ['$q','fi
             fct_MyLearn_API_Client.save({ type: 'Estudiantes' }, $scope.js_crearCuentaJson).$promise.then(function (data) {
                 set_sendCredentials(data.Id);
                 set_sendCredentialsTwitter(data.Id);
-                angular.forEach($scope.ls_tecnologiasSelect, function (value, key) {
+                /*angular.forEach($scope.ls_tecnologiasSelect, function (value, key) {
                     fct_MyLearn_API_Client.save({ type: 'Estudiantes', extension1: "Tecnologia" },
                         { IdTecnologia: value.Id, IdEstudiante: data.Id }
                         );
-                });
+                });*/
             });
         };
 
