@@ -17,5 +17,6 @@ namespace MyLearnApi.Models
         public string Nombre { get; set; }
         public Nullable<byte> Puntaje { get; set; }
         public Nullable<int> IdCurso { get; set; }
+        public string Estado { get; set; }
     }
 }

@@ -148,11 +148,10 @@ namespace MyLearnApi.BusinessLogic
         /// </summary>
         /// <param name="idProyecto"></param>
         /// <returns></returns>
-        public List<BADGE> getBadgesDeProyecto(int idProyecto)
+        public List<SP_Select_Badge_Por_Proyecto_Result> getBadgesDeProyecto(int idProyecto)
         {
             //se busca mediante el estado obtenido O
-            string lstr_Estado = "O";
-            return db.SP_SelectBadgePorProyecto(idProyecto, lstr_Estado).ToList<BADGE>();
+            return db.selectBadgePorProyecto(idProyecto).Where(b=> b.Estado == "O" || b.Estado == "R").ToList<SP_Select_Badge_Por_Proyecto_Result>();
         }
 
         public List<BADGE> getBadgesDeProyectoNoOtorgados(int idCurso,int idProyecto)

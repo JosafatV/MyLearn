@@ -330,9 +330,10 @@ CREATE PROCEDURE SP_Incrementar_Puntaje_Proyecto (@IdBadge INT, @IdProyecto INT)
 	GO
 	
 	/*badges obtenidosen un p*/
+	
 CREATE PROCEDURE SP_Select_Badge_Por_Proyecto (@IdProyecto INT)
 	AS
-		SELECT BADGE.Id, BADGE.Nombre, BADGE.Puntaje, BADGE.IdCurso
+		SELECT BADGE.Id, BADGE.Nombre, BADGE.Puntaje, BADGE.IdCurso , BADGE_POR_PROYECTO.Estado
 		FROM BADGE JOIN BADGE_POR_PROYECTO ON BADGE.Id = BADGE_POR_PROYECTO.IdBadge
 		WHERE BADGE_POR_PROYECTO.IdProyecto = @IdProyecto 
 	GO

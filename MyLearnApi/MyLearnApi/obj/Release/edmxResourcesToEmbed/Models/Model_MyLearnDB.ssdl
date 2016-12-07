@@ -932,7 +932,6 @@ warning 6002: The table/view 'MyLearnDB2.dbo.VIEW_TRABAJO' does not have a prima
   </Function>
   <Function Name="SP_Select_Badge_Por_Proyecto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdProyecto" Type="int" Mode="In" />
-    <Parameter Name="Estado" Type="char" Mode="In" />
   </Function>
   <Function Name="SP_Select_Badge_Por_Proyecto_No_Otorgado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IdCurso" Type="int" Mode="In" />

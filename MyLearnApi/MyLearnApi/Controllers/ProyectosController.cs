@@ -172,7 +172,7 @@ namespace MyLearnApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("MyLearnApi/Proyectos/Badges/{idProyecto}")]
-        [ResponseType(typeof(List<BADGE>))]
+        [ResponseType(typeof(List<SP_Select_Badge_Por_Proyecto_Result>))]
         public IHttpActionResult getBadgesDeProyecto(int idProyecto)
         {
             return Ok(pobj_ProyectoLogic.getBadgesDeProyecto(idProyecto));

@@ -280,11 +280,9 @@
     </AssociationSet>
     <FunctionImport Name="SP_Select_Badge_Por_Proyecto" ReturnType="Collection(MyLearnDBModel.SP_Select_Badge_Por_Proyecto_Result)">
       <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
-      <Parameter Name="Estado" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_SelectBadgePorProyecto" EntitySet="BADGE" ReturnType="Collection(MyLearnDBModel.BADGE)">
       <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
-      <Parameter Name="Estado" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_Incrementar_Puntaje_Proyecto">
       <Parameter Name="IdBadge" Mode="In" Type="Int32" />
@@ -437,6 +435,12 @@
       <Parameter Name="Nombre" Mode="In" Type="String" />
       <Parameter Name="idEstudiante" Mode="In" Type="String" />
       <Parameter Name="Estado" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="selectBadgePorProyecto" ReturnType="Collection(MyLearnDBModel.SP_Select_Badge_Por_Proyecto_Result)">
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetBadgesDeUnProyecto" ReturnType="Collection(MyLearnDBModel.SP_Select_Badge_Por_Proyecto_Result)">
+      <Parameter Name="IdProyecto" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="ESTUDIANTE">
@@ -1049,6 +1053,7 @@
     <Property Type="String" Name="Nombre" Nullable="true" MaxLength="30" />
     <Property Type="Byte" Name="Puntaje" Nullable="true" />
     <Property Type="Int32" Name="IdCurso" Nullable="true" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="1" />
   </ComplexType>
   <EntityType Name="MENSAJE_POR_PROYECTO">
     <Key>
